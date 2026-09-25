@@ -1,0 +1,61 @@
+{
+  "_catatan": "DATA CONTOH untuk development. Ringkasan ditulis sendiri, BELUM diverifikasi terhadap teks resmi. Ganti dengan chunk hasil pipeline Data Engineer (pgvector) sebelum demo/submit.",
+  "chunks": [
+    {
+      "id": "uupa-19",
+      "sumber": "UU No. 5 Tahun 1960 (UUPA)",
+      "pasal": "Pasal 19",
+      "teks": "Pemerintah menyelenggarakan pendaftaran tanah di seluruh wilayah Indonesia untuk menjamin kepastian hukum. Pendaftaran meliputi pengukuran, pemetaan, pembukuan tanah, pendaftaran hak dan peralihannya, serta pemberian surat tanda bukti hak yang berlaku sebagai alat pembuktian yang kuat.",
+      "asal": "regulasi",
+      "kata_kunci": "pendaftaran tanah sertifikat kepastian hukum bukti hak"
+    },
+    {
+      "id": "uupa-20",
+      "sumber": "UU No. 5 Tahun 1960 (UUPA)",
+      "pasal": "Pasal 20",
+      "teks": "Hak milik adalah hak turun-temurun, terkuat, dan terpenuh yang dapat dipunyai orang atas tanah. Hak milik dapat beralih dan dialihkan kepada pihak lain.",
+      "asal": "regulasi",
+      "kata_kunci": "shm sertifikat hak milik turun temurun terkuat terpenuh"
+    },
+    {
+      "id": "uupa-35",
+      "sumber": "UU No. 5 Tahun 1960 (UUPA)",
+      "pasal": "Pasal 35",
+      "teks": "Hak guna bangunan adalah hak untuk mendirikan dan mempunyai bangunan di atas tanah yang bukan miliknya sendiri, dengan jangka waktu paling lama 30 tahun dan dapat diperpanjang paling lama 20 tahun. Berbeda dengan hak milik, hak guna bangunan memiliki jangka waktu.",
+      "asal": "regulasi",
+      "kata_kunci": "hgb sertifikat hak guna bangunan jangka waktu perpanjang beda shm"
+    },
+    {
+      "id": "kuhper-1338",
+      "sumber": "KUHPerdata",
+      "pasal": "Pasal 1338",
+      "teks": "Semua persetujuan yang dibuat secara sah berlaku sebagai undang-undang bagi mereka yang membuatnya. Persetujuan tidak dapat ditarik kembali selain dengan kesepakatan kedua belah pihak atau karena alasan yang ditentukan undang-undang, dan harus dilaksanakan dengan itikad baik.",
+      "asal": "regulasi",
+      "kata_kunci": "perjanjian kontrak ppjb kebebasan berkontrak batal itikad baik dp uang muka"
+    },
+    {
+      "id": "bphtb-umum",
+      "sumber": "UU No. 21 Tahun 1997 jo. UU No. 20 Tahun 2000 (BPHTB)",
+      "pasal": "Ketentuan umum",
+      "teks": "BPHTB (Bea Perolehan Hak atas Tanah dan Bangunan) dikenakan atas perolehan hak atas tanah dan/atau bangunan, dan pada dasarnya dibayar oleh pihak yang memperoleh hak (umumnya pembeli). Pajak penghasilan atas pengalihan hak umumnya menjadi kewajiban pihak yang mengalihkan (penjual). Para pihak dapat menyepakati pembagian beban pajak yang berbeda dalam perjanjian.",
+      "asal": "regulasi",
+      "kata_kunci": "bphtb pajak pembeli penjual pph jual beli menanggung"
+    },
+    {
+      "id": "app-upload",
+      "sumber": "Panduan Aplikasi",
+      "pasal": "Cara upload dokumen",
+      "teks": "Unggah dokumen hukum tanah (PPJB, AJB, akta hibah, dll) dalam format PDF pada halaman analisis. Aplikasi akan meringkas isinya dengan bahasa awam dan menandai pasal yang berpotensi merugikan.",
+      "asal": "panduan",
+      "kata_kunci": "upload unggah dokumen pdf analisis aplikasi fitur cara pakai"
+    },
+    {
+      "id": "app-risiko",
+      "sumber": "Panduan Aplikasi",
+      "pasal": "Arti skor risiko",
+      "teks": "Pasal ditandai merah (risiko tinggi), kuning (perlu diperhatikan), atau hijau (relatif aman). Kategori risiko meliputi pembatalan sepihak, denda tidak wajar, DP hangus tanpa syarat jelas, tidak ada jaminan bebas sengketa, pembebanan pajak ke satu pihak, objek tanah tidak jelas, hilangnya hak somasi, dan kuasa mutlak.",
+      "asal": "panduan",
+      "kata_kunci": "merah kuning hijau risiko skor warna kategori aplikasi arti"
+    }
+  ]
+}

@@ -14,10 +14,12 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from firebase_admin import auth, credentials, firestore
 from pydantic import BaseModel, Field
 
+from chatbot import jawab_chat
+
 # Struktur Firestore:
-#   documents/{id}     user_id, filename, status, summary, risks[], error, created_at
-#   chat_history/{id}  user_id, question, answer, sources[], created_at
-# User pakai Firebase Auth (anonymous). PDF tidak disimpan, cuma diekstrak teksnya lalu dianalisis.
+#   documents/{id}     user_id, filename, text, status, summary, risks[], error, created_at
+#   chat_history/{id}  user_id, document_id (null = chat umum), pertanyaan, jawaban, sumber[], status, created_at
+# User pakai Firebase Auth (anonymous). File PDF tidak disimpan, cuma teksnya (untuk analisis + konteks chat).
 # ponytail: tanpa Firebase Storage (butuh Blaze plan); tambahkan kalau perlu fitur download PDF asli.
 
 app = FastAPI(title="Hukum Tanah API")
@@ -52,21 +54,20 @@ class Analysis(BaseModel):
 
 
 class ChatIn(BaseModel):
-    question: str = Field(min_length=1, max_length=2000)
+    pertanyaan: str = Field(min_length=1, max_length=2000)
+    document_id: UUID | None = None  # isi kalau user lagi buka dokumen; sekalian jadi id sesi chat
 
 
-class ChatOut(BaseModel):
-    answer: str
-    sources: list[str]
-
-
-class ChatItem(ChatOut):
-    question: str
+class ChatItem(BaseModel):
+    pertanyaan: str
+    jawaban: str
+    sumber: list[dict]
+    status: str
     created_at: datetime
 
 
 MAX_PDF_BYTES = 10 * 1024 * 1024
-CHAT_FALLBACK = ChatOut(answer="Maaf, asisten sedang tidak bisa menjawab. Coba lagi sebentar lagi.", sources=[])
+MAX_TEXT_CHARS = 200_000  # ponytail: batas dokumen Firestore 1 MiB; simpan teks di Storage kalau dokumen user lebih panjang
 
 
 @cache
@@ -90,7 +91,7 @@ def now():
     return datetime.now(timezone.utc)
 
 
-# --- Colokan untuk AI Engineer: ganti isi 2 fungsi ini (atau `from ai import analyze, answer`), format output wajib sama ---
+# --- Colokan untuk AI Engineer: ganti isi fungsi ini, format output wajib sama. Chat sudah pakai modul chatbot/ ---
 
 def analyze(text: str) -> dict:
     return {
@@ -104,11 +105,6 @@ def analyze(text: str) -> dict:
              "alasan": "Nomor sertifikat dan luas sudah jelas; batas-batas tanah sebaiknya ditambahkan."},
         ],
     }
-
-
-def answer(question: str) -> dict:
-    return {"answer": "SHM adalah hak terkuat dan terpenuh atas tanah (dummy, menunggu RAG).",
-            "sources": ["UU No. 5 Tahun 1960 (UUPA) Pasal 20"]}
 
 
 # --- Endpoint ---
@@ -150,7 +146,7 @@ def upload(file: UploadFile, tasks: BackgroundTasks, uid: str = Depends(current_
         raise HTTPException(422, "PDF tidak berisi teks (kemungkinan hasil scan). Gunakan PDF digital.")
 
     doc_id = uuid4()
-    doc = {"user_id": uid, "filename": file.filename or "dokumen.pdf",
+    doc = {"user_id": uid, "filename": file.filename or "dokumen.pdf", "text": text[:MAX_TEXT_CHARS],
            "status": "pending", "summary": None, "risks": [], "error": None, "created_at": now()}
     fb().collection("documents").document(str(doc_id)).set(doc)
     tasks.add_task(run_analysis, str(doc_id), text)
@@ -165,26 +161,42 @@ def list_documents(uid: str = Depends(current_user)):
     return sorted(docs, key=lambda d: d.created_at, reverse=True)
 
 
-@app.get("/analysis/{document_id}", response_model=Analysis)
-def get_analysis(document_id: UUID, uid: str = Depends(current_user)):
+def own_document(document_id: UUID, uid: str) -> dict:
     snap = fb().collection("documents").document(str(document_id)).get()
     if not snap.exists or snap.get("user_id") != uid:
         raise HTTPException(404, "Dokumen tidak ditemukan")  # 404 juga untuk punya orang lain, biar id nggak bocor
-    return Analysis(document_id=document_id, **snap.to_dict())
+    return snap.to_dict()
 
 
-@app.post("/chat", response_model=ChatOut)
+@app.get("/analysis/{document_id}", response_model=Analysis)
+def get_analysis(document_id: UUID, uid: str = Depends(current_user)):
+    return Analysis(document_id=document_id, **own_document(document_id, uid))
+
+
+def history(uid: str, document_id: str | None) -> list[dict]:
+    q = (fb().collection("chat_history")
+         .where(filter=firestore.FieldFilter("user_id", "==", uid))
+         .where(filter=firestore.FieldFilter("document_id", "==", document_id)))
+    return sorted((s.to_dict() for s in q.stream()), key=lambda h: h["created_at"])  # lama → baru
+
+
+# def (bukan async def): jawab_chat blocking, FastAPI otomatis jalankan di threadpool
+@app.post("/chat")
 def chat(body: ChatIn, uid: str = Depends(current_user)):
-    try:
-        out = ChatOut(**answer(body.question))
-    except Exception:
-        log.exception("Chat gagal")
-        return CHAT_FALLBACK  # LLM timeout/rate limit: jawab sopan, jangan crash, jangan simpan ke riwayat
-    fb().collection("chat_history").add({"user_id": uid, "question": body.question, **out.model_dump(), "created_at": now()})
-    return out
+    doc_id = str(body.document_id) if body.document_id else None
+    konteks = own_document(body.document_id, uid).get("text") if doc_id else None
+    riwayat = []
+    for h in history(uid, doc_id):
+        riwayat += [{"role": "user", "content": h["pertanyaan"]}, {"role": "assistant", "content": h["jawaban"]}]
+
+    hasil = jawab_chat(body.pertanyaan, riwayat, konteks)
+    if hasil["status"] != "error":  # jawaban "layanan bermasalah" jangan masuk riwayat
+        fb().collection("chat_history").add({
+            "user_id": uid, "document_id": doc_id, "pertanyaan": body.pertanyaan, "jawaban": hasil["jawaban"],
+            "sumber": hasil["sumber"], "status": hasil["status"], "created_at": now()})
+    return hasil  # apa adanya: jawaban, sumber, di_luar_cakupan, status, disclaimer
 
 
 @app.get("/chat/history", response_model=list[ChatItem])
-def chat_history(uid: str = Depends(current_user)):
-    snaps = fb().collection("chat_history").where(filter=firestore.FieldFilter("user_id", "==", uid)).stream()
-    return sorted((ChatItem(**s.to_dict()) for s in snaps), key=lambda c: c.created_at)  # lama → baru, urutan chat
+def chat_history(document_id: UUID | None = None, uid: str = Depends(current_user)):
+    return history(uid, str(document_id) if document_id else None)
