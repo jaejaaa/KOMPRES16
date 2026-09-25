@@ -35,7 +35,7 @@ Model saat ini `BAAI/bge-m3` (1024 dimensi, unduhan ±2,3 GB). Bila model digant
 
 ## Kontrak pencarian
 ```python
-import sys; sys.path.insert(0, "data engineer/scripts")
+import sys; sys.path.insert(0, "data_engineer/scripts")
 from search import search
 search("peralihan hak karena jual beli", top_k=5)
 ```

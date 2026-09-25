@@ -8,21 +8,21 @@ UI/UX + Frontend, Backend, AI Engineer, Data Engineer.
 | Folder | Isi | Peran pemilik |
 |---|---|---|
 | [`backend/`](backend/) | FastAPI + Firebase (Auth anonim, Firestore). Endpoint upload/analisis/chat, modul `chatbot/` (Gemini) | Backend, AI Engineer |
-| [`data engineer/`](data%20engineer/) | Knowledge base regulasi: PDF sumber → chunk per Pasal → embedding → `search()`; panduan prosedur; test set & evaluasi | Data Engineer |
+| [`data_engineer/`](data_engineer/) | Knowledge base regulasi: PDF sumber → chunk per Pasal → embedding → `search()`; panduan prosedur; test set & evaluasi | Data Engineer |
 | `frontend/` *(belum ada)* | Next.js | Frontend |
 
 ## Alur sistem
 
 ```
 Frontend ──▶ Backend (FastAPI) ──▶ chatbot/ (Gemini) ──▶ search() ──▶ knowledge base
- upload,       auth, upload,         prompt, guardrail,     data engineer/scripts     (chunks.jsonl
+ upload,       auth, upload,         prompt, guardrail,     data_engineer/scripts     (chunks.jsonl
  chat          Firestore             sitasi Pasal                                      + embeddings)
 ```
 
 ## Kontrak antar modul
 - **Chat:** `POST /chat` `{pertanyaan, document_id?}` → `{jawaban, sumber[], di_luar_cakupan, status, disclaimer}`; riwayat `GET /chat/history?document_id=`.
 - **Retrieval:** `search(query, top_k) -> [{id, sumber, pasal, teks, asal, score(0-1), status, ...}]`, atau `Retriever().search()` → `[(Chunk, skor)]`.
-  Detail di [`data engineer/README.md`](data%20engineer/README.md).
+  Detail di [`data_engineer/README.md`](data_engineer/README.md).
 - **Analisis dokumen:** `analyze(text) -> {summary, risks:[{pasal, kutipan, kategori, level(low|medium|high), alasan}]}`. *(menunggu AI Engineer)*
 
 ## Status singkat
