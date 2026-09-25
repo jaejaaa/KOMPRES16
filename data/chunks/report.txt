@@ -5,4 +5,5 @@ PP 24/1997               chunk= 129 (batang tubuh=  71, penjelasan= 58) pasal 1�
 UU 2/2012                chunk=  84 (batang tubuh=  61, penjelasan= 23) pasal 1–61  hilang: []
 UU 21/1997               chunk=  52 (batang tubuh=  29, penjelasan= 23) pasal 1–28  hilang: []
 UU 27/2022               chunk= 104 (batang tubuh=  76, penjelasan= 28) pasal 1–76  hilang: []
+UU 28/2009               chunk=  13 (batang tubuh=  10, penjelasan=  3) pasal 85–93  hilang: []
 UU 5/1960                chunk= 109 (batang tubuh=  68, penjelasan= 41) pasal 1–58  hilang: []

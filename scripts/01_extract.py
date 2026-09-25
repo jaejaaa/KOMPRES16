@@ -1,5 +1,5 @@
 """Langkah 1: ekstrak teks PDF regulasi -> data/extracted/<slug>.json + .txt (per halaman)."""
-import fitz, json, re, subprocess, tempfile
+import fitz, json, re, subprocess, sys, tempfile
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -12,6 +12,7 @@ DOCS = {  # file -> (slug, nama_pendek, judul)
     "Permen ATRKBPN Nomor 3 Tahun 2023.pdf": ("permen-3-2023", "Permen ATR/BPN 3/2023", "Penerbitan Dokumen Elektronik dalam Kegiatan Pendaftaran Tanah"),
     "Kitab_Undang-Undang_Hukum_Perdata_Buku_Kedua.pdf": ("kuhperdata-buku2", "KUHPerdata Buku II", "Tentang Kebendaan"),
     "UU Nomor 2 Tahun 2012.pdf": ("uu-2-2012", "UU 2/2012", "Pengadaan Tanah bagi Pembangunan untuk Kepentingan Umum"),
+    "UU Nomor 28 Tahun 2009.pdf": ("uu-28-2009", "UU 28/2009", "Pajak Daerah dan Retribusi Daerah (PDRD)"),
     "UU Nomor 27 Tahun 2022.pdf": ("uu-27-2022", "UU 27/2022", "Pelindungan Data Pribadi"),
 }
 
@@ -32,6 +33,7 @@ def ocr_page(args):
 
 OUT.mkdir(parents=True, exist_ok=True)
 for fn, (slug, short, title) in DOCS.items():
+    if sys.argv[1:] and slug not in sys.argv[1:]: continue  # opsional: python 01_extract.py <slug> ...
     doc = fitz.open(RAW / fn)
     if slug in SCANNED:
         with ThreadPoolExecutor(8) as ex:

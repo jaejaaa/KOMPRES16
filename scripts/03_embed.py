@@ -23,9 +23,9 @@ if "--upload" in sys.argv:
         with conn.cursor() as cur:
             for c, e in zip(chunks, emb):
                 cur.execute("""insert into regulation_chunks
-                  (id,doc_slug,doc,doc_title,section,bab,pasal,pasal_inferred,page_start,page_end,content,embedding)
-                  values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                  (id,doc_slug,doc,doc_title,section,bab,pasal,pasal_inferred,status,page_start,page_end,content,embedding)
+                  values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
                   on conflict (id) do update set content=excluded.content, embedding=excluded.embedding""",
                   (c["id"], c["doc_slug"], c["doc"], c["doc_title"], c["section"], c["bab"], c["pasal"],
-                   c["pasal_inferred"], c["page_start"], c["page_end"], c["text"], e))
+                   c["pasal_inferred"], c["status"], c["page_start"], c["page_end"], c["text"], e))
     print("upload selesai")

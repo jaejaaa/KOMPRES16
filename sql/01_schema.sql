@@ -10,6 +10,7 @@ create table if not exists regulation_chunks (
   bab           text,
   pasal         text not null,
   pasal_inferred boolean default false,    -- nomor Pasal ditebak karena OCR
+  status        text not null default 'berlaku',  -- 'berlaku' | 'dicabut (...)' | 'diubah sebagian (...)'
   page_start    int, page_end int,
   content       text not null,
   embedding     vector(1024) not null
@@ -25,10 +26,10 @@ create or replace function match_regulation_chunks(
   filter_doc text default null,
   include_penjelasan boolean default false
 ) returns table (
-  id text, doc text, pasal text, section text, bab text,
+  id text, doc text, pasal text, section text, bab text, status text,
   page_start int, page_end int, content text, similarity float
 ) language sql stable as $$
-  select id, doc, pasal, section, bab, page_start, page_end, content,
+  select id, doc, pasal, section, bab, status, page_start, page_end, content,
          1 - (embedding <=> query_embedding) as similarity
   from regulation_chunks
   where (filter_doc is null or doc_slug = filter_doc)

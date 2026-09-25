@@ -9,6 +9,10 @@ BAB = re.compile(r"^\s*BAB\s+([IVXLC]+)\s*$")
 PENJ = re.compile(r"^\s*(PENJELASAN|Penjelasan)\s*$|^\s*PENJELASAN\s+(ATAS|ATAS\s*$)", re.I)
 ROMAN = re.compile(r"^\s*Pasal\s+([IVX]{1,4})\s*$")  # Ketentuan Konversi UUPA: Pasal I–IX
 MAX_CHARS = 1800
+# Dokumen besar: hanya Pasal yang relevan untuk hukum tanah yang di-chunk (batang tubuh + penjelasan)
+# Status berlaku; UU 21/1997 (BPHTB) digantikan UU 28/2009 Pasal 85-93, PP 24/1997 diubah PP 18/2021
+STATUS = {"uu-21-1997": "dicabut (digantikan UU 28/2009)", "pp-24-1997": "diubah sebagian (PP 18/2021)"}
+SCOPE = {"uu-28-2009": (85, 93)}  # BPHTB dalam UU PDRD
 
 def split_ayat(body: str):
     """Pasal panjang dipecah di batas ayat '(n)' agar tiap chunk tetap utuh secara makna."""
@@ -93,7 +97,11 @@ def main():
         man = [c for c in load_manual() if c["doc_slug"] == d["slug"]]
         keys = {c["id"] for c in man}
         cs = [c for c in cs if c["id"] not in keys] + man
+        if d["slug"] in SCOPE:
+            lo, hi = SCOPE[d["slug"]]
+            cs = [c for c in cs if c["pasal"][0].isdigit() and lo <= int(c["pasal"].rstrip("ABCDEFGH")) <= hi]
         cs.sort(key=lambda c: (c["section"] != "batang_tubuh", c["page_start"]))
+        for c in cs: c["status"] = STATUS.get(c["doc_slug"], "berlaku")
         allc += cs
         body = [c for c in cs if c["section"] == "batang_tubuh"]
         nums = sorted({int(c["pasal"].rstrip("ABCDEFGH")) for c in body if c["pasal"][0].isdigit()})
