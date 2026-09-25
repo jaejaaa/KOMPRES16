@@ -11,9 +11,11 @@ import pymupdf
 from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from dotenv import load_dotenv
 from firebase_admin import auth, credentials, firestore
 from pydantic import BaseModel, Field
 
+load_dotenv()  # harus sebelum import chatbot: chatbot/config.py baca GEMINI_MODEL saat di-import
 from chatbot import jawab_chat
 
 # Struktur Firestore:
