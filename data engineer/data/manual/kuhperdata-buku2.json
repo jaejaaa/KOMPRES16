@@ -3,8 +3,12 @@
   "doc_slug": "kuhperdata-buku2",
   "chunks": [
     {
-      "pasal": "1162", "bab": "XXI", "page_start": 179, "page_end": 179,
-      "text": "Hipotek adalah suatu hak kebendaan atas barang tak bergerak yang dijadikan jaminan dalam pelunasan suatu perikatan."
+      "pasal": "1162",
+      "bab": "XXI",
+      "page_start": 179,
+      "page_end": 179,
+      "text": "Hipotek adalah suatu hak kebendaan atas barang tak bergerak yang dijadikan jaminan dalam pelunasan suatu perikatan.",
+      "konteks": "Hipotek > Ketentuan-Ketentuan Umum"
     }
   ]
 }

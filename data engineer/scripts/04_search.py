@@ -24,7 +24,7 @@ TESTS = [  # (pertanyaan, [(dokumen, pasal) yang dianggap benar])
     ("Data pribadi pemilik tanah harus dilindungi bagaimana?", [("UU 27/2022", "35"), ("UU 27/2022", "39")]),
 ]
 if __name__ == "__main__":
-    for hybrid in (False, True):
+    for hybrid in (False, True):  # perbandingan vektor vs hybrid
         hit = 0
         for q, exp in TESTS:
             r = search(q, 5, hybrid=hybrid, include_panduan=False)  # ukur retrieval regulasi saja

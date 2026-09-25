@@ -22,7 +22,7 @@ def build_docs():
     norms = np.linalg.norm(emb, axis=1); assert np.allclose(norms, 1, atol=1e-3), "embedding belum ternormalisasi"
     assert len({c["id"] for c in chunks}) == len(chunks), "id chunk tidak unik"
     for c, e in zip(chunks, emb):
-        yield c["id"], {k: c[k] for k in ("doc_slug", "doc", "doc_title", "section", "bab", "pasal", "pasal_inferred",
+        yield c["id"], {k: c[k] for k in ("doc_slug", "doc", "doc_title", "section", "bab", "konteks", "pasal", "pasal_inferred",
                                           "status", "page_start", "page_end")} | {
             "content": c["text"], "is_active": not c["status"].startswith("dicabut"), "embedding": e}
 

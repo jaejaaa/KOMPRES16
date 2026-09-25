@@ -7,6 +7,7 @@ PASAL = re.compile(r"^\s*Pasal\s+(\d+\s?[A-Z]?)\s*$")
 PASAL_NOISY = re.compile(r"^\s*Pasal\s+([^\sa-z]{1,3})\s*$")  # heading rusak OCR, mis. 'Pasal D', 'Pasal 1!' -> ditebak dari urutan
 BAB = re.compile(r"^\s*BAB\s+([IVXLC]+)\s*$")
 PENJ = re.compile(r"^\s*(PENJELASAN|Penjelasan)\s*$|^\s*PENJELASAN\s+(ATAS|ATAS\s*$)", re.I)
+BAGIAN = re.compile(r"^\s*(Bagian|BAGIAN|Paragraf|PARAGRAF)\s+((?:Ke|KE)\w+|\d+|[IVXivx]+)\s*$")  # 'Bagian Kesatu' / 'BAGIAN 1' + baris judul di bawahnya
 ROMAN = re.compile(r"^\s*Pasal\s+([IVX]{1,4})\s*$")  # Ketentuan Konversi UUPA: Pasal I–IX
 MAX_CHARS = 1800
 # Dokumen besar: hanya Pasal yang relevan untuk hukum tanah yang di-chunk (batang tubuh + penjelasan)
@@ -52,6 +53,7 @@ def chunk_doc(d):
         i1 = next(i for i, (_, l) in enumerate(lines) if i > i0 and l.strip() == end)
         lines = lines[i0:i1]
     section, bab, cur = "batang_tubuh", None, None
+    bab_judul, bagian, collecting, want_bagian = "", "", False, False  # konteks judul untuk embedding
     raw = []
     def flush():
         nonlocal cur
@@ -59,11 +61,23 @@ def chunk_doc(d):
         cur = None
     for page, line in lines:
         if PENJ.match(line) and section == "batang_tubuh" and raw:
-            flush(); section = "penjelasan"; bab = None; continue
+            flush(); section = "penjelasan"; bab = None; bab_judul = bagian = ""; collecting = want_bagian = False; continue
         if m := BAB.match(line):
             flush() if section == "batang_tubuh" else None
-            bab = m.group(1)
+            bab = m.group(1); bab_judul, bagian, collecting, want_bagian = "", "", True, False
             if cur: continue
+        elif collecting and not PASAL.match(line):  # judul Bab: 1-3 baris huruf kapital tepat setelah 'BAB X'
+            t = line.strip()
+            if not t and bab_judul: collecting = False
+            elif t and sum(c.isupper() for c in t) >= 0.6 * max(sum(c.isalpha() for c in t), 1) and len(t) < 120 and not BAGIAN.match(t):
+                bab_judul = (bab_judul + " " + t).strip(); continue
+            elif t: collecting = False
+        if want_bagian and line.strip():
+            want_bagian = False
+            if not PASAL.match(line) and len(line.strip()) < 120:
+                bagian = line.strip(); continue
+        if section == "batang_tubuh" and (mb := BAGIAN.match(line)) and not PASAL.match(line):
+            flush(); collecting = False; want_bagian = True; bagian = ""; continue
         m, inferred = PASAL.match(line), False
         if not m and d["slug"] == "uupa-1960" and section == "batang_tubuh":
             m = ROMAN.match(line)
@@ -76,7 +90,9 @@ def chunk_doc(d):
             flush()
             num = str(int(last.group()) + 1) if inferred else m.group(1).replace(" ", "")
             if d["slug"] == "uupa-1960" and ROMAN.match(line): num = "konversi-" + num
-            cur = {"pasal": num, "inferred": inferred, "section": section, "bab": bab, "page_start": page, "page_end": page, "text": ""}
+            collecting = False
+            cur = {"pasal": num, "inferred": inferred, "section": section, "bab": bab,
+                   "konteks": " > ".join(x for x in (bab_judul.title() if bab_judul else "", bagian) if x), "page_start": page, "page_end": page, "text": ""}
             continue
         if cur:
             cur["text"] += line + "\n"; cur["page_end"] = page
@@ -93,7 +109,7 @@ def chunk_doc(d):
             chunks.append({
                 "id": f"{d['slug']}:{r['section'][:4]}:ps{r['pasal']}" + (f":{j}" if len(pieces) > 1 else ""),
                 "doc_slug": d["slug"], "doc": d["short"], "doc_title": d["title"],
-                "section": r["section"], "bab": r["bab"], "pasal": r["pasal"], "pasal_inferred": r.get("inferred", False),
+                "section": r["section"], "bab": r["bab"], "konteks": r.get("konteks", ""), "pasal": r["pasal"], "pasal_inferred": r.get("inferred", False),
                 "page_start": r["page_start"], "page_end": r["page_end"],
                 "text": piece.strip(), "n_chars": len(piece),
             })
@@ -106,7 +122,7 @@ def load_manual():
         m = json.loads(f.read_text()); d = json.loads((EXT / f"{m['doc_slug']}.json").read_text())
         for c in m["chunks"]:
             out.append({"id": f"{m['doc_slug']}:bata:ps{c['pasal']}", "doc_slug": m["doc_slug"], "doc": d["short"],
-                        "doc_title": d["title"], "section": "batang_tubuh", "bab": c.get("bab"), "pasal": c["pasal"],
+                        "doc_title": d["title"], "section": "batang_tubuh", "bab": c.get("bab"), "konteks": c.get("konteks", ""), "pasal": c["pasal"],
                         "pasal_inferred": False, "source": "manual", "page_start": c["page_start"],
                         "page_end": c["page_end"], "text": c["text"], "n_chars": len(c["text"])})
     return out
@@ -118,7 +134,7 @@ def load_panduan():
         m = json.loads(f.read_text())
         for i, c in enumerate(m["chunks"], 1):
             out.append({"id": f"{m['doc_slug']}:{i:02d}", "doc_slug": m["doc_slug"], "doc": m["doc"], "doc_title": m["doc_title"],
-                        "section": "panduan", "bab": None, "pasal": c["judul"], "pasal_inferred": False,
+                        "section": "panduan", "bab": None, "konteks": "", "pasal": c["judul"], "pasal_inferred": False,
                         "page_start": None, "page_end": None, "text": c["text"], "n_chars": len(c["text"]), "status": "panduan"})
     return out
 

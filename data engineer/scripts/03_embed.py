@@ -10,7 +10,8 @@ chunks = [json.loads(l) for l in open(CH / "chunks.jsonl")]
 # prefix konteks agar embedding tahu asal Pasal-nya; dipakai juga saat membuat embedding query
 def doc_text(c):
     if c["section"] == "panduan": return f"{c['doc']} - {c['pasal']}: {c['text']}"
-    return f"{c['doc']} Pasal {c['pasal']} ({c['doc_title']}): {c['text']}"
+    ctx = c.get("konteks") or c["doc_title"]  # judul Bab/Bagian memberi konteks (mis. 'Hipotek') pada Pasal yang pendek
+    return f"{c['doc']} - {ctx} - Pasal {c['pasal']}: {c['text']}"
 
 def load_env():
     if Path(".env").exists():

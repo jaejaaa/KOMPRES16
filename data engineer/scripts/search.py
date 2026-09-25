@@ -16,7 +16,8 @@ Opsi: doc_slug=, include_penjelasan=, include_dicabut=, include_panduan= (False 
 Backend ranking vektor (env SEARCH_BACKEND):
   firestore           : Firestore vector search (find_nearest, koleksi regulation_chunks)
   local (auto bila Firestore belum dikonfigurasi) : numpy atas data/chunks/embeddings.npy (offline, untuk uji/dev)
-Sisi kata kunci memakai data/chunks/chunks.jsonl (sertakan file ini di deployment); hasil digabung dengan RRF.
+Default: pencarian vektor saja (terbaik pada test set, lihat data/eval/ABLASI.md). hybrid=True menambah kata kunci (RRF) - opsional, tidak dianjurkan.
+Metadata/penyaring status memakai data/chunks/chunks.jsonl (sertakan file ini di deployment).
 Aturan berstatus 'dicabut' dan Penjelasan disembunyikan secara default; panduan prosedur ikut dicari.
 """
 from __future__ import annotations
@@ -109,7 +110,7 @@ def cosine_scores(qvec, ids, backend: str, remote: dict):
     return {i: max(0.0, min(1.0, v)) for i, v in out.items()}
 
 def search(query: str, top_k: int = 5, doc_slug: str | None = None, include_penjelasan: bool = False,
-           include_dicabut: bool = False, hybrid: bool = True, pool: int = 40, backend: str | None = None,
+           include_dicabut: bool = False, hybrid: bool = False, pool: int = 40, backend: str | None = None,
            include_panduan: bool = True, k: int | None = None):
     top_k = k or top_k  # 'k' = alias lama
     load_env()
