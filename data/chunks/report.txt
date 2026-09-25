@@ -7,3 +7,4 @@ UU 21/1997               chunk=  57 (batang tubuh=  30, penjelasan= 27) pasal 1�
 UU 27/2022               chunk=  98 (batang tubuh=  77, penjelasan= 21) pasal 1–76  hilang: []
 UU 28/2009               chunk=  12 (batang tubuh=  10, penjelasan=  2) pasal 85–93  hilang: []
 UU 5/1960                chunk= 109 (batang tubuh=  68, penjelasan= 41) pasal 1–58  hilang: []
+Panduan prosedur         chunk=  14

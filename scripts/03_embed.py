@@ -8,7 +8,9 @@ CH = Path("data/chunks")
 MODEL = "BAAI/bge-m3"  # 1024 dimensi
 chunks = [json.loads(l) for l in open(CH / "chunks.jsonl")]
 # prefix konteks agar embedding tahu asal Pasal-nya; dipakai juga saat membuat embedding query
-def doc_text(c): return f"{c['doc']} Pasal {c['pasal']} ({c['doc_title']}): {c['text']}"
+def doc_text(c):
+    if c["section"] == "panduan": return f"{c['doc']} - {c['pasal']}: {c['text']}"
+    return f"{c['doc']} Pasal {c['pasal']} ({c['doc_title']}): {c['text']}"
 
 def load_env():
     if Path(".env").exists():

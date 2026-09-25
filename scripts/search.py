@@ -1,14 +1,23 @@
 """Pencarian regulasi untuk RAG (dipakai AI Engineer / Backend).
 
     from search import search
-    search("peralihan hak karena jual beli", k=5)
-    # -> [{id, doc, pasal, section, bab, status, page_start, page_end, content, score}, ...]
+    search("peralihan hak karena jual beli", top_k=5)
+    # -> [{id, sumber, pasal, teks, asal, score, ...}, ...]   (urut paling relevan dulu)
+      id     : id chunk unik, mis. 'pp-24-1997:bata:ps37'
+      sumber : nama dokumen, mis. 'PP 24/1997' atau 'Panduan: Balik Nama Sertifikat Tanah'
+      pasal  : nomor Pasal ('37'); untuk panduan berisi judul bagian
+      teks   : isi chunk
+      asal   : 'regulasi' | 'penjelasan' | 'panduan'  (panduan = ringkasan prosedur, BUKAN teks hukum resmi)
+      score  : kemiripan kosinus 0-1 antara pertanyaan dan chunk (bisa dipakai sebagai ambang tolak jawaban)
+      rank_score : skor gabungan hybrid (hanya untuk urutan; skala kecil, bukan 0-1)
+      + doc, section, bab, status, page_start, page_end
+Opsi: doc_slug=, include_penjelasan=, include_dicabut=, include_panduan= (False -> hanya regulasi), hybrid=
 
 Backend ranking vektor (env SEARCH_BACKEND):
   firestore (default) : Firestore vector search (find_nearest, koleksi regulation_chunks)
   local               : numpy atas data/chunks/embeddings.npy (offline, untuk uji/dev)
 Sisi kata kunci memakai data/chunks/chunks.jsonl (sertakan file ini di deployment); hasil digabung dengan RRF.
-Aturan berstatus 'dicabut' dan Penjelasan disembunyikan secara default.
+Aturan berstatus 'dicabut' dan Penjelasan disembunyikan secara default; panduan prosedur ikut dicari.
 """
 from __future__ import annotations
 import collections, json, math, os, re
@@ -64,17 +73,41 @@ def vector_ranking(qvec, allowed, pool: int, backend: str):
     db = firestore.Client(project=os.getenv("FIREBASE_PROJECT_ID") or None, database=os.getenv("FIRESTORE_DATABASE", "(default)"))
     docs = db.collection(COLLECTION).find_nearest(
         vector_field="embedding", query_vector=Vector([float(x) for x in qvec]),
-        distance_measure=DistanceMeasure.COSINE, limit=min(pool * 4, 1000)).stream()  # ambil lebih, saring status/section di sini
+        distance_measure=DistanceMeasure.COSINE, limit=min(pool * 4, 1000),
+        distance_result_field="_dist").stream()  # ambil lebih, saring status/section di sini
     got = {d.id: d.to_dict() for d in docs}
     return [i for i in got if i in allowed][:pool], got
 
-def search(query: str, k: int = 5, doc_slug: str | None = None, include_penjelasan: bool = False,
-           include_dicabut: bool = False, hybrid: bool = True, pool: int = 40, backend: str | None = None):
+def cosine_scores(qvec, ids, backend: str, remote: dict):
+    """Kemiripan kosinus 0-1 untuk hasil akhir. Firestore: jarak dari find_nearest; sisanya dihitung dari vektor dokumen."""
+    import numpy as np
+    global _emb
+    out, missing = {}, []
+    for i in ids:
+        if i in remote and "_dist" in remote[i]: out[i] = 1.0 - float(remote[i]["_dist"])
+        else: missing.append(i)
+    if missing:
+        if backend == "local":
+            if _emb is None: _emb = np.load(ROOT / "data/chunks/embeddings.npy")
+            pos = {r["id"]: n for n, r in enumerate(corpus()["rows"])}
+            for i in missing: out[i] = float(_emb[pos[i]] @ qvec)
+        else:  # hasil dari jalur kata kunci saja: ambil vektornya dari Firestore
+            from google.cloud import firestore
+            db = firestore.Client(project=os.getenv("FIREBASE_PROJECT_ID") or None, database=os.getenv("FIRESTORE_DATABASE", "(default)"))
+            for d in db.get_all([db.collection(COLLECTION).document(i) for i in missing], field_paths=["embedding"]):
+                out[d.id] = float(np.array(list(d.get("embedding"))) @ qvec) if d.exists else 0.0
+    return {i: max(0.0, min(1.0, v)) for i, v in out.items()}
+
+def search(query: str, top_k: int = 5, doc_slug: str | None = None, include_penjelasan: bool = False,
+           include_dicabut: bool = False, hybrid: bool = True, pool: int = 40, backend: str | None = None,
+           include_panduan: bool = True, k: int | None = None):
+    top_k = k or top_k  # 'k' = alias lama
     backend = backend or os.getenv("SEARCH_BACKEND", "firestore")
     c = corpus()
     allowed = {r["id"] for r in c["rows"]
                if (doc_slug is None or r["doc_slug"] == doc_slug)
-               and (include_penjelasan or r["section"] == "batang_tubuh")
+               and (include_penjelasan or r["section"] in ("batang_tubuh", "panduan"))
+               and (include_panduan or r["section"] != "panduan")
                and (include_dicabut or not r["status"].startswith("dicabut"))}
     qvec = get_model().encode([query], normalize_embeddings=True)[0]
     vec_ids, remote = vector_ranking(qvec, allowed, pool, backend)
@@ -82,11 +115,16 @@ def search(query: str, k: int = 5, doc_slug: str | None = None, include_penjelas
     score = collections.defaultdict(float)
     for lst in lists:
         for rank, i in enumerate(lst, 1): score[i] += 1 / (RRF_K + rank)
+    top = sorted(score.items(), key=lambda x: -x[1])[:top_k]
+    cos = cosine_scores(qvec, [i for i, _ in top], backend, remote)
     out = []
-    for i, s in sorted(score.items(), key=lambda x: -x[1])[:k]:
+    for i, s in sorted(score.items(), key=lambda x: -x[1])[:top_k]:
         r = remote.get(i) or {}
         loc = c["byid"][i]
-        out.append({"id": i, "doc": loc["doc"], "pasal": loc["pasal"], "section": loc["section"], "bab": loc["bab"],
-                    "status": loc["status"], "page_start": loc["page_start"], "page_end": loc["page_end"],
-                    "content": r.get("content", loc["text"]), "score": round(s, 5)})
+        teks = r.get("content", loc["text"])
+        out.append({"id": i, "sumber": loc["doc"], "pasal": loc["pasal"], "teks": teks,
+                    "asal": {"batang_tubuh": "regulasi"}.get(loc["section"], loc["section"]),
+                    "score": round(cos[i], 4), "rank_score": round(s, 5),
+                    "doc": loc["doc"], "section": loc["section"], "bab": loc["bab"], "status": loc["status"],
+                    "page_start": loc["page_start"], "page_end": loc["page_end"], "content": teks})
     return out

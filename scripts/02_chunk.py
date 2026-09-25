@@ -111,6 +111,17 @@ def load_manual():
                         "page_end": c["page_end"], "text": c["text"], "n_chars": len(c["text"])})
     return out
 
+def load_panduan():
+    """Panduan prosedur (bukan regulasi) -> data/panduan/*.json; section='panduan', status='panduan'."""
+    out = []
+    for f in sorted(Path("data/panduan").glob("*.json")):
+        m = json.loads(f.read_text())
+        for i, c in enumerate(m["chunks"], 1):
+            out.append({"id": f"{m['doc_slug']}:{i:02d}", "doc_slug": m["doc_slug"], "doc": m["doc"], "doc_title": m["doc_title"],
+                        "section": "panduan", "bab": None, "pasal": c["judul"], "pasal_inferred": False,
+                        "page_start": None, "page_end": None, "text": c["text"], "n_chars": len(c["text"]), "status": "panduan"})
+    return out
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     allc, report = [], []
@@ -134,6 +145,8 @@ def main():
         missing = [n for n in range(nums[0], nums[-1] + 1) if n not in nums] if nums else []
         report.append(f"{d['short']:24s} chunk={len(cs):4d} (batang tubuh={len(body):4d}, penjelasan={len(cs)-len(body):3d}) "
                       f"pasal {nums[0] if nums else '-'}–{nums[-1] if nums else '-'}  hilang: {missing}")
+    pan = load_panduan(); allc += pan
+    report.append(f"{'Panduan prosedur':24s} chunk={len(pan):4d}")
     with open(OUT / "chunks.jsonl", "w") as fh:
         for c in allc: fh.write(json.dumps(c, ensure_ascii=False) + "\n")
     (OUT / "report.txt").write_text("\n".join(report))
