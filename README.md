@@ -5,9 +5,10 @@ Pipeline: `data/raw/*.pdf` → `01_extract.py` (PyMuPDF / OCR Tesseract untuk PD
 
 ## Status
 - [x] Hari 1 — 8 PDF terkumpul, teks terekstrak (6 dokumen di-OCR ulang)
-- [x] Hari 2 — chunking per Pasal (1.420 chunk); lihat `data/chunks/report.txt`
+- [x] Hari 2 — chunking per Pasal (1.422 chunk); lihat `data/chunks/report.txt`
 - [ ] Hari 2–3 — install sentence-transformers, embed, upload ke Supabase
 - [ ] Hari 3 — 5–10 dokumen sintetis · Hari 4 — test set Q&A + panduan prosedur
 
 ## Gap OCR yang diketahui (Pasal tidak terbaca di scan)
-PP 18/2021: Ps 66, 85 · UU 21/1997: Ps 4, 9, 13, 24 · KUHPerdata: Ps 1122
+PP 18/2021 Ps 66 & 85 sudah ditambal manual (`data/manual/`).
+Masih hilang: UU 21/1997: Ps 4, 9, 13, 24 · KUHPerdata: Ps 1122

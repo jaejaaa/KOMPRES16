@@ -1,0 +1,14 @@
+{
+  "_catatan": "Pasal yang gagal terbaca OCR, diketik manual dari PDF asli data/raw/PP Nomor 18 Tahun 2021.pdf",
+  "doc_slug": "pp-18-2021",
+  "chunks": [
+    {
+      "pasal": "66", "bab": "IV", "page_start": 41, "page_end": 41,
+      "text": "(1) Dalam hal terdapat bidang tanah yang sudah tidak dapat diidentifikasi lagi karena sudah berubah dari bentuk asalnya karena peristiwa alam sehingga tidak dapat difungsikan, digunakan, dan dimanfaatkan sebagaimana mestinya, dinyatakan sebagai Tanah Musnah dan Hak Pengelolaan dan/atau Hak Atas Tanah dinyatakan hapus.\n(2) Penetapan Tanah Musnah sebagaimana dimaksud pada ayat (1) dilakukan dengan tahapan identifikasi, inventarisasi, dan pengkajian.\n(3) Sebelum ditetapkan sebagai Tanah Musnah, pemegang Hak Pengelolaan dan/atau Hak Atas Tanah diberikan prioritas untuk melakukan rekonstruksi atau reklamasi atas pemanfaatan Tanah.\n(4) Dalam hal rekonstruksi atau reklamasi sebagaimana dimaksud pada ayat (3) dilakukan oleh Pemerintah Pusat, Pemerintah Daerah, atau pihak lain maka pemegang Hak Pengelolaan dan/atau Hak Atas Tanah diberikan bantuan dana kerohiman.\n(5) Ketentuan lebih lanjut mengenai penetapan Tanah Musnah diatur dengan Peraturan Menteri."
+    },
+    {
+      "pasal": "85", "bab": "VII", "page_start": 50, "page_end": 51,
+      "text": "(1) Seluruh data dan/atau dokumen dalam rangka kegiatan Pendaftaran Tanah secara bertahap disimpan dan disajikan dalam bentuk dokumen elektronik dengan memanfaatkan teknologi informasi dan komunikasi.\n(2) Data dan/atau dokumen sebagaimana dimaksud pada ayat (1) disimpan secara elektronik di pangkalan data Kementerian.\n(3) Untuk keperluan pembuktian di pengadilan dan/atau pemberian informasi pertanahan yang dimohonkan instansi yang memerlukan untuk pelaksanaan tugasnya, data dan/atau dokumen sebagaimana dimaksud pada ayat (2) dapat diberikan akses melalui sistem elektronik."
+    }
+  ]
+}

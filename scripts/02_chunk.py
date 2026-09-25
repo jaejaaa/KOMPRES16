@@ -73,11 +73,28 @@ def chunk_doc(d):
             })
     return chunks
 
+def load_manual():
+    """Pasal yang diketik manual (OCR gagal) -> data/manual/*.json; menggantikan chunk otomatis dengan nomor sama."""
+    out = []
+    for f in sorted(Path("data/manual").glob("*.json")):
+        m = json.loads(f.read_text()); d = json.loads((EXT / f"{m['doc_slug']}.json").read_text())
+        for c in m["chunks"]:
+            out.append({"id": f"{m['doc_slug']}:bata:ps{c['pasal']}", "doc_slug": m["doc_slug"], "doc": d["short"],
+                        "doc_title": d["title"], "section": "batang_tubuh", "bab": c.get("bab"), "pasal": c["pasal"],
+                        "pasal_inferred": False, "source": "manual", "page_start": c["page_start"],
+                        "page_end": c["page_end"], "text": c["text"], "n_chars": len(c["text"])})
+    return out
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     allc, report = [], []
     for f in sorted(EXT.glob("*.json")):
-        d = json.loads(f.read_text()); cs = chunk_doc(d); allc += cs
+        d = json.loads(f.read_text()); cs = chunk_doc(d)
+        man = [c for c in load_manual() if c["doc_slug"] == d["slug"]]
+        keys = {c["id"] for c in man}
+        cs = [c for c in cs if c["id"] not in keys] + man
+        cs.sort(key=lambda c: (c["section"] != "batang_tubuh", c["page_start"]))
+        allc += cs
         body = [c for c in cs if c["section"] == "batang_tubuh"]
         nums = sorted({int(c["pasal"].rstrip("ABCDEFGH")) for c in body if c["pasal"][0].isdigit()})
         missing = [n for n in range(nums[0], nums[-1] + 1) if n not in nums] if nums else []
