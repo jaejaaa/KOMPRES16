@@ -1,7 +1,7 @@
 KUHPerdata Buku II       chunk= 735 (batang tubuh= 735, penjelasan=  0) pasal 499–1232  hilang: []
 Permen ATR/BPN 3/2023    chunk=  53 (batang tubuh=  53, penjelasan=  0) pasal 1–47  hilang: []
 PP 18/2021               chunk= 168 (batang tubuh= 106, penjelasan= 62) pasal 1–104  hilang: []
-PP 24/1997               chunk= 128 (batang tubuh=  74, penjelasan= 54) pasal 1–66  hilang: []
+PP 24/1997               chunk= 125 (batang tubuh=  74, penjelasan= 51) pasal 1–66  hilang: []
 UU 2/2012                chunk=  82 (batang tubuh=  62, penjelasan= 20) pasal 1–61  hilang: []
 UU 21/1997               chunk=  57 (batang tubuh=  30, penjelasan= 27) pasal 1–28  hilang: []
 UU 27/2022               chunk=  98 (batang tubuh=  77, penjelasan= 21) pasal 1–76  hilang: []

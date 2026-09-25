@@ -1,31 +1,43 @@
-"""Langkah 3: embed semua chunk (bge-m3) -> data/chunks/embeddings.npy.
-Upload ke Supabase: set SUPABASE_DB_URL lalu jalankan dengan --upload."""
+"""Langkah 3: embed semua chunk dengan bge-m3 -> data/chunks/embeddings.npy, lalu (--upload) masukkan ke Postgres/pgvector.
+DATABASE_URL dibaca dari .env (mis. postgresql://jagatanah@localhost:5433/jagatanah)."""
 import json, os, sys
 from pathlib import Path
 import numpy as np
 
 CH = Path("data/chunks")
+MODEL = "BAAI/bge-m3"  # 1024 dimensi
 chunks = [json.loads(l) for l in open(CH / "chunks.jsonl")]
-# prefix konteks agar embedding tahu asal Pasal-nya
-texts = [f"{c['doc']} Pasal {c['pasal']} ({c['doc_title']}): {c['text']}" for c in chunks]
+# prefix konteks agar embedding tahu asal Pasal-nya; dipakai juga saat membuat embedding query
+def doc_text(c): return f"{c['doc']} Pasal {c['pasal']} ({c['doc_title']}): {c['text']}"
 
-from sentence_transformers import SentenceTransformer
-model = SentenceTransformer("BAAI/bge-m3")
-emb = model.encode(texts, batch_size=16, normalize_embeddings=True, show_progress_bar=True)
-np.save(CH / "embeddings.npy", emb.astype("float32"))
-print("embeddings:", emb.shape)
+def load_env():
+    if Path(".env").exists():
+        for l in Path(".env").read_text().splitlines():
+            if "=" in l and not l.startswith("#"):
+                k, v = l.split("=", 1); os.environ.setdefault(k.strip(), v.strip())
 
-if "--upload" in sys.argv:
-    import psycopg
-    from pgvector.psycopg import register_vector
-    with psycopg.connect(os.environ["SUPABASE_DB_URL"]) as conn:
-        register_vector(conn)
-        with conn.cursor() as cur:
-            for c, e in zip(chunks, emb):
-                cur.execute("""insert into regulation_chunks
+if __name__ == "__main__":
+    import torch
+    from sentence_transformers import SentenceTransformer
+    device = "mps" if torch.backends.mps.is_available() else "cpu"
+    model = SentenceTransformer(MODEL, device=device)
+    model.max_seq_length = 1024
+    emb = model.encode([doc_text(c) for c in chunks], batch_size=8, normalize_embeddings=True, show_progress_bar=True)
+    np.save(CH / "embeddings.npy", emb.astype("float32"))
+    print("embeddings:", emb.shape, "device:", device)
+
+    if "--upload" in sys.argv:
+        import psycopg
+        from pgvector.psycopg import register_vector
+        load_env()
+        with psycopg.connect(os.environ["DATABASE_URL"]) as conn:
+            register_vector(conn)
+            with conn.cursor() as cur:
+                cur.execute("truncate regulation_chunks")
+                cur.executemany("""insert into regulation_chunks
                   (id,doc_slug,doc,doc_title,section,bab,pasal,pasal_inferred,status,page_start,page_end,content,embedding)
-                  values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
-                  on conflict (id) do update set content=excluded.content, embedding=excluded.embedding""",
-                  (c["id"], c["doc_slug"], c["doc"], c["doc_title"], c["section"], c["bab"], c["pasal"],
-                   c["pasal_inferred"], c["status"], c["page_start"], c["page_end"], c["text"], e))
-    print("upload selesai")
+                  values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""",
+                  [(c["id"], c["doc_slug"], c["doc"], c["doc_title"], c["section"], c["bab"], c["pasal"],
+                    c["pasal_inferred"], c["status"], c["page_start"], c["page_end"], c["text"], e)
+                   for c, e in zip(chunks, emb)])
+        print("upload selesai:", len(chunks), "chunk")

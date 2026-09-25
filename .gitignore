@@ -3,3 +3,5 @@ __pycache__/
 data/chunks/embeddings.npy
 .env
 .DS_Store
+.pgdata/
+.pgdata/

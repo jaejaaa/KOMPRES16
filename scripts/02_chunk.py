@@ -15,7 +15,7 @@ STATUS = {"uu-21-1997": "dicabut (digantikan UU 28/2009)", "pp-24-1997": "diubah
 BOUNDS = {"kuhperdata-buku2": ("BUKU KEDUA", "BUKU KETIGA")}  # PDF memuat 4 Buku; ambil teks di antara dua penanda
 SCOPE = {"uu-28-2009": (85, 93)}  # BPHTB dalam UU PDRD
 
-NOISE_LINE = re.compile(r"^\s*(-?\s*\d{1,3}\s*-?|PRESIDEN|REPUBLIK\s+INDONESIA|PRESIDEN\s+REPUBLIK\s+INDONESIA|SK\s+No\s.*|www\.hukumonline\.com)\s*$", re.I)
+NOISE_LINE = re.compile(r"^\s*(-?\s*\d{1,3}\s*-?|PRESIDEN|REPUBLIK\s+INDONESIA|PRESIDEN\s+REPUBLIK\s+INDONESIA|SK\s+No\s.*|www\.hukumonline\.com|Diunduh dari .*jdih\.atrbpn\.go\.id.*)\s*$", re.I)
 CONTINUED = re.compile(r"^\s*(Pasal\s+\d+|BAB\s+[IVXL]+|\(\d+\)\s*\w*|\w+)?\s*(\.\s?){2,}\s*(-\s*\d+\s*-)?\s*$")  # footer 'Pasal 89 . . .'
 PENUTUP = re.compile(r"\n\s*(Ditetapkan|Disahkan)\s+di\b")
 
