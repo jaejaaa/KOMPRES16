@@ -14,8 +14,8 @@
 Opsi: doc_slug=, include_penjelasan=, include_dicabut=, include_panduan= (False -> hanya regulasi), hybrid=
 
 Backend ranking vektor (env SEARCH_BACKEND):
-  firestore (default) : Firestore vector search (find_nearest, koleksi regulation_chunks)
-  local               : numpy atas data/chunks/embeddings.npy (offline, untuk uji/dev)
+  firestore           : Firestore vector search (find_nearest, koleksi regulation_chunks)
+  local (auto bila Firestore belum dikonfigurasi) : numpy atas data/chunks/embeddings.npy (offline, untuk uji/dev)
 Sisi kata kunci memakai data/chunks/chunks.jsonl (sertakan file ini di deployment); hasil digabung dengan RRF.
 Aturan berstatus 'dicabut' dan Penjelasan disembunyikan secara default; panduan prosedur ikut dicari.
 """
@@ -28,6 +28,19 @@ ROOT = Path(__file__).resolve().parent.parent
 COLLECTION = os.getenv("FIRESTORE_COLLECTION", "regulation_chunks")
 STOP = set("apa yang dan atau di ke dari untuk dengan pada adalah itu ini oleh akan dapat harus bagaimana berapa siapa apakah mana saya kita tidak sebagai dalam para suatu setiap jika maka agar bila serta juga lebih sudah telah ada cara syarat".split())
 RRF_K = 60
+
+_db = None
+def set_firestore_client(db):
+    """Backend memanggil ini sekali: search.set_firestore_client(fb()), agar memakai kredensial yang sama (mis. FIREBASE_CREDENTIALS)."""
+    global _db; _db = db
+
+def firestore_client():
+    global _db
+    if _db is None:
+        from google.cloud import firestore
+        load_env()
+        _db = firestore.Client(project=os.getenv("FIREBASE_PROJECT_ID") or None, database=os.getenv("FIRESTORE_DATABASE", "(default)"))
+    return _db
 
 _corpus = None
 def corpus():
@@ -66,12 +79,9 @@ def vector_ranking(qvec, allowed, pool: int, backend: str):
         order = np.argsort(-(_emb @ qvec))
         rows = corpus()["rows"]
         return [rows[i]["id"] for i in order if rows[i]["id"] in allowed][:pool], {}
-    from google.cloud import firestore
     from google.cloud.firestore_v1.vector import Vector
     from google.cloud.firestore_v1.base_vector_query import DistanceMeasure
-    load_env()
-    db = firestore.Client(project=os.getenv("FIREBASE_PROJECT_ID") or None, database=os.getenv("FIRESTORE_DATABASE", "(default)"))
-    docs = db.collection(COLLECTION).find_nearest(
+    docs = firestore_client().collection(COLLECTION).find_nearest(
         vector_field="embedding", query_vector=Vector([float(x) for x in qvec]),
         distance_measure=DistanceMeasure.COSINE, limit=min(pool * 4, 1000),
         distance_result_field="_dist").stream()  # ambil lebih, saring status/section di sini
@@ -92,8 +102,7 @@ def cosine_scores(qvec, ids, backend: str, remote: dict):
             pos = {r["id"]: n for n, r in enumerate(corpus()["rows"])}
             for i in missing: out[i] = float(_emb[pos[i]] @ qvec)
         else:  # hasil dari jalur kata kunci saja: ambil vektornya dari Firestore
-            from google.cloud import firestore
-            db = firestore.Client(project=os.getenv("FIREBASE_PROJECT_ID") or None, database=os.getenv("FIRESTORE_DATABASE", "(default)"))
+            db = firestore_client()
             for d in db.get_all([db.collection(COLLECTION).document(i) for i in missing], field_paths=["embedding"]):
                 out[d.id] = float(np.array(list(d.get("embedding"))) @ qvec) if d.exists else 0.0
     return {i: max(0.0, min(1.0, v)) for i, v in out.items()}
@@ -102,7 +111,9 @@ def search(query: str, top_k: int = 5, doc_slug: str | None = None, include_penj
            include_dicabut: bool = False, hybrid: bool = True, pool: int = 40, backend: str | None = None,
            include_panduan: bool = True, k: int | None = None):
     top_k = k or top_k  # 'k' = alias lama
-    backend = backend or os.getenv("SEARCH_BACKEND", "firestore")
+    load_env()
+    # 'auto': Firestore bila klien disuntikkan/kredensial ada, selain itu lokal (dari chunks.jsonl + embeddings.npy)
+    backend = backend or os.getenv("SEARCH_BACKEND") or ("firestore" if (_db is not None or os.getenv("GOOGLE_APPLICATION_CREDENTIALS")) else "local")
     c = corpus()
     allowed = {r["id"] for r in c["rows"]
                if (doc_slug is None or r["doc_slug"] == doc_slug)
