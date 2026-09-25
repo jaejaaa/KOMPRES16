@@ -23,6 +23,7 @@ from __future__ import annotations
 import collections, json, math, os, re
 from pathlib import Path
 from embed_util import load_env, get_model
+from glossary import expand_query
 
 ROOT = Path(__file__).resolve().parent.parent
 COLLECTION = os.getenv("FIRESTORE_COLLECTION", "regulation_chunks")
@@ -120,6 +121,7 @@ def search(query: str, top_k: int = 5, doc_slug: str | None = None, include_penj
                and (include_penjelasan or r["section"] in ("batang_tubuh", "panduan"))
                and (include_panduan or r["section"] != "panduan")
                and (include_dicabut or not r["status"].startswith("dicabut"))}
+    query = expand_query(query)  # SHM/HGB/balik nama -> istilah regulasi
     qvec = get_model().encode([query], normalize_embeddings=True)[0]
     vec_ids, remote = vector_ranking(qvec, allowed, pool, backend)
     lists = [vec_ids] + ([keyword_ranking(query, allowed)[:pool]] if hybrid else [])

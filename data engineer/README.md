@@ -56,6 +56,12 @@ Tiap hasil: `id, sumber, pasal, teks, asal, score` (+ `doc, section, bab, status
 - Kolom `status` (`berlaku` / `diubah sebagian` / `dicabut` / `panduan`) sebaiknya dimunculkan di jawaban chatbot; untuk `asal="panduan"` beri catatan "bukan nasihat hukum, verifikasi ke Kantor Pertanahan".
 - Pertanyaan awam ("balik nama") kini tertangani panduan; untuk pertanyaan regulasi lain tetap disarankan *query rewriting* LLM ke istilah UU.
 
+### Adapter `retriever.py` (untuk `jawab_chat(retriever=...)`)
+`Retriever().search(query, top_k) -> list[(Chunk, skor 0-1)]`; `Chunk` = `id, sumber, pasal, teks, asal, status, page_start, page_end, sitasi`.
+Skor = kosinus murni; urutan = hybrid → gunakan `Retriever.skor_terbaik(hasil)` untuk ambang "di luar cakupan".
+`scripts/glossary.py` memperluas singkatan (SHM, HGB, AJB, BPHTB, "balik nama", ...) ke istilah regulasi sebelum pencarian.
+Pertanyaan perbandingan/multi-hop ("bedanya SHM dan HGB") sebaiknya dipecah LLM jadi sub-query.
+
 ## Panduan prosedur (`data/panduan/`)
 `balik-nama.json` (7 bagian) dan `cek-keaslian.json` (6 bagian). Kutipan Pasal diverifikasi ke korpus; butir bertanda
 "praktik umum" berasal dari informasi publik sekunder dan **perlu diverifikasi** ke Kantor Pertanahan/PPAT sebelum masuk proposal.
