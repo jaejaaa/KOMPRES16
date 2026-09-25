@@ -23,7 +23,7 @@ Aturan berstatus 'dicabut' dan Penjelasan disembunyikan secara default; panduan 
 from __future__ import annotations
 import collections, json, math, os, re
 from pathlib import Path
-from embed_util import load_env, get_model
+from embed_util import load_env, get_model, doc_text
 from glossary import expand_query
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -72,13 +72,26 @@ def keyword_ranking(query: str, allowed) -> list:
     return [i for _, i in sorted(scored, reverse=True)]
 
 _emb = None
+def load_embeddings():
+    """embeddings.npy tidak ikut git (*.npy di-ignore). Bila tidak ada / jumlahnya tidak cocok dengan chunks.jsonl, dibangun ulang otomatis."""
+    global _emb
+    if _emb is None:
+        import numpy as np
+        f, rows = ROOT / "data/chunks/embeddings.npy", corpus()["rows"]
+        if f.exists() and len(np.load(f, mmap_mode="r")) == len(rows):
+            _emb = np.load(f)
+        else:
+            print(f"[search] embeddings.npy tidak ada/usang -> membangun {len(rows)} embedding (sekali, ±2 menit)...", flush=True)
+            _emb = get_model().encode([doc_text(r) for r in rows], batch_size=8, normalize_embeddings=True, show_progress_bar=True).astype("float32")
+            np.save(f, _emb)
+    return _emb
+
 def vector_ranking(qvec, allowed, pool: int, backend: str):
     """Kembalikan (daftar id terurut, dict id->dokumen dari backend jika ada)."""
     global _emb
     if backend == "local":
         import numpy as np
-        if _emb is None: _emb = np.load(ROOT / "data/chunks/embeddings.npy")
-        order = np.argsort(-(_emb @ qvec))
+        order = np.argsort(-(load_embeddings() @ qvec))
         rows = corpus()["rows"]
         return [rows[i]["id"] for i in order if rows[i]["id"] in allowed][:pool], {}
     from google.cloud.firestore_v1.vector import Vector
@@ -93,16 +106,15 @@ def vector_ranking(qvec, allowed, pool: int, backend: str):
 def cosine_scores(qvec, ids, backend: str, remote: dict):
     """Kemiripan kosinus 0-1 untuk hasil akhir. Firestore: jarak dari find_nearest; sisanya dihitung dari vektor dokumen."""
     import numpy as np
-    global _emb
     out, missing = {}, []
     for i in ids:
         if i in remote and "_dist" in remote[i]: out[i] = 1.0 - float(remote[i]["_dist"])
         else: missing.append(i)
     if missing:
         if backend == "local":
-            if _emb is None: _emb = np.load(ROOT / "data/chunks/embeddings.npy")
+            emb = load_embeddings()
             pos = {r["id"]: n for n, r in enumerate(corpus()["rows"])}
-            for i in missing: out[i] = float(_emb[pos[i]] @ qvec)
+            for i in missing: out[i] = float(emb[pos[i]] @ qvec)
         else:  # hasil dari jalur kata kunci saja: ambil vektornya dari Firestore
             db = firestore_client()
             for d in db.get_all([db.collection(COLLECTION).document(i) for i in missing], field_paths=["embedding"]):

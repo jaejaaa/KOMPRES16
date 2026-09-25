@@ -49,8 +49,8 @@ Tiap hasil: `id, sumber, pasal, teks, asal, score` (+ `doc, section, bab, status
 | `rank_score` | skor untuk urutan (bukan 0–1); pada mode default urutan = kosinus menurun |
 
 - Backend memanggil `search.set_firestore_client(fb())` sekali agar memakai kredensial yang sama.
-- Backend otomatis: **Firestore** bila klien disuntikkan/kredensial ada, selain itu **local** (dari `chunks.jsonl` + `embeddings.npy`, ikut di repo). Paksa dengan `SEARCH_BACKEND=firestore|local`.
-- Mode local sudah bisa dipakai **sekarang** tanpa Firestore. Catatan: pertanyaan tetap di-embed dengan `bge-m3` (unduh ±2,3 GB sekali; `pip install sentence-transformers numpy`). `embeddings.npy` terikat ke model itu — jika model diganti, jalankan ulang `03_embed.py`.
+- Backend otomatis: **Firestore** bila klien disuntikkan/kredensial ada, selain itu **local** (dari `chunks.jsonl` + `embeddings.npy`). Paksa dengan `SEARCH_BACKEND=firestore|local`.
+- Mode local sudah bisa dipakai **sekarang** tanpa Firestore. Catatan: pertanyaan tetap di-embed dengan `bge-m3` (unduh ±2,3 GB sekali; `pip install sentence-transformers numpy`). `embeddings.npy` **tidak ikut git** (`*.npy` di-ignore): `search()` membangunnya otomatis saat pertama kali dipanggil (±2 menit) bila tidak ada atau tidak cocok dengan `chunks.jsonl`. Jika model diganti, hapus file itu / jalankan ulang `03_embed.py`.
 - Default **vektor saja** (terbaik pada test set, lihat `data/eval/ABLASI.md`); `hybrid=True` menambah kata kunci (tidak dianjurkan). `data/chunks/chunks.jsonl` tetap perlu ada di deployment (metadata & penyaring status).
 - Default: batang tubuh + panduan; `dicabut` disembunyikan. Opsi: `doc_slug=`, `include_penjelasan=`, `include_dicabut=`, `include_panduan=False` (hanya regulasi), `hybrid=False`.
 - Kolom `status` (`berlaku` / `diubah sebagian` / `dicabut` / `panduan`) sebaiknya dimunculkan di jawaban chatbot; untuk `asal="panduan"` beri catatan "bukan nasihat hukum, verifikasi ke Kantor Pertanahan".
