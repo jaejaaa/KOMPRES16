@@ -7,8 +7,10 @@ from .retrieval import (
     Chunk,
     KeywordRetriever,
     Retriever,
+    label_pasal,
     muat_regulasi,
     pecah_dokumen,
+    pecah_perbandingan,
     tokenize,
 )
 
@@ -61,6 +63,34 @@ def _query_retrieval(pertanyaan: str, riwayat: list[dict]) -> str:
     return pertanyaan
 
 
+def _cari(
+    retriever: Retriever, queries: list[str], top_k: int
+) -> dict[str, tuple[Chunk, float]]:
+    """Cari tiap query, gabungkan; chunk yang sama dipakai skor tertingginya."""
+    hasil: dict[str, tuple[Chunk, float]] = {}
+    for q in queries:
+        for chunk, skor in retriever.search(q, top_k):
+            if chunk.id not in hasil or skor > hasil[chunk.id][1]:
+                hasil[chunk.id] = (chunk, skor)
+    return hasil
+
+
+def _sumber(chunk: Chunk) -> dict:
+    s = {
+        "id": chunk.id,
+        "uu": chunk.sumber,
+        "pasal": label_pasal(chunk.pasal),
+        "kutipan": chunk.teks,
+        "asal": chunk.asal,
+    }
+    # field tambahan dari retriever Data Engineer (opsional)
+    if getattr(chunk, "status", None):
+        s["status"] = chunk.status
+    if getattr(chunk, "page_start", None):
+        s["halaman"] = chunk.page_start
+    return s
+
+
 def jawab_chat(
     pertanyaan: str,
     riwayat: list[dict] | None = None,
@@ -73,8 +103,10 @@ def jawab_chat(
 
     riwayat: [{"role": "user"|"assistant", "content": "..."}]
     konteks_dokumen: teks dokumen yang sedang dibuka user (opsional)
-    retriever: ganti dengan retriever pgvector kalau sudah ada. Kalau diisi,
-               chunk dokumen tetap ditambahkan lewat KeywordRetriever terpisah.
+    retriever: retriever regulasi dengan method `search(query, top_k) -> [(Chunk, skor 0-1)]`.
+               Kosong = KeywordRetriever + data contoh. Chunk dokumen user selalu
+               dicari terpisah (pencocokan kata). Atur ambang lewat env
+               MIN_RETRIEVAL_SCORE (regulasi) dan MIN_DOK_SCORE (dokumen).
     """
     pertanyaan = (pertanyaan or "").strip()
 
@@ -89,26 +121,34 @@ def jawab_chat(
     riwayat = _bersihkan_riwayat(riwayat)
     chunks_dok = pecah_dokumen(konteks_dokumen) if konteks_dokumen else []
 
-    # Lapis 1b: gerbang skor retrieval
+    # Lapis 1b: gerbang skor retrieval (skor terbaik, bukan skor chunk pertama:
+    # urutan hasil retriever bisa hybrid sehingga skornya tidak selalu menurun)
     query = _query_retrieval(pertanyaan, riwayat)
-    hasil: list[tuple[Chunk, float]] = []
-    reg = retriever or KeywordRetriever(_get_regulasi() + chunks_dok)
-    hasil.extend(reg.search(query, config.TOP_K))
-    if retriever and chunks_dok:
-        hasil.extend(KeywordRetriever(chunks_dok).search(query, config.TOP_K))
+    sisi = pecah_perbandingan(pertanyaan)  # "bedanya X dan Y" -> cari X dan Y sendiri-sendiri
+    queries = sisi + [query] if sisi else [query]
+    per_query = max(2, config.TOP_K // 2) if sisi else config.TOP_K
 
-    terpilih: dict[str, Chunk] = {
-        c.id: c for c, skor in hasil if skor >= config.MIN_RETRIEVAL_SCORE
-    }
-    # "Pasal 5 di kontrak saya..." -> selalu sertakan pasal dokumen yang disebut
-    for n in re.findall(r"\bpasal\s+(\d+)", pertanyaan, re.IGNORECASE):
-        for c in chunks_dok:
-            if c.id == f"dok-{n}":
-                terpilih[c.id] = c
-    if not terpilih:
+    reg = retriever or KeywordRetriever(_get_regulasi())
+    kandidat = _cari(reg, queries, per_query)
+    lolos_reg = bool(kandidat) and (
+        max(skor for _, skor in kandidat.values()) >= config.MIN_RETRIEVAL_SCORE
+    )
+
+    dok: dict[str, Chunk] = {}
+    if chunks_dok:
+        for i, (c, skor) in _cari(KeywordRetriever(chunks_dok), [query], config.TOP_K).items():
+            if skor >= config.MIN_DOK_SCORE:
+                dok[i] = c
+        # "Pasal 5 di kontrak saya..." -> selalu sertakan pasal dokumen yang disebut
+        for n in re.findall(r"\bpasal\s+(\d+)", pertanyaan, re.IGNORECASE):
+            for c in chunks_dok:
+                if c.id == f"dok-{n}":
+                    dok[c.id] = c
+
+    chunks = list(dok.values()) + ([c for c, _ in kandidat.values()] if lolos_reg else [])
+    if not chunks:
         return _respons(guardrails.PESAN_DI_LUAR_CAKUPAN, "di_luar_cakupan")
-
-    chunks = list(terpilih.values())
+    peta = {str(i): c for i, c in enumerate(chunks, 1)}  # nomor prompt -> chunk asli
     sensitif = guardrails.is_sensitif(pertanyaan)
 
     try:
@@ -121,21 +161,11 @@ def jawab_chat(
     # Lapis 3: validasi sitasi. Sumber dibangun dari chunk asli, bukan dari teks LLM.
     if not isinstance(out, dict) or out.get("di_luar_cakupan"):
         return _respons(guardrails.PESAN_DI_LUAR_CAKUPAN, "di_luar_cakupan")
-    ids = [i for i in out.get("sumber_ids", []) if i in terpilih]
+    ids = [str(i).strip() for i in out.get("sumber_ids", []) if str(i).strip() in peta]
     jawaban = str(out.get("jawaban", "")).strip()
     if not ids or not jawaban:
         return _respons(guardrails.PESAN_DI_LUAR_CAKUPAN, "di_luar_cakupan")
 
     if sensitif:
         jawaban += guardrails.CATATAN_SENSITIF
-    sumber = [
-        {
-            "id": i,
-            "uu": terpilih[i].sumber,
-            "pasal": terpilih[i].pasal,
-            "kutipan": terpilih[i].teks,
-            "asal": terpilih[i].asal,
-        }
-        for i in dict.fromkeys(ids)
-    ]
-    return _respons(jawaban, "ok", sumber)
+    return _respons(jawaban, "ok", [_sumber(peta[i]) for i in dict.fromkeys(ids)])

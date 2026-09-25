@@ -6,6 +6,9 @@ GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
 # Di bawah ini chatbot langsung jawab "di luar cakupan" tanpa memanggil LLM.
 MIN_RETRIEVAL_SCORE = float(os.environ.get("MIN_RETRIEVAL_SCORE", "0.25"))
 
+# Skor minimal chunk dokumen user (pencocokan kata, skala 0-1, terpisah dari retriever regulasi)
+MIN_DOK_SCORE = float(os.environ.get("MIN_DOK_SCORE", "0.25"))
+
 TOP_K = 4
 MAX_RIWAYAT = 6
 MAX_PERTANYAAN_CHARS = 1000

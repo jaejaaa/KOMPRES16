@@ -96,3 +96,26 @@ def pecah_dokumen(teks: str) -> list[Chunk]:
             )
         )
     return chunks
+
+
+def label_pasal(pasal: str) -> str:
+    """"35" -> "Pasal 35"; label lain ("Ketentuan umum") dibiarkan."""
+    p = str(pasal).strip()
+    return f"Pasal {p}" if p[:1].isdigit() else p
+
+
+_BUANG = re.compile(r"\b(apa\s+)?(bedanya|perbedaan|beda|bandingkan|perbandingan)\b", re.IGNORECASE)
+_BANDING = re.compile(r"\b(vs|versus)\b", re.IGNORECASE)
+_PEMISAH = re.compile(r"\s+(?:dan|vs|versus|atau|dengan|sama)\s+", re.IGNORECASE)
+
+
+def pecah_perbandingan(pertanyaan: str) -> list[str]:
+    """"Apa bedanya SHM dan HGB?" -> ["SHM", "HGB"]. Bukan pertanyaan perbandingan -> [].
+
+    Jawaban perbandingan tersebar di dua pasal, jadi masing-masing sisi dicari sendiri.
+    """
+    if not (_BUANG.search(pertanyaan) or _BANDING.search(pertanyaan)):
+        return []
+    inti = re.sub(r"[?!.]+", " ", _BUANG.sub(" ", pertanyaan)).strip()
+    bagian = [b.strip() for b in _PEMISAH.split(inti) if b.strip()]
+    return bagian if len(bagian) == 2 else []
