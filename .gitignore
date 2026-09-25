@@ -1,8 +1,26 @@
+# Python
 .venv/
 venv/
 __pycache__/
+*.pyc
+.pytest_cache/
+
+# OS / editor
 .DS_Store
+
+# RAHASIA — jangan pernah di-commit (pakai file .env lokal / Secret di hosting)
 .env
-.pgdata/
+.env.*
+!.env.example
+*serviceAccount*.json
+*-firebase-adminsdk-*.json
+firebase-key.json
+
+# Frontend (Next.js), untuk nanti
+node_modules/
+.next/
+
+# File biner turunan; dibangun ulang otomatis oleh data engineer/scripts/search.py.
+# Belum diputuskan tim: kalau vektor mau di-commit, buka baris whitelist di bawah.
 *.npy
-Folder Hukum Tanah/
+# !data engineer/data/chunks/*.npy
