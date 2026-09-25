@@ -11,4 +11,5 @@ Pipeline: `data/raw/*.pdf` → `01_extract.py` (PyMuPDF / OCR Tesseract untuk PD
 
 ## Gap OCR yang diketahui (Pasal tidak terbaca di scan)
 PP 18/2021 Ps 66 & 85 sudah ditambal manual (`data/manual/`).
-Masih hilang: UU 21/1997: Ps 4, 9, 13, 24 · KUHPerdata: Ps 1122
+UU 21/1997 Ps 4, 9, 13, 24 juga sudah ditambal manual.
+Masih hilang: KUHPerdata Ps 1122 (cek dulu apakah memang ada di teks asli).
