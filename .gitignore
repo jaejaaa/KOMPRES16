@@ -5,3 +5,5 @@ data/chunks/embeddings.npy
 .DS_Store
 .pgdata/
 .pgdata/
+*serviceAccount*.json
+*-firebase-adminsdk-*.json
