@@ -45,3 +45,4 @@ search("peralihan hak karena jual beli", k=5)
 ## Hasil uji awal retrieval (9 pertanyaan, Pasal benar di top-5)
 vektor saja 7/9 · hybrid 8/9 (`SEARCH_BACKEND=local python scripts/04_search.py`).
 Uji kecil; angka evaluasi resmi memakai test set Q&A (Hari 4).
+# KOMPRES16
