@@ -1,0 +1,10 @@
+{
+  "_catatan": "Pasal 1162: di PDF sumber tertulis '1162' tanpa kata 'Pasal' (typo sumber), sehingga tidak terdeteksi chunker. Teks diambil dari hal. 179 PDF.",
+  "doc_slug": "kuhperdata-buku2",
+  "chunks": [
+    {
+      "pasal": "1162", "bab": "XXI", "page_start": 179, "page_end": 179,
+      "text": "Hipotek adalah suatu hak kebendaan atas barang tak bergerak yang dijadikan jaminan dalam pelunasan suatu perikatan."
+    }
+  ]
+}

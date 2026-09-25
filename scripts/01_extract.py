@@ -10,7 +10,7 @@ DOCS = {  # file -> (slug, nama_pendek, judul)
     "PP Nomor 18 Tahun 2021.pdf": ("pp-18-2021", "PP 18/2021", "Hak Pengelolaan, Hak Atas Tanah, Satuan Rumah Susun, dan Pendaftaran Tanah"),
     "UU Nomor 21 Tahun 1997_.pdf": ("uu-21-1997", "UU 21/1997", "Bea Perolehan Hak atas Tanah dan Bangunan (BPHTB)"),
     "Permen ATRKBPN Nomor 3 Tahun 2023.pdf": ("permen-3-2023", "Permen ATR/BPN 3/2023", "Penerbitan Dokumen Elektronik dalam Kegiatan Pendaftaran Tanah"),
-    "Kitab_Undang-Undang_Hukum_Perdata_Buku_Kedua.pdf": ("kuhperdata-buku2", "KUHPerdata Buku II", "Tentang Kebendaan"),
+    "Kitab-Undang-undang-Hukum-Perdata.pdf": ("kuhperdata-buku2", "KUHPerdata Buku II", "Tentang Kebendaan"),
     "UU Nomor 2 Tahun 2012.pdf": ("uu-2-2012", "UU 2/2012", "Pengadaan Tanah bagi Pembangunan untuk Kepentingan Umum"),
     "UU Nomor 28 Tahun 2009.pdf": ("uu-28-2009", "UU 28/2009", "Pajak Daerah dan Retribusi Daerah (PDRD)"),
     "UU Nomor 27 Tahun 2022.pdf": ("uu-27-2022", "UU 27/2022", "Pelindungan Data Pribadi"),
@@ -21,6 +21,7 @@ def clean(t: str) -> str:
     t = re.sub(r"[ \t]+", " ", t)
     return re.sub(r"\n{3,}", "\n\n", t).strip()
 
+PAGE_RANGE = {"kuhperdata-buku2": (90, 189)}  # PDF berisi 4 Buku; hanya Buku Kedua (nomor halaman tetap mengacu ke PDF asli)
 SCANNED = {"pp-18-2021", "permen-3-2023", "uu-21-1997", "uu-2-2012", "uu-27-2022", "pp-24-1997"}  # PDF scan: text layer bawaan rusak -> OCR ulang
 
 def ocr_page(args):
@@ -35,12 +36,15 @@ OUT.mkdir(parents=True, exist_ok=True)
 for fn, (slug, short, title) in DOCS.items():
     if sys.argv[1:] and slug not in sys.argv[1:]: continue  # opsional: python 01_extract.py <slug> ...
     doc = fitz.open(RAW / fn)
+    lo, hi = PAGE_RANGE.get(slug, (1, len(doc)))
     if slug in SCANNED:
         with ThreadPoolExecutor(8) as ex:
             texts = list(ex.map(ocr_page, [(fn, i) for i in range(len(doc))]))
     else:
         texts = [p.get_text(sort=True) for p in doc]
-    pages = [{"page": i + 1, "text": clean(t), "ocr": slug in SCANNED} for i, t in enumerate(texts)]
+    texts = [re.sub(r"^\s*www\.hukumonline\.com\s*$", "", t, flags=re.M) for t in texts]  # watermark
+    pages = [{"page": i + 1, "text": clean(t), "ocr": slug in SCANNED}
+             for i, t in enumerate(texts) if lo <= i + 1 <= hi]
     (OUT / f"{slug}.json").write_text(json.dumps(
         {"slug": slug, "short": short, "title": title, "source_file": fn, "pages": pages},
         ensure_ascii=False, indent=1))

@@ -12,6 +12,7 @@ MAX_CHARS = 1800
 # Dokumen besar: hanya Pasal yang relevan untuk hukum tanah yang di-chunk (batang tubuh + penjelasan)
 # Status berlaku; UU 21/1997 (BPHTB) digantikan UU 28/2009 Pasal 85-93, PP 24/1997 diubah PP 18/2021
 STATUS = {"uu-21-1997": "dicabut (digantikan UU 28/2009)", "pp-24-1997": "diubah sebagian (PP 18/2021)"}
+BOUNDS = {"kuhperdata-buku2": ("BUKU KEDUA", "BUKU KETIGA")}  # PDF memuat 4 Buku; ambil teks di antara dua penanda
 SCOPE = {"uu-28-2009": (85, 93)}  # BPHTB dalam UU PDRD
 
 def split_ayat(body: str):
@@ -29,9 +30,12 @@ def split_ayat(body: str):
 def chunk_doc(d):
     lines = []  # (page, line)
     for pg in d["pages"]:
-        if d["slug"] == "kuhperdata-buku2" and pg["page"] in (1, len(d["pages"])):
-            continue  # halaman sampul/kosong Wikisource
         lines += [(pg["page"], l) for l in pg["text"].split("\n")]
+    if d["slug"] in BOUNDS:
+        start, end = BOUNDS[d["slug"]]
+        i0 = next(i for i, (_, l) in enumerate(lines) if l.strip() == start)
+        i1 = next(i for i, (_, l) in enumerate(lines) if i > i0 and l.strip() == end)
+        lines = lines[i0:i1]
     section, bab, cur = "batang_tubuh", None, None
     raw = []
     def flush():
