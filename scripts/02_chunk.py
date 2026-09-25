@@ -15,9 +15,24 @@ STATUS = {"uu-21-1997": "dicabut (digantikan UU 28/2009)", "pp-24-1997": "diubah
 BOUNDS = {"kuhperdata-buku2": ("BUKU KEDUA", "BUKU KETIGA")}  # PDF memuat 4 Buku; ambil teks di antara dua penanda
 SCOPE = {"uu-28-2009": (85, 93)}  # BPHTB dalam UU PDRD
 
+NOISE_LINE = re.compile(r"^\s*(-?\s*\d{1,3}\s*-?|PRESIDEN|REPUBLIK\s+INDONESIA|PRESIDEN\s+REPUBLIK\s+INDONESIA|SK\s+No\s.*|www\.hukumonline\.com)\s*$", re.I)
+CONTINUED = re.compile(r"^\s*(Pasal\s+\d+|BAB\s+[IVXL]+|\(\d+\)\s*\w*|\w+)?\s*(\.\s?){2,}\s*(-\s*\d+\s*-)?\s*$")  # footer 'Pasal 89 . . .'
+PENUTUP = re.compile(r"\n\s*(Ditetapkan|Disahkan)\s+di\b")
+
+def is_noise(line: str) -> bool:
+    t = line.strip()
+    if not t: return False
+    if NOISE_LINE.match(t) or CONTINUED.match(t): return True
+    letters = sum(ch.isalpha() for ch in t)
+    return len(t) >= 8 and letters / len(t) < 0.45 and not re.search(r"[A-Za-z]{4,}", t) and not re.match(r"^[\(\d]", t)  # baris sampah OCR
+
+def only_cukup_jelas(t: str) -> bool:
+    rest = re.sub(r"Cukup jelas\.?|Ayat\s*\(\d+\)|Huruf\s+[a-z]|Angka\s+\d+|Pasal\s+\d+[A-Z]?|[|\s.\-]", "", t, flags=re.I)
+    return len(rest) < 5
+
 def split_ayat(body: str):
     """Pasal panjang dipecah di batas ayat '(n)' agar tiap chunk tetap utuh secara makna."""
-    parts = re.split(r"\n(?=\(\d+\)\s)", body)
+    parts = re.split(r"\n(?=(?:\(\d+\)|\d+\.|Ayat\s*\(\d+\))\s)", body)
     out, cur = [], ""
     for p in parts:
         if cur and len(cur) + len(p) > MAX_CHARS:
@@ -30,7 +45,7 @@ def split_ayat(body: str):
 def chunk_doc(d):
     lines = []  # (page, line)
     for pg in d["pages"]:
-        lines += [(pg["page"], l) for l in pg["text"].split("\n")]
+        lines += [(pg["page"], l) for l in pg["text"].split("\n") if not is_noise(l)]
     if d["slug"] in BOUNDS:
         start, end = BOUNDS[d["slug"]]
         i0 = next(i for i, (_, l) in enumerate(lines) if l.strip() == start)
@@ -69,6 +84,9 @@ def chunk_doc(d):
     chunks = []
     for r in raw:
         text = re.sub(r"\n{2,}", "\n", re.sub(r"-\n(?=[a-z])", "", r["text"])).strip()
+        if r["section"] == "batang_tubuh" and (m := PENUTUP.search("\n" + text)):
+            text = text[: max(m.start() - 1, 0)].strip()  # buang blok tanda tangan + lampiran
+        if r["section"] == "penjelasan" and only_cukup_jelas(text): continue  # tanpa isi
         if len(text) < 15: continue  # header/judul salah deteksi
         pieces = split_ayat(text) if len(text) > MAX_CHARS else [text]
         for j, piece in enumerate(pieces, 1):
@@ -105,7 +123,11 @@ def main():
             lo, hi = SCOPE[d["slug"]]
             cs = [c for c in cs if c["pasal"][0].isdigit() and lo <= int(c["pasal"].rstrip("ABCDEFGH")) <= hi]
         cs.sort(key=lambda c: (c["section"] != "batang_tubuh", c["page_start"]))
-        for c in cs: c["status"] = STATUS.get(c["doc_slug"], "berlaku")
+        seen = {}
+        for c in cs:
+            c["status"] = STATUS.get(c["doc_slug"], "berlaku")
+            seen[c["id"]] = seen.get(c["id"], 0) + 1
+            if seen[c["id"]] > 1: c["id"] += f"~{seen[c['id']]}"  # id unik untuk Pasal duplikat
         allc += cs
         body = [c for c in cs if c["section"] == "batang_tubuh"]
         nums = sorted({int(c["pasal"].rstrip("ABCDEFGH")) for c in body if c["pasal"][0].isdigit()})
