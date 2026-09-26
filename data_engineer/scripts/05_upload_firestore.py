@@ -8,17 +8,15 @@ import json, os, sys
 from pathlib import Path
 import numpy as np
 sys.path.insert(0, str(Path(__file__).parent))
-from embed_util import load_env
+from embed_util import load_env, load_or_build_embeddings
 
 CH = Path(__file__).resolve().parent.parent / "data/chunks"
 COLLECTION = os.getenv("FIRESTORE_COLLECTION", "regulation_chunks")
-DIM = 1024
 
 def build_docs():
     chunks = [json.loads(l) for l in open(CH / "chunks.jsonl")]
-    emb = np.load(CH / "embeddings.npy")
-    assert len(chunks) == len(emb), f"jumlah chunk ({len(chunks)}) != embedding ({len(emb)}): jalankan 03_embed.py ulang"
-    assert emb.shape[1] == DIM, f"dimensi {emb.shape[1]} != {DIM}"
+    emb = load_or_build_embeddings(chunks)  # penyedia dari EMBED_PROVIDER; dibangun bila belum ada
+    assert len(chunks) == len(emb), f"jumlah chunk ({len(chunks)}) != embedding ({len(emb)})"
     norms = np.linalg.norm(emb, axis=1); assert np.allclose(norms, 1, atol=1e-3), "embedding belum ternormalisasi"
     assert len({c["id"] for c in chunks}) == len(chunks), "id chunk tidak unik"
     for c, e in zip(chunks, emb):
@@ -28,7 +26,7 @@ def build_docs():
 
 if __name__ == "__main__":
     docs = list(build_docs())
-    size = max(len(json.dumps({k: v for k, v in d.items() if k != "embedding"})) + DIM * 8 for _, d in docs)
+    size = max(len(json.dumps({k: v for k, v in d.items() if k != "embedding"})) + len(d["embedding"]) * 8 for _, d in docs)
     print(f"{len(docs)} dokumen valid | dokumen terbesar ≈ {size/1024:.0f} KiB (batas Firestore 1 MiB)")
     if "--dry-run" in sys.argv: sys.exit(0)
 

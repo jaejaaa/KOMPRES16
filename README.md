@@ -29,7 +29,8 @@ Frontend ──▶ Backend (FastAPI) ──▶ chatbot/ (Gemini) ──▶ searc
 - ✅ Knowledge base: 9 regulasi, 1.452 chunk, test set 45 pertanyaan, retrieval Hit@5 0,93 (dev set).
 - ✅ Backend: Auth, upload PDF, chat + riwayat, chatbot Gemini tersambung (masih memakai data regulasi contoh).
 - ⏳ Chatbot belum memakai `search()` asli; analisis dokumen (`analyze`) masih dummy; frontend belum masuk repo.
-- ❓ **Belum diputuskan:** model embedding produksi (bge-m3 vs Gemini embedding), penyimpanan vektor (file `.npy` vs Firestore), tempat hosting backend.
+- ✅ **Diputuskan:** embedding pindah ke Gemini (`gemini-embedding-001`); laporan perbandingan dengan bge-m3 di `data_engineer/data/eval/PERBANDINGAN_EMBEDDING.md`.
+- ❓ **Belum diputuskan:** penyimpanan vektor (file `.npy` di git vs Firestore) dan tempat hosting backend.
 
 ## Aturan main repo
 1. **Jangan commit rahasia** (`.env`, kunci service account, API key). Pakai `.env` lokal; contoh ada di `.env.example` tiap folder.

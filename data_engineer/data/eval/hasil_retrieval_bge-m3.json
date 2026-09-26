@@ -1,0 +1,1103 @@
+{
+ "waktu": "2026-09-26 11:54",
+ "set": "dev",
+ "provider": "bge-m3",
+ "top_k": 5,
+ "kategori": {
+  "awam": {
+   "n": 4,
+   "hit@1": 0.5,
+   "hit@3": 0.75,
+   "hit@5": 1.0,
+   "mrr": 0.675,
+   "precision@1": 0.5,
+   "recall@1": 0.5,
+   "precision@3": 0.25,
+   "recall@3": 0.75,
+   "precision@5": 0.2,
+   "recall@5": 1.0
+  },
+  "multi": {
+   "n": 2,
+   "hit@1": 0.5,
+   "hit@3": 0.5,
+   "hit@5": 0.5,
+   "mrr": 0.5,
+   "precision@1": 0.5,
+   "recall@1": 0.5,
+   "precision@3": 0.6666666666666666,
+   "recall@3": 0.75,
+   "precision@5": 0.6,
+   "recall@5": 0.75
+  },
+  "panduan": {
+   "n": 4,
+   "hit@1": 1.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "mrr": 1.0,
+   "precision@1": 1.0,
+   "recall@1": 1.0,
+   "precision@3": 1.0,
+   "recall@3": 1.0,
+   "precision@5": 0.9,
+   "recall@5": 1.0
+  },
+  "regulasi": {
+   "n": 29,
+   "hit@1": 0.6896551724137931,
+   "hit@3": 0.896551724137931,
+   "hit@5": 0.9310344827586207,
+   "mrr": 0.8017241379310345,
+   "precision@1": 0.6896551724137931,
+   "recall@1": 0.6896551724137931,
+   "precision@3": 0.33333333333333326,
+   "recall@3": 0.896551724137931,
+   "precision@5": 0.206896551724138,
+   "recall@5": 0.9310344827586207
+  },
+  "status": {
+   "n": 1,
+   "hit@1": 0.0,
+   "hit@3": 1.0,
+   "hit@5": 1.0,
+   "mrr": 0.5,
+   "precision@1": 0.0,
+   "recall@1": 0.0,
+   "precision@3": 0.3333333333333333,
+   "recall@3": 1.0,
+   "precision@5": 0.2,
+   "recall@5": 1.0
+  }
+ },
+ "total": {
+  "n": 40,
+  "hit@1": 0.675,
+  "hit@3": 0.875,
+  "hit@5": 0.925,
+  "mrr": 0.78625,
+  "precision@1": 0.675,
+  "recall@1": 0.675,
+  "precision@3": 0.4083333333333334,
+  "recall@3": 0.8875,
+  "precision@5": 0.29500000000000004,
+  "recall@5": 0.9375
+ },
+ "sapuan_ambang": [
+  {
+   "ambang": 0.35,
+   "salah_tolak": 0.0,
+   "salah_terima": 1.0
+  },
+  {
+   "ambang": 0.4,
+   "salah_tolak": 0.0,
+   "salah_terima": 1.0
+  },
+  {
+   "ambang": 0.45,
+   "salah_tolak": 0.025,
+   "salah_terima": 0.8
+  },
+  {
+   "ambang": 0.5,
+   "salah_tolak": 0.025,
+   "salah_terima": 0.6
+  },
+  {
+   "ambang": 0.55,
+   "salah_tolak": 0.025,
+   "salah_terima": 0.4
+  },
+  {
+   "ambang": 0.6,
+   "salah_tolak": 0.025,
+   "salah_terima": 0.2
+  },
+  {
+   "ambang": 0.65,
+   "salah_tolak": 0.025,
+   "salah_terima": 0.2
+  },
+  {
+   "ambang": 0.7,
+   "salah_tolak": 0.5,
+   "salah_terima": 0.0
+  },
+  {
+   "ambang": 0.75,
+   "salah_tolak": 0.725,
+   "salah_terima": 0.0
+  }
+ ],
+ "kutipan_terlarang": [],
+ "rata2_ms_per_kueri": 64.7265699174669,
+ "peringkat": {
+  "R01": null,
+  "R02": 1,
+  "R03": 1,
+  "R04": 1,
+  "R05": 2,
+  "R06": 2,
+  "R07": 2,
+  "R08": 1,
+  "R09": 4,
+  "R10": 1,
+  "R11": 1,
+  "R12": 2,
+  "R13": 1,
+  "R14": 2,
+  "R15": 1,
+  "R16": 1,
+  "R17": 2,
+  "R18": 1,
+  "R19": 1,
+  "R20": 1,
+  "R21": 1,
+  "R22": 1,
+  "R23": 1,
+  "R24": null,
+  "R25": 1,
+  "R26": 1,
+  "R27": 1,
+  "R28": 1,
+  "R29": 1,
+  "A01": 2,
+  "A02": 1,
+  "A03": 5,
+  "A04": 1,
+  "P01": 1,
+  "P02": 1,
+  "P03": 1,
+  "P04": 1,
+  "S01": 2,
+  "M01": null,
+  "M02": 1
+ },
+ "skor_terbaik": {
+  "R01": 0.6682,
+  "R02": 0.6649,
+  "R03": 0.7665,
+  "R04": 0.7654,
+  "R05": 0.7352,
+  "R06": 0.712,
+  "R07": 0.6974,
+  "R08": 0.6634,
+  "R09": 0.6919,
+  "R10": 0.7814,
+  "R11": 0.7613,
+  "R12": 0.6635,
+  "R13": 0.772,
+  "R14": 0.7245,
+  "R15": 0.7,
+  "R16": 0.6559,
+  "R17": 0.6777,
+  "R18": 0.6979,
+  "R19": 0.7175,
+  "R20": 0.6858,
+  "R21": 0.6763,
+  "R22": 0.6913,
+  "R23": 0.7497,
+  "R24": 0.4499,
+  "R25": 0.7515,
+  "R26": 0.6753,
+  "R27": 0.7524,
+  "R28": 0.7487,
+  "R29": 0.7504,
+  "A01": 0.7827,
+  "A02": 0.6633,
+  "A03": 0.6608,
+  "A04": 0.6637,
+  "P01": 0.8213,
+  "P02": 0.7077,
+  "P03": 0.7604,
+  "P04": 0.7423,
+  "S01": 0.663,
+  "M01": 0.6695,
+  "M02": 0.699,
+  "O01": 0.4605,
+  "O02": 0.6687,
+  "O03": 0.5568,
+  "O04": 0.5476,
+  "O05": 0.4017
+ },
+ "top3": {
+  "R01": [
+   [
+    "UU 5/1960",
+    "4",
+    0.6682
+   ],
+   [
+    "UU 5/1960",
+    "8",
+    0.6542
+   ],
+   [
+    "UU 5/1960",
+    "2",
+    0.6538
+   ]
+  ],
+  "R02": [
+   [
+    "UU 5/1960",
+    "21",
+    0.6649
+   ],
+   [
+    "KUHPerdata Buku II",
+    "571",
+    0.6584
+   ],
+   [
+    "UU 5/1960",
+    "20",
+    0.6417
+   ]
+  ],
+  "R03": [
+   [
+    "PP 18/2021",
+    "37",
+    0.7665
+   ],
+   [
+    "PP 18/2021",
+    "41",
+    0.7384
+   ],
+   [
+    "UU 5/1960",
+    "35",
+    0.7364
+   ]
+  ],
+  "R04": [
+   [
+    "PP 18/2021",
+    "22",
+    0.7654
+   ],
+   [
+    "UU 5/1960",
+    "29",
+    0.7336
+   ],
+   [
+    "PP 18/2021",
+    "26",
+    0.7321
+   ]
+  ],
+  "R05": [
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Langkah 2 - Bayar pajak (",
+    0.7352
+   ],
+   [
+    "UU 28/2009",
+    "88",
+    0.6368
+   ],
+   [
+    "UU 28/2009",
+    "89",
+    0.5513
+   ]
+  ],
+  "R06": [
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Langkah 2 - Bayar pajak (",
+    0.712
+   ],
+   [
+    "UU 28/2009",
+    "86",
+    0.6686
+   ],
+   [
+    "UU 28/2009",
+    "85",
+    0.64
+   ]
+  ],
+  "R07": [
+   [
+    "Panduan: Cek Keaslian Sertifikat Tanah",
+    "Dasar hukum dan prinsip p",
+    0.6974
+   ],
+   [
+    "PP 24/1997",
+    "32",
+    0.6923
+   ],
+   [
+    "Panduan: Cek Keaslian Sertifikat Tanah",
+    "Cek fisik dokumen dan obj",
+    0.6383
+   ]
+  ],
+  "R08": [
+   [
+    "PP 24/1997",
+    "32",
+    0.6634
+   ],
+   [
+    "PP 18/2021",
+    "96",
+    0.6047
+   ],
+   [
+    "PP 18/2021",
+    "95",
+    0.5747
+   ]
+  ],
+  "R09": [
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Kasus lain: warisan dan l",
+    0.6919
+   ],
+   [
+    "PP 24/1997",
+    "42",
+    0.6824
+   ],
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Ringkasan alur",
+    0.6815
+   ]
+  ],
+  "R10": [
+   [
+    "PP 24/1997",
+    "40",
+    0.7814
+   ],
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Langkah 4 - PPAT mendafta",
+    0.7764
+   ],
+   [
+    "Permen ATR/BPN 3/2023",
+    "25",
+    0.7188
+   ]
+  ],
+  "R11": [
+   [
+    "PP 18/2021",
+    "64",
+    0.7613
+   ],
+   [
+    "PP 18/2021",
+    "14",
+    0.6914
+   ],
+   [
+    "PP 18/2021",
+    "82",
+    0.6736
+   ]
+  ],
+  "R12": [
+   [
+    "KUHPerdata Buku II",
+    "594",
+    0.6635
+   ],
+   [
+    "PP 18/2021",
+    "66",
+    0.6306
+   ],
+   [
+    "KUHPerdata Buku II",
+    "754",
+    0.6287
+   ]
+  ],
+  "R13": [
+   [
+    "PP 18/2021",
+    "88",
+    0.772
+   ],
+   [
+    "PP 24/1997",
+    "26",
+    0.7192
+   ],
+   [
+    "PP 24/1997",
+    "28",
+    0.7034
+   ]
+  ],
+  "R14": [
+   [
+    "Panduan: Cek Keaslian Sertifikat Tanah",
+    "Sertifikat elektronik",
+    0.7245
+   ],
+   [
+    "Permen ATR/BPN 3/2023",
+    "6",
+    0.714
+   ],
+   [
+    "PP 18/2021",
+    "84",
+    0.7062
+   ]
+  ],
+  "R15": [
+   [
+    "UU 27/2022",
+    "4",
+    0.7
+   ],
+   [
+    "UU 27/2022",
+    "1",
+    0.6263
+   ],
+   [
+    "UU 27/2022",
+    "15",
+    0.6119
+   ]
+  ],
+  "R16": [
+   [
+    "UU 27/2022",
+    "46",
+    0.6559
+   ],
+   [
+    "UU 27/2022",
+    "67",
+    0.6286
+   ],
+   [
+    "UU 27/2022",
+    "30",
+    0.6151
+   ]
+  ],
+  "R17": [
+   [
+    "UU 27/2022",
+    "67",
+    0.6777
+   ],
+   [
+    "UU 27/2022",
+    "57",
+    0.6729
+   ],
+   [
+    "UU 27/2022",
+    "60",
+    0.6506
+   ]
+  ],
+  "R18": [
+   [
+    "UU 27/2022",
+    "8",
+    0.6979
+   ],
+   [
+    "UU 27/2022",
+    "44",
+    0.6918
+   ],
+   [
+    "UU 27/2022",
+    "43",
+    0.6856
+   ]
+  ],
+  "R19": [
+   [
+    "UU 2/2012",
+    "10",
+    0.7175
+   ],
+   [
+    "UU 2/2012",
+    "49",
+    0.7097
+   ],
+   [
+    "UU 2/2012",
+    "3",
+    0.6998
+   ]
+  ],
+  "R20": [
+   [
+    "UU 2/2012",
+    "9",
+    0.6858
+   ],
+   [
+    "UU 2/2012",
+    "27",
+    0.6742
+   ],
+   [
+    "UU 2/2012",
+    "46",
+    0.6582
+   ]
+  ],
+  "R21": [
+   [
+    "UU 5/1960",
+    "6",
+    0.6763
+   ],
+   [
+    "PP 18/2021",
+    "1",
+    0.6027
+   ],
+   [
+    "UU 2/2012",
+    "3",
+    0.601
+   ]
+  ],
+  "R22": [
+   [
+    "UU 5/1960",
+    "27",
+    0.6913
+   ],
+   [
+    "PP 18/2021",
+    "62",
+    0.6736
+   ],
+   [
+    "PP 18/2021",
+    "47",
+    0.6703
+   ]
+  ],
+  "R23": [
+   [
+    "KUHPerdata Buku II",
+    "584",
+    0.7497
+   ],
+   [
+    "KUHPerdata Buku II",
+    "610",
+    0.7129
+   ],
+   [
+    "KUHPerdata Buku II",
+    "621",
+    0.7097
+   ]
+  ],
+  "R24": [
+   [
+    "KUHPerdata Buku II",
+    "660",
+    0.4499
+   ],
+   [
+    "KUHPerdata Buku II",
+    "661",
+    0.4494
+   ],
+   [
+    "UU 2/2012",
+    "4",
+    0.444
+   ]
+  ],
+  "R25": [
+   [
+    "PP 24/1997",
+    "42",
+    0.7515
+   ],
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Kasus lain: warisan dan l",
+    0.7147
+   ],
+   [
+    "PP 24/1997",
+    "53",
+    0.6528
+   ]
+  ],
+  "R26": [
+   [
+    "Permen ATR/BPN 3/2023",
+    "17",
+    0.6753
+   ],
+   [
+    "Permen ATR/BPN 3/2023",
+    "46",
+    0.6728
+   ],
+   [
+    "Permen ATR/BPN 3/2023",
+    "20",
+    0.6377
+   ]
+  ],
+  "R27": [
+   [
+    "PP 18/2021",
+    "87",
+    0.7524
+   ],
+   [
+    "PP 24/1997",
+    "1",
+    0.7096
+   ],
+   [
+    "PP 24/1997",
+    "13",
+    0.6854
+   ]
+  ],
+  "R28": [
+   [
+    "PP 18/2021",
+    "67",
+    0.7487
+   ],
+   [
+    "PP 18/2021",
+    "71",
+    0.646
+   ],
+   [
+    "PP 18/2021",
+    "68",
+    0.6182
+   ]
+  ],
+  "R29": [
+   [
+    "PP 24/1997",
+    "1",
+    0.7504
+   ],
+   [
+    "PP 24/1997",
+    "1",
+    0.712
+   ],
+   [
+    "UU 5/1960",
+    "19",
+    0.6996
+   ]
+  ],
+  "A01": [
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Langkah 2 - Bayar pajak (",
+    0.7827
+   ],
+   [
+    "UU 28/2009",
+    "90",
+    0.6673
+   ],
+   [
+    "UU 28/2009",
+    "86",
+    0.6163
+   ]
+  ],
+  "A02": [
+   [
+    "UU 5/1960",
+    "21",
+    0.6633
+   ],
+   [
+    "PP 18/2021",
+    "70",
+    0.6359
+   ],
+   [
+    "UU 5/1960",
+    "konversi-I",
+    0.6243
+   ]
+  ],
+  "A03": [
+   [
+    "PP 18/2021",
+    "46",
+    0.6608
+   ],
+   [
+    "PP 18/2021",
+    "47",
+    0.66
+   ],
+   [
+    "PP 18/2021",
+    "42",
+    0.6467
+   ]
+  ],
+  "A04": [
+   [
+    "PP 24/1997",
+    "32",
+    0.6637
+   ],
+   [
+    "Panduan: Cek Keaslian Sertifikat Tanah",
+    "Cek fisik dokumen dan obj",
+    0.6141
+   ],
+   [
+    "Panduan: Cek Keaslian Sertifikat Tanah",
+    "Dasar hukum dan prinsip p",
+    0.6126
+   ]
+  ],
+  "P01": [
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Ringkasan alur",
+    0.8213
+   ],
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Langkah 5 - Proses di Kan",
+    0.7264
+   ],
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Kasus lain: warisan dan l",
+    0.725
+   ]
+  ],
+  "P02": [
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Ringkasan alur",
+    0.7077
+   ],
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Dokumen yang umumnya disi",
+    0.684
+   ],
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Kasus lain: warisan dan l",
+    0.675
+   ]
+  ],
+  "P03": [
+   [
+    "Panduan: Cek Keaslian Sertifikat Tanah",
+    "Cara 1 - Cek langsung di ",
+    0.7604
+   ],
+   [
+    "Panduan: Cek Keaslian Sertifikat Tanah",
+    "Dasar hukum dan prinsip p",
+    0.752
+   ],
+   [
+    "Panduan: Cek Keaslian Sertifikat Tanah",
+    "Cek fisik dokumen dan obj",
+    0.7374
+   ]
+  ],
+  "P04": [
+   [
+    "Panduan: Cek Keaslian Sertifikat Tanah",
+    "Cara 2 - Cek awal secara ",
+    0.7423
+   ],
+   [
+    "Panduan: Cek Keaslian Sertifikat Tanah",
+    "Dasar hukum dan prinsip p",
+    0.6847
+   ],
+   [
+    "Panduan: Cek Keaslian Sertifikat Tanah",
+    "Sertifikat elektronik",
+    0.6709
+   ]
+  ],
+  "S01": [
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Langkah 2 - Bayar pajak (",
+    0.663
+   ],
+   [
+    "UU 28/2009",
+    "87",
+    0.6189
+   ],
+   [
+    "UU 28/2009",
+    "85",
+    0.6131
+   ]
+  ],
+  "M01": [
+   [
+    "PP 18/2021",
+    "44",
+    0.6695
+   ],
+   [
+    "UU 5/1960",
+    "35",
+    0.6625
+   ],
+   [
+    "PP 18/2021",
+    "39",
+    0.6591
+   ]
+  ],
+  "M02": [
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Ringkasan alur",
+    0.699
+   ],
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Kasus lain: warisan dan l",
+    0.6683
+   ],
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Langkah 2 - Bayar pajak (",
+    0.649
+   ]
+  ],
+  "O01": [
+   [
+    "KUHPerdata Buku II",
+    "846",
+    0.4605
+   ],
+   [
+    "KUHPerdata Buku II",
+    "749",
+    0.446
+   ],
+   [
+    "UU 2/2012",
+    "4",
+    0.4447
+   ]
+  ],
+  "O02": [
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Langkah 2 - Bayar pajak (",
+    0.6687
+   ],
+   [
+    "UU 28/2009",
+    "87",
+    0.5766
+   ],
+   [
+    "UU 28/2009",
+    "88",
+    0.5708
+   ]
+  ],
+  "O03": [
+   [
+    "Panduan: Cek Keaslian Sertifikat Tanah",
+    "Jika ditemukan kejanggala",
+    0.5568
+   ],
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Langkah 1 - Cek sertifika",
+    0.5364
+   ],
+   [
+    "PP 24/1997",
+    "32",
+    0.5339
+   ]
+  ],
+  "O04": [
+   [
+    "Panduan: Balik Nama Sertifikat Tanah",
+    "Langkah 2 - Bayar pajak (",
+    0.5476
+   ],
+   [
+    "PP 18/2021",
+    "39",
+    0.5408
+   ],
+   [
+    "PP 18/2021",
+    "44",
+    0.5381
+   ]
+  ],
+  "O05": [
+   [
+    "KUHPerdata Buku II",
+    "1046",
+    0.4017
+   ],
+   [
+    "KUHPerdata Buku II",
+    "661",
+    0.4013
+   ],
+   [
+    "UU 2/2012",
+    "4",
+    0.3986
+   ]
+  ]
+ },
+ "meleset": [
+  {
+   "id": "R01",
+   "pertanyaan": "Apa yang dimaksud dengan hak milik menurut UUPA?",
+   "peringkat": null,
+   "top3": [
+    [
+     "UU 5/1960",
+     "4",
+     0.6682
+    ],
+    [
+     "UU 5/1960",
+     "8",
+     0.6542
+    ],
+    [
+     "UU 5/1960",
+     "2",
+     0.6538
+    ]
+   ]
+  },
+  {
+   "id": "R09",
+   "pertanyaan": "Peralihan hak atas tanah karena jual beli harus dibuktikan dengan apa agar bisa didaftarkan?",
+   "peringkat": 4,
+   "top3": [
+    [
+     "Panduan: Balik Nama Sertifikat Tanah",
+     "Kasus lain: warisan dan l",
+     0.6919
+    ],
+    [
+     "PP 24/1997",
+     "42",
+     0.6824
+    ],
+    [
+     "Panduan: Balik Nama Sertifikat Tanah",
+     "Ringkasan alur",
+     0.6815
+    ]
+   ]
+  },
+  {
+   "id": "R24",
+   "pertanyaan": "Apa pengertian hipotek?",
+   "peringkat": null,
+   "top3": [
+    [
+     "KUHPerdata Buku II",
+     "660",
+     0.4499
+    ],
+    [
+     "KUHPerdata Buku II",
+     "661",
+     0.4494
+    ],
+    [
+     "UU 2/2012",
+     "4",
+     0.444
+    ]
+   ]
+  },
+  {
+   "id": "A03",
+   "pertanyaan": "Kalau HGB saya sudah habis masa berlakunya, tanahnya jadi milik siapa?",
+   "peringkat": 5,
+   "top3": [
+    [
+     "PP 18/2021",
+     "46",
+     0.6608
+    ],
+    [
+     "PP 18/2021",
+     "47",
+     0.66
+    ],
+    [
+     "PP 18/2021",
+     "42",
+     0.6467
+    ]
+   ]
+  },
+  {
+   "id": "M01",
+   "pertanyaan": "Apa bedanya hak milik dan hak guna bangunan?",
+   "peringkat": null,
+   "top3": [
+    [
+     "PP 18/2021",
+     "44",
+     0.6695
+    ],
+    [
+     "UU 5/1960",
+     "35",
+     0.6625
+    ],
+    [
+     "PP 18/2021",
+     "39",
+     0.6591
+    ]
+   ]
+  }
+ ]
+}

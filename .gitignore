@@ -20,7 +20,10 @@ firebase-key.json
 node_modules/
 .next/
 
-# File biner turunan; dibangun ulang otomatis oleh data_engineer/scripts/search.py.
-# Belum diputuskan tim: kalau vektor mau di-commit, buka baris whitelist di bawah.
+# File biner turunan (vektor per penyedia). Yang lain (mis. bge-m3) tetap tidak di-commit.
 *.npy
-# !data_engineer/data/chunks/*.npy
+*.npz
+embeddings_*.meta.json
+# Vektor produksi (Gemini) HARUS ikut repo: membangunnya ulang butuh 1.452 panggilan API, melebihi kuota harian gratis (1.000).
+!data_engineer/data/chunks/embeddings_gemini.npy
+!data_engineer/data/chunks/embeddings_gemini.meta.json

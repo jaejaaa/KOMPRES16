@@ -1,0 +1,118 @@
+{
+ "_status": "DRAF untuk disepakati dengan AI Engineer",
+ "level": [
+  "low",
+  "medium",
+  "high"
+ ],
+ "kategori": [
+  {
+   "id": "K1",
+   "nama": "Uang muka (DP) hangus tanpa syarat jelas",
+   "level_umum": "high",
+   "deskripsi": "Uang muka tidak dapat dikembalikan / hangus walau pembatalan disebabkan pihak penjual atau objek tidak dapat dialihkan.",
+   "dasar_hukum": []
+  },
+  {
+   "id": "K2",
+   "nama": "Ketidakjelasan objek tanah",
+   "level_umum": "high",
+   "deskripsi": "Letak, luas, batas, atau nomor sertifikat tanah tidak jelas atau dapat diubah sepihak.",
+   "dasar_hukum": [
+    {
+     "sumber": "PP 24/1997",
+     "pasal": "32",
+     "catatan": "Sertifikat = alat pembuktian kuat atas data fisik dan yuridis (sesuai surat ukur dan buku tanah)"
+    }
+   ]
+  },
+  {
+   "id": "K3",
+   "nama": "Status hak dan beban atas tanah tidak dijamin",
+   "level_umum": "high",
+   "deskripsi": "Penjual tidak menjamin tanah bebas sengketa, sitaan, atau jaminan (hak tanggungan) dan pembeli diminta melepaskan tuntutan.",
+   "dasar_hukum": [
+    {
+     "sumber": "PP 24/1997",
+     "pasal": "39",
+     "catatan": "PPAT menolak membuat akta bila sertifikat tidak sesuai daftar Kantor Pertanahan"
+    },
+    {
+     "sumber": "PP 24/1997",
+     "pasal": "45",
+     "catatan": "Kantor Pertanahan menolak mendaftar peralihan bila sertifikat tidak sesuai daftar"
+    }
+   ]
+  },
+  {
+   "id": "K4",
+   "nama": "Peralihan hak tanpa akta PPAT",
+   "level_umum": "high",
+   "deskripsi": "Jual beli hanya dengan kuitansi/perjanjian di bawah tangan; akta PPAT dan balik nama ditiadakan atau ditunda tanpa batas.",
+   "dasar_hukum": [
+    {
+     "sumber": "PP 24/1997",
+     "pasal": "37",
+     "catatan": "Peralihan hak melalui jual beli hanya dapat didaftarkan bila dibuktikan dengan akta PPAT"
+    }
+   ]
+  },
+  {
+   "id": "K5",
+   "nama": "Pajak dan biaya tidak jelas",
+   "level_umum": "medium",
+   "deskripsi": "Pembebanan pajak (BPHTB/PPh) dan biaya PPAT/balik nama tidak jelas, ditentukan sepihak, atau ditunda.",
+   "dasar_hukum": [
+    {
+     "sumber": "UU 28/2009",
+     "pasal": "86",
+     "catatan": "Subjek BPHTB = pihak yang memperoleh hak"
+    },
+    {
+     "sumber": "UU 28/2009",
+     "pasal": "91",
+     "catatan": "PPAT hanya menandatangani akta setelah bukti pembayaran pajak diserahkan"
+    }
+   ]
+  },
+  {
+   "id": "K6",
+   "nama": "Klausul denda/syarat berat sebelah",
+   "level_umum": "high",
+   "deskripsi": "Denda tanpa batas, sanksi hanya untuk satu pihak, kenaikan sewa sepihak, atau syarat yang bersifat memeras.",
+   "dasar_hukum": [
+    {
+     "sumber": "UU 5/1960",
+     "pasal": "44",
+     "catatan": "Perjanjian sewa tanah tidak boleh disertai syarat yang mengandung unsur pemerasan (ayat 3)"
+    }
+   ]
+  },
+  {
+   "id": "K7",
+   "nama": "Waktu pelaksanaan tidak jelas",
+   "level_umum": "medium",
+   "deskripsi": "Tanggal serah terima, pelunasan, penandatanganan AJB, atau jangka waktu sewa tidak ditentukan atau ditentukan sepihak.",
+   "dasar_hukum": [
+    {
+     "sumber": "PP 24/1997",
+     "pasal": "40",
+     "catatan": "PPAT wajib menyampaikan akta ke Kantor Pertanahan paling lambat 7 hari kerja"
+    }
+   ]
+  },
+  {
+   "id": "K8",
+   "nama": "Subjek hak tidak memenuhi syarat",
+   "level_umum": "high",
+   "deskripsi": "Pihak yang tidak berhak (mis. warga negara asing) diberi Hak Milik atas tanah.",
+   "dasar_hukum": [
+    {
+     "sumber": "UU 5/1960",
+     "pasal": "21",
+     "catatan": "Hanya warga negara Indonesia dapat mempunyai hak milik"
+    }
+   ]
+  }
+ ]
+}

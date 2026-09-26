@@ -15,7 +15,7 @@ Opsi: doc_slug=, include_penjelasan=, include_dicabut=, include_panduan= (False 
 
 Backend ranking vektor (env SEARCH_BACKEND):
   firestore           : Firestore vector search (find_nearest, koleksi regulation_chunks)
-  local (auto bila Firestore belum dikonfigurasi) : numpy atas data/chunks/embeddings.npy (offline, untuk uji/dev)
+  local (auto bila Firestore belum dikonfigurasi) : numpy atas data/chunks/embeddings_<penyedia>.npy (dibangun otomatis bila belum ada)
 Default: pencarian vektor saja (terbaik pada test set, lihat data/eval/ABLASI.md). hybrid=True menambah kata kunci (RRF) - opsional, tidak dianjurkan.
 Metadata/penyaring status memakai data/chunks/chunks.jsonl (sertakan file ini di deployment).
 Aturan berstatus 'dicabut' dan Penjelasan disembunyikan secara default; panduan prosedur ikut dicari.
@@ -23,7 +23,7 @@ Aturan berstatus 'dicabut' dan Penjelasan disembunyikan secara default; panduan 
 from __future__ import annotations
 import collections, json, math, os, re
 from pathlib import Path
-from embed_util import load_env, get_model, doc_text
+from embed_util import load_env, get_encoder, load_or_build_embeddings, provider_name
 from glossary import expand_query
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -71,27 +71,15 @@ def keyword_ranking(query: str, allowed) -> list:
             if s > 0: scored.append((s, r["id"]))
     return [i for _, i in sorted(scored, reverse=True)]
 
-_emb = None
-def load_embeddings():
-    """embeddings.npy tidak ikut git (*.npy di-ignore). Bila tidak ada / jumlahnya tidak cocok dengan chunks.jsonl, dibangun ulang otomatis."""
-    global _emb
-    if _emb is None:
-        import numpy as np
-        f, rows = ROOT / "data/chunks/embeddings.npy", corpus()["rows"]
-        if f.exists() and len(np.load(f, mmap_mode="r")) == len(rows):
-            _emb = np.load(f)
-        else:
-            print(f"[search] embeddings.npy tidak ada/usang -> membangun {len(rows)} embedding (sekali, ±2 menit)...", flush=True)
-            _emb = get_model().encode([doc_text(r) for r in rows], batch_size=8, normalize_embeddings=True, show_progress_bar=True).astype("float32")
-            np.save(f, _emb)
-    return _emb
+def load_embeddings(provider: str | None = None):
+    """Vektor chunk untuk penyedia embedding (env EMBED_PROVIDER: gemini | bge-m3). Cache di embeddings_<penyedia>.npy (tidak ikut git)."""
+    return load_or_build_embeddings(corpus()["rows"], provider)
 
-def vector_ranking(qvec, allowed, pool: int, backend: str):
+def vector_ranking(qvec, allowed, pool: int, backend: str, provider: str | None = None):
     """Kembalikan (daftar id terurut, dict id->dokumen dari backend jika ada)."""
-    global _emb
     if backend == "local":
         import numpy as np
-        order = np.argsort(-(load_embeddings() @ qvec))
+        order = np.argsort(-(load_embeddings(provider) @ qvec))
         rows = corpus()["rows"]
         return [rows[i]["id"] for i in order if rows[i]["id"] in allowed][:pool], {}
     from google.cloud.firestore_v1.vector import Vector
@@ -103,7 +91,7 @@ def vector_ranking(qvec, allowed, pool: int, backend: str):
     got = {d.id: d.to_dict() for d in docs}
     return [i for i in got if i in allowed][:pool], got
 
-def cosine_scores(qvec, ids, backend: str, remote: dict):
+def cosine_scores(qvec, ids, backend: str, remote: dict, provider: str | None = None):
     """Kemiripan kosinus 0-1 untuk hasil akhir. Firestore: jarak dari find_nearest; sisanya dihitung dari vektor dokumen."""
     import numpy as np
     out, missing = {}, []
@@ -112,7 +100,7 @@ def cosine_scores(qvec, ids, backend: str, remote: dict):
         else: missing.append(i)
     if missing:
         if backend == "local":
-            emb = load_embeddings()
+            emb = load_embeddings(provider)
             pos = {r["id"]: n for n, r in enumerate(corpus()["rows"])}
             for i in missing: out[i] = float(emb[pos[i]] @ qvec)
         else:  # hasil dari jalur kata kunci saja: ambil vektornya dari Firestore
@@ -123,10 +111,11 @@ def cosine_scores(qvec, ids, backend: str, remote: dict):
 
 def search(query: str, top_k: int = 5, doc_slug: str | None = None, include_penjelasan: bool = False,
            include_dicabut: bool = False, hybrid: bool = False, pool: int = 40, backend: str | None = None,
-           include_panduan: bool = True, k: int | None = None):
+           include_panduan: bool = True, k: int | None = None, provider: str | None = None):
     top_k = k or top_k  # 'k' = alias lama
     load_env()
-    # 'auto': Firestore bila klien disuntikkan/kredensial ada, selain itu lokal (dari chunks.jsonl + embeddings.npy)
+    provider = provider_name(provider)  # 'gemini' (default) atau 'bge-m3'
+    # 'auto': Firestore bila klien disuntikkan/kredensial ada, selain itu lokal (dari chunks.jsonl + embeddings_<penyedia>.npy)
     backend = backend or os.getenv("SEARCH_BACKEND") or ("firestore" if (_db is not None or os.getenv("GOOGLE_APPLICATION_CREDENTIALS")) else "local")
     c = corpus()
     allowed = {r["id"] for r in c["rows"]
@@ -135,14 +124,14 @@ def search(query: str, top_k: int = 5, doc_slug: str | None = None, include_penj
                and (include_panduan or r["section"] != "panduan")
                and (include_dicabut or not r["status"].startswith("dicabut"))}
     query = expand_query(query)  # SHM/HGB/balik nama -> istilah regulasi
-    qvec = get_model().encode([query], normalize_embeddings=True)[0]
-    vec_ids, remote = vector_ranking(qvec, allowed, pool, backend)
+    qvec = get_encoder(provider).encode_query(query)
+    vec_ids, remote = vector_ranking(qvec, allowed, pool, backend, provider)
     lists = [vec_ids] + ([keyword_ranking(query, allowed)[:pool]] if hybrid else [])
     score = collections.defaultdict(float)
     for lst in lists:
         for rank, i in enumerate(lst, 1): score[i] += 1 / (RRF_K + rank)
     top = sorted(score.items(), key=lambda x: -x[1])[:top_k]
-    cos = cosine_scores(qvec, [i for i, _ in top], backend, remote)
+    cos = cosine_scores(qvec, [i for i, _ in top], backend, remote, provider)
     out = []
     for i, s in sorted(score.items(), key=lambda x: -x[1])[:top_k]:
         r = remote.get(i) or {}

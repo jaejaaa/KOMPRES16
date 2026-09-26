@@ -12,10 +12,11 @@ Bagian dari [KOMPRES 16](../README.md). Tugas: menyiapkan "otak referensi" chatb
 | `data/extracted/` | Teks hasil ekstraksi per halaman (turunan, dibangun ulang oleh `01_extract.py`) |
 | `data/manual/` | Pasal yang gagal terbaca OCR, diketik manual dari PDF asli |
 | `data/panduan/` | Panduan prosedur: balik nama, cek keaslian sertifikat |
-| `data/chunks/` | `chunks.jsonl` (1.452 chunk), `report.txt`; `embeddings.npy` dibangun otomatis (tidak masuk git) |
-| `data/eval/` | `testset_qa.json` (45 pertanyaan), `ABLASI.md`, `hasil_retrieval.json` |
-| `scripts/` | Pipeline `01`–`06`, plus `search.py`, `retriever.py`, `glossary.py`, `embed_util.py` |
-| `docs/FIRESTORE_SETUP.md` | Opsional; hanya bila vektor disimpan di Firestore (belum diputuskan) |
+| `data/chunks/` | `chunks.jsonl` (1.452 chunk), `report.txt`; vektor `embeddings_<penyedia>.npy` + `.meta.json` dibangun otomatis (tidak masuk git) |
+| `data/eval/` | `testset_qa.json` (dev, 45), `testset_heldout.json` (terpisah, 25), `ABLASI.md`, `PERBANDINGAN_EMBEDDING.md`, `hasil_*.json` |
+| `data/synthetic/` | 8 PDF perjanjian sintetis, `ground_truth.json`, `taksonomi_risiko.json` (draf 8 kategori) |
+| `scripts/` | Pipeline `01`–`09` (`07` perbandingan embedding, `08` buat dokumen sintetis, `09` evaluasi deteksi risiko), plus `search.py`, `retriever.py`, `glossary.py`, `embed_util.py` |
+| `docs/` | `PROPOSAL_DATASET_METODE.md` (draf proposal + daftar pustaka), `DATASET_PELENGKAP.md`, `FIRESTORE_SETUP.md` (opsional) |
 
 ## Sumber regulasi
 UUPA (UU 5/1960), PP 24/1997, PP 18/2021, UU 21/1997 (BPHTB), Permen ATR/BPN 3/2023, KUHPerdata Buku II (hal. 90–189 dari PDF 4 Buku), UU 2/2012, UU 27/2022, UU 28/2009 (hanya BPHTB, Pasal 85–93).
@@ -25,13 +26,19 @@ UUPA (UU 5/1960), PP 24/1997, PP 18/2021, UU 21/1997 (BPHTB), Permen ATR/BPN 3/2
 ## Menjalankan
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
-pip install pymupdf sentence-transformers numpy      # OCR PDF scan butuh: brew install tesseract tesseract-lang
-python scripts/01_extract.py && python scripts/02_chunk.py && python scripts/03_embed.py   # membangun ulang semuanya (dari folder ini)
-python scripts/04_search.py                          # uji cepat retrieval
-python scripts/06_eval_retrieval.py                  # evaluasi terhadap test set (--validate: cek grounding test set saja)
+pip install pymupdf numpy google-genai        # bge-m3 (opsional): pip install sentence-transformers ; OCR PDF scan: brew install tesseract tesseract-lang
+cp .env.example .env                          # lalu isi GEMINI_API_KEY (key sendiri, jangan di-commit)
+python scripts/01_extract.py && python scripts/02_chunk.py     # dari folder data_engineer/: PDF -> teks -> chunk
+python scripts/03_embed.py                    # vektor semua chunk untuk penyedia aktif (default gemini)
+python scripts/04_search.py                   # uji cepat retrieval
+python scripts/06_eval_retrieval.py           # evaluasi terhadap test set (--validate: cek grounding test set saja)
+python scripts/07_compare_providers.py        # laporan perbandingan bge-m3 vs gemini -> data/eval/PERBANDINGAN_EMBEDDING.md
+python scripts/08_make_synthetic.py           # membuat 8 PDF sintetis + kunci jawaban (data/synthetic/)
+python scripts/09_eval_risk.py --selftest     # uji metrik deteksi risiko; --analyzer modul:fungsi untuk mengukur analyze()
 ```
-`embeddings.npy` tidak ikut git (`*.npy` di-ignore). `search()` membangunnya otomatis saat pertama dipanggil (±2 menit) bila tidak ada atau tidak cocok dengan `chunks.jsonl`.
-Model saat ini `BAAI/bge-m3` (1024 dimensi, unduhan ±2,3 GB). Bila model diganti, hapus `embeddings.npy` dan **setel ulang ambang skor** (skala kosinus tiap model berbeda).
+**Penyedia embedding** (env `EMBED_PROVIDER`): `gemini` (default; `gemini-embedding-2`, 768 dimensi, lewat API) atau `bge-m3` (model lokal, ±2,3 GB; hanya untuk perbandingan).
+Vektor disimpan per penyedia di `data/chunks/embeddings_<penyedia>.npy` (tidak ikut git). `search()` membangunnya otomatis bila belum ada, atau bila teks chunk/model berubah (dicek lewat sidik jari di `.meta.json`).
+Bila model diganti, **setel ulang ambang skor** (skala kosinus tiap model berbeda); lihat `PERBANDINGAN_EMBEDDING.md`.
 
 ## Kontrak pencarian
 ```python
@@ -53,7 +60,7 @@ Tiap hasil: `id, sumber, pasal, teks, asal, score` (+ `doc, section, bab, status
 
 - **Default:** vektor saja (terbaik pada test set, lihat `data/eval/ABLASI.md`), batang tubuh + panduan, aturan `dicabut` disembunyikan.
   Opsi: `doc_slug=`, `include_penjelasan=`, `include_dicabut=`, `include_panduan=False` (hanya regulasi), `hybrid=True` (tidak dianjurkan).
-- **Backend penyimpanan:** `SEARCH_BACKEND=local` (dari `chunks.jsonl` + `embeddings.npy`; otomatis bila Firestore tidak dikonfigurasi) atau `firestore` (`search.set_firestore_client(fb())`, butuh `scripts/05_upload_firestore.py`).
+- **Backend penyimpanan:** `SEARCH_BACKEND=local` (dari `chunks.jsonl` + `embeddings_<penyedia>.npy`; otomatis bila Firestore tidak dikonfigurasi) atau `firestore` (`search.set_firestore_client(fb())`, butuh `scripts/05_upload_firestore.py`).
 - **Adapter chatbot:** `from retriever import Retriever` → `Retriever().search(q, top_k) -> [(Chunk, skor)]`; `Chunk` punya `sitasi`, `status`, `page_start`. Pakai `Retriever.skor_terbaik(hasil)` untuk ambang.
 - **Glosarium** (`glossary.py`) memperluas singkatan dan istilah awam (SHM, HGB, AJB, BPHTB, "balik nama") ke istilah regulasi sebelum pencarian.
 - `data/chunks/chunks.jsonl` harus ikut ke deployment (metadata dan penyaring status).
@@ -74,10 +81,17 @@ Pertanyaan yang dekat topik tapi tak tercakup (mis. tarif PPh penjualan tanah, s
 menjawab hanya dari konteks dan menyatakan "tidak ada di basis pengetahuan" bila konteks tidak memuat jawabannya.
 Kelemahan yang diketahui: pertanyaan perbandingan/multi-Pasal ("bedanya hak milik dan HGB") dan definisi pendek seperti "pengertian hipotek".
 
+## Evaluasi tambahan
+- **Set penguji terpisah** `data/eval/testset_heldout.json` (25 item, Pasal rujukan berbeda): **jangan dipakai menyetel apa pun**; jalankan `python scripts/06_eval_retrieval.py --set heldout` hanya untuk angka final.
+- **Metrik retrieval** kini juga Precision@k dan Recall@k (Precision@5 dibatasi jumlah Pasal rujukan per pertanyaan, jadi maksimumnya ±0,2–0,4).
+- **Deteksi risiko:** `scripts/09_eval_risk.py` mengukur `analyze()` terhadap 8 dokumen sintetis (14 pasal berisiko, 56 aman): precision/recall/F1 per pasal, kecocokan kategori dan level, alarm palsu pada dokumen bersih. Baseline `analyze()` dummy backend: precision 0,19, recall 0,21.
+- **Status hukum per Pasal:** PP 24/1997 Ps 26 dan 45 ditandai khusus (jangka waktu pengumuman dicabut PP 18/2021 Ps 103 huruf c); UU 21/1997 = masa peralihan 1 tahun (UU 28/2009 Ps 180 angka 6).
+
 ## Status dan yang belum
 - [x] Regulasi terkumpul, teks diekstrak (6 dari 9 PDF di-OCR), chunk per Pasal, embedding, `search()`
-- [x] Panduan prosedur (2), test set Q&A (45), evaluasi + ablasi
-- [ ] Dokumen sintetis (5–10 PDF perjanjian jual-beli/sewa tanah) untuk uji deteksi risiko, menunggu taksonomi risiko dari AI Engineer
-- [ ] Set penguji terpisah untuk angka final proposal
-- [ ] Bagian dataset & metode + daftar pustaka untuk proposal
-- ❓ Keputusan tim: model embedding produksi (bge-m3 vs Gemini embedding), penyimpanan vektor (file vs Firestore)
+- [x] Panduan prosedur (2), test set Q&A dev (45) + held-out (25), evaluasi (Hit@k, MRR, P/R@k) + ablasi
+- [x] Draf taksonomi 8 kategori + 8 dokumen sintetis + alat ukur deteksi risiko (menunggu taksonomi final dari AI Engineer)
+- [x] Penilaian dataset pelengkap HF; draf bagian proposal dan daftar pustaka (`docs/PROPOSAL_DATASET_METODE.md`)
+- [ ] Embedding Gemini selesai (980/1.452; lanjut setelah reset kuota) dan laporan `PERBANDINGAN_EMBEDDING.md`
+- [ ] Angka held-out final, template proposal panitia (format sitasi), isi bagian [ISI] di draf proposal
+- ❓ Belum diputuskan tim: penyimpanan vektor (file `.npy` di git vs Firestore) dan hosting backend

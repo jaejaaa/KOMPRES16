@@ -1,21 +1,20 @@
-"""Langkah 3: embed semua chunk dengan bge-m3 -> data/chunks/embeddings.npy (dibaca oleh search.py)."""
-import json, sys
+"""Langkah 3: bangun embedding semua chunk untuk satu penyedia -> data/chunks/embeddings_<penyedia>.npy
+
+  python scripts/03_embed.py                       # penyedia dari EMBED_PROVIDER (default gemini)
+  python scripts/03_embed.py --provider bge-m3     # model lokal
+  python scripts/03_embed.py --force               # bangun ulang walau cache masih valid
+Butuh GEMINI_API_KEY di data_engineer/.env untuk 'gemini'."""
+import argparse, json, sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
-import numpy as np
+from embed_util import CHUNKS_DIR, cache_paths, get_encoder, load_or_build_embeddings, provider_name
 
-CH = Path("data/chunks")
-MODEL = "BAAI/bge-m3"  # 1024 dimensi
-chunks = [json.loads(l) for l in open(CH / "chunks.jsonl")]
-# prefix konteks agar embedding tahu asal Pasal-nya; dipakai juga saat membuat embedding query
-from embed_util import doc_text  # satu definisi, dipakai juga oleh search.py
-
-if __name__ == "__main__":
-    import torch
-    from sentence_transformers import SentenceTransformer
-    device = "mps" if torch.backends.mps.is_available() else "cpu"
-    model = SentenceTransformer(MODEL, device=device)
-    model.max_seq_length = 1024
-    emb = model.encode([doc_text(c) for c in chunks], batch_size=8, normalize_embeddings=True, show_progress_bar=True)
-    np.save(CH / "embeddings.npy", emb.astype("float32"))
-    print("embeddings:", emb.shape, "device:", device)
+ap = argparse.ArgumentParser()
+ap.add_argument("--provider"); ap.add_argument("--force", action="store_true")
+a = ap.parse_args()
+p = provider_name(a.provider)
+rows = [json.loads(l) for l in open(CHUNKS_DIR / "chunks.jsonl")]
+if a.force:
+    for f in cache_paths(p): f.unlink(missing_ok=True)
+emb = load_or_build_embeddings(rows, p)
+print(f"embeddings '{p}' ({get_encoder(p).tag}): {emb.shape}")
