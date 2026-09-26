@@ -102,10 +102,10 @@ class TestAnalyze(unittest.TestCase):
         self.assertEqual([r["level"] for r in h["risks"]], ["high"])
 
     def test_absen_hanya_untuk_kategori_jaminan(self):
-        ok = jalankan({"kategori": "Tidak ada jaminan bebas sengketa/sita", "level": "high",
-                       "alasan": "Tidak ada jaminan bebas sengketa.", "absen": True})
+        ok = jalankan({"kategori": "Status hak dan beban atas tanah tidak dijamin", "level": "high",
+                       "alasan": "Tidak ada jaminan status hak.", "absen": True})
         self.assertEqual(ok["risks"][0]["pasal"], "Tidak ada klausul")
-        tidak = jalankan({"kategori": "Klausul pembatalan sepihak", "level": "high",
+        tidak = jalankan({"kategori": "Peralihan hak tanpa akta PPAT", "level": "high",
                           "alasan": "x", "absen": True})
         self.assertEqual(tidak["risks"], [])
 

@@ -1,25 +1,37 @@
-"""Taksonomi risiko klausul dokumen pertanahan (8 kategori dari brief) + pemetaan level."""
+"""Taksonomi risiko klausul dokumen pertanahan (10 kategori) + pemetaan level.
+
+K1-K8 = draf Data Engineer (nama persis sama dengan kunci jawaban dataset sintetis, jadi evaluasi
+tanpa mapping). Dua kategori tambahan dari brief awal: somasi/upaya hukum dan kuasa mutlak.
+"Klausul pembatalan sepihak" dari brief dilebur ke K6 (syarat berat sebelah).
+"""
 import difflib
 
 # (nama kategori, penjelasan untuk LLM). Nama dipakai apa adanya oleh Frontend.
 KATEGORI = [
-    ("Klausul pembatalan sepihak",
-     "Salah satu pihak (biasanya penjual/pengembang) boleh membatalkan atau mengubah perjanjian "
-     "kapan saja tanpa persetujuan atau alasan yang jelas, sementara pihak lain tidak."),
-    ("Denda/penalti tidak wajar",
-     "Denda, bunga, atau penalti yang sangat besar, berat sebelah, atau tidak sebanding "
-     "(mis. persentase tinggi per hari) atau hanya berlaku untuk satu pihak."),
     ("Uang muka (DP) hangus tanpa syarat jelas",
-     "Uang muka/tanda jadi hangus atau tidak dikembalikan tanpa kondisi yang jelas dan proporsional, "
-     "termasuk saat pembatalan terjadi karena kesalahan pihak lain."),
-    ("Tidak ada jaminan bebas sengketa/sita",
-     "Penjual tidak menjamin tanah bebas sengketa, sitaan, jaminan utang/hak tanggungan, atau "
-     "klaim pihak ketiga, atau membebaskan diri dari tanggung jawab itu."),
-    ("Pembebanan seluruh pajak ke satu pihak",
-     "Seluruh pajak dan biaya (BPHTB, PPh, biaya notaris/PPAT, dll) dibebankan ke satu pihak saja."),
+     "Uang muka/tanda jadi tidak dapat dikembalikan atau hangus tanpa kondisi yang jelas dan proporsional, "
+     "termasuk walau pembatalan disebabkan pihak penjual atau objek tidak dapat dialihkan."),
     ("Ketidakjelasan objek tanah",
-     "Objek tanah tidak jelas: luas 'kurang lebih', batas-batas tidak disebut, nomor/jenis sertifikat "
-     "atau letak tanah tidak lengkap."),
+     "Letak, luas ('kurang lebih'), batas-batas, atau nomor/jenis sertifikat tanah tidak jelas, "
+     "belum ditentukan, atau dapat diubah sepihak."),
+    ("Status hak dan beban atas tanah tidak dijamin",
+     "Penjual tidak menjamin tanah bebas sengketa, sitaan, atau jaminan utang (hak tanggungan), "
+     "atau pembeli diminta melepaskan tuntutan atas hal itu."),
+    ("Peralihan hak tanpa akta PPAT",
+     "Jual beli hanya dengan kuitansi/perjanjian di bawah tangan; akta PPAT dan balik nama ditiadakan "
+     "atau ditunda tanpa batas."),
+    ("Pajak dan biaya tidak jelas",
+     "Pembebanan pajak (BPHTB/PPh) dan biaya notaris/PPAT/balik nama tidak jelas, ditentukan sepihak, "
+     "ditunda, atau seluruhnya dibebankan ke satu pihak."),
+    ("Klausul denda/syarat berat sebelah",
+     "Denda tanpa batas atau persentase tinggi, sanksi hanya untuk satu pihak, hak membatalkan/mengubah "
+     "perjanjian secara sepihak, kenaikan sewa sepihak, atau syarat yang bersifat memeras."),
+    ("Waktu pelaksanaan tidak jelas",
+     "Tanggal serah terima, pelunasan, penandatanganan AJB, atau jangka waktu sewa tidak ditentukan "
+     "atau ditentukan sepihak."),
+    ("Subjek hak tidak memenuhi syarat",
+     "Pihak yang tidak berhak (mis. warga negara asing) diberi Hak Milik atas tanah, atau status "
+     "subjek pihak tidak memenuhi syarat untuk hak yang dialihkan."),
     ("Hilangnya hak somasi/upaya hukum",
      "Para pihak melepaskan hak somasi, hak menggugat, hak menempuh jalur hukum/pengadilan, atau "
      "penyelesaian sengketa dibuat berat sebelah."),
@@ -31,7 +43,7 @@ KATEGORI = [
 NAMA_KATEGORI = [nama for nama, _ in KATEGORI]
 
 # Hanya kategori ini yang boleh dilaporkan sebagai "klausul tidak ditemukan" (ketiadaan itu sendiri risiko).
-KATEGORI_BOLEH_ABSEN = {"Tidak ada jaminan bebas sengketa/sita"}
+KATEGORI_BOLEH_ABSEN = {"Status hak dan beban atas tanah tidak dijamin"}
 
 _LEVEL = {
     "low": "low", "medium": "medium", "high": "high",
