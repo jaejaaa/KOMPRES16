@@ -9,7 +9,7 @@ UI/UX + Frontend, Backend, AI Engineer, Data Engineer.
 |---|---|---|
 | [`backend/`](backend/) | FastAPI + Firebase (Auth anonim, Firestore). Endpoint upload/analisis/chat, modul `chatbot/` (Gemini) | Backend, AI Engineer |
 | [`data_engineer/`](data_engineer/) | Knowledge base regulasi: PDF sumber → chunk per Pasal → embedding → `search()`; panduan prosedur; test set & evaluasi | Data Engineer |
-| `frontend/` *(belum ada)* | Next.js | Frontend |
+| [`frontend/`](frontend/) | Next.js 16 + Tailwind: beranda, cek dokumen, hasil analisis, tanya hukum (chat), panduan. Pakai data mock selama URL backend belum diisi | UI/UX + Frontend |
 
 ## Alur sistem
 
@@ -24,11 +24,22 @@ Frontend ──▶ Backend (FastAPI) ──▶ chatbot/ (Gemini) ──▶ searc
 - **Retrieval:** `search(query, top_k) -> [{id, sumber, pasal, teks, asal, score(0-1), status, ...}]`, atau `Retriever().search()` → `[(Chunk, skor)]`.
   Detail di [`data_engineer/README.md`](data_engineer/README.md).
 - **Analisis dokumen:** `analyze(text) -> {summary, risks:[{pasal, kutipan, kategori, level(low|medium|high), alasan}]}`. *(menunggu AI Engineer)*
+- **Panduan:** halaman `/panduan` membaca salinan `data_engineer/data/panduan/*.json` di `frontend/data/panduan/` (Next.js tidak bisa import file di luar `frontend/`). Kalau panduan diubah, kabari Frontend supaya salinannya diperbarui.
+
+## Menjalankan frontend
+```
+cd frontend
+npm install
+npm run dev        # buka http://localhost:3000
+```
+Buat `frontend/.env.local` (tidak masuk git) berisi `NEXT_PUBLIC_FIREBASE_*` (config web Firebase) dan `NEXT_PUBLIC_API_URL`.
+Selama `NEXT_PUBLIC_API_URL` kosong, frontend memakai data mock. Setelah backend online: isi URL-nya, set `NEXT_PUBLIC_USE_MOCK=false`, lalu restart `npm run dev`.
 
 ## Status singkat
 - ✅ Knowledge base: 9 regulasi, 1.452 chunk, test set 45 pertanyaan, retrieval Hit@5 0,93 (dev set).
 - ✅ Backend: Auth, upload PDF, chat + riwayat, chatbot Gemini tersambung (masih memakai data regulasi contoh).
-- ⏳ Chatbot belum memakai `search()` asli; analisis dokumen (`analyze`) masih dummy; frontend belum masuk repo.
+- ✅ Frontend: semua halaman sudah didesain dan berjalan dengan data mock; tinggal disambungkan ke URL backend.
+- ⏳ Chatbot belum memakai `search()` asli; analisis dokumen (`analyze`) masih dummy.
 - ✅ **Diputuskan:** embedding pindah ke Gemini (`gemini-embedding-001`); laporan perbandingan dengan bge-m3 di `data_engineer/data/eval/PERBANDINGAN_EMBEDDING.md`.
 - ❓ **Belum diputuskan:** penyimpanan vektor (file `.npy` di git vs Firestore) dan tempat hosting backend.
 
