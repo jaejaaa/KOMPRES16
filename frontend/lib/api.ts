@@ -1,5 +1,5 @@
 import type { AnalysisResult, ChatHistoryItem, ChatResponse, UploadResponse } from "@/types/api";
-import { mockAnalysis, mockFailed, mockChatReply } from "./mock-data";
+import { mockAnalysis, mockDocuments, mockFailed, mockJawab } from "./mock-data";
 import { getToken } from "./firebase";
 
 // Mock aktif selama URL backend belum ada / NEXT_PUBLIC_USE_MOCK=true
@@ -53,7 +53,7 @@ export async function getAnalysis(id: string): Promise<AnalysisResult> {
 }
 
 export async function getDocuments(): Promise<UploadResponse[]> {
-  if (USE_MOCK) return [];
+  if (USE_MOCK) return mockDocuments;
   return request("/documents");
 }
 
@@ -61,7 +61,7 @@ export async function getDocuments(): Promise<UploadResponse[]> {
 export async function sendChat(pertanyaan: string, documentId?: string): Promise<ChatResponse> {
   if (USE_MOCK) {
     await delay(1200);
-    return mockChatReply;
+    return mockJawab(pertanyaan, documentId);
   }
   return request("/chat", {
     method: "POST",

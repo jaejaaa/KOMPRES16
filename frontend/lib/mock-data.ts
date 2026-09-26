@@ -1,4 +1,4 @@
-import type { AnalysisResult, ChatResponse } from "@/types/api";
+import type { AnalysisResult, ChatResponse, UploadResponse } from "@/types/api";
 
 export const mockAnalysis: AnalysisResult = {
   document_id: "doc_demo",
@@ -46,18 +46,72 @@ export const mockFailed: AnalysisResult = {
   error: "Teks tidak bisa dibaca. Pastikan PDF bukan hasil scan yang buram.",
 };
 
+export const mockDocuments: UploadResponse[] = [
+  { id: "doc_demo", filename: "Perjanjian_Jual_Beli_Bekasi.pdf", status: "done", created_at: "2026-09-25T10:12:00Z" },
+  { id: "doc_gagal", filename: "scan_AJB_lama.pdf", status: "failed", created_at: "2026-09-24T08:40:00Z" },
+];
+
+// Teks disclaimer & pesan di luar cakupan disalin dari backend/chatbot/guardrails.py
+const DISCLAIMER = "Jawaban ini bersifat informatif, bukan pengganti nasihat hukum resmi.";
+
 export const mockChatReply: ChatResponse = {
-  jawaban: "Jual beli tanah perlu dibuat dengan akta PPAT supaya sertifikat bisa dibalik nama ke nama pembeli.",
+  jawaban:
+    "Jual beli tanah harus dibuat dengan Akta Jual Beli (AJB) oleh PPAT. Tanpa akta PPAT, peralihan hak tidak bisa didaftarkan di Kantor Pertanahan, jadi sertifikat tidak bisa dibalik nama ke nama pembeli.\n\nKuitansi atau perjanjian di bawah tangan saja tidak cukup untuk proses balik nama.",
   sumber: [
     {
-      id: "pp24-37",
-      uu: "PP No. 24 Tahun 1997",
-      pasal: "Pasal 37 ayat (1)",
-      kutipan: "Peralihan hak atas tanah dan hak milik atas satuan rumah susun melalui jual beli ... hanya dapat didaftarkan jika dibuktikan dengan akta yang dibuat oleh PPAT yang berwenang ...",
+      id: "pp-24-1997:bata:ps37",
+      uu: "PP 24/1997",
+      pasal: "Pasal 37",
+      kutipan:
+        "(1) Peralihan hak atas tanah dan hak milik atas satuan rumah susun melalui jual beli, tukar menukar, hibah, pemasukan dalam perusahaan dan perbuatan hukum pemindahan hak lainnya, kecuali pemindahan hak melalui lelang hanya dapat didaftarkan jika dibuktikan dengan akta yang dibuat oleh PPAT yang berwenang menurut ketentuan peraturan perundang-undangan yang berlaku.",
       asal: "regulasi",
+      status: "diubah sebagian (PP 18/2021)",
+    },
+    {
+      id: "panduan-balik-nama-3",
+      uu: "Panduan: Balik Nama Sertifikat Tanah",
+      pasal: "Langkah 3 - Tanda tangan Akta Jual Beli (AJB) di hadapan PPAT",
+      kutipan: "AJB yang sah dari PPAT adalah dasar untuk balik nama; perjanjian di bawah tangan atau kuitansi saja tidak cukup untuk pendaftaran peralihan hak.",
+      asal: "panduan",
+      status: "panduan",
     },
   ],
   di_luar_cakupan: false,
   status: "ok",
-  disclaimer: "Jawaban ini bersifat informatif, bukan pengganti nasihat hukum resmi.",
+  disclaimer: DISCLAIMER,
 };
+
+export const mockChatDokumen: ChatResponse = {
+  jawaban:
+    "Pasal 6 di dokumen kamu menyatakan perjanjian cukup ditandatangani kedua pihak tanpa akta pejabat. Artinya transaksi ini tidak dibuat di hadapan PPAT, padahal balik nama sertifikat hanya bisa didaftarkan dengan akta PPAT.\n\nSebelum membayar, minta penjual sepakat membuat AJB di PPAT dan ubah Pasal 6.",
+  sumber: [
+    {
+      id: "dok-6",
+      uu: "Dokumen kamu",
+      pasal: "Pasal 6",
+      kutipan: "Perjanjian ini cukup ditandatangani kedua belah pihak tanpa perlu dibuatkan akta oleh pejabat manapun.",
+      asal: "dokumen",
+    },
+    mockChatReply.sumber[0],
+  ],
+  di_luar_cakupan: false,
+  status: "ok",
+  disclaimer: DISCLAIMER,
+};
+
+export const mockDiLuarCakupan: ChatResponse = {
+  jawaban:
+    "Pertanyaan ini di luar cakupan basis pengetahuan saya yang berfokus pada hukum pertanahan dan fitur aplikasi ini. Disarankan konsultasi dengan notaris/PPAT atau advokat untuk kepastian lebih lanjut.",
+  sumber: [],
+  di_luar_cakupan: true,
+  status: "di_luar_cakupan",
+  disclaimer: DISCLAIMER,
+};
+
+// Tiru perilaku backend secara kasar supaya semua tampilan chat bisa dites tanpa server
+export function mockJawab(pertanyaan: string, documentId?: string): ChatResponse {
+  const q = pertanyaan.toLowerCase();
+  if (documentId && /pasal|dokumen|kontrak|perjanjian|saya/.test(q)) return mockChatDokumen;
+  if (/tanah|sertifikat|shm|hgb|ajb|ppat|bphtb|balik nama|jual beli|waris|bpn|pajak|akta/.test(q)) return mockChatReply;
+  return mockDiLuarCakupan;
+}

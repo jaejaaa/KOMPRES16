@@ -1,0 +1,20 @@
+{
+  "_catatan": "Panduan prosedur (bukan teks regulasi). Kutipan Pasal diverifikasi terhadap korpus (PP 24/1997, PP 18/2021, Permen ATR/BPN 3/2023). Butir bertanda 'praktik umum' berasal dari informasi publik sekunder dan perlu diverifikasi ke Kantor Pertanahan.",
+  "doc_slug": "panduan-cek-keaslian",
+  "doc": "Panduan: Cek Keaslian Sertifikat Tanah",
+  "doc_title": "Cara Memeriksa Keaslian dan Keabsahan Sertifikat Tanah",
+  "chunks": [
+    {"judul": "Dasar hukum dan prinsip pengecekan",
+     "text": "Sertifikat merupakan surat tanda bukti hak yang berlaku sebagai alat pembuktian yang kuat mengenai data fisik dan data yuridis yang termuat di dalamnya, sepanjang data tersebut sesuai dengan data dalam surat ukur dan buku tanah hak yang bersangkutan (PP 24/1997 Pasal 32 ayat 1). Artinya keaslian dan keabsahan sertifikat diuji dengan mencocokkannya dengan data di Kantor Pertanahan. Setiap orang yang berkepentingan berhak mengetahui data fisik dan data yuridis yang tersimpan dalam peta pendaftaran, daftar tanah, surat ukur, dan buku tanah (Pasal 34 ayat 1); persyaratan dan tata caranya ditetapkan oleh Menteri (Pasal 34 ayat 3)."},
+    {"judul": "Cara 1 - Cek langsung di Kantor Pertanahan (paling sahih)",
+     "text": "Cara paling andal adalah pengecekan sertifikat di Kantor Pertanahan (BPN) tempat tanah berada, karena petugas mencocokkan sertifikat fisik dengan buku tanah. Praktik umum (verifikasi ke Kantor Pertanahan setempat): bawa fotokopi dan asli KTP pemohon, sertifikat hak atas tanah, dan surat kuasa bila pengecekan dikuasakan kepada pihak lain, misalnya PPAT atau notaris. Pengecekan dikenai biaya PNBP; tanyakan besaran dan lama proses terbaru di loket layanan. Calon pembeli umumnya meminta PPAT melakukan pengecekan sebelum akta dibuat."},
+    {"judul": "Cara 2 - Cek awal secara online",
+     "text": "Praktik umum (informasi publik sekunder; fitur dan tampilan dapat berubah): pengecekan awal dapat dilakukan lewat aplikasi Sentuh Tanahku atau laman resmi Kementerian ATR/BPN (atrbpn.go.id), misalnya dengan memilih Kantor Pertanahan dan memasukkan nomor berkas. Pengecekan daring membantu penelusuran awal informasi berkas, tetapi tidak menggantikan pencocokan sertifikat fisik dengan buku tanah di Kantor Pertanahan; jadikan pengecekan langsung sebagai keputusan akhir sebelum membayar atau menandatangani akta."},
+    {"judul": "Cek fisik dokumen dan objek tanah",
+     "text": "Saran umum: cocokkan nama pemegang hak, nomor hak, luas, dan letak tanah pada sertifikat dengan surat ukur dan kondisi di lapangan; pastikan batas dan penguasaan tanah sesuai; periksa apakah ada catatan sengketa, sitaan, atau hak tanggungan di buku tanah. Waspada bila penjual menolak sertifikat dicek ke Kantor Pertanahan, hanya mau menunjukkan fotokopi, atau harga jauh di bawah pasar. PPAT wajib menolak membuat akta jika sertifikat yang diserahkan tidak sesuai dengan daftar-daftar di Kantor Pertanahan (PP 24/1997 Pasal 39 ayat 1 huruf a)."},
+    {"judul": "Sertifikat elektronik",
+     "text": "Penyelenggaraan pendaftaran tanah dapat dilakukan secara elektronik; data dan informasi elektronik serta hasil cetaknya merupakan alat bukti hukum yang sah (PP 18/2021 Pasal 84 ayat 1 dan 3). Dokumen elektronik dalam pendaftaran tanah diakses dan/atau dicetak melalui Sistem Elektronik (Permen ATR/BPN 3/2023 Pasal 6 ayat 1). Untuk sertifikat elektronik, keabsahan dicek melalui sistem resmi Kementerian ATR/BPN atau Kantor Pertanahan, bukan dari hasil cetak atau tangkapan layar yang dikirim pihak lain."},
+    {"judul": "Jika ditemukan kejanggalan",
+     "text": "Jika ada ketidaksesuaian antara sertifikat dan data Kantor Pertanahan atau dugaan pemalsuan: hentikan transaksi dan jangan membayar uang muka atau pelunasan; simpan salinan dokumen; laporkan atau konsultasikan ke Kantor Pertanahan setempat, PPAT, atau penasihat hukum. Informasi ini bersifat edukasi umum dan bukan nasihat hukum; untuk kasus konkret konsultasikan dengan pejabat atau profesional yang berwenang."}
+  ]
+}
