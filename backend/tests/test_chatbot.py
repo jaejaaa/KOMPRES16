@@ -138,8 +138,8 @@ class TestRetrieverAsli(unittest.TestCase):
     def test_perbandingan_dicari_per_sisi(self):
         ret = FakeRetriever(0.9)
         jawab_chat("Apa bedanya SHM dan HGB?", retriever=ret, llm=FakeLLM())
-        self.assertIn("SHM", ret.queries)
-        self.assertIn("HGB", ret.queries)
+        self.assertIn("Apa pengertian SHM?", ret.queries)
+        self.assertIn("Apa pengertian HGB?", ret.queries)
 
     def test_status_diubah_sebagian_masuk_prompt(self):
         c = _chunk("pp24:ps37", "37")
@@ -172,6 +172,30 @@ class TestPecahDokumen(unittest.TestCase):
 
         teks = "Pasal 1\nObjek tanah.\nPasal 2\nSebagaimana dimaksud dalam Pasal 1 maka berlaku.\n"
         self.assertEqual([c.id for c in pecah_dokumen(teks)], ["dok-1", "dok-2"])
+
+
+class TestTopik(unittest.TestCase):
+    """Skor embedding Gemini tinggi untuk teks apa pun, jadi gerbang skor saja tidak cukup."""
+
+    def test_topik_tidak_sesuai_ditolak_walau_skor_tinggi(self):
+        llm = FakeLLM({"topik_sesuai": False, "jawaban": "Ijazah itu palsu.", "sumber_ids": ["1"],
+                       "di_luar_cakupan": False})
+        r = jawab_chat("ijazah tokoh itu palsu atau asli?", retriever=FakeRetriever(0.95), llm=llm)
+        self.assertEqual(r["status"], "di_luar_cakupan")
+        self.assertNotIn("palsu", r["jawaban"].lower())
+        self.assertEqual(r["sumber"], [])
+
+    def test_topik_sesuai_true_atau_tanpa_field_tetap_dijawab(self):
+        for extra in ({"topik_sesuai": True}, {}):
+            llm = FakeLLM({"jawaban": "HGB berlaku 30 tahun.", "sumber_ids": ["1"], "di_luar_cakupan": False, **extra})
+            r = jawab_chat("HGB berlaku berapa lama", retriever=FakeRetriever(0.9), llm=llm)
+            self.assertEqual(r["status"], "ok")
+
+    def test_prompt_memuat_aturan_cek_topik(self):
+        from chatbot.prompts import SYSTEM_PROMPT
+
+        self.assertIn("topik_sesuai", SYSTEM_PROMPT)
+        self.assertIn("ijazah", SYSTEM_PROMPT)
 
 
 if __name__ == "__main__":

@@ -5,6 +5,14 @@ Tugasmu HANYA menjelaskan hukum tanah/properti dan cara memakai aplikasi ini, \
 dalam bahasa Indonesia yang mudah dipahami orang awam.
 
 ATURAN KETAT:
+0. LANGKAH PERTAMA - nilai topik <pertanyaan> itu sendiri, TERLEPAS dari isi <konteks>. \
+Pertanyaan sesuai topik hanya jika membahas hukum tanah/properti (sertifikat, jual beli, sewa, \
+pajak tanah, sengketa tanah, dokumen pertanahan) atau cara memakai aplikasi ini. Pertanyaan tentang \
+orang/tokoh, politik, berita, gosip, ijazah atau riwayat seseorang, kesehatan, pemrograman, atau hal \
+lain di luar itu: set "topik_sesuai": false, "di_luar_cakupan": true, "jawaban": "", "sumber_ids": []. \
+Konteks yang kebetulan mirip kata (mis. "keaslian", "palsu") TIDAK membuat pertanyaan menjadi sesuai topik.
+   Contoh topik_sesuai=false: "Apakah ijazah seorang tokoh itu palsu?", "Siapa presiden pertama Indonesia?", \
+"Berapa harga saham hari ini?". Contoh topik_sesuai=true: "Bagaimana cara tahu sertifikat tanah asli atau palsu?".
 1. Jawab HANYA berdasarkan bagian <konteks>. Dilarang memakai pengetahuan lain, \
 menebak, atau mengarang pasal/UU.
 2. Jika konteks tidak cukup untuk menjawab, set "di_luar_cakupan": true dan \
@@ -24,7 +32,7 @@ dokumen dan mana aturan hukum.
 itu telah diubah sebagian oleh peraturan lain, dan sarankan mengecek ketentuan terbaru.
 9. Untuk pertanyaan perbandingan, jelaskan kedua sisi berdasarkan konteks masing-masing.
 
-Keluarkan HANYA JSON: {"jawaban": str, "sumber_ids": [str], "di_luar_cakupan": bool}"""
+Keluarkan HANYA JSON: {"topik_sesuai": bool, "jawaban": str, "sumber_ids": [str], "di_luar_cakupan": bool}"""
 
 
 def judul_chunk(c: Chunk) -> str:

@@ -126,7 +126,8 @@ def jawab_chat(
     # urutan hasil retriever bisa hybrid sehingga skornya tidak selalu menurun)
     query = _query_retrieval(pertanyaan, riwayat)
     sisi = pecah_perbandingan(pertanyaan)  # "bedanya X dan Y" -> cari X dan Y sendiri-sendiri
-    queries = sisi + [query] if sisi else [query]
+    # sub-query pendek ("HGB") melenceng di embedding; bungkus jadi kalimat utuh
+    queries = [f"Apa pengertian {x}?" for x in sisi] + [query] if sisi else [query]
     per_query = max(2, config.TOP_K // 2) if sisi else config.TOP_K
 
     reg = retriever or KeywordRetriever(_get_regulasi())
@@ -164,7 +165,7 @@ def jawab_chat(
         return _respons(guardrails.PESAN_ERROR, "error")
 
     # Lapis 3: validasi sitasi. Sumber dibangun dari chunk asli, bukan dari teks LLM.
-    if not isinstance(out, dict) or out.get("di_luar_cakupan"):
+    if not isinstance(out, dict) or out.get("di_luar_cakupan") or out.get("topik_sesuai") is False:
         return _respons(guardrails.PESAN_DI_LUAR_CAKUPAN, "di_luar_cakupan")
     ids = [str(i).strip() for i in out.get("sumber_ids", []) if str(i).strip() in peta]
     jawaban = str(out.get("jawaban", "")).strip()
