@@ -22,6 +22,7 @@ os.environ.setdefault("SEARCH_BACKEND", "local")  # vektor dari file .npy; tanpa
 os.environ.setdefault("MIN_RETRIEVAL_SCORE", "0.65")  # skala skor Gemini embedding, lihat data_engineer/data/eval/PERBANDINGAN_EMBEDDING.md
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "data_engineer" / "scripts"))
 from retriever import Retriever
+from analisis import analyze
 from chatbot import jawab_chat
 
 # Struktur Firestore:
@@ -98,22 +99,6 @@ def current_user(token: HTTPAuthorizationCredentials = Depends(HTTPBearer())) ->
 
 def now():
     return datetime.now(timezone.utc)
-
-
-# --- Colokan untuk AI Engineer: ganti isi fungsi ini, format output wajib sama. Chat sudah pakai modul chatbot/ ---
-
-def analyze(text: str) -> dict:
-    return {
-        "summary": "Perjanjian jual-beli tanah seluas 120 m² di Kota Bandung antara Budi (penjual) dan Sari (pembeli).",
-        "risks": [
-            {"pasal": "Pasal 5", "kutipan": "Uang muka tidak dapat dikembalikan dengan alasan apa pun.",
-             "kategori": "Uang muka (DP) hangus tanpa syarat jelas", "level": "high",
-             "alasan": "DP hangus walaupun pembatalan terjadi karena kesalahan penjual."},
-            {"pasal": "Pasal 2", "kutipan": "Objek jual-beli adalah tanah SHM No. 123 seluas 120 m².",
-             "kategori": "Ketidakjelasan objek tanah", "level": "low",
-             "alasan": "Nomor sertifikat dan luas sudah jelas; batas-batas tanah sebaiknya ditambahkan."},
-        ],
-    }
 
 
 # --- Endpoint ---

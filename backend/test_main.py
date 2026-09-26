@@ -27,6 +27,7 @@ assert up(b"bukan pdf").status_code == 415
 assert up(b"%PDF" + b"0" * main.MAX_PDF_BYTES).status_code == 413
 assert up(b"%PDF-1.7 rusak").status_code == 422
 assert up(make_pdf()).status_code == 422  # halaman kosong = seperti hasil scan
+main.analyze = lambda text: {"summary": "s", "risks": [{"pasal": "Pasal 5", "kutipan": "k", "kategori": "x", "level": "high", "alasan": "a"}]}  # tanpa Gemini
 assert up(make_pdf("Pasal 1 Penjual menjual tanah")).status_code == 202
 assert "Pasal 1 Penjual" in doc_ref.set.call_args.args[0]["text"]  # teks disimpan untuk konteks chat
 saved = doc_ref.update.call_args.args[0]
