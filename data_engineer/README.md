@@ -74,7 +74,8 @@ Tiap hasil: `id, sumber, pasal, teks, asal, score` (+ `doc, section, bab, status
 `data/eval/testset_qa.json`: 45 item (29 regulasi, 4 awam, 4 panduan, 1 jebakan aturan dicabut, 2 multi-Pasal, 5 di luar cakupan).
 Tiap item: pertanyaan, jawaban acuan, Pasal rujukan, dan `bukti_kunci` yang diverifikasi otomatis ke teks Pasal.
 
-Hasil (bge-m3, vektor saja, top-5, 40 pertanyaan yang bisa dijawab): **Hit@1 0,68 · Hit@3 0,88 · Hit@5 0,93 · MRR 0,79**.
+Hasil dev (model final Gemini `gemini-embedding-2`, vektor saja, top-5, 40 pertanyaan yang bisa dijawab): **Hit@1 0.78 · Hit@3 0.95 · Hit@5 0.95 · MRR 0.86** (pembanding bge-m3: 0,68 / 0,88 / 0,93 / 0,79).
+**Hasil held-out (dijalankan SEKALI pada 2026-09-27, 21 pertanyaan): Hit@1 0.76 · Hit@3 0.90 · Hit@5 0.95 · MRR 0.83 · Recall@5 0.98**, konsisten dengan dev. Set ini sudah "terpakai": jangan dijalankan ulang untuk menyetel apa pun; jika konfigurasi berubah, buat set penguji baru.
 Parameter dituning pada set yang sama, jadi angka ini **optimistis**; untuk proposal perlu set penguji terpisah.
 
 Ambang tolak (kosinus terbaik, bge-m3): 0,50 → 3% valid ditolak tetapi 60% di luar cakupan lolos; 0,60 → 3% ditolak, 20% lolos.
