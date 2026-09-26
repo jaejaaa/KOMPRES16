@@ -41,6 +41,8 @@ Selama `NEXT_PUBLIC_API_URL` kosong, frontend memakai data mock. Setelah backend
 - ✅ Analisis dokumen memakai `analyze()` asli (10 kategori risiko).
 - ✅ Knowledge base: 9 regulasi, 1.452 chunk; retrieval Hit@5 0,95 (dev set), laporan di `data_engineer/data/eval/PERBANDINGAN_EMBEDDING.md`.
 - ⏳ Frontend: sambungkan ke URL backend di atas, lalu deploy ke Vercel (domainnya ditambahkan ke Firebase Authorized domains + CORS backend).
+- ✅ Evaluasi deteksi risiko pada dokumen sintetis dev: F1 0,90 (analisis dummy: 0,20), tetapi optimistis; set held-out (6 dokumen, kunci jawaban dipegang Data Engineer) disiapkan untuk angka final.
+- ⏳ Kuota Gemini tier gratis sangat kecil (mis. 20 permintaan/hari untuk model jawaban; 1 pertanyaan chat = 2 permintaan): demo butuh billing atau kunci/project terpisah, plus video demo cadangan.
 
 ## Aturan main repo
 1. **Jangan commit rahasia** (`.env`, kunci service account, API key). Pakai `.env` lokal; contoh ada di `.env.example` tiap folder.

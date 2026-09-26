@@ -2,6 +2,7 @@
 import fitz, json, re, subprocess, sys, tempfile
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+for _s in (sys.stdout, sys.stderr): getattr(_s, "reconfigure", lambda **k: None)(encoding="utf-8", errors="replace")  # konsol Windows (cp1252) tidak crash
 
 RAW, OUT = Path("data/raw"), Path("data/extracted")
 DOCS = {  # file -> (slug, nama_pendek, judul)
@@ -47,8 +48,8 @@ for fn, (slug, short, title) in DOCS.items():
              for i, t in enumerate(texts) if lo <= i + 1 <= hi]
     (OUT / f"{slug}.json").write_text(json.dumps(
         {"slug": slug, "short": short, "title": title, "source_file": fn, "pages": pages},
-        ensure_ascii=False, indent=1))
-    (OUT / f"{slug}.txt").write_text("\n\n".join(f"[[hal {p['page']}]]\n{p['text']}" for p in pages))
+        ensure_ascii=False, indent=1), encoding="utf-8")
+    (OUT / f"{slug}.txt").write_text("\n\n".join(f"[[hal {p['page']}]]\n{p['text']}" for p in pages), encoding="utf-8")
     n = sum(len(p["text"]) for p in pages)
     empty = [p["page"] for p in pages if len(p["text"]) < 50]
     print(f"{short:24s} {len(pages):4d} hal {n:8d} char  halaman kosong: {empty}")

@@ -28,3 +28,11 @@ embeddings_*.meta.json
 !data_engineer/data/chunks/embeddings_gemini.npy
 !data_engineer/data/chunks/embeddings_gemini.meta.json
 .vercel
+
+# Hasil evaluasi risiko yang dihasilkan otomatis (bukan bukti tetap); hasil_retrieval_*.json SENGAJA tetap di-commit sebagai bukti angka proposal
+data_engineer/data/eval/prediksi_*.json
+data_engineer/data/eval/hasil_risiko_*.json
+data_engineer/data/eval/_selftest_*.md
+
+# Kunci jawaban set penguji risiko terpisah (held-out) sengaja TIDAK di-commit agar tetap "buta" bagi yang menyetel analyze()
+data_engineer/private/

@@ -4,6 +4,7 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from search import search
+for _s in (sys.stdout, sys.stderr): getattr(_s, "reconfigure", lambda **k: None)(encoding="utf-8", errors="replace")  # konsol Windows (cp1252) tidak crash
 
 PANDUAN_TESTS = [  # (pertanyaan, doc_slug panduan yang harus ada di top-3)
     ('Bagaimana cara balik nama sertifikat tanah?', 'Panduan: Balik Nama Sertifikat Tanah'),

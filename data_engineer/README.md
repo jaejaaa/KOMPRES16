@@ -14,7 +14,8 @@ Bagian dari [KOMPRES 16](../README.md). Tugas: menyiapkan "otak referensi" chatb
 | `data/panduan/` | Panduan prosedur: balik nama, cek keaslian sertifikat |
 | `data/chunks/` | `chunks.jsonl` (1.452 chunk), `report.txt`; vektor `embeddings_<penyedia>.npy` + `.meta.json` dibangun otomatis (tidak masuk git) |
 | `data/eval/` | `testset_qa.json` (dev, 45), `testset_heldout.json` (terpisah, 25), `ABLASI.md`, `PERBANDINGAN_EMBEDDING.md`, `hasil_*.json` |
-| `data/synthetic/` | 8 PDF perjanjian sintetis, `ground_truth.json`, `taksonomi_risiko.json` (draf 8 kategori) |
+| `data/synthetic/` | Set dev risiko: 12 PDF perjanjian sintetis D01–D12, `ground_truth.json`, `taksonomi_risiko.json` (10 kategori K1–K10, sama dengan `backend/analisis/taksonomi.py`) |
+| `data/synthetic_heldout/` | Set risiko terpisah (held-out): 6 PDF H1–H6 dengan kalimat berbeda dan pasal jebakan. **Kunci jawabannya tidak ada di repo** (`private/`, di-gitignore) |
 | `scripts/` | Pipeline `01`–`09` (`07` perbandingan embedding, `08` buat dokumen sintetis, `09` evaluasi deteksi risiko), plus `search.py`, `retriever.py`, `glossary.py`, `embed_util.py` |
 | `docs/` | `PROPOSAL_DATASET_METODE.md` (draf proposal + daftar pustaka), `DATASET_PELENGKAP.md`, `FIRESTORE_SETUP.md` (opsional) |
 
@@ -33,7 +34,7 @@ python scripts/03_embed.py                    # vektor semua chunk untuk penyedi
 python scripts/04_search.py                   # uji cepat retrieval
 python scripts/06_eval_retrieval.py           # evaluasi terhadap test set (--validate: cek grounding test set saja)
 python scripts/07_compare_providers.py        # laporan perbandingan bge-m3 vs gemini -> data/eval/PERBANDINGAN_EMBEDDING.md
-python scripts/08_make_synthetic.py           # membuat 8 PDF sintetis + kunci jawaban (data/synthetic/)
+python scripts/08_make_synthetic.py           # membuat 12 PDF sintetis dev + kunci jawaban + taksonomi (data/synthetic/)
 python scripts/09_eval_risk.py --selftest     # uji metrik deteksi risiko; --analyzer modul:fungsi untuk mengukur analyze()
 ```
 **Penyedia embedding** (env `EMBED_PROVIDER`): `gemini` (default; `gemini-embedding-2`, 768 dimensi, lewat API) atau `bge-m3` (model lokal, ±2,3 GB; hanya untuk perbandingan).
@@ -84,14 +85,26 @@ Kelemahan yang diketahui: pertanyaan perbandingan/multi-Pasal ("bedanya hak mili
 ## Evaluasi tambahan
 - **Set penguji terpisah** `data/eval/testset_heldout.json` (25 item, Pasal rujukan berbeda): **jangan dipakai menyetel apa pun**; jalankan `python scripts/06_eval_retrieval.py --set heldout` hanya untuk angka final.
 - **Metrik retrieval** kini juga Precision@k dan Recall@k (Precision@5 dibatasi jumlah Pasal rujukan per pertanyaan, jadi maksimumnya ±0,2–0,4).
-- **Deteksi risiko:** `scripts/09_eval_risk.py` mengukur `analyze()` terhadap 8 dokumen sintetis (14 pasal berisiko, 56 aman): precision/recall/F1 per pasal, kecocokan kategori dan level, alarm palsu pada dokumen bersih. Baseline `analyze()` dummy backend: precision 0,19, recall 0,21.
+- **Deteksi risiko:** `scripts/09_eval_risk.py` mengukur `analyze()`: precision/recall/F1 per pasal, kecocokan kategori dan level, alarm palsu pada dokumen bersih, dan temuan tanpa nomor pasal (mis. "klausul tidak ditemukan") yang dihitung terpisah.
+  Set **dev** (12 dokumen, 25 pasal berisiko, 80 aman) boleh dipakai menyetel prompt; set **held-out** (6 dokumen, 17 berisiko, 31 aman) hanya untuk angka final, jangan dipakai menyetel. Baseline `analyze()` dummy: F1 0,20 (dev) dan 0,21 (held-out).
+  Contoh: `PYTHONIOENCODING=utf-8 python data_engineer/scripts/09_eval_risk.py --analyzer analisis:analyze --path backend --set dev`.
+  Held-out: AI Engineer menjalankan `... 09_eval_risk.py --analyzer analisis:analyze --path backend --set heldout --predict-only` lalu mengirim `data/eval/prediksi_*_heldout.json` ke Data Engineer, yang menilainya dengan kunci privat (`--predictions FILE --set heldout`).
+  Catatan bias: dokumen dev dibuat dari definisi kategori yang sama dengan prompt `analyze()`, jadi angka dev optimistis; itu alasan set held-out dibuat dengan kalimat berbeda.
 - **Status hukum per Pasal:** PP 24/1997 Ps 26 dan 45 ditandai khusus (jangka waktu pengumuman dicabut PP 18/2021 Ps 103 huruf c); UU 21/1997 = masa peralihan 1 tahun (UU 28/2009 Ps 180 angka 6).
+
+## Portabilitas (Windows / macOS / Linux)
+Semua baca/tulis file memakai UTF-8 eksplisit. Ini penting: `chunks.jsonl` berisi karakter non-ASCII; dibaca dengan encoding bawaan Windows (cp1252) kode lama **crash**,
+dan dengan latin-1 sidik jari vektor **berbeda** sehingga `search()` mencoba membangun ulang 1.452 embedding (menabrak kuota harian). Keluaran konsol juga dipaksa UTF-8 agar
+karakter seperti "≤" tidak membuat skrip crash di Windows. `.gitattributes` menjaga akhir baris file data (LF) dan menandai `*.npy`/`*.pdf` sebagai biner.
+Hasil evaluasi risiko yang dihasilkan otomatis (`prediksi_*.json`, `hasil_risiko_*.json`) di-gitignore; `hasil_retrieval_*.json` sengaja tetap di-commit sebagai bukti angka proposal.
 
 ## Status dan yang belum
 - [x] Regulasi terkumpul, teks diekstrak (6 dari 9 PDF di-OCR), chunk per Pasal, embedding, `search()`
 - [x] Panduan prosedur (2), test set Q&A dev (45) + held-out (25), evaluasi (Hit@k, MRR, P/R@k) + ablasi
-- [x] Draf taksonomi 8 kategori + 8 dokumen sintetis + alat ukur deteksi risiko (menunggu taksonomi final dari AI Engineer)
+- [x] Taksonomi 10 kategori (sama dengan AI Engineer) + 12 dokumen sintetis dev + 6 dokumen held-out + alat ukur deteksi risiko
 - [x] Penilaian dataset pelengkap HF; draf bagian proposal dan daftar pustaka (`docs/PROPOSAL_DATASET_METODE.md`)
-- [ ] Embedding Gemini selesai (980/1.452; lanjut setelah reset kuota) dan laporan `PERBANDINGAN_EMBEDDING.md`
-- [ ] Angka held-out final, template proposal panitia (format sitasi), isi bagian [ISI] di draf proposal
-- ❓ Belum diputuskan tim: penyimpanan vektor (file `.npy` di git vs Firestore) dan hosting backend
+- [x] Embedding Gemini selesai (`gemini-embedding-2`, 1.452 chunk), vektor ikut repo, laporan `PERBANDINGAN_EMBEDDING.md`
+- [x] `analyze()` dan chatbot dengan retriever sudah tersambung di backend (AI Engineer + Backend)
+- [ ] Angka held-out final (retrieval dan risiko) setelah model final dikonfirmasi, template proposal panitia (format sitasi), isi bagian [ISI] di draf proposal
+- [ ] Verifikasi butir "praktik umum" pada panduan prosedur ke sumber resmi
+- ❓ Belum diputuskan tim: hosting backend (Dockerfile masih hanya membawa `backend/`, sedangkan `data_engineer/` juga harus ikut) dan kuota Gemini untuk demo

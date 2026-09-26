@@ -1,6 +1,8 @@
 """Langkah 2: potong teks regulasi per Pasal -> data/chunks/chunks.jsonl (+ laporan validasi)."""
 import json, re
+import sys
 from pathlib import Path
+for _s in (sys.stdout, sys.stderr): getattr(_s, "reconfigure", lambda **k: None)(encoding="utf-8", errors="replace")  # konsol Windows (cp1252) tidak crash
 
 EXT, OUT = Path("data/extracted"), Path("data/chunks")
 PASAL = re.compile(r"^\s*Pasal\s+(\d+\s?[A-Z]?)\s*$")
@@ -124,7 +126,7 @@ def load_manual():
     """Pasal yang diketik manual (OCR gagal) -> data/manual/*.json; menggantikan chunk otomatis dengan nomor sama."""
     out = []
     for f in sorted(Path("data/manual").glob("*.json")):
-        m = json.loads(f.read_text()); d = json.loads((EXT / f"{m['doc_slug']}.json").read_text())
+        m = json.loads(f.read_text(encoding="utf-8")); d = json.loads((EXT / f"{m['doc_slug']}.json").read_text(encoding="utf-8"))
         for c in m["chunks"]:
             out.append({"id": f"{m['doc_slug']}:bata:ps{c['pasal']}", "doc_slug": m["doc_slug"], "doc": d["short"],
                         "doc_title": d["title"], "section": "batang_tubuh", "bab": c.get("bab"), "konteks": c.get("konteks", ""), "pasal": c["pasal"],
@@ -136,7 +138,7 @@ def load_panduan():
     """Panduan prosedur (bukan regulasi) -> data/panduan/*.json; section='panduan', status='panduan'."""
     out = []
     for f in sorted(Path("data/panduan").glob("*.json")):
-        m = json.loads(f.read_text())
+        m = json.loads(f.read_text(encoding="utf-8"))
         for i, c in enumerate(m["chunks"], 1):
             out.append({"id": f"{m['doc_slug']}:{i:02d}", "doc_slug": m["doc_slug"], "doc": m["doc"], "doc_title": m["doc_title"],
                         "section": "panduan", "bab": None, "konteks": "", "pasal": c["judul"], "pasal_inferred": False,
@@ -147,7 +149,7 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     allc, report = [], []
     for f in sorted(EXT.glob("*.json")):
-        d = json.loads(f.read_text()); cs = chunk_doc(d)
+        d = json.loads(f.read_text(encoding="utf-8")); cs = chunk_doc(d)
         man = [c for c in load_manual() if c["doc_slug"] == d["slug"]]
         keys = {c["id"] for c in man}
         cs = [c for c in cs if c["id"] not in keys] + man
@@ -168,8 +170,8 @@ def main():
                       f"pasal {nums[0] if nums else '-'}–{nums[-1] if nums else '-'}  hilang: {missing}")
     pan = load_panduan(); allc += pan
     report.append(f"{'Panduan prosedur':24s} chunk={len(pan):4d}")
-    with open(OUT / "chunks.jsonl", "w") as fh:
+    with open(OUT / "chunks.jsonl", "w", encoding="utf-8") as fh:
         for c in allc: fh.write(json.dumps(c, ensure_ascii=False) + "\n")
-    (OUT / "report.txt").write_text("\n".join(report))
+    (OUT / "report.txt").write_text("\n".join(report), encoding="utf-8")
     print("\n".join(report)); print("TOTAL chunk:", len(allc), "| rata2 char:", sum(c["n_chars"] for c in allc)//len(allc))
 main()

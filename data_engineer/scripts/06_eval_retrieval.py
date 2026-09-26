@@ -8,14 +8,15 @@ Metrik: Hit@1/3/5, MRR, Precision@k dan Recall@k (pertanyaan yang bisa dijawab);
 Hasil disimpan di data/eval/hasil_retrieval_<penyedia>.json."""
 import argparse, json, re, sys, time
 from pathlib import Path
+for _s in (sys.stdout, sys.stderr): getattr(_s, "reconfigure", lambda **k: None)(encoding="utf-8", errors="replace")  # konsol Windows (cp1252) tidak crash
 sys.path.insert(0, str(Path(__file__).parent))
 ROOT = Path(__file__).resolve().parent.parent
 SETS = {"dev": "testset_qa.json", "heldout": "testset_heldout.json"}  # dev = dipakai tuning; heldout = hanya untuk angka final
-TEST = json.loads((ROOT / "data/eval/testset_qa.json").read_text())["items"]
+TEST = json.loads((ROOT / "data/eval/testset_qa.json").read_text(encoding="utf-8"))["items"]
 
 def use_set(name):
     global TEST
-    TEST = json.loads((ROOT / "data/eval" / SETS[name]).read_text())["items"]
+    TEST = json.loads((ROOT / "data/eval" / SETS[name]).read_text(encoding="utf-8"))["items"]
 THRESHOLDS = (0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75)
 
 def norm(t): return re.sub(r"\s+", " ", re.sub(r"-\s*\n\s*", "", t)).lower()
@@ -24,7 +25,7 @@ def match(r, ref):  # r: hasil search; ref: {'sumber','pasal'}; pasal kosong = s
     return r["sumber"] == ref["sumber"] and (not ref.get("pasal") or r["pasal"] == ref["pasal"])
 
 def validate():
-    rows = [json.loads(l) for l in open(ROOT / "data/chunks/chunks.jsonl")]
+    rows = [json.loads(l) for l in open(ROOT / "data/chunks/chunks.jsonl", encoding="utf-8")]
     bad = 0
     for it in TEST:
         text = ""
@@ -82,7 +83,7 @@ def evaluate(top_k=5, provider=None, verbose=True, set_name="dev"):
            "peringkat": ranks, "skor_terbaik": best, "top3": top3,
            "meleset": [{"id": i["id"], "pertanyaan": i["pertanyaan"], "peringkat": ranks[i["id"]], "top3": top3[i["id"]]}
                        for i in ans if not ranks[i["id"]] or ranks[i["id"]] > 3]}
-    (ROOT / f"data/eval/hasil_retrieval_{p.replace(':', '_')}{'' if set_name == 'dev' else '_' + set_name}.json").write_text(json.dumps(out, ensure_ascii=False, indent=1))
+    (ROOT / f"data/eval/hasil_retrieval_{p.replace(':', '_')}{'' if set_name == 'dev' else '_' + set_name}.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     if verbose:
         print(f"\n== Retrieval [{p}] top_k={top_k}, rata-rata {out['rata2_ms_per_kueri']:.0f} ms/kueri ==")
         print(f"{'kategori':<10}{'n':>3}{'Hit@1':>8}{'Hit@3':>8}{'Hit@5':>8}{'MRR':>8}{'P@5':>8}{'R@5':>8}")

@@ -17,7 +17,7 @@ DEFAULT_PROVIDER = "gemini"
 def load_env():
     env = ROOT / ".env"  # data_engineer/.env, bukan cwd
     if env.exists():
-        for l in env.read_text().splitlines():
+        for l in env.read_text(encoding="utf-8").splitlines():
             if "=" in l and not l.lstrip().startswith("#"):
                 k, v = l.split("=", 1); os.environ.setdefault(k.strip(), v.strip())
 
@@ -161,13 +161,13 @@ def load_or_build_embeddings(rows, provider: str | None = None):
     enc = get_encoder(p)
     npy, meta = cache_paths(p)
     fp = fingerprint(enc.tag, texts)
-    if npy.exists() and meta.exists() and json.loads(meta.read_text()).get("fingerprint") == fp:
+    if npy.exists() and meta.exists() and json.loads(meta.read_text(encoding="utf-8")).get("fingerprint") == fp:
         emb = np.load(npy)
     else:
         print(f"[embed] vektor '{p}' belum ada/usang -> membangun {len(texts)} embedding...", flush=True)
         emb = enc.encode_docs(texts)
         np.save(npy, emb)
         meta.write_text(json.dumps({"provider": p, "model": enc.tag, "n": len(texts), "dim": int(emb.shape[1]),
-                                    "fingerprint": fp, "dibuat": time.strftime("%Y-%m-%d %H:%M")}, indent=1))
+                                    "fingerprint": fp, "dibuat": time.strftime("%Y-%m-%d %H:%M")}, indent=1), encoding="utf-8")
     _cache[p] = (len(texts), emb)
     return emb

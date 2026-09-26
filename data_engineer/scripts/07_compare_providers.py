@@ -6,6 +6,7 @@
 Semua angka di laporan diambil dari hasil evaluasi, bukan diketik tangan."""
 import argparse, importlib, json, sys, time
 from pathlib import Path
+for _s in (sys.stdout, sys.stderr): getattr(_s, "reconfigure", lambda **k: None)(encoding="utf-8", errors="replace")  # konsol Windows (cp1252) tidak crash
 sys.path.insert(0, str(Path(__file__).parent))
 ROOT = Path(__file__).resolve().parent.parent
 EV = importlib.import_module("06_eval_retrieval")
@@ -13,7 +14,7 @@ A, B = "bge-m3", "gemini"   # A = pembanding (sekarang), B = kandidat pengganti 
 
 def load(p, reuse):
     f = ROOT / f"data/eval/hasil_retrieval_{p.replace(':', '_')}.json"
-    if reuse and f.exists(): return json.loads(f.read_text())
+    if reuse and f.exists(): return json.loads(f.read_text(encoding="utf-8"))
     return EV.evaluate(5, p, verbose=False)
 
 def pct(x): return f"{int(x * 100 + 0.5)}%"  # bulatkan setengah ke atas, konsisten dengan tabel 2 desimal
@@ -29,7 +30,7 @@ def ambang_rekomendasi(sweep, maks_salah_tolak=0.05):
 def info_file(p):
     from embed_util import cache_paths
     npy, meta = cache_paths(p)
-    m = json.loads(meta.read_text()) if meta.exists() else {}
+    m = json.loads(meta.read_text(encoding="utf-8")) if meta.exists() else {}
     return {"dim": m.get("dim", "?"), "model": m.get("model", "?"), "mb": npy.stat().st_size / 1e6 if npy.exists() else 0}
 
 def build(ra, rb):
@@ -131,7 +132,7 @@ if __name__ == "__main__":
     a = ap.parse_args(); B = a.candidate
     if a.selftest:
         r = load(A, True); B = A
-        out = build(r, r); (ROOT / "data/eval/_selftest_perbandingan.md").write_text(out); print(out[:1800]); sys.exit(0)
+        out = build(r, r); (ROOT / "data/eval/_selftest_perbandingan.md").write_text(out, encoding="utf-8"); print(out[:1800]); sys.exit(0)
     ra, rb = load(A, a.reuse), load(B, a.reuse)
-    (ROOT / "data/eval/PERBANDINGAN_EMBEDDING.md").write_text(build(ra, rb))
+    (ROOT / "data/eval/PERBANDINGAN_EMBEDDING.md").write_text(build(ra, rb), encoding="utf-8")
     print("ditulis: data/eval/PERBANDINGAN_EMBEDDING.md")

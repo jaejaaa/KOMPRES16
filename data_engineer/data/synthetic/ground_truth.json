@@ -310,6 +310,186 @@
     "Pasal 8",
     "Pasal 9"
    ]
+  },
+  {
+   "id": "D09",
+   "berkas": "pdf/D09_jual_beli_lepas_upaya_hukum.pdf",
+   "jenis": "jual_beli",
+   "pasal_total": [
+    "Pasal 1",
+    "Pasal 2",
+    "Pasal 3",
+    "Pasal 4",
+    "Pasal 5",
+    "Pasal 6",
+    "Pasal 7",
+    "Pasal 8",
+    "Pasal 9"
+   ],
+   "risks": [
+    {
+     "pasal": "Pasal 3",
+     "kategori_id": "K1",
+     "kategori": "Uang muka (DP) hangus tanpa syarat jelas",
+     "level": "low",
+     "kutipan_kunci": "Apabila pembatalan terjadi karena kesalahan PEMBELI, uang muka hangus sebesar 50% (lima puluh persen) dari nilai uang muka, sedangkan sisanya dikembalikan dalam"
+    },
+    {
+     "pasal": "Pasal 9",
+     "kategori_id": "K9",
+     "kategori": "Hilangnya hak somasi/upaya hukum",
+     "level": "high",
+     "kutipan_kunci": "Para pihak dengan ini melepaskan hak untuk mengajukan somasi dan hak untuk menempuh jalur hukum ke pengadilan atas segala perselisihan yang timbul dari perjanji"
+    }
+   ],
+   "pasal_aman": [
+    "Pasal 1",
+    "Pasal 2",
+    "Pasal 4",
+    "Pasal 5",
+    "Pasal 6",
+    "Pasal 7",
+    "Pasal 8"
+   ]
+  },
+  {
+   "id": "D10",
+   "berkas": "pdf/D10_jual_beli_kuasa_mutlak.pdf",
+   "jenis": "jual_beli",
+   "pasal_total": [
+    "Pasal 1",
+    "Pasal 2",
+    "Pasal 3",
+    "Pasal 4",
+    "Pasal 5",
+    "Pasal 6",
+    "Pasal 7",
+    "Pasal 8",
+    "Pasal 9"
+   ],
+   "risks": [
+    {
+     "pasal": "Pasal 6",
+     "kategori_id": "K10",
+     "kategori": "Kuasa mutlak yang berisiko disalahgunakan",
+     "level": "high",
+     "kutipan_kunci": "PENJUAL memberikan kuasa mutlak yang tidak dapat ditarik kembali kepada PEMBELI untuk menjual, mengalihkan, dan membebani tanah tersebut kepada pihak mana pun t"
+    },
+    {
+     "pasal": "Pasal 7",
+     "kategori_id": "K7",
+     "kategori": "Waktu pelaksanaan tidak jelas",
+     "level": "low",
+     "kutipan_kunci": "Penyerahan tanah dilakukan paling lambat 30 (tiga puluh) hari setelah pelunasan, sedangkan tanggal penandatanganan Akta Jual Beli di hadapan PPAT akan disepakat"
+    }
+   ],
+   "pasal_aman": [
+    "Pasal 1",
+    "Pasal 2",
+    "Pasal 3",
+    "Pasal 4",
+    "Pasal 5",
+    "Pasal 8",
+    "Pasal 9"
+   ]
+  },
+  {
+   "id": "D11",
+   "berkas": "pdf/D11_sewa_batal_sepihak.pdf",
+   "jenis": "sewa",
+   "pasal_total": [
+    "Pasal 1",
+    "Pasal 2",
+    "Pasal 3",
+    "Pasal 4",
+    "Pasal 5",
+    "Pasal 6",
+    "Pasal 7",
+    "Pasal 8"
+   ],
+   "risks": [
+    {
+     "pasal": "Pasal 2",
+     "kategori_id": "K7",
+     "kategori": "Waktu pelaksanaan tidak jelas",
+     "level": "low",
+     "kutipan_kunci": "Jangka waktu sewa adalah 5 (lima) tahun terhitung sejak tanah diserahkan kepada PENYEWA, sedangkan tanggal penyerahan tanah akan ditentukan kemudian secara tert"
+    },
+    {
+     "pasal": "Pasal 6",
+     "kategori_id": "K6",
+     "kategori": "Klausul denda/syarat berat sebelah",
+     "level": "high",
+     "kutipan_kunci": "PEMILIK berhak membatalkan perjanjian sewa ini secara sepihak sewaktu-waktu tanpa pemberitahuan dan tanpa mengembalikan uang sewa yang telah dibayar, sedangkan "
+    },
+    {
+     "pasal": "Pasal 8",
+     "kategori_id": "K9",
+     "kategori": "Hilangnya hak somasi/upaya hukum",
+     "level": "medium",
+     "kutipan_kunci": "Perselisihan diputus oleh pihak yang ditunjuk PEMILIK dan putusannya mengikat"
+    }
+   ],
+   "pasal_aman": [
+    "Pasal 1",
+    "Pasal 3",
+    "Pasal 4",
+    "Pasal 5",
+    "Pasal 7"
+   ]
+  },
+  {
+   "id": "D12",
+   "berkas": "pdf/D12_jual_beli_level_campur.pdf",
+   "jenis": "jual_beli",
+   "pasal_total": [
+    "Pasal 1",
+    "Pasal 2",
+    "Pasal 3",
+    "Pasal 4",
+    "Pasal 5",
+    "Pasal 6",
+    "Pasal 7",
+    "Pasal 8",
+    "Pasal 9"
+   ],
+   "risks": [
+    {
+     "pasal": "Pasal 1",
+     "kategori_id": "K2",
+     "kategori": "Ketidakjelasan objek tanah",
+     "level": "low",
+     "kutipan_kunci": "PENJUAL menjual kepada PEMBELI sebidang tanah Hak Milik berdasarkan SHM No"
+    },
+    {
+     "pasal": "Pasal 4",
+     "kategori_id": "K3",
+     "kategori": "Status hak dan beban atas tanah tidak dijamin",
+     "level": "medium",
+     "kutipan_kunci": "PENJUAL menjamin bahwa tanah tersebut tidak dalam sengketa dan tidak disita, kecuali beban atau sengketa yang telah diketahui PEMBELI"
+    },
+    {
+     "pasal": "Pasal 5",
+     "kategori_id": "K5",
+     "kategori": "Pajak dan biaya tidak jelas",
+     "level": "low",
+     "kutipan_kunci": "Biaya PPAT dan biaya balik nama dibagi dua antara PENJUAL dan PEMBELI, sedangkan pembagian pajak lainnya akan dibicarakan kemudian oleh para pihak."
+    },
+    {
+     "pasal": "Pasal 8",
+     "kategori_id": "K6",
+     "kategori": "Klausul denda/syarat berat sebelah",
+     "level": "low",
+     "kutipan_kunci": "Keterlambatan pembayaran oleh PEMBELI dikenakan denda 2% (dua persen) per hari dengan batas maksimum 30% (tiga puluh persen) dari harga jual beli"
+    }
+   ],
+   "pasal_aman": [
+    "Pasal 2",
+    "Pasal 3",
+    "Pasal 6",
+    "Pasal 7",
+    "Pasal 9"
+   ]
   }
  ]
 }

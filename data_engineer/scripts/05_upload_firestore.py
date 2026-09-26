@@ -9,12 +9,13 @@ from pathlib import Path
 import numpy as np
 sys.path.insert(0, str(Path(__file__).parent))
 from embed_util import load_env, load_or_build_embeddings
+for _s in (sys.stdout, sys.stderr): getattr(_s, "reconfigure", lambda **k: None)(encoding="utf-8", errors="replace")  # konsol Windows (cp1252) tidak crash
 
 CH = Path(__file__).resolve().parent.parent / "data/chunks"
 COLLECTION = os.getenv("FIRESTORE_COLLECTION", "regulation_chunks")
 
 def build_docs():
-    chunks = [json.loads(l) for l in open(CH / "chunks.jsonl")]
+    chunks = [json.loads(l) for l in open(CH / "chunks.jsonl", encoding="utf-8")]
     emb = load_or_build_embeddings(chunks)  # penyedia dari EMBED_PROVIDER; dibangun bila belum ada
     assert len(chunks) == len(emb), f"jumlah chunk ({len(chunks)}) != embedding ({len(emb)})"
     norms = np.linalg.norm(emb, axis=1); assert np.allclose(norms, 1, atol=1e-3), "embedding belum ternormalisasi"

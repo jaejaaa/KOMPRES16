@@ -1,5 +1,5 @@
 {
- "_status": "DRAF untuk disepakati dengan AI Engineer",
+ "_status": "Disepakati dengan AI Engineer: 10 kategori, sama dengan backend/analisis/taksonomi.py",
  "level": [
   "low",
   "medium",
@@ -10,14 +10,14 @@
    "id": "K1",
    "nama": "Uang muka (DP) hangus tanpa syarat jelas",
    "level_umum": "high",
-   "deskripsi": "Uang muka tidak dapat dikembalikan / hangus walau pembatalan disebabkan pihak penjual atau objek tidak dapat dialihkan.",
+   "deskripsi": "Uang muka/tanda jadi tidak dapat dikembalikan atau hangus tanpa kondisi yang jelas dan proporsional, termasuk walau pembatalan disebabkan pihak penjual atau objek tidak dapat dialihkan.",
    "dasar_hukum": []
   },
   {
    "id": "K2",
    "nama": "Ketidakjelasan objek tanah",
    "level_umum": "high",
-   "deskripsi": "Letak, luas, batas, atau nomor sertifikat tanah tidak jelas atau dapat diubah sepihak.",
+   "deskripsi": "Letak, luas ('kurang lebih'), batas-batas, atau nomor/jenis sertifikat tanah tidak jelas, belum ditentukan, atau dapat diubah sepihak.",
    "dasar_hukum": [
     {
      "sumber": "PP 24/1997",
@@ -30,7 +30,7 @@
    "id": "K3",
    "nama": "Status hak dan beban atas tanah tidak dijamin",
    "level_umum": "high",
-   "deskripsi": "Penjual tidak menjamin tanah bebas sengketa, sitaan, atau jaminan (hak tanggungan) dan pembeli diminta melepaskan tuntutan.",
+   "deskripsi": "Penjual tidak menjamin tanah bebas sengketa, sitaan, atau jaminan utang (hak tanggungan), atau pembeli diminta melepaskan tuntutan atas hal itu.",
    "dasar_hukum": [
     {
      "sumber": "PP 24/1997",
@@ -61,7 +61,7 @@
    "id": "K5",
    "nama": "Pajak dan biaya tidak jelas",
    "level_umum": "medium",
-   "deskripsi": "Pembebanan pajak (BPHTB/PPh) dan biaya PPAT/balik nama tidak jelas, ditentukan sepihak, atau ditunda.",
+   "deskripsi": "Pembebanan pajak (BPHTB/PPh) dan biaya notaris/PPAT/balik nama tidak jelas, ditentukan sepihak, ditunda, atau seluruhnya dibebankan ke satu pihak.",
    "dasar_hukum": [
     {
      "sumber": "UU 28/2009",
@@ -79,7 +79,7 @@
    "id": "K6",
    "nama": "Klausul denda/syarat berat sebelah",
    "level_umum": "high",
-   "deskripsi": "Denda tanpa batas, sanksi hanya untuk satu pihak, kenaikan sewa sepihak, atau syarat yang bersifat memeras.",
+   "deskripsi": "Denda tanpa batas atau persentase tinggi, sanksi hanya untuk satu pihak, hak membatalkan/mengubah perjanjian secara sepihak (termasuk pembatalan sepihak), kenaikan sewa sepihak, atau syarat yang bersifat memeras.",
    "dasar_hukum": [
     {
      "sumber": "UU 5/1960",
@@ -105,7 +105,7 @@
    "id": "K8",
    "nama": "Subjek hak tidak memenuhi syarat",
    "level_umum": "high",
-   "deskripsi": "Pihak yang tidak berhak (mis. warga negara asing) diberi Hak Milik atas tanah.",
+   "deskripsi": "Pihak yang tidak berhak (mis. warga negara asing) diberi Hak Milik atas tanah, atau status subjek pihak tidak memenuhi syarat untuk hak yang dialihkan.",
    "dasar_hukum": [
     {
      "sumber": "UU 5/1960",
@@ -113,6 +113,20 @@
      "catatan": "Hanya warga negara Indonesia dapat mempunyai hak milik"
     }
    ]
+  },
+  {
+   "id": "K9",
+   "nama": "Hilangnya hak somasi/upaya hukum",
+   "level_umum": "high",
+   "deskripsi": "Para pihak melepaskan hak somasi, hak menggugat, hak menempuh jalur hukum/pengadilan, atau penyelesaian sengketa dibuat berat sebelah.",
+   "dasar_hukum": []
+  },
+  {
+   "id": "K10",
+   "nama": "Kuasa mutlak yang berisiko disalahgunakan",
+   "level_umum": "high",
+   "deskripsi": "Pemberian kuasa yang tidak dapat ditarik kembali / kuasa mutlak, terutama untuk menjual atau memindahkan hak atas tanah.",
+   "dasar_hukum": []
   }
  ]
 }

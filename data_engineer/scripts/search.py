@@ -49,7 +49,7 @@ def corpus():
     """chunks.jsonl + indeks kata (dimuat sekali)."""
     global _corpus
     if _corpus is None:
-        rows = [json.loads(l) for l in open(ROOT / "data/chunks/chunks.jsonl")]
+        rows = [json.loads(l) for l in open(ROOT / "data/chunks/chunks.jsonl", encoding="utf-8")]
         toks = [set(re.findall(r"[a-z0-9]+", r["text"].lower())) for r in rows]
         df = collections.Counter(w for t in toks for w in t)
         n = len(rows)

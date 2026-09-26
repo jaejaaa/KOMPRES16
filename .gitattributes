@@ -1,0 +1,7 @@
+# Cegah Windows/macOS mengubah akhir baris file data (vektor dan sidik jari harus identik di semua laptop)
+*.npy binary
+*.pdf binary
+*.jsonl text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.py text eol=lf
