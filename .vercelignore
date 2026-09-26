@@ -1,6 +1,6 @@
 # Rahasia: isi lewat Environment Variables di Vercel
-.env
-**/.env
+.env*
+**/.env*
 *firebase*.json
 .venv
 **/__pycache__

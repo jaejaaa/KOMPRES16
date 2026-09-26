@@ -12,6 +12,7 @@ import firebase_admin
 import pymupdf
 from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from dotenv import load_dotenv
 from firebase_admin import auth, credentials, firestore
@@ -121,6 +122,11 @@ def run_analysis(doc_id: str, text: str):
     except Exception:
         log.exception("Analisis gagal untuk dokumen %s", doc_id)
         ref.update({"status": "failed", "error": "Analisis gagal, coba upload ulang beberapa saat lagi."})
+
+
+@app.get("/", include_in_schema=False)
+def root():
+    return RedirectResponse("/docs")  # yang buka URL backend di browser langsung lihat daftar endpoint
 
 
 @app.get("/health")

@@ -27,3 +27,4 @@ embeddings_*.meta.json
 # Vektor produksi (Gemini) HARUS ikut repo: membangunnya ulang butuh 1.452 panggilan API, melebihi kuota harian gratis (1.000).
 !data_engineer/data/chunks/embeddings_gemini.npy
 !data_engineer/data/chunks/embeddings_gemini.meta.json
+.vercel

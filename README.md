@@ -23,7 +23,7 @@ Frontend ──▶ Backend (FastAPI) ──▶ chatbot/ (Gemini) ──▶ searc
 - **Chat:** `POST /chat` `{pertanyaan, document_id?}` → `{jawaban, sumber[], di_luar_cakupan, status, disclaimer}`; riwayat `GET /chat/history?document_id=`.
 - **Retrieval:** `search(query, top_k) -> [{id, sumber, pasal, teks, asal, score(0-1), status, ...}]`, atau `Retriever().search()` → `[(Chunk, skor)]`.
   Detail di [`data_engineer/README.md`](data_engineer/README.md).
-- **Analisis dokumen:** `analyze(text) -> {summary, risks:[{pasal, kutipan, kategori, level(low|medium|high), alasan}]}`. *(menunggu AI Engineer)*
+- **Analisis dokumen:** `analyze(text) -> {summary, risks:[{pasal, kutipan, kategori, level(low|medium|high), alasan}]}` di `backend/analisis/`.
 - **Panduan:** halaman `/panduan` membaca salinan `data_engineer/data/panduan/*.json` di `frontend/data/panduan/` (Next.js tidak bisa import file di luar `frontend/`). Kalau panduan diubah, kabari Frontend supaya salinannya diperbarui.
 
 ## Menjalankan frontend
@@ -36,12 +36,11 @@ Buat `frontend/.env.local` (tidak masuk git) berisi `NEXT_PUBLIC_FIREBASE_*` (co
 Selama `NEXT_PUBLIC_API_URL` kosong, frontend memakai data mock. Setelah backend online: isi URL-nya, set `NEXT_PUBLIC_USE_MOCK=false`, lalu restart `npm run dev`.
 
 ## Status singkat
-- ✅ Knowledge base: 9 regulasi, 1.452 chunk, test set 45 pertanyaan, retrieval Hit@5 0,93 (dev set).
-- ✅ Backend: Auth, upload PDF, chat + riwayat, chatbot Gemini tersambung (masih memakai data regulasi contoh).
-- ✅ Frontend: semua halaman sudah didesain dan berjalan dengan data mock; tinggal disambungkan ke URL backend.
-- ⏳ Chatbot belum memakai `search()` asli; analisis dokumen (`analyze`) masih dummy.
-- ✅ **Diputuskan:** embedding pindah ke Gemini (`gemini-embedding-001`); laporan perbandingan dengan bge-m3 di `data_engineer/data/eval/PERBANDINGAN_EMBEDDING.md`.
-- ❓ **Belum diputuskan:** penyimpanan vektor (file `.npy` di git vs Firestore) dan tempat hosting backend.
+- ✅ Backend live: **https://kompres16-backend.vercel.app** (Vercel, deploy manual, lihat [`backend/README.md`](backend/README.md)).
+- ✅ Chat memakai `Retriever` Data Engineer (Gemini `gemini-embedding-2`, vektor `.npy` di repo, ambang 0,65).
+- ✅ Analisis dokumen memakai `analyze()` asli (10 kategori risiko).
+- ✅ Knowledge base: 9 regulasi, 1.452 chunk; retrieval Hit@5 0,95 (dev set), laporan di `data_engineer/data/eval/PERBANDINGAN_EMBEDDING.md`.
+- ⏳ Frontend: sambungkan ke URL backend di atas, lalu deploy ke Vercel (domainnya ditambahkan ke Firebase Authorized domains + CORS backend).
 
 ## Aturan main repo
 1. **Jangan commit rahasia** (`.env`, kunci service account, API key). Pakai `.env` lokal; contoh ada di `.env.example` tiap folder.

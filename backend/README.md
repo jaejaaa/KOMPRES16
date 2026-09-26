@@ -1,16 +1,17 @@
----
-title: Hukum Tanah API
-emoji: ⚖️
-colorFrom: blue
-colorTo: green
-sdk: docker
-app_port: 7860
-pinned: false
----
+# Backend KOMPRES 16 (FastAPI + Firebase)
 
-# Hukum Tanah API (Backend KOMPRES 16)
+Live: https://kompres16-backend.vercel.app (dokumentasi endpoint: `/docs`)
 
-FastAPI + Firebase. Dokumentasi endpoint: buka `/docs`.
+## Jalan lokal
+```
+pip install -r backend/requirements.txt
+cp backend/.env.example backend/.env         # isi GEMINI_API_KEY
+cd backend && GOOGLE_APPLICATION_CREDENTIALS=/path/firebase-key.json uvicorn main:app --reload
+```
+Tes: `python test_main.py` dan `python -m unittest discover -s tests` (dari folder `backend/`).
 
-Env/Secret yang dibutuhkan: `FIREBASE_CREDENTIALS` (isi JSON service account Firebase).
-Lokal: `GOOGLE_APPLICATION_CREDENTIALS=firebase-key.json fastapi dev main.py`
+## Deploy (Vercel)
+Dari root repo: `npx vercel deploy --prod --yes`. Konfigurasi ada di `pyproject.toml` (entrypoint + dependensi),
+`vercel.json` (maxDuration), dan `.vercelignore`. Env di Vercel: `GEMINI_API_KEY`, `GEMINI_MODEL`, `FIREBASE_CREDENTIALS` (isi JSON service account).
+Di Vercel, analisis dokumen dijalankan langsung di `/upload` (tanpa background task); PDF maksimal 4 MB.
+Retriever memakai `data_engineer/scripts` + `data_engineer/data/chunks`, jadi deploy harus dari root repo.
