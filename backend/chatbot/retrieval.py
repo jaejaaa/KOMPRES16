@@ -80,7 +80,7 @@ def muat_regulasi(path: Path = DATA_REGULASI) -> list[Chunk]:
 
 def pecah_dokumen(teks: str) -> list[Chunk]:
     """Pecah teks dokumen user per 'Pasal N' (fallback: per paragraf)."""
-    bagian = [b.strip() for b in re.split(r"(?=\bPasal\s+\d+)", teks) if b.strip()]
+    bagian = [b.strip() for b in re.split(r"(?m)(?=^[ \t]*Pasal\s+\d+\b)", teks) if b.strip()]
     if len(bagian) <= 1:
         bagian = [b.strip() for b in re.split(r"\n\s*\n", teks) if b.strip()]
     chunks = []

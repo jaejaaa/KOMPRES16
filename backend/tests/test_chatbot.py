@@ -166,5 +166,13 @@ class TestRetrieverAsli(unittest.TestCase):
         self.assertEqual(llm.calls, 0)
 
 
+class TestPecahDokumen(unittest.TestCase):
+    def test_rujukan_pasal_di_tengah_kalimat_tidak_memecah(self):
+        from chatbot.retrieval import pecah_dokumen
+
+        teks = "Pasal 1\nObjek tanah.\nPasal 2\nSebagaimana dimaksud dalam Pasal 1 maka berlaku.\n"
+        self.assertEqual([c.id for c in pecah_dokumen(teks)], ["dok-1", "dok-2"])
+
+
 if __name__ == "__main__":
     unittest.main()
