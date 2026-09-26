@@ -1,0 +1,13 @@
+# Rahasia: isi lewat Environment Variables di Vercel
+.env
+**/.env
+*firebase*.json
+.venv
+**/__pycache__
+
+frontend
+backend/tests
+backend/test_main.py
+data_engineer/docs
+data_engineer/data/*
+!data_engineer/data/chunks

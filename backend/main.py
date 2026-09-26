@@ -20,6 +20,7 @@ from pydantic import BaseModel, Field
 load_dotenv()  # harus sebelum import chatbot: chatbot/config.py baca GEMINI_MODEL saat di-import
 os.environ.setdefault("SEARCH_BACKEND", "local")  # vektor dari file .npy; tanpa ini search.py pilih Firestore (kosong) karena kredensial Firebase ada
 os.environ.setdefault("MIN_RETRIEVAL_SCORE", "0.65")  # skala skor Gemini embedding, lihat data_engineer/data/eval/PERBANDINGAN_EMBEDDING.md
+sys.path.insert(0, str(Path(__file__).resolve().parent))  # Vercel memuat file ini sebagai backend.main dari root repo
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "data_engineer" / "scripts"))
 from retriever import Retriever
 from analisis import analyze
@@ -76,7 +77,7 @@ class ChatItem(BaseModel):
     created_at: datetime
 
 
-MAX_PDF_BYTES = 10 * 1024 * 1024
+MAX_PDF_BYTES = 4 * 1024 * 1024  # Vercel menolak body request > 4,5 MB
 MAX_TEXT_CHARS = 200_000  # ponytail: batas dokumen Firestore 1 MiB; simpan teks di Storage kalau dokumen user lebih panjang
 
 
@@ -131,7 +132,7 @@ def health():
 def upload(file: UploadFile, tasks: BackgroundTasks, uid: str = Depends(current_user)):
     pdf = file.file.read(MAX_PDF_BYTES + 1)
     if len(pdf) > MAX_PDF_BYTES:
-        raise HTTPException(413, "PDF maksimal 10 MB")
+        raise HTTPException(413, "PDF maksimal 4 MB")
     if not pdf.startswith(b"%PDF"):
         raise HTTPException(415, "File harus PDF")
     text = extract_text(pdf)
@@ -143,7 +144,10 @@ def upload(file: UploadFile, tasks: BackgroundTasks, uid: str = Depends(current_
     doc = {"user_id": uid, "filename": file.filename or "dokumen.pdf", "text": text[:MAX_TEXT_CHARS],
            "status": "pending", "summary": None, "risks": [], "error": None, "created_at": now()}
     fb().collection("documents").document(str(doc_id)).set(doc)
-    tasks.add_task(run_analysis, str(doc_id), text)
+    if os.environ.get("VERCEL"):  # serverless: tugas setelah respons tidak dijamin jalan, jadi analisis dulu (maxDuration di vercel.json)
+        run_analysis(str(doc_id), text)
+    else:
+        tasks.add_task(run_analysis, str(doc_id), text)
     return Document(id=doc_id, **doc)
 
 

@@ -1,0 +1,17 @@
+# Deploy backend ke Vercel dari root repo (butuh data_engineer/ untuk retriever).
+# ponytail: daftar dependensi duplikat backend/requirements.txt (dipakai lokal/Docker); ubah keduanya bareng.
+[project]
+name = "kompres16-backend"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]",
+    "firebase-admin",
+    "pymupdf",
+    "google-genai>=1.0.0",
+    "python-dotenv>=1.0.0",
+    "numpy",
+]
+
+[tool.vercel]
+entrypoint = "backend.main:app"
