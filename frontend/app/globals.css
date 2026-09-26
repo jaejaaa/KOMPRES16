@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+/* Warna aplikasi. Dipakai lewat class: bg-brand, text-ink, border-line, dst. */
+@theme {
+  --color-brand: #6B1E2E;        /* marun: logo, tombol utama, link */
+  --color-brand-hover: #561623;
+  --color-brass: #8A6D3B;        /* kuningan: aksen tipis & dekoratif saja */
+  --color-paper: #F7F4F2;        /* background kertas */
+  --color-card: #FFFFFF;
+  --color-line: #D9CFCB;         /* border */
+  --color-ink: #221A1A;          /* teks utama */
+  --color-ink-soft: #5C4F4F;     /* teks pendukung */
+
+  /* Warna risiko: HANYA untuk label risiko, selalu + ikon + teks */
+  --color-risk-high: #D92D20;
+  --color-risk-high-bg: #FEE4E2;
+  --color-risk-high-text: #912018;
+  --color-risk-mid: #F79009;
+  --color-risk-mid-bg: #FEF0C7;
+  --color-risk-mid-text: #93370D;
+  --color-risk-low: #079455;
+  --color-risk-low-bg: #DCFAE6;
+  --color-risk-low-text: #085D3A;
+}
+
+@theme inline {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-source-serif), ui-serif, Georgia, serif;
+}
+
+html { color-scheme: light; }
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* Kaca: hanya dipakai di atas konten (navbar, lensa), bukan di atas background polos */
+.glass {
+  background: rgb(247 244 242 / 0.72);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid rgb(217 207 203 / 0.7);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass { background: var(--color-paper); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
