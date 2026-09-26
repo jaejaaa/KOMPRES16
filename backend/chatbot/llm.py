@@ -46,10 +46,16 @@ class GeminiLLM:
                 )
                 return parse_json(resp.text)
             except errors.APIError as e:
-                sementara = e.code in (429, 500, 502, 503, 504)
+                sementara = e.code in (429, 500, 502, 503, 504) and not kuota_harian_habis(e)
                 if not sementara or percobaan == MAX_PERCOBAAN - 1:
                     raise
                 time.sleep(JEDA_DASAR * 2**percobaan)
+
+
+def kuota_harian_habis(e: Exception) -> bool:
+    """429 karena kuota HARIAN habis (free tier ~20 request/hari/model): mengulang sia-sia dan
+    hanya menghabiskan sisa kuota, jadi gagal cepat. 429 per-menit tetap boleh diulang."""
+    return getattr(e, "code", None) == 429 and "PerDay" in str(e)
 
 
 def parse_json(teks: str) -> dict:
