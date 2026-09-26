@@ -1,6 +1,7 @@
 import type { AnalysisResult, ChatHistoryItem, ChatResponse, UploadResponse } from "@/types/api";
 import { mockAnalysis, mockDocuments, mockFailed, mockJawab } from "./mock-data";
 import { getToken } from "./firebase";
+import { MAX_PDF_MB } from "./site";
 
 // Mock aktif selama URL backend belum ada / NEXT_PUBLIC_USE_MOCK=true
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "";
@@ -9,7 +10,7 @@ const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 const ERROR_TEXT: Record<number, string> = {
   401: "Sesi kamu habis. Muat ulang halaman lalu coba lagi.",
-  413: "Ukuran file terlalu besar. Maksimal 10 MB.",
+  413: `Ukuran file terlalu besar. Maksimal ${MAX_PDF_MB} MB.`,
   415: "File harus berformat PDF.",
 };
 
@@ -31,7 +32,7 @@ export async function uploadDocument(file: File): Promise<UploadResponse> {
   if (USE_MOCK) {
     await delay(800);
     if (file.type !== "application/pdf") throw new Error(ERROR_TEXT[415]);
-    if (file.size > 10 * 1024 * 1024) throw new Error(ERROR_TEXT[413]);
+    if (file.size > MAX_PDF_MB * 1024 * 1024) throw new Error(ERROR_TEXT[413]);
     // Tips tes: upload file yang namanya mengandung "gagal" buat lihat tampilan error
     const id = file.name.toLowerCase().includes("gagal") ? "doc_gagal" : "doc_demo";
     return { id, filename: file.name, status: "pending", created_at: new Date().toISOString() };

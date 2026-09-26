@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Icon, { type IconName } from "@/components/Icon";
+import { MAX_PDF_MB } from "@/lib/site";
 
 const LANGKAH = [
-  { judul: "Unggah PDF", isi: "Perjanjian jual beli, AJB, atau surat tanah lain. Cukup PDF digital, maksimal 10 MB." },
+  { judul: "Unggah PDF", isi: `Perjanjian jual beli, AJB, atau surat tanah lain. Cukup PDF digital, maksimal ${MAX_PDF_MB} MB.` },
   { judul: "Pasal berisiko ditandai", isi: "Tiap pasal diberi label tinggi, perlu dicek, atau aman, lengkap dengan alasannya." },
   { judul: "Tanya kalau masih bingung", isi: "Asisten menjawab dengan bahasa sehari-hari dan menyebut pasal dasarnya." },
 ];

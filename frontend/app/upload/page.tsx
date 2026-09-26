@@ -5,8 +5,7 @@ import Link from "next/link";
 import { getDocuments, uploadDocument } from "@/lib/api";
 import type { DocStatus, UploadResponse } from "@/types/api";
 import Icon from "@/components/Icon";
-
-const MAX_MB = 10;
+import { MAX_PDF_MB as MAX_MB } from "@/lib/site";
 
 const STATUS: Record<DocStatus, { label: string; className: string }> = {
   pending: { label: "Sedang dianalisis", className: "bg-risk-mid-bg text-risk-mid-text" },
@@ -140,7 +139,7 @@ export default function UploadPage() {
         disabled={!file || loading}
         className="mt-5 w-full rounded-xl bg-brand px-4 py-3.5 font-semibold text-white transition-colors hover:bg-brand-hover disabled:cursor-not-allowed disabled:bg-line disabled:text-ink-soft"
       >
-        {loading ? "Mengunggah..." : "Periksa dokumen"}
+        {loading ? "Menganalisis dokumen, tunggu sebentar..." : "Periksa dokumen"}
       </button>
 
       <ul className="mt-6 space-y-2 text-sm text-ink-soft">
