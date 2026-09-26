@@ -42,7 +42,7 @@ assert doc_ref.update.call_args.args[0]["status"] == "failed"
 
 # --- chat ---
 calls = []
-def fake_jawab(pertanyaan, riwayat, konteks):
+def fake_jawab(pertanyaan, riwayat, konteks, **k):
     calls.append((pertanyaan, riwayat, konteks))
     return {"jawaban": "ok", "sumber": [], "di_luar_cakupan": False, "status": "ok", "disclaimer": "d"}
 main.jawab_chat = fake_jawab
@@ -65,7 +65,7 @@ c.post("/chat", json={"pertanyaan": "Pasal 1?", "document_id": str(main.uuid4())
 assert calls[-1][2] == "Pasal 1 Penjual menjual tanah"  # konteks_dokumen = teks dokumen user
 
 db.collection.return_value.add.reset_mock()
-main.jawab_chat = lambda *a: {"jawaban": "Maaf", "sumber": [], "di_luar_cakupan": False, "status": "error", "disclaimer": "d"}
+main.jawab_chat = lambda *a, **k: {"jawaban": "Maaf", "sumber": [], "di_luar_cakupan": False, "status": "error", "disclaimer": "d"}
 assert c.post("/chat", json={"pertanyaan": "Apa itu SHM?"}).json()["status"] == "error"
 assert not db.collection.return_value.add.called  # jawaban error tidak disimpan
 

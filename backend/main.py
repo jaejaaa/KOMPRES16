@@ -1,8 +1,10 @@
 import json
 import logging
 import os
+import sys
 from datetime import datetime, timezone
 from functools import cache
+from pathlib import Path
 from typing import Literal
 from uuid import UUID, uuid4
 
@@ -16,6 +18,10 @@ from firebase_admin import auth, credentials, firestore
 from pydantic import BaseModel, Field
 
 load_dotenv()  # harus sebelum import chatbot: chatbot/config.py baca GEMINI_MODEL saat di-import
+os.environ.setdefault("SEARCH_BACKEND", "local")  # vektor dari file .npy; tanpa ini search.py pilih Firestore (kosong) karena kredensial Firebase ada
+os.environ.setdefault("MIN_RETRIEVAL_SCORE", "0.65")  # skala skor Gemini embedding, lihat data_engineer/data/eval/PERBANDINGAN_EMBEDDING.md
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "data_engineer" / "scripts"))
+from retriever import Retriever
 from chatbot import jawab_chat
 
 # Struktur Firestore:
@@ -28,6 +34,7 @@ app = FastAPI(title="Hukum Tanah API")
 # ponytail: izinkan semua origin untuk dev, ganti ke domain frontend sebelum final
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 log = logging.getLogger("uvicorn.error")
+REGULASI = Retriever()  # retriever Data Engineer (Gemini embedding); 1 panggilan embedding per pertanyaan
 
 Status = Literal["pending", "done", "failed"]
 
@@ -191,7 +198,7 @@ def chat(body: ChatIn, uid: str = Depends(current_user)):
     for h in history(uid, doc_id):
         riwayat += [{"role": "user", "content": h["pertanyaan"]}, {"role": "assistant", "content": h["jawaban"]}]
 
-    hasil = jawab_chat(body.pertanyaan, riwayat, konteks)
+    hasil = jawab_chat(body.pertanyaan, riwayat, konteks, retriever=REGULASI)
     if hasil["status"] != "error":  # jawaban "layanan bermasalah" jangan masuk riwayat
         fb().collection("chat_history").add({
             "user_id": uid, "document_id": doc_id, "pertanyaan": body.pertanyaan, "jawaban": hasil["jawaban"],

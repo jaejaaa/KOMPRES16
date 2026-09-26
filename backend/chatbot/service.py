@@ -1,3 +1,4 @@
+import logging
 import re
 
 from . import config, guardrails
@@ -129,7 +130,11 @@ def jawab_chat(
     per_query = max(2, config.TOP_K // 2) if sisi else config.TOP_K
 
     reg = retriever or KeywordRetriever(_get_regulasi())
-    kandidat = _cari(reg, queries, per_query)
+    try:
+        kandidat = _cari(reg, queries, per_query)
+    except Exception:  # kuota embedding habis / jaringan putus: jawab sopan, bukan 500
+        logging.getLogger(__name__).exception("retrieval gagal")
+        return _respons(guardrails.PESAN_ERROR, "error")
     lolos_reg = bool(kandidat) and (
         max(skor for _, skor in kandidat.values()) >= config.MIN_RETRIEVAL_SCORE
     )

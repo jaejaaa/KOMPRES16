@@ -155,6 +155,16 @@ class TestRetrieverAsli(unittest.TestCase):
         self.assertIn("status: diubah sebagian", prompts[0])
         self.assertIn("[ID: 1]", prompts[0])
 
+    def test_retriever_gagal_jawab_sopan(self):
+        class Rusak:
+            def search(self, q, k):
+                raise RuntimeError("429 kuota habis")
+
+        llm = FakeLLM()
+        r = jawab_chat("syarat balik nama sertifikat", retriever=Rusak(), llm=llm)
+        self.assertEqual(r["status"], "error")
+        self.assertEqual(llm.calls, 0)
+
 
 if __name__ == "__main__":
     unittest.main()
