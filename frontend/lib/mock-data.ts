@@ -1,4 +1,4 @@
-import type { AnalysisResult, ChatResponse, HasilKonsultan, KategoriKasus, Konsultan, UploadResponse } from "@/types/api";
+import type { AnalysisResult, ChatResponse, HasilKonsultan, KategoriKasus, Konsultan, SaranKonsultasi, UploadResponse } from "@/types/api";
 
 export const mockAnalysis: AnalysisResult = {
   document_id: "doc_demo",
@@ -131,6 +131,19 @@ export const mockKategoriKasus: KategoriKasus[] = [
 const mockKonsultan: Konsultan[] = [
   { id: "N01", nama: "Contoh Notaris A, S.H., M.Kn.", jenis: "Notaris/PPAT (dummy)", kantor: "Kantor Notaris & PPAT Contoh A", kota: "Bandung", provinsi: "Jawa Barat", kategori_kasus: ["balik-nama", "waris"], kontak: "(contoh - belum ada nomor/alamat asli)", _dummy: true },
   { id: "A01", nama: "Contoh Advokat B, S.H., M.H.", jenis: "Advokat (dummy)", kantor: "Kantor Hukum Contoh B", kota: "Jakarta Selatan", provinsi: "DKI Jakarta", kategori_kasus: ["waris", "sengketa-tanah"], kontak: "(contoh - belum ada nomor/alamat asli)", _dummy: true },
+];
+
+// Tiruan GET /analysis/{id}/konsultan. mockAnalysis di atas belum memakai nama 10 kategori taksonomi
+// asli (dibuat sebelum taksonomi final), jadi rekomendasi ini ditulis manual, bukan diturunkan darinya.
+export const mockSaranKonsultasi: SaranKonsultasi[] = [
+  {
+    kategori_kasus: "balik-nama",
+    kategori: "Balik nama / peralihan hak (jual-beli, hibah)",
+    catatan: null,
+    notaris_ppat: [mockKonsultan[0]],
+    advokat: [],
+    peringatan: "SELURUH DATA DI HALAMAN INI FIKTIF untuk demo, bukan daftar Notaris/PPAT/Advokat sungguhan.",
+  },
 ];
 
 export function mockCariKonsultan(kategori: string, provinsi?: string): HasilKonsultan {

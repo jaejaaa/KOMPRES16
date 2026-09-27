@@ -7,6 +7,7 @@ import type { AnalysisResult, RiskLevel } from "@/types/api";
 import RiskCard, { RISK_STYLE, RiskBadge } from "@/components/RiskCard";
 import Icon from "@/components/Icon";
 import KonsultasiDokumen from "@/components/KonsultasiDokumen";
+import SaranKonsultasi from "@/components/SaranKonsultasi";
 import { btn, container, Notice, PageHeader, Panel, Spinner, StepBar } from "@/components/ui";
 
 const ORDER: Record<RiskLevel, number> = { high: 0, medium: 1, low: 2 };
@@ -215,6 +216,8 @@ export default function AnalisisPage() {
               ))}
             </ul>
           </Panel>
+
+          <SaranKonsultasi documentId={data.document_id} />
 
           <div className="rounded-3xl border border-line bg-surface p-5 text-sm shadow-soft">
             <div className="flex justify-between gap-4">

@@ -64,9 +64,9 @@ function Bagian({ profesi, daftar, provinsi, namaKategori }: { profesi: Profesi;
   );
 }
 
-export default function DirektoriKonsultan() {
+export default function DirektoriKonsultan({ kategoriAwal }: { kategoriAwal?: string }) {
   const [daftarKategori, setDaftarKategori] = useState<KategoriKasus[] | null>(null);
-  const [kategori, setKategori] = useState("");
+  const [kategori, setKategori] = useState(kategoriAwal ?? "");
   const [provinsi, setProvinsi] = useState("");
   const [ulang, setUlang] = useState(0);
   const [hasil, setHasil] = useState<{ kunci: string; data?: HasilKonsultan; error?: string } | null>(null);
@@ -79,10 +79,12 @@ export default function DirektoriKonsultan() {
       .then((list) => {
         if (!aktif) return;
         setDaftarKategori(list);
-        setKategori((k) => k || list[0]?.id || "");
+        // kategoriAwal cuma dipakai kalau valid (ada di daftar); selain itu jatuh ke kategori pertama
+        setKategori((k) => k || (kategoriAwal && list.some((x) => x.id === kategoriAwal) ? kategoriAwal : list[0]?.id) || "");
       })
       .catch(() => aktif && setDaftarKategori([]));
     return () => { aktif = false; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- kategoriAwal cuma dipakai sekali saat mount
   }, []);
 
   useEffect(() => {

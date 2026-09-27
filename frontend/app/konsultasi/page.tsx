@@ -5,7 +5,10 @@ import { APP_NAME } from "@/lib/site";
 
 export const metadata: Metadata = { title: `Konsultasi Hukum — ${APP_NAME}` };
 
-export default function KonsultasiPage() {
+// /konsultasi?kategori=<id>  -> dari rekomendasi di halaman hasil analisis, kategori sudah terpilih
+export default async function KonsultasiPage({ searchParams }: PageProps<"/konsultasi">) {
+  const { kategori } = await searchParams;
+  const kategoriAwal = typeof kategori === "string" && kategori ? kategori : undefined;
   return (
     <main>
       <PageHeader
@@ -14,7 +17,7 @@ export default function KonsultasiPage() {
         title="Konsultasi Hukum"
         desc="Temukan Notaris/PPAT atau advokat yang sesuai dengan urusan tanah Anda."
       />
-      <DirektoriKonsultan />
+      <DirektoriKonsultan kategoriAwal={kategoriAwal} />
     </main>
   );
 }

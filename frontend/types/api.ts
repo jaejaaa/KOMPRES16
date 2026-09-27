@@ -83,3 +83,8 @@ export interface HasilKonsultan {
   advokat: Konsultan[];
   peringatan: string; // wajib ditampilkan ke pengguna
 }
+
+// GET /analysis/{id}/konsultan: rekomendasi berdasarkan kategori risiko "high" yang ditemukan
+export interface SaranKonsultasi extends HasilKonsultan {
+  kategori_kasus: string; // id kategori kasus (mis. "balik-nama"), utk deep-link ke /konsultasi?kategori=
+}

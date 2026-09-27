@@ -84,6 +84,15 @@ db.collection.return_value.where.reset_mock()
 assert c.get("/chat/history").json()[0]["document_id"] is None
 assert db.collection.return_value.where.call_count == 1
 
+# --- rekomendasi konsultan dari hasil analisis ---
+snap.to_dict.return_value = {"user_id": "user-a", "risks": [
+    {"pasal": "Pasal 6", "kutipan": "k", "kategori": "Peralihan hak tanpa akta PPAT", "level": "high", "alasan": "a"},
+    {"pasal": "Pasal 8", "kutipan": "k", "kategori": "Pajak dan biaya tidak jelas", "level": "medium", "alasan": "a"},
+]}
+r = c.get(f"/analysis/{main.uuid4()}/konsultan").json()
+assert [x["kategori_kasus"] for x in r] == ["balik-nama"]  # cuma risiko "high" & yang terpetakan
+assert "peringatan" in r[0] and "notaris_ppat" in r[0]  # apa adanya dari cari_konsultan()
+
 main.app.dependency_overrides.clear()
 assert c.get("/chat/history").status_code == 401  # tanpa token ditolak
 print("OK")

@@ -1,5 +1,5 @@
-import type { AnalysisResult, ChatHistoryItem, ChatResponse, HasilKonsultan, KategoriKasus, UploadResponse } from "@/types/api";
-import { mockAnalysis, mockCariKonsultan, mockDocuments, mockFailed, mockJawab, mockKategoriKasus } from "./mock-data";
+import type { AnalysisResult, ChatHistoryItem, ChatResponse, HasilKonsultan, KategoriKasus, SaranKonsultasi, UploadResponse } from "@/types/api";
+import { mockAnalysis, mockCariKonsultan, mockDocuments, mockFailed, mockJawab, mockKategoriKasus, mockSaranKonsultasi } from "./mock-data";
 import { getToken } from "./firebase";
 import { MAX_PDF_MB } from "./site";
 
@@ -64,6 +64,15 @@ export async function getAnalysis(id: string): Promise<AnalysisResult> {
 export async function getDocuments(): Promise<UploadResponse[]> {
   if (USE_MOCK) return mockDocuments;
   return request("/documents");
+}
+
+// Rekomendasi konsultan (dummy) berdasarkan kategori risiko "high" yang ditemukan di dokumen ini
+export async function getSaranKonsultasi(documentId: string): Promise<SaranKonsultasi[]> {
+  if (USE_MOCK) {
+    await delay(500);
+    return documentId === mockAnalysis.document_id ? mockSaranKonsultasi : [];
+  }
+  return request(`/analysis/${documentId}/konsultan`);
 }
 
 // documentId diisi kalau user bertanya tentang dokumen yang sedang dibuka

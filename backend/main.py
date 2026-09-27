@@ -24,7 +24,7 @@ os.environ.setdefault("MIN_RETRIEVAL_SCORE", "0.65")  # skala skor Gemini embedd
 sys.path.insert(0, str(Path(__file__).resolve().parent))  # Vercel memuat file ini sebagai backend.main dari root repo
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "data_engineer" / "scripts"))
 from retriever import Retriever
-from analisis import DokumenTidakRelevan, analyze
+from analisis import DokumenTidakRelevan, analyze, saran_kategori_kasus
 from chatbot import jawab_chat
 from konsultan import cari_konsultan, kategori_kasus
 
@@ -184,6 +184,14 @@ def own_document(document_id: UUID, uid: str) -> dict:
 @app.get("/analysis/{document_id}", response_model=Analysis)
 def get_analysis(document_id: UUID, uid: str = Depends(current_user)):
     return Analysis(document_id=document_id, **own_document(document_id, uid))
+
+
+# Rekomendasi konsultan (dummy) berdasarkan kategori risiko "high" yang ditemukan analyze().
+# Dihitung on-demand (bukan disimpan): cari_konsultan() cuma baca JSON lokal, murah dan selalu segar.
+@app.get("/analysis/{document_id}/konsultan")
+def analysis_konsultan(document_id: UUID, uid: str = Depends(current_user)):
+    risks = own_document(document_id, uid).get("risks") or []
+    return [{"kategori_kasus": k, **cari_konsultan(k)} for k in saran_kategori_kasus(risks)]
 
 
 def history(uid: str) -> list[dict]:
