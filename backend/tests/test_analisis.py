@@ -1,9 +1,10 @@
 import unittest
 from pathlib import Path
 
-from analisis import analyze
+from analisis import DokumenTidakRelevan, analyze
 from analisis.analyzer import _bagi_bagian
 from analisis.masking import kembalikan, samarkan
+from analisis.prompts import SYSTEM_PROMPT_RELEVANSI
 
 CONTOH = (Path(__file__).parent.parent / "analisis" / "contoh" / "ppjb_berisiko.txt").read_text(encoding="utf-8")
 K4 = "Uang muka yang telah dibayarkan tidak dapat dikembalikan dengan alasan apa pun dan menjadi hangus seluruhnya"
@@ -15,13 +16,22 @@ def risiko(pasal="Pasal 4", kutipan=K4, kategori="Uang muka (DP) hangus tanpa sy
 
 
 class FakeLLM:
-    def __init__(self, *jawaban, error=False):
+    """Pemeriksaan relevansi dan pemrosesan bagian/gabung dibedakan lewat `system`, sama seperti
+    GeminiLLM asli menerima system prompt berbeda untuk tiap tahap."""
+
+    def __init__(self, *jawaban, error=False, relevan=True, gagal_relevansi=False):
         self.jawaban = list(jawaban)
         self.prompts = []
         self.error = error
+        self.relevan = relevan
+        self.gagal_relevansi = gagal_relevansi
 
     def generate_json(self, system, user):
         self.prompts.append(user)
+        if system == SYSTEM_PROMPT_RELEVANSI:
+            if self.gagal_relevansi:
+                raise RuntimeError("cek relevansi gagal")
+            return {"relevan": self.relevan, "alasan": "tes"}
         if self.error:
             raise RuntimeError("boom")
         return self.jawaban.pop(0) if len(self.jawaban) > 1 else self.jawaban[0]
@@ -124,6 +134,32 @@ class TestAnalyze(unittest.TestCase):
 
     def test_ringkasan_kosong_pakai_cadangan(self):
         self.assertTrue(jalankan(ringkasan="")["summary"])
+
+
+class TestRelevansi(unittest.TestCase):
+    def test_dokumen_tidak_relevan_ditolak_sebelum_diproses(self):
+        llm = FakeLLM({"ringkasan": "harusnya tidak terpakai", "risks": [risiko()]}, relevan=False)
+        with self.assertRaises(DokumenTidakRelevan):
+            analyze(CONTOH, llm=llm)
+        self.assertEqual(len(llm.prompts), 1)  # loop bagian tidak pernah jalan
+
+    def test_dokumen_relevan_diproses_normal(self):
+        h = analyze(CONTOH, llm=FakeLLM({"ringkasan": "Perjanjian jual beli tanah.", "risks": [risiko()]}, relevan=True))
+        self.assertEqual(len(h["risks"]), 1)
+
+    def test_cek_relevansi_gagal_tidak_menghalangi_analisis(self):
+        """Fail-open: gangguan di pemeriksaan relevansi tidak boleh memblokir dokumen yang sah."""
+        h = analyze(CONTOH, llm=FakeLLM({"ringkasan": "Perjanjian jual beli tanah.", "risks": [risiko()]},
+                                         gagal_relevansi=True))
+        self.assertEqual(len(h["risks"]), 1)
+
+    def test_pesan_penolakan_menyebut_jenis_dokumen(self):
+        try:
+            analyze(CONTOH, llm=FakeLLM(relevan=False))
+        except DokumenTidakRelevan as e:
+            self.assertIn("hukum pertanahan", str(e))
+        else:
+            self.fail("harus menolak")
 
 
 if __name__ == "__main__":

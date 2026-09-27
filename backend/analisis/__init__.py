@@ -1,3 +1,3 @@
-from .analyzer import analyze
+from .analyzer import DokumenTidakRelevan, analyze
 
-__all__ = ["analyze"]
+__all__ = ["DokumenTidakRelevan", "analyze"]

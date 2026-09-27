@@ -24,7 +24,7 @@ os.environ.setdefault("MIN_RETRIEVAL_SCORE", "0.65")  # skala skor Gemini embedd
 sys.path.insert(0, str(Path(__file__).resolve().parent))  # Vercel memuat file ini sebagai backend.main dari root repo
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "data_engineer" / "scripts"))
 from retriever import Retriever
-from analisis import analyze
+from analisis import DokumenTidakRelevan, analyze
 from chatbot import jawab_chat
 from konsultan import cari_konsultan, kategori_kasus
 
@@ -124,6 +124,9 @@ def run_analysis(doc_id: str, text: str):
     try:
         out = Analysis(document_id=doc_id, status="done", **analyze(text))  # validasi output AI sebelum disimpan
         ref.update(out.model_dump(include={"status", "summary", "risks"}))
+    except DokumenTidakRelevan as e:
+        log.info("Dokumen %s ditolak: bukan dokumen hukum pertanahan", doc_id)
+        ref.update({"status": "failed", "error": str(e)})
     except Exception:
         log.exception("Analisis gagal untuk dokumen %s", doc_id)
         ref.update({"status": "failed", "error": "Analisis gagal, coba upload ulang beberapa saat lagi."})

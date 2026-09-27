@@ -4,14 +4,31 @@ import re
 from chatbot.llm import LLM
 
 from .masking import kembalikan, samarkan
-from .prompts import SYSTEM_PROMPT, SYSTEM_PROMPT_GABUNG, prompt_bagian, prompt_gabung
+from .prompts import (
+    SYSTEM_PROMPT,
+    SYSTEM_PROMPT_GABUNG,
+    SYSTEM_PROMPT_RELEVANSI,
+    prompt_bagian,
+    prompt_gabung,
+    prompt_relevansi,
+)
 from .taksonomi import KATEGORI_BOLEH_ABSEN, petakan_kategori, petakan_level
 
 MAKS_KARAKTER_BAGIAN = 12000  # dokumen lebih panjang dipecah per kelompok pasal
 MIN_KARAKTER_DOKUMEN = 50
 MAKS_KUTIPAN = 400
+MAKS_KARAKTER_SAMPEL_RELEVANSI = 3000  # cukup buat judul + para pihak; hemat token
 KUTIPAN_ABSEN = "(klausul ini tidak ditemukan dalam dokumen)"
 PASAL_ABSEN = "Tidak ada klausul"
+PESAN_TIDAK_RELEVAN = (
+    "Dokumen ini tidak terlihat seperti dokumen hukum pertanahan (PPJB, AJB, akta hibah, "
+    "sewa tanah, sertifikat, dsb). Silakan unggah dokumen yang sesuai."
+)
+
+
+class DokumenTidakRelevan(ValueError):
+    """Dokumen bukan dokumen hukum pertanahan/properti (di luar cakupan aplikasi)."""
+
 
 _llm_default: LLM | None = None
 _URUTAN_LEVEL = {"high": 0, "medium": 1, "low": 2}
@@ -121,12 +138,27 @@ def _bersihkan_risiko(mentah: list, teks: str) -> list[dict]:
     return sorted(hasil.values(), key=lambda x: (_URUTAN_LEVEL[x["level"]], _no_pasal(x["pasal"])))
 
 
+def _cek_relevansi(llm: LLM, teks: str) -> None:
+    """Tolak dokumen yang jelas bukan dokumen hukum pertanahan (mis. CV, resep, artikel berita).
+
+    Gagal-aman: kalau pemeriksaan ini error atau formatnya tidak jelas, dokumen TETAP dianalisis
+    (fail open) — supaya gangguan sesaat tidak memblokir dokumen yang sah.
+    """
+    try:
+        out = llm.generate_json(SYSTEM_PROMPT_RELEVANSI, prompt_relevansi(teks[:MAKS_KARAKTER_SAMPEL_RELEVANSI]))
+    except Exception:
+        return
+    if isinstance(out, dict) and out.get("relevan") is False:
+        raise DokumenTidakRelevan(PESAN_TIDAK_RELEVAN)
+
+
 def analyze(text: str, *, llm: LLM | None = None, maks_karakter: int = MAKS_KARAKTER_BAGIAN) -> dict:
     """Ringkas dokumen ke bahasa awam dan tandai klausul berisiko.
 
     Return: {"summary": str, "risks": [{pasal, kutipan, kategori, level, alasan}]}
-    level: "low" (hijau) | "medium" (kuning) | "high" (merah). Melempar exception kalau
-    dokumen kosong/terlalu pendek atau Gemini gagal (pemanggil menandai dokumen "failed").
+    level: "low" (hijau) | "medium" (kuning) | "high" (merah). Melempar DokumenTidakRelevan kalau
+    dokumen bukan dokumen hukum pertanahan, atau ValueError/exception lain kalau dokumen
+    kosong/terlalu pendek atau Gemini gagal (pemanggil menandai dokumen "failed").
     """
     teks_asli = (text or "").strip()
     if len(teks_asli) < MIN_KARAKTER_DOKUMEN:
@@ -134,6 +166,7 @@ def analyze(text: str, *, llm: LLM | None = None, maks_karakter: int = MAKS_KARA
 
     llm = llm or _get_llm()
     teks, peta = samarkan(teks_asli)  # data pribadi tidak dikirim ke LLM
+    _cek_relevansi(llm, teks)
     bagian = _bagi_bagian(teks, maks_karakter)
 
     ringkasan_bagian: list[str] = []
