@@ -77,6 +77,7 @@ class ChatItem(BaseModel):
     sumber: list[dict]
     status: str
     created_at: datetime
+    document_id: str | None = None  # bukan penyaring lagi (riwayat 1 percakapan per akun); FE tampilkan tanda "Mode dokumen"
 
 
 MAX_PDF_BYTES = 4 * 1024 * 1024  # Vercel menolak body request > 4,5 MB
@@ -185,10 +186,11 @@ def get_analysis(document_id: UUID, uid: str = Depends(current_user)):
     return Analysis(document_id=document_id, **own_document(document_id, uid))
 
 
-def history(uid: str, document_id: str | None) -> list[dict]:
-    q = (fb().collection("chat_history")
-         .where(filter=firestore.FieldFilter("user_id", "==", uid))
-         .where(filter=firestore.FieldFilter("document_id", "==", document_id)))
+def history(uid: str) -> list[dict]:
+    # Satu percakapan per akun: chat umum dan chat per-dokumen digabung jadi satu riwayat
+    # (document_id tetap disimpan per pesan sebagai penanda, bukan lagi penyaring).
+    # ponytail: tidak dibatasi jumlah; pertimbangkan limit/pagination kalau riwayat per user membesar.
+    q = fb().collection("chat_history").where(filter=firestore.FieldFilter("user_id", "==", uid))
     return sorted((s.to_dict() for s in q.stream()), key=lambda h: h["created_at"])  # lama → baru
 
 
@@ -201,7 +203,7 @@ def chat(body: ChatIn, token: dict = Depends(current_token)):
         raise HTTPException(403, "Login dulu untuk lanjut tanya soal dokumen ini")
     konteks = own_document(body.document_id, uid).get("text") if doc_id else None
     riwayat = []
-    for h in history(uid, doc_id):
+    for h in history(uid):
         riwayat += [{"role": "user", "content": h["pertanyaan"]}, {"role": "assistant", "content": h["jawaban"]}]
 
     hasil = jawab_chat(body.pertanyaan, riwayat, konteks, retriever=REGULASI)
@@ -213,8 +215,8 @@ def chat(body: ChatIn, token: dict = Depends(current_token)):
 
 
 @app.get("/chat/history", response_model=list[ChatItem])
-def chat_history(document_id: UUID | None = None, uid: str = Depends(current_user)):
-    return history(uid, str(document_id) if document_id else None)
+def chat_history(uid: str = Depends(current_user)):
+    return history(uid)
 
 
 # Data konsultan masih DUMMY (Data Engineer): FE wajib tampilkan field "peringatan" + label "Contoh/Demo"

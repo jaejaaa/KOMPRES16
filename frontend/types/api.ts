@@ -51,6 +51,7 @@ export interface ChatHistoryItem {
   sumber: ChatSource[];
   status: string;
   created_at: string;
+  document_id: string | null; // penanda saja (satu riwayat gabungan per akun), bukan penyaring
 }
 
 // Direktori konsultan (GET /konsultan/kategori, GET /konsultan). Data dari backend masih DUMMY/fiktif.

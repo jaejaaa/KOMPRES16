@@ -12,7 +12,7 @@ import TamuBanner from "./TamuBanner";
 import { btn, container, Notice, PageHeader, Panel } from "./ui";
 
 type Pesan =
-  | { id: number; peran: "user"; teks: string }
+  | { id: number; peran: "user"; teks: string; dokumen: boolean }
   | { id: number; peran: "asisten"; data: ChatResponse }
   | { id: number; peran: "gagal"; pertanyaan: string; pesan: string };
 
@@ -108,17 +108,19 @@ export default function ChatRoom({ documentId }: { documentId?: string }) {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const id = () => nextId.current++;
 
-  // Muat riwayat percakapan sebelumnya (per dokumen, atau chat umum)
+  // Chat umum dan chat per-dokumen satu riwayat yang sama (1 percakapan per akun), jadi
+  // dimuat sekali per status akun, TIDAK setiap kali documentId berpindah (lihat komentar
+  // di bawah untuk penyetelan ulang perluMasuk/tamuHilang saat mode dokumen berganti).
   useEffect(() => {
     // Tunggu status akun; tamu tidak punya riwayat chat dokumen (ditolak backend)
     if (!akun.siap || !akun.uid || (documentId && !akun.masuk)) return;
     let aktif = true;
-    getChatHistory(documentId)
+    getChatHistory()
       .then((items) => {
         if (!aktif || !items.length) return;
         setPesan(
           items.flatMap((h): Pesan[] => [
-            { id: nextId.current++, peran: "user", teks: h.pertanyaan },
+            { id: nextId.current++, peran: "user", teks: h.pertanyaan, dokumen: !!h.document_id },
             {
               id: nextId.current++,
               peran: "asisten",
@@ -135,7 +137,15 @@ export default function ChatRoom({ documentId }: { documentId?: string }) {
       })
       .catch(() => { }); // riwayat pelengkap; chat baru tetap bisa dipakai
     return () => { aktif = false; };
-  }, [documentId, akun.siap, akun.masuk, akun.uid]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- sengaja tidak depend ke documentId, lihat komentar di atas
+  }, [akun.siap, akun.masuk, akun.uid]);
+
+  // documentId berganti (mis. "Tanya umum saja" / buka dokumen lain): kunci/notice lama sudah
+  // tidak relevan untuk mode yang baru, tapi riwayat percakapan (pesan) TETAP tampil menyatu.
+  useEffect(() => {
+    setPerluMasuk(false);
+    setTamuHilang(false);
+  }, [documentId]);
 
   useEffect(() => {
     if (pesan.length || loading) akhirRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -146,7 +156,7 @@ export default function ChatRoom({ documentId }: { documentId?: string }) {
     if (!q || loading) return;
     if (!ulang) {
       setInput("");
-      setPesan((p) => [...p, { id: id(), peran: "user", teks: q }]);
+      setPesan((p) => [...p, { id: id(), peran: "user", teks: q, dokumen: !!documentId }]);
     }
     setLoading(true);
     try {
@@ -269,7 +279,12 @@ export default function ChatRoom({ documentId }: { documentId?: string }) {
             {pesan.map((m) => {
               if (m.peran === "user")
                 return (
-                  <div key={m.id} className="fade-up flex justify-end">
+                  <div key={m.id} className="fade-up flex flex-col items-end gap-1">
+                    {m.dokumen && (
+                      <span className="flex items-center gap-1 pr-1 text-[0.7rem] font-semibold text-ink-soft">
+                        <Icon name="doc" className="size-3" /> Soal dokumen
+                      </span>
+                    )}
                     <p className="max-w-[85%] whitespace-pre-line rounded-3xl rounded-br-md bg-linear-to-br from-secondary to-primary px-5 py-3 text-white shadow-soft">
                       {m.teks}
                     </p>

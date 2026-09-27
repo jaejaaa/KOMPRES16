@@ -79,10 +79,10 @@ export async function sendChat(pertanyaan: string, documentId?: string): Promise
   });
 }
 
-export async function getChatHistory(documentId?: string): Promise<ChatHistoryItem[]> {
+// Satu riwayat gabungan per akun (chat umum + chat per-dokumen jadi satu percakapan)
+export async function getChatHistory(): Promise<ChatHistoryItem[]> {
   if (USE_MOCK) return [];
-  const query = documentId ? `?document_id=${encodeURIComponent(documentId)}` : "";
-  return request(`/chat/history${query}`);
+  return request("/chat/history");
 }
 
 // Direktori konsultan: endpoint publik, tidak perlu token login

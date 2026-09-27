@@ -18,6 +18,8 @@ def make_pdf(text=""):
 db = MagicMock()
 main.fb = lambda: db
 main.app.dependency_overrides[main.current_user] = lambda: "user-a"
+# /chat pakai current_token langsung (butuh sign_in_provider utk blokir tamu), bukan current_user
+main.app.dependency_overrides[main.current_token] = lambda: {"uid": "user-a", "firebase": {"sign_in_provider": "password"}}
 c = TestClient(main.app)
 up = lambda b: c.post("/upload", files={"file": ("x.pdf", b, "application/pdf")})
 doc_ref = db.collection.return_value.document.return_value
@@ -50,14 +52,19 @@ main.jawab_chat = fake_jawab
 
 hist = MagicMock()
 hist.to_dict.return_value = {"pertanyaan": "Apa itu HGB?", "jawaban": "HGB adalah...", "sumber": [],
-                             "status": "ok", "created_at": datetime.now(timezone.utc)}
-db.collection.return_value.where.return_value.where.return_value.stream.return_value = [hist]
+                             "status": "ok", "created_at": datetime.now(timezone.utc), "document_id": None}
+db.collection.return_value.where.return_value.stream.return_value = [hist]  # 1 riwayat per akun, tidak lagi difilter document_id
 
 r = c.post("/chat", json={"pertanyaan": "kalau SHM?"})
 assert r.json() == fake_jawab("", [], None)  # dikembalikan apa adanya
 assert calls[0] == ("kalau SHM?", [{"role": "user", "content": "Apa itu HGB?"},
                                   {"role": "assistant", "content": "HGB adalah..."}], None)
 assert db.collection.return_value.add.call_args.args[0]["document_id"] is None
+
+main.app.dependency_overrides[main.current_token] = lambda: {"uid": "user-a", "firebase": {"sign_in_provider": "anonymous"}}
+assert c.post("/chat", json={"pertanyaan": "Pasal 1?", "document_id": str(main.uuid4())}).status_code == 403  # tamu ditolak
+assert c.post("/chat", json={"pertanyaan": "Apa itu HGB?"}).status_code == 200  # chat umum tetap boleh sbg tamu
+main.app.dependency_overrides[main.current_token] = lambda: {"uid": "user-a", "firebase": {"sign_in_provider": "password"}}
 
 assert c.post("/chat", json={"pertanyaan": "Pasal 1?", "document_id": str(main.uuid4())}).status_code == 404  # dokumen orang lain
 snap.get.return_value = "user-a"
@@ -71,6 +78,11 @@ assert c.post("/chat", json={"pertanyaan": "Apa itu SHM?"}).json()["status"] == 
 assert not db.collection.return_value.add.called  # jawaban error tidak disimpan
 
 assert c.get("/chat/history").json()[0]["pertanyaan"] == "Apa itu HGB?"
+
+# chat umum & chat dokumen 1 riwayat: cuma 1 filter (user_id), document_id ikut di tiap pesan sebagai penanda
+db.collection.return_value.where.reset_mock()
+assert c.get("/chat/history").json()[0]["document_id"] is None
+assert db.collection.return_value.where.call_count == 1
 
 main.app.dependency_overrides.clear()
 assert c.get("/chat/history").status_code == 401  # tanpa token ditolak
