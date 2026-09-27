@@ -1,5 +1,5 @@
-import type { AnalysisResult, ChatHistoryItem, ChatResponse, UploadResponse } from "@/types/api";
-import { mockAnalysis, mockDocuments, mockFailed, mockJawab } from "./mock-data";
+import type { AnalysisResult, ChatHistoryItem, ChatResponse, HasilKonsultan, KategoriKasus, UploadResponse } from "@/types/api";
+import { mockAnalysis, mockCariKonsultan, mockDocuments, mockFailed, mockJawab, mockKategoriKasus } from "./mock-data";
 import { getToken } from "./firebase";
 import { MAX_PDF_MB } from "./site";
 
@@ -83,4 +83,26 @@ export async function getChatHistory(documentId?: string): Promise<ChatHistoryIt
   if (USE_MOCK) return [];
   const query = documentId ? `?document_id=${encodeURIComponent(documentId)}` : "";
   return request(`/chat/history${query}`);
+}
+
+// Direktori konsultan: endpoint publik, tidak perlu token login
+async function publik<T>(path: string): Promise<T> {
+  const res = await fetch(`${BASE_URL}${path}`);
+  if (!res.ok) throw new ApiError(res.status, "Data konsultan belum bisa dimuat. Coba lagi beberapa saat.");
+  return res.json() as Promise<T>;
+}
+
+export async function getKategoriKasus(): Promise<KategoriKasus[]> {
+  if (USE_MOCK) return mockKategoriKasus;
+  return publik("/konsultan/kategori");
+}
+
+export async function cariKonsultan(kategori: string, provinsi?: string): Promise<HasilKonsultan> {
+  if (USE_MOCK) {
+    await delay(400);
+    return mockCariKonsultan(kategori, provinsi);
+  }
+  const q = new URLSearchParams({ kategori });
+  if (provinsi) q.set("provinsi", provinsi);
+  return publik(`/konsultan?${q}`);
 }

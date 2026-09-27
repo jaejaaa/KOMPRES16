@@ -27,9 +27,8 @@ const SARAN_DOKUMEN = [
   "Apa maksud Pasal 6 di perjanjian saya?",
   "Apa yang harus saya minta ke penjual sebelum tanda tangan?",
 ];
-const TOPIK = ["Jual beli & AJB", "Sertifikat SHM/HGB", "Sertifikat elektronik", "Balik nama", "Pajak BPHTB", "Isi dokumen Anda"];
 const DISCLAIMER = "Jawaban ini bersifat informatif, bukan pengganti nasihat hukum resmi.";
-const MAX_CHARS = 2000; // sama dengan batas backend (ChatIn.pertanyaan)
+const MAX_CHARS = 2000; // sama dengan batas backend (ChatIn.pertanyaan)  
 
 function Sumber({ s, nomor }: { s: ChatSource; nomor: number }) {
   const panduan = s.asal === "panduan" ? PANDUAN.find((p) => s.uu.includes(p.judul)) : undefined;
@@ -134,7 +133,7 @@ export default function ChatRoom({ documentId }: { documentId?: string }) {
           ]),
         );
       })
-      .catch(() => {}); // riwayat pelengkap; chat baru tetap bisa dipakai
+      .catch(() => { }); // riwayat pelengkap; chat baru tetap bisa dipakai
     return () => { aktif = false; };
   }, [documentId, akun.siap, akun.masuk, akun.uid]);
 
@@ -182,8 +181,8 @@ export default function ChatRoom({ documentId }: { documentId?: string }) {
     <main>
       <PageHeader
         icon="chat"
-        crumbs={[{ href: "/", label: "Beranda" }, { label: "Konsultasi Hukum" }]}
-        title="Konsultasi Hukum Pertanahan"
+        crumbs={[{ href: "/", label: "Beranda" }, { label: "JagaTanah AI" }]}
+        title="JagaTanah AI"
         desc="Ajukan pertanyaan seputar tanah. Setiap jawaban menyebut pasal peraturan yang menjadi dasarnya."
       />
 
@@ -196,7 +195,7 @@ export default function ChatRoom({ documentId }: { documentId?: string }) {
                 <span className="absolute -bottom-0.5 -right-0.5 size-3 rounded-full border-2 border-surface bg-risk-low" aria-hidden />
               </span>
               <span className="leading-tight">
-                <span className="block font-bold text-ink">Asisten JagaTanah</span>
+                <span className="block font-bold text-ink">JagaTanah AI</span>
                 <span className="block text-xs text-ink-soft">Menjawab berdasarkan peraturan pertanahan</span>
               </span>
             </span>
@@ -357,12 +356,9 @@ export default function ChatRoom({ documentId }: { documentId?: string }) {
         </section>
 
         <aside className="space-y-4 lg:sticky lg:top-28">
-          <Panel title="Topik" icon="list">
-            <ul className="flex flex-wrap gap-2">
-              {TOPIK.map((t) => (
-                <li key={t} className="rounded-full bg-bg px-3 py-1.5 text-sm text-ink">{t}</li>
-              ))}
-            </ul>
+          <Panel title="Butuh bantuan profesional?" icon="scale">
+            <p className="text-sm leading-relaxed text-ink-soft">Temukan Notaris/PPAT atau advokat sesuai urusan tanah Anda.</p>
+            <Link href="/konsultasi" className={`${btn.secondary} mt-4 w-full py-2.5 text-sm`}>Konsultasi Hukum</Link>
           </Panel>
           <Panel title="Butuh langkah lengkap?" icon="book">
             <ul className="space-y-1">

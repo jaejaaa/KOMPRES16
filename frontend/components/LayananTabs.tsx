@@ -62,6 +62,30 @@ function PratinjauPanduan() {
   );
 }
 
+function PratinjauKonsultan() {
+  const orang = [
+    { nama: "Notaris/PPAT", kota: "Bandung, Jawa Barat", urusan: "Balik nama · Waris" },
+    { nama: "Advokat", kota: "Jakarta Selatan, DKI Jakarta", urusan: "Sengketa tanah" },
+  ];
+  return (
+    <ul className="space-y-2.5">
+      {orang.map((o, i) => (
+        <li key={o.nama} className="pop-in flex items-center gap-3 rounded-2xl bg-surface p-3.5 shadow-soft" style={{ animationDelay: `${i * 90}ms` }}>
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary">
+            <Icon name="user" className="size-5" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="flex items-center gap-2 text-sm font-bold text-ink">
+              {o.nama} <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-bold text-accent-ink">Contoh</span>
+            </span>
+            <span className="block truncate text-xs text-ink-soft">{o.kota} · {o.urusan}</span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 const TAB: { id: string; label: string; pendek: string; icon: IconName; judul: string; isi: string; poin: string[]; href: string; cta: string; pratinjau: ReactNode }[] = [
   {
     id: "cek",
@@ -77,15 +101,27 @@ const TAB: { id: string; label: string; pendek: string; icon: IconName; judul: s
   },
   {
     id: "chat",
-    label: "Konsultasi Hukum",
-    pendek: "Konsultasi",
+    label: "JagaTanah AI",
+    pendek: "JagaTanah AI",
     icon: "chat",
     judul: "Tanya apa saja, jawaban disertai pasalnya",
     isi: "Ajukan pertanyaan seputar jual beli, sertifikat, pajak, atau isi dokumen Anda. Jawaban merujuk langsung ke peraturan.",
     poin: ["Bahasa sederhana", "Sumber pasal bisa dibaca", "Bahas dokumen Anda setelah masuk"],
     href: "/chat",
-    cta: "Mulai konsultasi",
+    cta: "Tanya JagaTanah AI",
     pratinjau: <PratinjauChat />,
+  },
+  {
+    id: "konsultasi",
+    label: "Konsultasi Hukum",
+    pendek: "Konsultasi",
+    icon: "scale",
+    judul: "Temukan Notaris/PPAT atau advokat",
+    isi: "Pilih kebutuhan Anda, seperti balik nama, warisan, atau sengketa tanah. Kami tampilkan profesi yang tepat di provinsi Anda.",
+    poin: ["Disesuaikan dengan jenis urusan", "Filter per provinsi", "Notaris/PPAT dan advokat"],
+    href: "/konsultasi",
+    cta: "Cari konsultan",
+    pratinjau: <PratinjauKonsultan />,
   },
   {
     id: "panduan",
@@ -121,7 +157,7 @@ export default function LayananTabs() {
         role="tablist"
         aria-label="Layanan JagaTanah"
         onKeyDown={onKey}
-        className="mx-auto grid grid-cols-3 gap-1 rounded-3xl border border-line bg-surface p-1.5 shadow-soft sm:flex sm:w-fit sm:rounded-full"
+        className="mx-auto grid grid-cols-2 gap-1 rounded-3xl border border-line bg-surface p-1.5 shadow-soft sm:flex sm:w-fit sm:rounded-full"
       >
         {TAB.map((x, i) => (
           <button

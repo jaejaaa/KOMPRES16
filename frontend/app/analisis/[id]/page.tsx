@@ -41,7 +41,7 @@ function Masalah({ judul, pesan }: { judul: string; pesan: string }) {
           <Link href="/upload" className={btn.primary}>
             <Icon name="upload" className="size-4" /> Unggah ulang
           </Link>
-          <Link href="/chat" className={btn.secondary}>Konsultasi Hukum</Link>
+          <Link href="/chat" className={btn.secondary}>Tanya JagaTanah AI</Link>
         </div>
       </Panel>
     </Kerangka>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAkun, type Akun } from "@/lib/akun";
 import { keluar } from "@/lib/firebase";
-import { MENU } from "@/lib/site";
+import { AI, MENU } from "@/lib/site";
 import { Wordmark } from "./LogoMark";
 import Icon from "./Icon";
 import LoginDialog from "./LoginDialog";
@@ -140,8 +140,12 @@ export default function Navbar() {
                 Masuk
               </button>
             )}
-            <Link href="/upload" className={`${btn.primary} px-5 py-2.5 text-sm`}>
-              Mulai Pemeriksaan <Icon name="arrow" className="size-4" />
+            <Link
+              href={AI.href}
+              aria-current={path.startsWith(AI.href) ? "page" : undefined}
+              className={`${btn.primary} px-5 py-2.5 text-sm`}
+            >
+              <Icon name="chat" className="size-4" /> {AI.label}
             </Link>
           </div>
 
@@ -208,8 +212,8 @@ export default function Navbar() {
                   Masuk dengan Google
                 </button>
               )}
-              <Link href="/upload" onClick={() => setOpen(false)} className={`${btn.primary} mt-2 w-full`}>
-                Mulai Pemeriksaan
+              <Link href={AI.href} onClick={() => setOpen(false)} className={`${btn.primary} mt-2 w-full`}>
+                <Icon name="chat" className="size-4" /> {AI.label}
               </Link>
             </div>
           </nav>

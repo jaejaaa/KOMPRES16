@@ -1,4 +1,4 @@
-import type { AnalysisResult, ChatResponse, UploadResponse } from "@/types/api";
+import type { AnalysisResult, ChatResponse, HasilKonsultan, KategoriKasus, Konsultan, UploadResponse } from "@/types/api";
 
 export const mockAnalysis: AnalysisResult = {
   document_id: "doc_demo",
@@ -114,4 +114,33 @@ export function mockJawab(pertanyaan: string, documentId?: string): ChatResponse
   if (documentId && /pasal|dokumen|kontrak|perjanjian|saya/.test(q)) return mockChatDokumen;
   if (/tanah|sertifikat|shm|hgb|ajb|ppat|bphtb|balik nama|jual beli|waris|bpn|pajak|akta/.test(q)) return mockChatReply;
   return mockDiLuarCakupan;
+}
+
+// Tiruan kecil direktori konsultan (bentuk sama dengan backend/data_engineer/scripts/konsultan.py)
+export const mockKategoriKasus: KategoriKasus[] = [
+  { id: "balik-nama", nama: "Balik nama / peralihan hak (jual-beli, hibah)", profesi: ["notaris_ppat"] },
+  {
+    id: "waris",
+    nama: "Mengurus warisan tanah",
+    profesi: ["notaris_ppat", "advokat"],
+    catatan: "Notaris/PPAT bila para ahli waris sepakat damai; advokat bila ahli waris tidak sepakat atau bersengketa.",
+  },
+  { id: "sengketa-tanah", nama: "Sengketa tanah (sudah/berpotensi ke pengadilan)", profesi: ["advokat"] },
+];
+
+const mockKonsultan: Konsultan[] = [
+  { id: "N01", nama: "Contoh Notaris A, S.H., M.Kn.", jenis: "Notaris/PPAT (dummy)", kantor: "Kantor Notaris & PPAT Contoh A", kota: "Bandung", provinsi: "Jawa Barat", kategori_kasus: ["balik-nama", "waris"], kontak: "(contoh - belum ada nomor/alamat asli)", _dummy: true },
+  { id: "A01", nama: "Contoh Advokat B, S.H., M.H.", jenis: "Advokat (dummy)", kantor: "Kantor Hukum Contoh B", kota: "Jakarta Selatan", provinsi: "DKI Jakarta", kategori_kasus: ["waris", "sengketa-tanah"], kontak: "(contoh - belum ada nomor/alamat asli)", _dummy: true },
+];
+
+export function mockCariKonsultan(kategori: string, provinsi?: string): HasilKonsultan {
+  const kat = mockKategoriKasus.find((k) => k.id === kategori);
+  const cocok = (k: Konsultan) => k.kategori_kasus.includes(kategori) && (!provinsi || k.provinsi === provinsi);
+  return {
+    kategori: kat?.nama ?? null,
+    catatan: kat?.catatan ?? null,
+    notaris_ppat: kat?.profesi.includes("notaris_ppat") ? mockKonsultan.filter((k) => k.id.startsWith("N") && cocok(k)) : [],
+    advokat: kat?.profesi.includes("advokat") ? mockKonsultan.filter((k) => k.id.startsWith("A") && cocok(k)) : [],
+    peringatan: "SELURUH DATA DI HALAMAN INI FIKTIF untuk demo, bukan daftar Notaris/PPAT/Advokat sungguhan.",
+  };
 }

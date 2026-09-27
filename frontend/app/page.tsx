@@ -8,14 +8,15 @@ import { MAX_PDF_MB } from "@/lib/site";
 
 const PINTASAN = [
   { href: "/upload", judul: "Cek Dokumen", isi: "Periksa pasal perjanjian Anda" },
-  { href: "/chat", judul: "Konsultasi Hukum", isi: "Tanya seputar hukum pertanahan" },
+  { href: "/chat", judul: "JagaTanah AI", isi: "Tanya seputar hukum pertanahan" },
+  { href: "/konsultasi", judul: "Konsultasi Hukum", isi: "Temukan Notaris/PPAT dan advokat" },
   { href: "/panduan", judul: "Panduan Prosedur", isi: "Cek sertifikat dan balik nama" },
 ];
 
 const CARA = [
   { judul: "Unggah dokumen", isi: `Pilih file PDF perjanjian jual beli, AJB, atau surat tanah lain. Ukuran maksimal ${MAX_PDF_MB} MB.` },
   { judul: "Tunggu analisis", isi: "Setiap pasal dibaca dan dicocokkan dengan peraturan pertanahan. Prosesnya hanya beberapa detik." },
-  { judul: "Baca hasilnya", isi: "Pasal diberi tingkat risiko beserta alasannya. Bila masih ragu, tanyakan langsung di Konsultasi Hukum." },
+  { judul: "Baca hasilnya", isi: "Pasal diberi tingkat risiko beserta alasannya. Bila masih ragu, tanyakan langsung ke JagaTanah AI." },
 ];
 
 const REGULASI: { nama: string; tentang: string; dicabut?: boolean }[] = [
@@ -49,7 +50,11 @@ const FAQ = [
     a: "Tidak. Hasil pemeriksaan adalah bantuan awal untuk memahami isi dokumen. Keputusan transaksi tetap perlu dikonsultasikan dengan PPAT, notaris, atau Kantor Pertanahan.",
   },
   {
-    q: "Dari mana jawaban konsultasi hukum berasal?",
+    q: "Apakah daftar Notaris/PPAT dan advokat sudah sungguhan?",
+    a: "Belum. Daftar di halaman Konsultasi Hukum saat ini masih contoh (demo) dengan nama dan kantor fiktif, sehingga belum bisa dipakai untuk menghubungi siapa pun.",
+  },
+  {
+    q: "Dari mana jawaban JagaTanah AI berasal?",
     a: "Dari kumpulan peraturan pertanahan dan panduan prosedur. Setiap jawaban menampilkan pasal yang dijadikan dasar sehingga dapat Anda periksa sendiri.",
   },
 ];
@@ -76,7 +81,7 @@ export default function Home() {
               <Link href="/upload" className={`${btn.accent} px-7 py-3.5`}>
                 Mulai Pemeriksaan <Icon name="arrow" className="size-4" />
               </Link>
-              <Link href="/chat" className={`${btn.onDark} px-7 py-3.5`}>
+              <Link href="/konsultasi" className={`${btn.onDark} px-7 py-3.5`}>
                 Konsultasi Hukum
               </Link>
             </div>
@@ -85,12 +90,12 @@ export default function Home() {
 
         {/* Pintasan layanan di dasar layar pembuka */}
         <nav aria-label="Pintasan layanan" className="relative border-t border-white/15">
-          <ul className={`${container} grid grid-cols-1 sm:grid-cols-3`}>
+          <ul className={`${container} grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`}>
             {PINTASAN.map((p, i) => (
-              <li key={p.href} className={i > 0 ? "border-t border-white/15 sm:border-l sm:border-t-0" : ""}>
+              <li key={p.href} className={i > 0 ? "border-t border-white/15 lg:border-l lg:border-t-0" : ""}>
                 <Link
                   href={p.href}
-                  className={`group flex items-center justify-between gap-4 py-5 transition-colors hover:text-accent ${i === 0 ? "sm:pr-6" : "sm:px-6"}`}
+                  className={`group flex items-center justify-between gap-4 py-5 transition-colors hover:text-accent ${i === 0 ? "lg:pr-6" : "lg:px-6"}`}
                 >
                   <span>
                     <span className="block font-semibold">{p.judul}</span>

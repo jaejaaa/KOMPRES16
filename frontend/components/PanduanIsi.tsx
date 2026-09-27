@@ -160,7 +160,7 @@ export default function PanduanIsi({ p }: { p: Panduan }) {
             <p className="mt-1 text-sm text-white/75">Tanyakan langsung, jawaban disertai pasal dasarnya.</p>
           </div>
           <Link href="/chat" className={btn.accent}>
-            <Icon name="chat" className="size-4" /> Konsultasi Hukum
+            <Icon name="chat" className="size-4" /> Tanya JagaTanah AI
           </Link>
         </div>
 

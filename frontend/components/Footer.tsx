@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MENU } from "@/lib/site";
+import { AI, MENU } from "@/lib/site";
 import { Wordmark } from "./LogoMark";
 import { container } from "./ui";
 
@@ -18,7 +18,7 @@ export default function Footer() {
         <nav aria-label="Menu bawah">
           <h2 className="font-semibold text-white">Layanan</h2>
           <ul className="mt-3 space-y-2">
-            {MENU.filter((m) => m.href !== "/").map((m) => (
+            {[...MENU.filter((m) => m.href !== "/"), AI].map((m) => (
               <li key={m.href}>
                 <Link href={m.href} className="underline-offset-4 transition-colors hover:text-white hover:underline">
                   {m.label}

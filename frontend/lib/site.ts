@@ -9,6 +9,9 @@ export const MAX_PDF_MB = 4;
 export const MENU = [
   { href: "/", label: "Beranda" },
   { href: "/upload", label: "Cek Dokumen" },
-  { href: "/chat", label: "Konsultasi Hukum" },
+  { href: "/konsultasi", label: "Konsultasi Hukum" },
   { href: "/panduan", label: "Panduan" },
 ];
+
+// Asisten AI (chatbot). Tampil sebagai tombol utama di navbar, bukan di MENU.
+export const AI = { href: "/chat", label: "JagaTanah AI" };

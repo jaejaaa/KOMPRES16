@@ -24,6 +24,9 @@ const PATHS = {
   plus: "M12 5v14M5 12h14",
   x: "M7 7l10 10M17 7 7 17",
   filter: "M4 5h16l-6 8v5l-4 2v-7z",
+  pin: "M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12zM12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z",
+  user: "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0",
+  building: "M4 21V5l8-3 8 3v16M4 21h16M9 9h.01M15 9h.01M9 13h.01M15 13h.01M10 21v-4h4v4",
 } as const;
 
 export type IconName = keyof typeof PATHS;

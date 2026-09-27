@@ -23,7 +23,7 @@ const TAHAP = ["Mengunggah dokumen", "Membaca teks dokumen", "Mencocokkan pasal 
 const SYARAT = [
   "PDF digital, bukan hasil scan atau foto",
   `Ukuran file maksimal ${MAX_MB} MB`,
-  "Berisi pasal perjanjian, mis. jual beli, AJB, atau sewa",
+  "Berisi pasal perjanjian, misal. jual beli, AJB, atau sewa",
 ];
 
 const tanggal = (iso: string) =>
@@ -188,16 +188,14 @@ export default function UploadPage() {
                 onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
                 onDragLeave={() => setDragging(false)}
                 onDrop={(e) => { e.preventDefault(); setDragging(false); pick(e.dataTransfer.files[0]); }}
-                className={`group flex cursor-pointer flex-col items-center justify-center rounded-3xl border-2 border-dashed px-6 py-12 text-center transition-all duration-300 ${
-                  dragging
+                className={`group flex cursor-pointer flex-col items-center justify-center rounded-3xl border-2 border-dashed px-6 py-12 text-center transition-all duration-300 ${dragging
                     ? "scale-[1.01] border-secondary bg-primary-soft"
                     : "border-line-strong bg-linear-to-b from-bg to-surface hover:border-secondary hover:bg-primary-soft/50"
-                }`}
+                  }`}
               >
                 <span
-                  className={`flex size-16 items-center justify-center rounded-2xl bg-linear-to-br from-secondary to-primary text-white shadow-lift transition-transform duration-300 group-hover:-translate-y-1 ${
-                    dragging ? "animate-bounce" : ""
-                  }`}
+                  className={`flex size-16 items-center justify-center rounded-2xl bg-linear-to-br from-secondary to-primary text-white shadow-lift transition-transform duration-300 group-hover:-translate-y-1 ${dragging ? "animate-bounce" : ""
+                    }`}
                 >
                   <Icon name="upload" className="size-7" />
                 </span>

@@ -52,3 +52,33 @@ export interface ChatHistoryItem {
   status: string;
   created_at: string;
 }
+
+// Direktori konsultan (GET /konsultan/kategori, GET /konsultan). Data dari backend masih DUMMY/fiktif.
+export type Profesi = "notaris_ppat" | "advokat";
+
+export interface KategoriKasus {
+  id: string;
+  nama: string;
+  profesi: Profesi[];
+  catatan?: string;
+}
+
+export interface Konsultan {
+  id: string;
+  nama: string;
+  jenis: string;
+  kantor: string;
+  kota: string;
+  provinsi: string;
+  kategori_kasus: string[];
+  kontak: string;
+  _dummy?: boolean;
+}
+
+export interface HasilKonsultan {
+  kategori: string | null;
+  catatan: string | null;
+  notaris_ppat: Konsultan[];
+  advokat: Konsultan[];
+  peringatan: string; // wajib ditampilkan ke pengguna
+}
