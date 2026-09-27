@@ -99,6 +99,27 @@ dan dengan latin-1 sidik jari vektor **berbeda** sehingga `search()` mencoba mem
 karakter seperti "≤" tidak membuat skrip crash di Windows. `.gitattributes` menjaga akhir baris file data (LF) dan menandai `*.npy`/`*.pdf` sebagai biner.
 Hasil evaluasi risiko yang dihasilkan otomatis (`prediksi_*.json`, `hasil_risiko_*.json`) di-gitignore; `hasil_retrieval_*.json` sengaja tetap di-commit sebagai bukti angka proposal.
 
+## Fitur Konsultasi Profesional (business idea baru, masih dummy)
+Ide tambahan: arahkan pengguna ke profesional yang tepat untuk kasus balik nama, waris, sengketa tanah, mafia tanah, dll.
+`data/konsultan/{kategori_kasus,notaris_ppat_dummy,advokat_dummy}.json` (41 Notaris/PPAT + 41 Advokat, 34 provinsi) dan `scripts/konsultan.py` (`cari_konsultan(kategori_id, provinsi=)`).
+
+**Kenapa dua profesi:** Notaris/PPAT hanya menangani hal administratif (akta, balik nama, cek dokumen) dan **tidak beracara di pengadilan atau menegakkan hukum**.
+Untuk sengketa tanah dan dugaan mafia tanah, yang tepat adalah **advokat** (dan untuk mafia tanah, juga pelaporan ke Satgas Anti Mafia Tanah/ATR-BPN & Polri).
+`cari_konsultan()` menegakkan ini secara otomatis lewat pemetaan `kategori_kasus -> profesi` — untuk kategori `sengketa-tanah` dan `mafia-tanah`, `notaris_ppat` SELALU kosong; jangan diubah supaya app tidak salah mengarahkan pengguna.
+
+| Kategori | Notaris/PPAT | Advokat |
+|---|---|---|
+| balik-nama, cek-sertifikat, hak-tanggungan | ✅ | — |
+| waris, sertifikat-ganda | ✅ (jalur damai / cek awal) | ✅ (bila bersengketa) |
+| sengketa-tanah, mafia-tanah | — | ✅ |
+
+**PENTING - ini data DUMMY, bukan hasil scraping:**
+- Nama, kantor, dan kontak seluruhnya fiktif. Field `_PERINGATAN` di tiap file JSON dan `_dummy: true` per entri wajib ditampilkan/dicek sebelum dipakai di UI.
+- Scraping data asli sengaja TIDAK dilakukan: sumber resmi Notaris (ini.id, Mitra ATR/BPN) berbasis cari-per-nama (tidak bisa diambil sekaligus), organisasi advokat terpecah (PERADI/PERADIN/KAI), dan mempublikasikan ulang data kontak orang sungguhan tanpa izin berisiko terhadap UU 27/2022 PDP (yang justru ada di korpus regulasi kita) serta risiko data usang.
+- **Jalur ke data asli yang direkomendasikan:** pendaftaran mandiri oleh Notaris/PPAT/advokat mitra — mereka mengisi profil sendiri, app hanya menampilkan (seperti direktori mitra, bukan scraping pihak ketiga).
+- Backend sudah live di Vercel: kalau fitur ini ikut dideploy, **wajib diberi label jelas "Contoh/Demo"** di UI.
+
+## Status dan yang belum
 ## Status dan yang belum
 - [x] Regulasi terkumpul, teks diekstrak (6 dari 9 PDF di-OCR), chunk per Pasal, embedding, `search()`
 - [x] Panduan prosedur (2), test set Q&A dev (45) + held-out (25), evaluasi (Hit@k, MRR, P/R@k) + ablasi

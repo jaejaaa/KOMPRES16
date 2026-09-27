@@ -1,0 +1,569 @@
+{
+ "_PERINGATAN": "SELURUH DATA DI FILE INI FIKTIF (nama, kantor, kota dipasangkan acak untuk demo). BUKAN daftar Notaris/PPAT/Advokat sungguhan. Jangan ditampilkan ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk menghubungi siapa pun.",
+ "konsultan": [
+  {
+   "id": "A01",
+   "nama": "Teuku Rizal, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Teuku Rizal & Rekan",
+   "kota": "Banda Aceh",
+   "provinsi": "Aceh",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A02",
+   "nama": "Boru Panggabean, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Panggabean & Partners",
+   "kota": "Medan",
+   "provinsi": "Sumatera Utara",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A03",
+   "nama": "Rico Alfino, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Rico Alfino & Rekan",
+   "kota": "Padang",
+   "provinsi": "Sumatera Barat",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A04",
+   "nama": "Melly Anggraini, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Melly Anggraini & Associates",
+   "kota": "Pekanbaru",
+   "provinsi": "Riau",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A05",
+   "nama": "Johan Tanoto, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Johan Tanoto & Partners",
+   "kota": "Batam",
+   "provinsi": "Kepulauan Riau",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A06",
+   "nama": "Fajar Ramadhan, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Fajar Ramadhan & Rekan",
+   "kota": "Jambi",
+   "provinsi": "Jambi",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A07",
+   "nama": "Sinta Marbun, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Marbun & Partners",
+   "kota": "Palembang",
+   "provinsi": "Sumatera Selatan",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A08",
+   "nama": "Dian Kusuma, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Dian Kusuma & Rekan",
+   "kota": "Bengkulu",
+   "provinsi": "Bengkulu",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A09",
+   "nama": "Reza Pratama, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Pratama & Associates",
+   "kota": "Bandar Lampung",
+   "provinsi": "Lampung",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A10",
+   "nama": "Wina Aditya, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Wina Aditya & Rekan",
+   "kota": "Pangkalpinang",
+   "provinsi": "Kepulauan Bangka Belitung",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A11",
+   "nama": "Gunawan Santoso, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Santoso & Partners",
+   "kota": "Jakarta Selatan",
+   "provinsi": "DKI Jakarta",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A12",
+   "nama": "Angelina Kusnadi, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Kusnadi & Associates",
+   "kota": "Jakarta Pusat",
+   "provinsi": "DKI Jakarta",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A13",
+   "nama": "Fadli Ramadhan, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Fadli Ramadhan & Rekan",
+   "kota": "Bandung",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A14",
+   "nama": "Yenny Kristanto, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Kristanto & Partners",
+   "kota": "Bekasi",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A15",
+   "nama": "Hendra Wijaya, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Hendra Wijaya & Rekan",
+   "kota": "Bogor",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A16",
+   "nama": "Nina Marlina, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Marlina & Associates",
+   "kota": "Serang",
+   "provinsi": "Banten",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A17",
+   "nama": "Yudi Prasetya, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Yudi Prasetya & Rekan",
+   "kota": "Tangerang",
+   "provinsi": "Banten",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A18",
+   "nama": "Diah Permatasari, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Permatasari & Partners",
+   "kota": "Semarang",
+   "provinsi": "Jawa Tengah",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A19",
+   "nama": "Bayu Firmansyah, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Bayu Firmansyah & Rekan",
+   "kota": "Surakarta",
+   "provinsi": "Jawa Tengah",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A20",
+   "nama": "Rahmat Hidayat, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Hidayat & Associates",
+   "kota": "Yogyakarta",
+   "provinsi": "D.I. Yogyakarta",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A21",
+   "nama": "Sri Wahyuni, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Wahyuni & Partners",
+   "kota": "Surabaya",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A22",
+   "nama": "Arief Budiman, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Arief Budiman & Rekan",
+   "kota": "Malang",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A23",
+   "nama": "I Wayan Sudiana, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Sudiana & Partners",
+   "kota": "Denpasar",
+   "provinsi": "Bali",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A24",
+   "nama": "Ni Luh Sriwidari, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Sriwidari & Rekan",
+   "kota": "Singaraja",
+   "provinsi": "Bali",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A25",
+   "nama": "Baiq Nurjannah, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Nurjannah & Associates",
+   "kota": "Mataram",
+   "provinsi": "Nusa Tenggara Barat",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A26",
+   "nama": "Yosef Nahak, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Yosef Nahak & Rekan",
+   "kota": "Kupang",
+   "provinsi": "Nusa Tenggara Timur",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A27",
+   "nama": "Erwin Halim, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Halim & Partners",
+   "kota": "Pontianak",
+   "provinsi": "Kalimantan Barat",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A28",
+   "nama": "Novi Ratnasari, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Novi Ratnasari & Rekan",
+   "kota": "Palangkaraya",
+   "provinsi": "Kalimantan Tengah",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A29",
+   "nama": "Ahmad Zulkarnain, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Zulkarnain & Associates",
+   "kota": "Banjarmasin",
+   "provinsi": "Kalimantan Selatan",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A30",
+   "nama": "Dewi Anjani, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Dewi Anjani & Rekan",
+   "kota": "Samarinda",
+   "provinsi": "Kalimantan Timur",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A31",
+   "nama": "Farid Maulana, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Farid Maulana & Rekan",
+   "kota": "Tanjung Selor",
+   "provinsi": "Kalimantan Utara",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A32",
+   "nama": "Meike Rumondor, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Rumondor & Partners",
+   "kota": "Manado",
+   "provinsi": "Sulawesi Utara",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A33",
+   "nama": "Moh. Taufik, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Moh. Taufik & Rekan",
+   "kota": "Palu",
+   "provinsi": "Sulawesi Tengah",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A34",
+   "nama": "Andi Pallawagau, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Pallawagau & Associates",
+   "kota": "Makassar",
+   "provinsi": "Sulawesi Selatan",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A35",
+   "nama": "Wa Ode Sitti, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Wa Ode Sitti & Rekan",
+   "kota": "Kendari",
+   "provinsi": "Sulawesi Tenggara",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A36",
+   "nama": "Rian Katili, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Katili & Partners",
+   "kota": "Gorontalo",
+   "provinsi": "Gorontalo",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A37",
+   "nama": "Andi Rahman Massepe, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Massepe & Rekan",
+   "kota": "Mamuju",
+   "provinsi": "Sulawesi Barat",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A38",
+   "nama": "Ruth Latumahina, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Latumahina & Associates",
+   "kota": "Ambon",
+   "provinsi": "Maluku",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A39",
+   "nama": "Ridwan Soamole, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Ridwan Soamole & Rekan",
+   "kota": "Ternate",
+   "provinsi": "Maluku Utara",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A40",
+   "nama": "Yance Kapisa, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Kapisa & Partners",
+   "kota": "Jayapura",
+   "provinsi": "Papua",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "A41",
+   "nama": "Beatrix Rumbewas, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Beatrix Rumbewas & Rekan",
+   "kota": "Manokwari",
+   "provinsi": "Papua Barat",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  }
+ ]
+}

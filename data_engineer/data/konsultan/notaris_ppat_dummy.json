@@ -1,0 +1,588 @@
+{
+ "_PERINGATAN": "SELURUH DATA DI FILE INI FIKTIF (nama, kantor, kota dipasangkan acak untuk demo). BUKAN daftar Notaris/PPAT/Advokat sungguhan. Jangan ditampilkan ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk menghubungi siapa pun.",
+ "konsultan": [
+  {
+   "id": "N01",
+   "nama": "Ahmad Fauzi, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Ahmad Fauzi",
+   "kota": "Banda Aceh",
+   "provinsi": "Aceh",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris",
+    "cek-sertifikat"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N02",
+   "nama": "Rina Simatupang, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Rina Simatupang",
+   "kota": "Medan",
+   "provinsi": "Sumatera Utara",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda",
+    "cek-sertifikat"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N03",
+   "nama": "Yusuf Hakim, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Yusuf Hakim",
+   "kota": "Padang",
+   "provinsi": "Sumatera Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N04",
+   "nama": "Siti Rahmadhani, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Siti Rahmadhani",
+   "kota": "Pekanbaru",
+   "provinsi": "Riau",
+   "kategori_kasus": [
+    "balik-nama",
+    "hak-tanggungan"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N05",
+   "nama": "Deni Saputra, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Deni Saputra",
+   "kota": "Batam",
+   "provinsi": "Kepulauan Riau",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N06",
+   "nama": "Muhammad Ridwan, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT M. Ridwan",
+   "kota": "Jambi",
+   "provinsi": "Jambi",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N07",
+   "nama": "Elisa Wijaya, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Elisa Wijaya",
+   "kota": "Palembang",
+   "provinsi": "Sumatera Selatan",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N08",
+   "nama": "Bambang Prasetyo, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Bambang Prasetyo",
+   "kota": "Bengkulu",
+   "provinsi": "Bengkulu",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N09",
+   "nama": "Meilani Putri, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Meilani Putri",
+   "kota": "Bandar Lampung",
+   "provinsi": "Lampung",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N10",
+   "nama": "Hasan Basri, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Hasan Basri",
+   "kota": "Pangkalpinang",
+   "provinsi": "Kepulauan Bangka Belitung",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N11",
+   "nama": "Anisa Rahmawati, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Anisa Rahmawati",
+   "kota": "Jakarta Selatan",
+   "provinsi": "DKI Jakarta",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda",
+    "cek-sertifikat",
+    "hak-tanggungan"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N12",
+   "nama": "Dedi Kurniawan, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Dedi Kurniawan",
+   "kota": "Jakarta Pusat",
+   "provinsi": "DKI Jakarta",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N13",
+   "nama": "Fitriani Handayani, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Fitriani Handayani",
+   "kota": "Bandung",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris",
+    "cek-sertifikat"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N14",
+   "nama": "Agus Salim, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Agus Salim",
+   "kota": "Bekasi",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "hak-tanggungan"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N15",
+   "nama": "Christine Marpaung, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Christine Marpaung",
+   "kota": "Bogor",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N16",
+   "nama": "Sutrisno Wijaya, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Sutrisno Wijaya",
+   "kota": "Serang",
+   "provinsi": "Banten",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N17",
+   "nama": "Kartika Sari, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Kartika Sari",
+   "kota": "Tangerang",
+   "provinsi": "Banten",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N18",
+   "nama": "Wahyu Setiawan, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Wahyu Setiawan",
+   "kota": "Semarang",
+   "provinsi": "Jawa Tengah",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N19",
+   "nama": "Retno Wulandari, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Retno Wulandari",
+   "kota": "Surakarta",
+   "provinsi": "Jawa Tengah",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N20",
+   "nama": "Bagus Nugroho, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Bagus Nugroho",
+   "kota": "Yogyakarta",
+   "provinsi": "D.I. Yogyakarta",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N21",
+   "nama": "Indra Gunawan, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Indra Gunawan",
+   "kota": "Surabaya",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda",
+    "hak-tanggungan"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N22",
+   "nama": "Puspita Ayu, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Puspita Ayu",
+   "kota": "Malang",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris",
+    "cek-sertifikat"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N23",
+   "nama": "Made Sudiartha, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Made Sudiartha",
+   "kota": "Denpasar",
+   "provinsi": "Bali",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N24",
+   "nama": "Ni Kadek Ariani, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Ni Kadek Ariani",
+   "kota": "Singaraja",
+   "provinsi": "Bali",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N25",
+   "nama": "Lalu Ahmad Zaini, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT L. Ahmad Zaini",
+   "kota": "Mataram",
+   "provinsi": "Nusa Tenggara Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N26",
+   "nama": "Maria Goreti, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Maria Goreti",
+   "kota": "Kupang",
+   "provinsi": "Nusa Tenggara Timur",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N27",
+   "nama": "Yohanes Situmorang, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Yohanes Situmorang",
+   "kota": "Pontianak",
+   "provinsi": "Kalimantan Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N28",
+   "nama": "Herlina Wati, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Herlina Wati",
+   "kota": "Palangkaraya",
+   "provinsi": "Kalimantan Tengah",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N29",
+   "nama": "Rudi Hartono, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Rudi Hartono",
+   "kota": "Banjarmasin",
+   "provinsi": "Kalimantan Selatan",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat",
+    "hak-tanggungan"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N30",
+   "nama": "Nurul Aini, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Nurul Aini",
+   "kota": "Samarinda",
+   "provinsi": "Kalimantan Timur",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N31",
+   "nama": "Andi Saputra, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Andi Saputra",
+   "kota": "Tanjung Selor",
+   "provinsi": "Kalimantan Utara",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N32",
+   "nama": "Grace Tumbelaka, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Grace Tumbelaka",
+   "kota": "Manado",
+   "provinsi": "Sulawesi Utara",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N33",
+   "nama": "Moh. Iqbal, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Moh. Iqbal",
+   "kota": "Palu",
+   "provinsi": "Sulawesi Tengah",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N34",
+   "nama": "Andi Nurul Fadillah, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Andi Nurul Fadillah",
+   "kota": "Makassar",
+   "provinsi": "Sulawesi Selatan",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N35",
+   "nama": "La Ode Amir, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT La Ode Amir",
+   "kota": "Kendari",
+   "provinsi": "Sulawesi Tenggara",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N36",
+   "nama": "Frangky Mokodompit, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Frangky Mokodompit",
+   "kota": "Gorontalo",
+   "provinsi": "Gorontalo",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N37",
+   "nama": "Nurhayati Mandacan, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Nurhayati Mandacan",
+   "kota": "Mamuju",
+   "provinsi": "Sulawesi Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N38",
+   "nama": "Sarah Sahetapy, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Sarah Sahetapy",
+   "kota": "Ambon",
+   "provinsi": "Maluku",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N39",
+   "nama": "Yusrin Kabalmay, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Yusrin Kabalmay",
+   "kota": "Ternate",
+   "provinsi": "Maluku Utara",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N40",
+   "nama": "Yance Wamafma, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Yance Wamafma",
+   "kota": "Jayapura",
+   "provinsi": "Papua",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  },
+  {
+   "id": "N41",
+   "nama": "Dorince Mansim, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Dorince Mansim",
+   "kota": "Manokwari",
+   "provinsi": "Papua Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "_dummy": true
+  }
+ ]
+}

@@ -1,0 +1,60 @@
+{
+ "_PERINGATAN": "SELURUH DATA DI FILE INI FIKTIF (nama, kantor, kota dipasangkan acak untuk demo). BUKAN daftar Notaris/PPAT/Advokat sungguhan. Jangan ditampilkan ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk menghubungi siapa pun.",
+ "kategori_kasus": [
+  {
+   "id": "balik-nama",
+   "nama": "Balik nama / peralihan hak (jual-beli, hibah)",
+   "profesi": [
+    "notaris_ppat"
+   ]
+  },
+  {
+   "id": "waris",
+   "nama": "Mengurus warisan tanah",
+   "profesi": [
+    "notaris_ppat",
+    "advokat"
+   ],
+   "catatan": "Notaris/PPAT bila para ahli waris sepakat damai; advokat bila ahli waris tidak sepakat atau bersengketa."
+  },
+  {
+   "id": "cek-sertifikat",
+   "nama": "Pengecekan keabsahan sertifikat",
+   "profesi": [
+    "notaris_ppat"
+   ]
+  },
+  {
+   "id": "sertifikat-ganda",
+   "nama": "Sertifikat ganda / tumpang tindih",
+   "profesi": [
+    "notaris_ppat",
+    "advokat"
+   ],
+   "catatan": "Notaris/PPAT untuk pengecekan awal ke Kantor Pertanahan; advokat bila sudah bersengketa/berlanjut ke gugatan."
+  },
+  {
+   "id": "hak-tanggungan",
+   "nama": "Pembebanan / pelepasan hak tanggungan (agunan)",
+   "profesi": [
+    "notaris_ppat"
+   ]
+  },
+  {
+   "id": "sengketa-tanah",
+   "nama": "Sengketa tanah (sudah/berpotensi ke pengadilan)",
+   "profesi": [
+    "advokat"
+   ],
+   "catatan": "Ranah advokat (litigasi perdata). Notaris/PPAT tidak mewakili di pengadilan."
+  },
+  {
+   "id": "mafia-tanah",
+   "nama": "Dugaan mafia tanah / pemalsuan dokumen",
+   "profesi": [
+    "advokat"
+   ],
+   "catatan": "Advokat pidana dapat mendampingi proses hukum. Laporkan juga ke Satgas Anti Mafia Tanah (Kementerian ATR/BPN bersama Polri) untuk penindakan. Notaris/PPAT bukan penegak hukum."
+  }
+ ]
+}
