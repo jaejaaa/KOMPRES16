@@ -1,13 +1,12 @@
 {
- "_PERINGATAN": "SELURUH DATA DI FILE INI FIKTIF (nama, kantor, kota, telepon, lokasi, harga, dan jadwal dipasangkan/dikarang untuk demo). BUKAN daftar Notaris/PPAT/Advokat sungguhan. Nomor telepon TIDAK AKTIF (pola berurutan, bukan nomor asli). Tautan peta hanya PENCARIAN nama kantor di Google Maps (bukan lokasi terverifikasi). Harga bersifat INDIKATIF, bukan tarif resmi. Jangan ditampilkan ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk menghubungi atau mendatangi siapa pun.",
+ "_PERINGATAN": "SELURUH DATA DI FILE INI FIKTIF (nama, kantor, kota, telepon, lokasi, tarif per orang, dan jadwal dipasangkan/dikarang untuk demo). BUKAN daftar Notaris/PPAT/Advokat sungguhan. Nomor telepon TIDAK AKTIF (pola berurutan, bukan nomor asli). Tautan peta hanya PENCARIAN nama kantor di Google Maps (bukan lokasi terverifikasi). Tarif (field \"tarif\") bersifat INDIKATIF per orang, diputar dari 3 tingkatan, BUKAN tarif resmi maupun cerminan kualitas layanan sungguhan. Jangan ditampilkan ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk menghubungi atau mendatangi siapa pun.",
  "kategori_kasus": [
   {
    "id": "balik-nama",
    "nama": "Balik nama / peralihan hak (jual-beli, hibah)",
    "profesi": [
     "notaris_ppat"
-   ],
-   "estimasi_biaya": "Rp 1.000.000 – Rp 2.500.000 per akta (indikatif/dummy; tarif nyata bervariasi per daerah dan nilai transaksi)"
+   ]
   },
   {
    "id": "waris",
@@ -16,16 +15,14 @@
     "notaris_ppat",
     "advokat"
    ],
-   "catatan": "Notaris/PPAT bila para ahli waris sepakat damai; advokat bila ahli waris tidak sepakat atau bersengketa.",
-   "estimasi_biaya": "Notaris/PPAT: Rp 750.000 – Rp 2.000.000 (indikatif/dummy). Advokat (bila bersengketa): konsultasi awal Rp 300.000–Rp 750.000/sesi, penanganan perkara dirundingkan (dummy)."
+   "catatan": "Notaris/PPAT bila para ahli waris sepakat damai; advokat bila ahli waris tidak sepakat atau bersengketa."
   },
   {
    "id": "cek-sertifikat",
    "nama": "Pengecekan keabsahan sertifikat",
    "profesi": [
     "notaris_ppat"
-   ],
-   "estimasi_biaya": "Rp 150.000 – Rp 350.000 (indikatif/dummy; termasuk perkiraan biaya PNBP pengecekan)"
+   ]
   },
   {
    "id": "sertifikat-ganda",
@@ -34,16 +31,14 @@
     "notaris_ppat",
     "advokat"
    ],
-   "catatan": "Notaris/PPAT untuk pengecekan awal ke Kantor Pertanahan; advokat bila sudah bersengketa/berlanjut ke gugatan.",
-   "estimasi_biaya": "Notaris/PPAT (cek awal): Rp 300.000 – Rp 750.000 (dummy). Advokat (litigasi): mulai Rp 5.000.000, tergantung kompleksitas (indikatif/dummy)."
+   "catatan": "Notaris/PPAT untuk pengecekan awal ke Kantor Pertanahan; advokat bila sudah bersengketa/berlanjut ke gugatan."
   },
   {
    "id": "hak-tanggungan",
    "nama": "Pembebanan / pelepasan hak tanggungan (agunan)",
    "profesi": [
     "notaris_ppat"
-   ],
-   "estimasi_biaya": "Rp 500.000 – Rp 1.500.000 (indikatif/dummy; tarif nyata umumnya mengikuti nilai agunan)"
+   ]
   },
   {
    "id": "sengketa-tanah",
@@ -51,8 +46,7 @@
    "profesi": [
     "advokat"
    ],
-   "catatan": "Ranah advokat (litigasi perdata). Notaris/PPAT tidak mewakili di pengadilan.",
-   "estimasi_biaya": "Konsultasi awal Rp 300.000 – Rp 750.000/sesi; penanganan perkara mulai Rp 5.000.000, tergantung kompleksitas (indikatif/dummy)"
+   "catatan": "Ranah advokat (litigasi perdata). Notaris/PPAT tidak mewakili di pengadilan."
   },
   {
    "id": "mafia-tanah",
@@ -60,8 +54,7 @@
    "profesi": [
     "advokat"
    ],
-   "catatan": "Advokat pidana dapat mendampingi proses hukum. Laporkan juga ke Satgas Anti Mafia Tanah (Kementerian ATR/BPN bersama Polri) untuk penindakan. Notaris/PPAT bukan penegak hukum.",
-   "estimasi_biaya": "Konsultasi awal Rp 300.000 – Rp 750.000/sesi; pendampingan lanjutan dirundingkan di awal (indikatif/dummy). Pelaporan ke Satgas Anti Mafia Tanah tidak dipungut biaya."
+   "catatan": "Advokat pidana dapat mendampingi proses hukum. Laporkan juga ke Satgas Anti Mafia Tanah (Kementerian ATR/BPN bersama Polri) untuk penindakan (gratis, tidak dipungut biaya). Notaris/PPAT bukan penegak hukum."
   }
  ]
 }

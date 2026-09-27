@@ -1,5 +1,5 @@
 {
- "_PERINGATAN": "SELURUH DATA DI FILE INI FIKTIF (nama, kantor, kota, telepon, lokasi, harga, dan jadwal dipasangkan/dikarang untuk demo). BUKAN daftar Notaris/PPAT/Advokat sungguhan. Nomor telepon TIDAK AKTIF (pola berurutan, bukan nomor asli). Tautan peta hanya PENCARIAN nama kantor di Google Maps (bukan lokasi terverifikasi). Harga bersifat INDIKATIF, bukan tarif resmi. Jangan ditampilkan ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk menghubungi atau mendatangi siapa pun.",
+ "_PERINGATAN": "SELURUH DATA DI FILE INI FIKTIF (nama, kantor, kota, telepon, lokasi, tarif per orang, dan jadwal dipasangkan/dikarang untuk demo). BUKAN daftar Notaris/PPAT/Advokat sungguhan. Nomor telepon TIDAK AKTIF (pola berurutan, bukan nomor asli). Tautan peta hanya PENCARIAN nama kantor di Google Maps (bukan lokasi terverifikasi). Tarif (field \"tarif\") bersifat INDIKATIF per orang, diputar dari 3 tingkatan, BUKAN tarif resmi maupun cerminan kualitas layanan sungguhan. Jangan ditampilkan ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk menghubungi atau mendatangi siapa pun.",
  "konsultan": [
   {
    "id": "A01",
@@ -15,6 +15,7 @@
    "telepon": "0813-0000-0001 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Teuku%20Rizal%20%26%20Rekan%2C%20Banda%20Aceh%2C%20Aceh",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -31,6 +32,7 @@
    "telepon": "0813-0000-0002 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Panggabean%20%26%20Partners%2C%20Medan%2C%20Sumatera%20Utara",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -46,6 +48,7 @@
    "telepon": "0813-0000-0003 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Rico%20Alfino%20%26%20Rekan%2C%20Padang%2C%20Sumatera%20Barat",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -62,6 +65,7 @@
    "telepon": "0813-0000-0004 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Melly%20Anggraini%20%26%20Associates%2C%20Pekanbaru%2C%20Riau",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -78,6 +82,7 @@
    "telepon": "0813-0000-0005 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Johan%20Tanoto%20%26%20Partners%2C%20Batam%2C%20Kepulauan%20Riau",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -93,6 +98,7 @@
    "telepon": "0813-0000-0006 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Fajar%20Ramadhan%20%26%20Rekan%2C%20Jambi%2C%20Jambi",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -109,6 +115,7 @@
    "telepon": "0813-0000-0007 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Marbun%20%26%20Partners%2C%20Palembang%2C%20Sumatera%20Selatan",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -124,6 +131,7 @@
    "telepon": "0813-0000-0008 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Dian%20Kusuma%20%26%20Rekan%2C%20Bengkulu%2C%20Bengkulu",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -140,6 +148,7 @@
    "telepon": "0813-0000-0009 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Pratama%20%26%20Associates%2C%20Bandar%20Lampung%2C%20Lampung",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -155,6 +164,7 @@
    "telepon": "0813-0000-0010 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Wina%20Aditya%20%26%20Rekan%2C%20Pangkalpinang%2C%20Kepulauan%20Bangka%20Belitung",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -172,6 +182,7 @@
    "telepon": "0813-0000-0011 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Santoso%20%26%20Partners%2C%20Jakarta%20Selatan%2C%20DKI%20Jakarta",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -188,6 +199,7 @@
    "telepon": "0813-0000-0012 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Kusnadi%20%26%20Associates%2C%20Jakarta%20Pusat%2C%20DKI%20Jakarta",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -204,6 +216,7 @@
    "telepon": "0813-0000-0013 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Fadli%20Ramadhan%20%26%20Rekan%2C%20Bandung%2C%20Jawa%20Barat",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -220,6 +233,7 @@
    "telepon": "0813-0000-0014 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Kristanto%20%26%20Partners%2C%20Bekasi%2C%20Jawa%20Barat",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -235,6 +249,7 @@
    "telepon": "0813-0000-0015 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Hendra%20Wijaya%20%26%20Rekan%2C%20Bogor%2C%20Jawa%20Barat",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -251,6 +266,7 @@
    "telepon": "0813-0000-0016 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Marlina%20%26%20Associates%2C%20Serang%2C%20Banten",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -267,6 +283,7 @@
    "telepon": "0813-0000-0017 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Yudi%20Prasetya%20%26%20Rekan%2C%20Tangerang%2C%20Banten",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -283,6 +300,7 @@
    "telepon": "0813-0000-0018 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Permatasari%20%26%20Partners%2C%20Semarang%2C%20Jawa%20Tengah",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -298,6 +316,7 @@
    "telepon": "0813-0000-0019 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Bayu%20Firmansyah%20%26%20Rekan%2C%20Surakarta%2C%20Jawa%20Tengah",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -314,6 +333,7 @@
    "telepon": "0813-0000-0020 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Hidayat%20%26%20Associates%2C%20Yogyakarta%2C%20D.I.%20Yogyakarta",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -331,6 +351,7 @@
    "telepon": "0813-0000-0021 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Wahyuni%20%26%20Partners%2C%20Surabaya%2C%20Jawa%20Timur",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -347,6 +368,7 @@
    "telepon": "0813-0000-0022 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Arief%20Budiman%20%26%20Rekan%2C%20Malang%2C%20Jawa%20Timur",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -363,6 +385,7 @@
    "telepon": "0813-0000-0023 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Sudiana%20%26%20Partners%2C%20Denpasar%2C%20Bali",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -378,6 +401,7 @@
    "telepon": "0813-0000-0024 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Sriwidari%20%26%20Rekan%2C%20Singaraja%2C%20Bali",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -394,6 +418,7 @@
    "telepon": "0813-0000-0025 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Nurjannah%20%26%20Associates%2C%20Mataram%2C%20Nusa%20Tenggara%20Barat",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -409,6 +434,7 @@
    "telepon": "0813-0000-0026 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Yosef%20Nahak%20%26%20Rekan%2C%20Kupang%2C%20Nusa%20Tenggara%20Timur",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -425,6 +451,7 @@
    "telepon": "0813-0000-0027 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Halim%20%26%20Partners%2C%20Pontianak%2C%20Kalimantan%20Barat",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -440,6 +467,7 @@
    "telepon": "0813-0000-0028 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Novi%20Ratnasari%20%26%20Rekan%2C%20Palangkaraya%2C%20Kalimantan%20Tengah",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -456,6 +484,7 @@
    "telepon": "0813-0000-0029 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Zulkarnain%20%26%20Associates%2C%20Banjarmasin%2C%20Kalimantan%20Selatan",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -472,6 +501,7 @@
    "telepon": "0813-0000-0030 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Dewi%20Anjani%20%26%20Rekan%2C%20Samarinda%2C%20Kalimantan%20Timur",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -487,6 +517,7 @@
    "telepon": "0813-0000-0031 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Farid%20Maulana%20%26%20Rekan%2C%20Tanjung%20Selor%2C%20Kalimantan%20Utara",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -503,6 +534,7 @@
    "telepon": "0813-0000-0032 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Rumondor%20%26%20Partners%2C%20Manado%2C%20Sulawesi%20Utara",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -518,6 +550,7 @@
    "telepon": "0813-0000-0033 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Moh.%20Taufik%20%26%20Rekan%2C%20Palu%2C%20Sulawesi%20Tengah",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -535,6 +568,7 @@
    "telepon": "0813-0000-0034 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Pallawagau%20%26%20Associates%2C%20Makassar%2C%20Sulawesi%20Selatan",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -550,6 +584,7 @@
    "telepon": "0813-0000-0035 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Wa%20Ode%20Sitti%20%26%20Rekan%2C%20Kendari%2C%20Sulawesi%20Tenggara",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -566,6 +601,7 @@
    "telepon": "0813-0000-0036 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Katili%20%26%20Partners%2C%20Gorontalo%2C%20Gorontalo",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -581,6 +617,7 @@
    "telepon": "0813-0000-0037 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Massepe%20%26%20Rekan%2C%20Mamuju%2C%20Sulawesi%20Barat",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -597,6 +634,7 @@
    "telepon": "0813-0000-0038 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Latumahina%20%26%20Associates%2C%20Ambon%2C%20Maluku",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -612,6 +650,7 @@
    "telepon": "0813-0000-0039 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Ridwan%20Soamole%20%26%20Rekan%2C%20Ternate%2C%20Maluku%20Utara",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -629,6 +668,7 @@
    "telepon": "0813-0000-0040 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Kapisa%20%26%20Partners%2C%20Jayapura%2C%20Papua",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
   },
   {
@@ -645,6 +685,7 @@
    "telepon": "0813-0000-0041 (dummy - nomor tidak aktif, jangan dihubungi)",
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Beatrix%20Rumbewas%20%26%20Rekan%2C%20Manokwari%2C%20Papua%20Barat",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
   }
  ]

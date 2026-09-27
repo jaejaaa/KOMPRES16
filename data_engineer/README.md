@@ -113,13 +113,13 @@ Untuk sengketa tanah dan dugaan mafia tanah, yang tepat adalah **advokat** (dan 
 | waris, sertifikat-ganda | ✅ (jalur damai / cek awal) | ✅ (bila bersengketa) |
 | sengketa-tanah, mafia-tanah | — | ✅ |
 
-Tiap entri konsultan juga punya `telepon`, `peta` (tautan Google Maps), dan `jadwal`; tiap kategori kasus punya `estimasi_biaya`.
+Tiap entri konsultan juga punya `telepon`, `peta` (tautan Google Maps), `jadwal`, dan `tarif` (harga per orang, bukan per kategori).
 
 **PENTING - ini data DUMMY, bukan hasil scraping:**
 - Nama, kantor, telepon, lokasi, harga, dan jadwal seluruhnya fiktif/indikatif. Field `_PERINGATAN` di tiap file JSON dan `_dummy: true` per entri wajib ditampilkan/dicek sebelum dipakai di UI.
 - **Telepon**: pola berurutan (`0812-0000-0001`, dst.), sengaja BUKAN nomor acak yang terlihat asli, dan diberi keterangan "tidak aktif, jangan dihubungi".
 - **Peta**: tautan *pencarian* Google Maps (nama kantor + kota), bukan alamat/koordinat presisi — supaya tidak kebetulan menunjuk ke bangunan sungguhan.
-- **Harga (`estimasi_biaya`)**: kisaran indikatif per kategori kasus (bukan per orang), jelas ditandai "(indikatif/dummy)", bukan tarif resmi.
+- **Harga (`tarif`)**: kisaran indikatif PER ORANG (3 tingkatan diputar per indeks, supaya tidak seragam), jelas ditandai "(indikatif/dummy)" — bukan tarif resmi dan bukan cerminan kualitas layanan sungguhan.
 - Scraping data asli sengaja TIDAK dilakukan: sumber resmi Notaris (ini.id, Mitra ATR/BPN) berbasis cari-per-nama (tidak bisa diambil sekaligus), organisasi advokat terpecah (PERADI/PERADIN/KAI), dan mempublikasikan ulang data kontak orang sungguhan tanpa izin berisiko terhadap UU 27/2022 PDP (yang justru ada di korpus regulasi kita) serta risiko data usang.
 - **Jalur ke data asli yang direkomendasikan:** pendaftaran mandiri oleh Notaris/PPAT/advokat mitra — mereka mengisi profil sendiri, app hanya menampilkan (seperti direktori mitra, bukan scraping pihak ketiga).
 - Backend sudah live di Vercel: kalau fitur ini ikut dideploy, **wajib diberi label jelas "Contoh/Demo"** di UI.
