@@ -1,5 +1,5 @@
 {
- "_PERINGATAN": "SELURUH DATA DI FILE INI FIKTIF (nama, kantor, kota dipasangkan acak untuk demo). BUKAN daftar Notaris/PPAT/Advokat sungguhan. Jangan ditampilkan ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk menghubungi siapa pun.",
+ "_PERINGATAN": "SELURUH DATA DI FILE INI FIKTIF (nama, kantor, kota, telepon, lokasi, harga, dan jadwal dipasangkan/dikarang untuk demo). BUKAN daftar Notaris/PPAT/Advokat sungguhan. Nomor telepon TIDAK AKTIF (pola berurutan, bukan nomor asli). Tautan peta hanya PENCARIAN nama kantor di Google Maps (bukan lokasi terverifikasi). Harga bersifat INDIKATIF, bukan tarif resmi. Jangan ditampilkan ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk menghubungi atau mendatangi siapa pun.",
  "konsultan": [
   {
    "id": "N01",
@@ -13,7 +13,9 @@
     "waris",
     "cek-sertifikat"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0001 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Ahmad%20Fauzi%2C%20Banda%20Aceh%2C%20Aceh",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -28,7 +30,9 @@
     "sertifikat-ganda",
     "cek-sertifikat"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0002 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Rina%20Simatupang%2C%20Medan%2C%20Sumatera%20Utara",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -42,7 +46,9 @@
     "balik-nama",
     "waris"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0003 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Yusuf%20Hakim%2C%20Padang%2C%20Sumatera%20Barat",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -56,7 +62,9 @@
     "balik-nama",
     "hak-tanggungan"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0004 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Siti%20Rahmadhani%2C%20Pekanbaru%2C%20Riau",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "_dummy": true
   },
   {
@@ -70,7 +78,9 @@
     "balik-nama",
     "cek-sertifikat"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0005 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Deni%20Saputra%2C%20Batam%2C%20Kepulauan%20Riau",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -84,7 +94,9 @@
     "balik-nama",
     "waris"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0006 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20M.%20Ridwan%2C%20Jambi%2C%20Jambi",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -98,7 +110,9 @@
     "balik-nama",
     "sertifikat-ganda"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0007 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Elisa%20Wijaya%2C%20Palembang%2C%20Sumatera%20Selatan",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -112,7 +126,9 @@
     "balik-nama",
     "waris"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0008 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Bambang%20Prasetyo%2C%20Bengkulu%2C%20Bengkulu",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "_dummy": true
   },
   {
@@ -127,7 +143,9 @@
     "cek-sertifikat",
     "waris"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0009 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Meilani%20Putri%2C%20Bandar%20Lampung%2C%20Lampung",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -140,7 +158,9 @@
    "kategori_kasus": [
     "balik-nama"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0010 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Hasan%20Basri%2C%20Pangkalpinang%2C%20Kepulauan%20Bangka%20Belitung",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -156,7 +176,9 @@
     "cek-sertifikat",
     "hak-tanggungan"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0011 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Anisa%20Rahmawati%2C%20Jakarta%20Selatan%2C%20DKI%20Jakarta",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -170,7 +192,9 @@
     "balik-nama",
     "waris"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0012 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Dedi%20Kurniawan%2C%20Jakarta%20Pusat%2C%20DKI%20Jakarta",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "_dummy": true
   },
   {
@@ -185,7 +209,9 @@
     "waris",
     "cek-sertifikat"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0013 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Fitriani%20Handayani%2C%20Bandung%2C%20Jawa%20Barat",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -199,7 +225,9 @@
     "balik-nama",
     "hak-tanggungan"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0014 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Agus%20Salim%2C%20Bekasi%2C%20Jawa%20Barat",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -213,7 +241,9 @@
     "balik-nama",
     "sertifikat-ganda"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0015 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Christine%20Marpaung%2C%20Bogor%2C%20Jawa%20Barat",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -227,7 +257,9 @@
     "balik-nama",
     "waris"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0016 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Sutrisno%20Wijaya%2C%20Serang%2C%20Banten",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "_dummy": true
   },
   {
@@ -241,7 +273,9 @@
     "balik-nama",
     "cek-sertifikat"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0017 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Kartika%20Sari%2C%20Tangerang%2C%20Banten",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -256,7 +290,9 @@
     "waris",
     "sertifikat-ganda"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0018 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Wahyu%20Setiawan%2C%20Semarang%2C%20Jawa%20Tengah",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -270,7 +306,9 @@
     "balik-nama",
     "cek-sertifikat"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0019 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Retno%20Wulandari%2C%20Surakarta%2C%20Jawa%20Tengah",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -284,7 +322,9 @@
     "balik-nama",
     "waris"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0020 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Bagus%20Nugroho%2C%20Yogyakarta%2C%20D.I.%20Yogyakarta",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "_dummy": true
   },
   {
@@ -299,7 +339,9 @@
     "sertifikat-ganda",
     "hak-tanggungan"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0021 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Indra%20Gunawan%2C%20Surabaya%2C%20Jawa%20Timur",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -314,7 +356,9 @@
     "waris",
     "cek-sertifikat"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0022 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Puspita%20Ayu%2C%20Malang%2C%20Jawa%20Timur",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -329,7 +373,9 @@
     "cek-sertifikat",
     "sertifikat-ganda"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0023 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Made%20Sudiartha%2C%20Denpasar%2C%20Bali",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -343,7 +389,9 @@
     "balik-nama",
     "waris"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0024 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Ni%20Kadek%20Ariani%2C%20Singaraja%2C%20Bali",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "_dummy": true
   },
   {
@@ -357,7 +405,9 @@
     "balik-nama",
     "waris"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0025 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20L.%20Ahmad%20Zaini%2C%20Mataram%2C%20Nusa%20Tenggara%20Barat",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -371,7 +421,9 @@
     "balik-nama",
     "cek-sertifikat"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0026 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Maria%20Goreti%2C%20Kupang%2C%20Nusa%20Tenggara%20Timur",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -385,7 +437,9 @@
     "balik-nama",
     "sertifikat-ganda"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0027 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Yohanes%20Situmorang%2C%20Pontianak%2C%20Kalimantan%20Barat",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -399,7 +453,9 @@
     "balik-nama",
     "waris"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0028 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Herlina%20Wati%2C%20Palangkaraya%2C%20Kalimantan%20Tengah",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "_dummy": true
   },
   {
@@ -414,7 +470,9 @@
     "cek-sertifikat",
     "hak-tanggungan"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0029 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Rudi%20Hartono%2C%20Banjarmasin%2C%20Kalimantan%20Selatan",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -428,7 +486,9 @@
     "balik-nama",
     "sertifikat-ganda"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0030 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Nurul%20Aini%2C%20Samarinda%2C%20Kalimantan%20Timur",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -441,7 +501,9 @@
    "kategori_kasus": [
     "balik-nama"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0031 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Andi%20Saputra%2C%20Tanjung%20Selor%2C%20Kalimantan%20Utara",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -455,7 +517,9 @@
     "balik-nama",
     "waris"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0032 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Grace%20Tumbelaka%2C%20Manado%2C%20Sulawesi%20Utara",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "_dummy": true
   },
   {
@@ -469,7 +533,9 @@
     "balik-nama",
     "cek-sertifikat"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0033 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Moh.%20Iqbal%2C%20Palu%2C%20Sulawesi%20Tengah",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -484,7 +550,9 @@
     "waris",
     "sertifikat-ganda"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0034 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Andi%20Nurul%20Fadillah%2C%20Makassar%2C%20Sulawesi%20Selatan",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -498,7 +566,9 @@
     "balik-nama",
     "cek-sertifikat"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0035 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20La%20Ode%20Amir%2C%20Kendari%2C%20Sulawesi%20Tenggara",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -511,7 +581,9 @@
    "kategori_kasus": [
     "balik-nama"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0036 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Frangky%20Mokodompit%2C%20Gorontalo%2C%20Gorontalo",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "_dummy": true
   },
   {
@@ -525,7 +597,9 @@
     "balik-nama",
     "waris"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0037 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Nurhayati%20Mandacan%2C%20Mamuju%2C%20Sulawesi%20Barat",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -539,7 +613,9 @@
     "balik-nama",
     "cek-sertifikat"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0038 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Sarah%20Sahetapy%2C%20Ambon%2C%20Maluku",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -553,7 +629,9 @@
     "balik-nama",
     "waris"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0039 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Yusrin%20Kabalmay%2C%20Ternate%2C%20Maluku%20Utara",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "_dummy": true
   },
   {
@@ -567,7 +645,9 @@
     "balik-nama",
     "sertifikat-ganda"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0040 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Yance%20Wamafma%2C%20Jayapura%2C%20Papua",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "_dummy": true
   },
   {
@@ -581,7 +661,9 @@
     "balik-nama",
     "waris"
    ],
-   "kontak": "(contoh - belum ada nomor/alamat asli)",
+   "telepon": "0812-0000-0041 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Dorince%20Mansim%2C%20Manokwari%2C%20Papua%20Barat",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "_dummy": true
   }
  ]

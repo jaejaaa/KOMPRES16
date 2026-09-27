@@ -1,11 +1,18 @@
 """Buat data DUMMY direktori konsultan profesional (Notaris/PPAT + Advokat) untuk fitur "Konsultasi Profesional".
 
-PENTING: seluruh nama, kantor, dan kontak di sini FIKTIF (bukan orang/kantor sungguhan). Tujuannya demo/prototipe,
-BUKAN pengganti scraping data asli. Scraping data asli tidak dilakukan karena:
+PENTING: seluruh nama, kantor, kontak, lokasi, harga, dan jadwal di sini FIKTIF (bukan orang/kantor sungguhan).
+Tujuannya demo/prototipe, BUKAN pengganti scraping data asli. Scraping data asli tidak dilakukan karena:
   - Sumber resmi Notaris (ini.id, Mitra ATR/BPN) berbasis cari-per-nama, bukan daftar yang bisa diambil sekaligus.
   - Organisasi advokat terpecah (PERADI/PERADIN/KAI dll), tidak ada satu sumber otoritatif.
   - Data profesi + kontak orang sungguhan yang dipublikasikan ulang tanpa izin berisiko kena UU 27/2022 PDP
     (relevan, itu ada di korpus regulasi proyek ini) dan bisa jadi utang keakuratan (nomor berubah, dsb).
+
+Kolom tambahan (nomor telepon, peta, harga, jadwal) sengaja dibuat agar TIDAK bisa disalahartikan sebagai data asli:
+  - Nomor telepon: pola berurutan (0812-0000-0001, dst), bukan nomor acak yang terlihat asli.
+  - Lokasi: tautan PENCARIAN Google Maps (nama kantor + kota), bukan alamat/koordinat presisi yang bisa
+    kebetulan menunjuk ke bangunan sungguhan.
+  - Harga: kisaran indikatif per KATEGORI KASUS (bukan per orang), diberi label "(dummy)".
+  - Jadwal: pola mingguan generik, diberi label "(contoh)".
 
 Jika nanti mau data ASLI: cara yang aman & berkelanjutan adalah PENDAFTARAN MANDIRI oleh notaris/PPAT/advokat mitra
 (mereka isi profil sendiri, app hanya menampilkan), bukan scraping. Lihat catatan di README data_engineer.
@@ -14,24 +21,40 @@ Jalankan: python scripts/10_make_konsultan_dummy.py -> data/konsultan/{kategori_
 """
 import json
 from pathlib import Path
+from urllib.parse import quote
 
 OUT = Path(__file__).resolve().parent.parent / "data/konsultan"
+
+# Jadwal mingguan generik (dummy); "waktu setempat" karena provinsi tersebar di 3 zona waktu (WIB/WITA/WIT).
+JADWAL_TEMPLATES = [
+    "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+    "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+    "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+    "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+]
 
 # Kategori kasus -> profesi yang relevan. Notaris/PPAT: administratif (akta, balik nama, cek dokumen), tidak
 # beracara di pengadilan dan bukan penegak hukum. Advokat: litigasi perdata & pidana.
 KATEGORI_KASUS = [
-    {"id": "balik-nama", "nama": "Balik nama / peralihan hak (jual-beli, hibah)", "profesi": ["notaris_ppat"]},
+    {"id": "balik-nama", "nama": "Balik nama / peralihan hak (jual-beli, hibah)", "profesi": ["notaris_ppat"],
+     "estimasi_biaya": "Rp 1.000.000 – Rp 2.500.000 per akta (indikatif/dummy; tarif nyata bervariasi per daerah dan nilai transaksi)"},
     {"id": "waris", "nama": "Mengurus warisan tanah", "profesi": ["notaris_ppat", "advokat"],
-     "catatan": "Notaris/PPAT bila para ahli waris sepakat damai; advokat bila ahli waris tidak sepakat atau bersengketa."},
-    {"id": "cek-sertifikat", "nama": "Pengecekan keabsahan sertifikat", "profesi": ["notaris_ppat"]},
+     "catatan": "Notaris/PPAT bila para ahli waris sepakat damai; advokat bila ahli waris tidak sepakat atau bersengketa.",
+     "estimasi_biaya": "Notaris/PPAT: Rp 750.000 – Rp 2.000.000 (indikatif/dummy). Advokat (bila bersengketa): konsultasi awal Rp 300.000–Rp 750.000/sesi, penanganan perkara dirundingkan (dummy)."},
+    {"id": "cek-sertifikat", "nama": "Pengecekan keabsahan sertifikat", "profesi": ["notaris_ppat"],
+     "estimasi_biaya": "Rp 150.000 – Rp 350.000 (indikatif/dummy; termasuk perkiraan biaya PNBP pengecekan)"},
     {"id": "sertifikat-ganda", "nama": "Sertifikat ganda / tumpang tindih", "profesi": ["notaris_ppat", "advokat"],
-     "catatan": "Notaris/PPAT untuk pengecekan awal ke Kantor Pertanahan; advokat bila sudah bersengketa/berlanjut ke gugatan."},
-    {"id": "hak-tanggungan", "nama": "Pembebanan / pelepasan hak tanggungan (agunan)", "profesi": ["notaris_ppat"]},
+     "catatan": "Notaris/PPAT untuk pengecekan awal ke Kantor Pertanahan; advokat bila sudah bersengketa/berlanjut ke gugatan.",
+     "estimasi_biaya": "Notaris/PPAT (cek awal): Rp 300.000 – Rp 750.000 (dummy). Advokat (litigasi): mulai Rp 5.000.000, tergantung kompleksitas (indikatif/dummy)."},
+    {"id": "hak-tanggungan", "nama": "Pembebanan / pelepasan hak tanggungan (agunan)", "profesi": ["notaris_ppat"],
+     "estimasi_biaya": "Rp 500.000 – Rp 1.500.000 (indikatif/dummy; tarif nyata umumnya mengikuti nilai agunan)"},
     {"id": "sengketa-tanah", "nama": "Sengketa tanah (sudah/berpotensi ke pengadilan)", "profesi": ["advokat"],
-     "catatan": "Ranah advokat (litigasi perdata). Notaris/PPAT tidak mewakili di pengadilan."},
+     "catatan": "Ranah advokat (litigasi perdata). Notaris/PPAT tidak mewakili di pengadilan.",
+     "estimasi_biaya": "Konsultasi awal Rp 300.000 – Rp 750.000/sesi; penanganan perkara mulai Rp 5.000.000, tergantung kompleksitas (indikatif/dummy)"},
     {"id": "mafia-tanah", "nama": "Dugaan mafia tanah / pemalsuan dokumen", "profesi": ["advokat"],
      "catatan": "Advokat pidana dapat mendampingi proses hukum. Laporkan juga ke Satgas Anti Mafia Tanah "
-                "(Kementerian ATR/BPN bersama Polri) untuk penindakan. Notaris/PPAT bukan penegak hukum."},
+                "(Kementerian ATR/BPN bersama Polri) untuk penindakan. Notaris/PPAT bukan penegak hukum.",
+     "estimasi_biaya": "Konsultasi awal Rp 300.000 – Rp 750.000/sesi; pendampingan lanjutan dirundingkan di awal (indikatif/dummy). Pelaporan ke Satgas Anti Mafia Tanah tidak dipungut biaya."},
 ]
 
 # (nama, gelar, kantor, kota, provinsi, [id_kategori yang bisa dibantu])
@@ -124,21 +147,27 @@ ADVOKAT = [
     ("Beatrix Rumbewas", "S.H.", "Kantor Hukum Beatrix Rumbewas & Rekan", "Manokwari", "Papua Barat", ["sengketa-tanah", "waris"]),
 ]
 
-def _entri(i, prefix, jenis, row):
+def _entri(i, prefix, jenis, kode_telepon, row):
     nama, gelar, kantor, kota, provinsi, kategori = row
+    telepon = f"{kode_telepon}-0000-{i:04d} (dummy - nomor tidak aktif, jangan dihubungi)"
+    peta = f"https://www.google.com/maps/search/?api=1&query={quote(f'{kantor}, {kota}, {provinsi}')}"
+    jadwal = JADWAL_TEMPLATES[(i - 1) % len(JADWAL_TEMPLATES)]
     return {"id": f"{prefix}{i:02d}", "nama": f"{nama}, {gelar}", "jenis": jenis, "kantor": kantor,
             "kota": kota, "provinsi": provinsi, "kategori_kasus": kategori,
-            "kontak": "(contoh - belum ada nomor/alamat asli)", "_dummy": True}
+            "telepon": telepon, "peta": peta, "jadwal": jadwal, "_dummy": True}
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    peringatan = ("SELURUH DATA DI FILE INI FIKTIF (nama, kantor, kota dipasangkan acak untuk demo). "
-                  "BUKAN daftar Notaris/PPAT/Advokat sungguhan. Jangan ditampilkan ke pengguna tanpa label jelas "
-                  "'Contoh/Demo', dan jangan dipakai untuk menghubungi siapa pun.")
+    peringatan = ("SELURUH DATA DI FILE INI FIKTIF (nama, kantor, kota, telepon, lokasi, harga, dan jadwal "
+                  "dipasangkan/dikarang untuk demo). BUKAN daftar Notaris/PPAT/Advokat sungguhan. Nomor telepon "
+                  "TIDAK AKTIF (pola berurutan, bukan nomor asli). Tautan peta hanya PENCARIAN nama kantor di "
+                  "Google Maps (bukan lokasi terverifikasi). Harga bersifat INDIKATIF, bukan tarif resmi. "
+                  "Jangan ditampilkan ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk "
+                  "menghubungi atau mendatangi siapa pun.")
     (OUT / "kategori_kasus.json").write_text(json.dumps(
         {"_PERINGATAN": peringatan, "kategori_kasus": KATEGORI_KASUS}, ensure_ascii=False, indent=1), encoding="utf-8")
-    notaris = [_entri(i, "N", "Notaris/PPAT (dummy)", r) for i, r in enumerate(NOTARIS, 1)]
-    advokat = [_entri(i, "A", "Advokat (dummy)", r) for i, r in enumerate(ADVOKAT, 1)]
+    notaris = [_entri(i, "N", "Notaris/PPAT (dummy)", "0812", r) for i, r in enumerate(NOTARIS, 1)]
+    advokat = [_entri(i, "A", "Advokat (dummy)", "0813", r) for i, r in enumerate(ADVOKAT, 1)]
     (OUT / "notaris_ppat_dummy.json").write_text(json.dumps({"_PERINGATAN": peringatan, "konsultan": notaris}, ensure_ascii=False, indent=1), encoding="utf-8")
     (OUT / "advokat_dummy.json").write_text(json.dumps({"_PERINGATAN": peringatan, "konsultan": advokat}, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"Notaris/PPAT: {len(notaris)} entri, {len(set(k['provinsi'] for k in notaris))} provinsi")
