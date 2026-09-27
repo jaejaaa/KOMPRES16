@@ -11,6 +11,7 @@ backend/test_main.py
 data_engineer/docs
 data_engineer/data/*
 !data_engineer/data/chunks
+!data_engineer/data/konsultan
 
 # Kunci jawaban set uji risiko held-out (Data Engineer): jangan pernah ikut ter-deploy
 data_engineer/private

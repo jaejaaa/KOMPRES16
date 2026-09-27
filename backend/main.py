@@ -26,6 +26,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "data_engineer" 
 from retriever import Retriever
 from analisis import analyze
 from chatbot import jawab_chat
+from konsultan import cari_konsultan, kategori_kasus
 
 # Struktur Firestore:
 #   documents/{id}     user_id, filename, text, status, summary, risks[], error, created_at
@@ -91,12 +92,16 @@ def fb():
     return firestore.client()
 
 
-def current_user(token: HTTPAuthorizationCredentials = Depends(HTTPBearer())) -> str:
+def current_token(token: HTTPAuthorizationCredentials = Depends(HTTPBearer())) -> dict:
     fb()
     try:
-        return auth.verify_id_token(token.credentials)["uid"]
+        return auth.verify_id_token(token.credentials)
     except (ValueError, auth.InvalidIdTokenError):
         raise HTTPException(401, "Token tidak valid atau kedaluwarsa")
+
+
+def current_user(token: dict = Depends(current_token)) -> str:
+    return token["uid"]
 
 
 def now():
@@ -186,8 +191,11 @@ def history(uid: str, document_id: str | None) -> list[dict]:
 
 # def (bukan async def): jawab_chat blocking, FastAPI otomatis jalankan di threadpool
 @app.post("/chat")
-def chat(body: ChatIn, uid: str = Depends(current_user)):
+def chat(body: ChatIn, token: dict = Depends(current_token)):
+    uid = token["uid"]
     doc_id = str(body.document_id) if body.document_id else None
+    if doc_id and token["firebase"]["sign_in_provider"] == "anonymous":
+        raise HTTPException(403, "Login dulu untuk lanjut tanya soal dokumen ini")
     konteks = own_document(body.document_id, uid).get("text") if doc_id else None
     riwayat = []
     for h in history(uid, doc_id):
@@ -204,3 +212,14 @@ def chat(body: ChatIn, uid: str = Depends(current_user)):
 @app.get("/chat/history", response_model=list[ChatItem])
 def chat_history(document_id: UUID | None = None, uid: str = Depends(current_user)):
     return history(uid, str(document_id) if document_id else None)
+
+
+# Data konsultan masih DUMMY (Data Engineer): FE wajib tampilkan field "peringatan" + label "Contoh/Demo"
+@app.get("/konsultan/kategori")
+def konsultan_kategori():
+    return kategori_kasus()
+
+
+@app.get("/konsultan")
+def konsultan(kategori: str, provinsi: str | None = None, kota: str | None = None):
+    return cari_konsultan(kategori, provinsi, kota)
