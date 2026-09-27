@@ -83,11 +83,11 @@ export const mockChatReply: ChatResponse = {
 
 export const mockChatDokumen: ChatResponse = {
   jawaban:
-    "Pasal 6 di dokumen kamu menyatakan perjanjian cukup ditandatangani kedua pihak tanpa akta pejabat. Artinya transaksi ini tidak dibuat di hadapan PPAT, padahal balik nama sertifikat hanya bisa didaftarkan dengan akta PPAT.\n\nSebelum membayar, minta penjual sepakat membuat AJB di PPAT dan ubah Pasal 6.",
+    "Pasal 6 di dokumen Anda menyatakan perjanjian cukup ditandatangani kedua pihak tanpa akta pejabat. Artinya transaksi ini tidak dibuat di hadapan PPAT, padahal balik nama sertifikat hanya bisa didaftarkan dengan akta PPAT.\n\nSebelum membayar, minta penjual sepakat membuat AJB di PPAT dan ubah Pasal 6.",
   sumber: [
     {
       id: "dok-6",
-      uu: "Dokumen kamu",
+      uu: "Dokumen yang Anda unggah",
       pasal: "Pasal 6",
       kutipan: "Perjanjian ini cukup ditandatangani kedua belah pihak tanpa perlu dibuatkan akta oleh pejabat manapun.",
       asal: "dokumen",

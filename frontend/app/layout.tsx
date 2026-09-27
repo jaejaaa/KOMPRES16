@@ -1,27 +1,24 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Source_Serif_4 } from "next/font/google";
+import { Public_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { APP_NAME, APP_TAGLINE } from "@/lib/site";
 
-const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta", display: "swap" });
-const serif = Source_Serif_4({
-  subsets: ["latin"],
-  variable: "--font-source-serif",
-  style: ["normal", "italic"],
-  display: "swap",
-});
+// Public Sans: font yang dirancang untuk situs layanan publik, jelas dibaca di layar
+const publicSans = Public_Sans({ subsets: ["latin"], variable: "--font-public-sans", display: "swap" });
 
 export const metadata: Metadata = {
   title: `${APP_NAME} — ${APP_TAGLINE}`,
-  description: "Asisten yang membaca dokumen tanah dan menjelaskannya dengan bahasa sehari-hari, lengkap dengan dasar hukumnya.",
+  description:
+    "Periksa perjanjian jual beli dan dokumen tanah sebelum tanda tangan. Pasal berisiko dijelaskan dengan bahasa sederhana, lengkap dengan dasar hukumnya.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" className={`${jakarta.variable} ${serif.variable}`}>
-      <body className="flex min-h-screen flex-col antialiased">
+    <html lang="id" className={publicSans.variable}>
+      {/* overflow-x-clip: pengaman agar elemen dekoratif tidak membuat halaman bisa digeser ke samping di HP */}
+      <body className="flex min-h-screen flex-col overflow-x-clip antialiased">
         <Navbar />
         <div className="flex-1">{children}</div>
         <Footer />

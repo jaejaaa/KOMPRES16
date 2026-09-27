@@ -1,27 +1,46 @@
 import Link from "next/link";
-import { APP_NAME } from "@/lib/site";
-import LogoMark from "./LogoMark";
+import { MENU } from "@/lib/site";
+import { Wordmark } from "./LogoMark";
+import { container } from "./ui";
 
 export default function Footer() {
   return (
-    <footer className="mt-16 border-t border-line">
-      <div className="mx-auto flex max-w-5xl flex-col gap-4 px-4 py-8 text-sm text-ink-soft md:flex-row md:items-start md:justify-between md:px-8">
-        <div className="max-w-md">
-          <p className="flex items-center gap-2 font-semibold text-ink">
-            <LogoMark size={22} /> {APP_NAME}
+    <footer className="hero-bg mt-20 text-sm text-white/75">
+      <div className={`${container} grid grid-cols-1 gap-10 py-14 md:grid-cols-[1.4fr_1fr_1.2fr]`}>
+        <div>
+          <Wordmark inverse />
+          <p className="mt-4 max-w-sm leading-relaxed">
+            Membantu masyarakat memahami dokumen dan prosedur pertanahan dengan bahasa sederhana, lengkap dengan dasar
+            hukumnya.
           </p>
-          <p className="mt-2">
-            Informasi di aplikasi ini bersifat edukasi umum, bukan nasihat hukum. Untuk keputusan transaksi, konsultasikan
+        </div>
+
+        <nav aria-label="Menu bawah">
+          <h2 className="font-semibold text-white">Layanan</h2>
+          <ul className="mt-3 space-y-2">
+            {MENU.filter((m) => m.href !== "/").map((m) => (
+              <li key={m.href}>
+                <Link href={m.href} className="underline-offset-4 transition-colors hover:text-white hover:underline">
+                  {m.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div>
+          <h2 className="font-semibold text-white">Perhatian</h2>
+          <p className="mt-3 leading-relaxed">
+            Informasi di JagaTanah bersifat edukasi umum dan bukan nasihat hukum. Untuk keputusan transaksi, konsultasikan
             dengan PPAT, notaris, atau Kantor Pertanahan setempat.
           </p>
         </div>
-        <nav className="flex gap-5" aria-label="Tautan bawah">
-          <Link href="/upload" className="hover:text-ink">Cek dokumen</Link>
-          <Link href="/chat" className="hover:text-ink">Tanya hukum</Link>
-          <Link href="/panduan" className="hover:text-ink">Panduan</Link>
-        </nav>
       </div>
-      <p className="pb-6 text-center text-xs text-ink-soft">KOMPRES 16 · 2026</p>
+      <div className="border-t border-white/10">
+        <p className={`${container} py-5 text-xs`}>
+          © 2026 JagaTanah · Proyek Kompetisi KOMPRES 16 Informatika. Bukan situs resmi pemerintah.
+        </p>
+      </div>
     </footer>
   );
 }

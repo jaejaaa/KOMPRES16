@@ -7,7 +7,7 @@ export default function LegalText({ children }: { children: string }) {
     <>
       {children.split(RUJUKAN).map((part, i) =>
         i % 2 === 1 ? (
-          <cite key={i} className="rounded bg-brass/10 px-1 py-px text-[0.9em] font-medium not-italic text-brass-deep">
+          <cite key={i} className="box-decoration-clone rounded-md bg-primary-soft px-1.5 py-px text-[0.85em] font-semibold not-italic text-primary">
             {part.slice(1, -1)}
           </cite>
         ) : (

@@ -15,6 +15,15 @@ const PATHS = {
   scale: "M12 4v16M8 20h8M5 8h14M5 8l-2.5 6a2.5 2.5 0 0 0 5 0zm14 0-2.5 6a2.5 2.5 0 0 0 5 0z",
   info: "M12 11v6M12 7h.01M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z",
   refresh: "M20 11a8 8 0 1 0-2.3 5.7M20 5v6h-6",
+  chevron: "m6 9 6 6 6-6",
+  shield: "M12 3 20 6v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6z",
+  search: "M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM20 20l-4-4",
+  clock: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2",
+  list: "M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01",
+  lock: "M6 11h12v10H6zM8.5 11V7.5a3.5 3.5 0 0 1 7 0V11",
+  plus: "M12 5v14M5 12h14",
+  x: "M7 7l10 10M17 7 7 17",
+  filter: "M4 5h16l-6 8v5l-4 2v-7z",
 } as const;
 
 export type IconName = keyof typeof PATHS;

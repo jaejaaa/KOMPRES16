@@ -4,37 +4,47 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import { getAnalysis } from "@/lib/api";
 import type { AnalysisResult, RiskLevel } from "@/types/api";
-import RiskCard, { RiskBadge } from "@/components/RiskCard";
+import RiskCard, { RISK_STYLE, RiskBadge } from "@/components/RiskCard";
 import Icon from "@/components/Icon";
+import KonsultasiDokumen from "@/components/KonsultasiDokumen";
+import { btn, container, Notice, PageHeader, Panel, Spinner, StepBar } from "@/components/ui";
 
 const ORDER: Record<RiskLevel, number> = { high: 0, medium: 1, low: 2 };
+const LEVELS = ["high", "medium", "low"] as const;
 const POLL_MS = 2500;
 
-function Shell({ children }: { children: React.ReactNode }) {
+function Kerangka({ aktif, children }: { aktif: 1 | 2; children: React.ReactNode }) {
   return (
-    <main className="mx-auto max-w-3xl px-4 pb-8 pt-8 md:px-8">
-      <Link href="/upload" className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-soft hover:text-ink">
-        <Icon name="back" className="size-4" /> Cek dokumen lain
-      </Link>
-      {children}
+    <main>
+      <PageHeader
+        icon="list"
+        crumbs={[{ href: "/", label: "Beranda" }, { href: "/upload", label: "Cek Dokumen" }, { label: "Hasil Pemeriksaan" }]}
+        title="Hasil Pemeriksaan Dokumen"
+        desc="Pasal diurutkan dari risiko tertinggi. Buka kutipan untuk membaca teks asli pasalnya."
+      />
+      <StepBar aktif={aktif} />
+      <div className={`${container} pt-6`}>{children}</div>
     </main>
   );
 }
 
 function Masalah({ judul, pesan }: { judul: string; pesan: string }) {
   return (
-    <Shell>
-      <div className="mt-6 rounded-2xl border border-line bg-card p-6" role="alert">
-        <span className="flex size-10 items-center justify-center rounded-xl bg-risk-high-bg text-risk-high-text">
-          <Icon name="alert" />
+    <Kerangka aktif={2}>
+      <Panel className="mx-auto max-w-2xl text-center">
+        <span className="mx-auto flex size-16 items-center justify-center rounded-2xl bg-risk-high-bg text-risk-high">
+          <Icon name="alert" className="size-8" />
         </span>
-        <h1 className="mt-4 font-serif text-2xl font-semibold text-ink">{judul}</h1>
-        <p className="mt-2 text-ink-soft">{pesan}</p>
-        <Link href="/upload" className="mt-5 inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-3 font-semibold text-white hover:bg-brand-hover">
-          <Icon name="upload" className="size-4" /> Unggah ulang
-        </Link>
-      </div>
-    </Shell>
+        <h2 className="mt-5 text-2xl font-extrabold tracking-tight text-ink">{judul}</h2>
+        <p className="mx-auto mt-2 max-w-md text-ink-soft">{pesan}</p>
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <Link href="/upload" className={btn.primary}>
+            <Icon name="upload" className="size-4" /> Unggah ulang
+          </Link>
+          <Link href="/chat" className={btn.secondary}>Konsultasi Hukum</Link>
+        </div>
+      </Panel>
+    </Kerangka>
   );
 }
 
@@ -42,6 +52,7 @@ export default function AnalisisPage() {
   const { id } = useParams<{ id: string }>();
   const [data, setData] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [filter, setFilter] = useState<RiskLevel | "all">("all");
 
   useEffect(() => {
     let stop = false;
@@ -60,87 +71,167 @@ export default function AnalisisPage() {
     return () => { stop = true; clearTimeout(timer); };
   }, [id]);
 
-  if (error) return <Masalah judul="Hasil tidak bisa dimuat" pesan={error} />;
+  if (error) return <Masalah judul="Hasil tidak dapat dimuat" pesan={error} />;
 
   if (data?.status === "failed")
-    return <Masalah judul="Analisis gagal" pesan={data.error ?? "Dokumen tidak bisa dianalisis."} />;
+    return <Masalah judul="Analisis gagal" pesan={data.error ?? "Dokumen tidak dapat dianalisis."} />;
 
   if (!data || data.status !== "done")
     return (
-      <Shell>
-        <div className="mt-6 rounded-2xl border border-line bg-card p-6" aria-live="polite">
-          <div className="flex items-center gap-3">
-            <span className="flex gap-1 text-brand" aria-hidden>
-              <span className="typing-dot size-2 rounded-full bg-current" />
-              <span className="typing-dot size-2 rounded-full bg-current" />
-              <span className="typing-dot size-2 rounded-full bg-current" />
+      <Kerangka aktif={1}>
+        <Panel className="mx-auto max-w-2xl">
+          <div className="flex items-center gap-4" aria-live="polite">
+            <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-primary text-white shadow-lift">
+              <Spinner className="size-7" />
             </span>
-            <p className="font-semibold text-ink">Sedang membaca dokumen kamu</p>
+            <div>
+              <p className="text-lg font-bold text-ink">Dokumen sedang dianalisis</p>
+              <p className="text-sm text-ink-soft">Biasanya kurang dari 30 detik. Halaman ini akan terisi otomatis.</p>
+            </div>
           </div>
-          <p className="mt-2 text-sm text-ink-soft">Biasanya kurang dari 30 detik. Halaman ini akan terisi otomatis.</p>
+          <div className="mt-6 h-2 overflow-hidden rounded-full bg-bg">
+            <div className="progress-bar h-full w-2/5 rounded-full bg-linear-to-r from-secondary to-primary" />
+          </div>
           <div className="mt-6 space-y-3" aria-hidden>
-            <div className="h-3 w-3/4 animate-pulse rounded bg-line/60" />
-            <div className="h-3 w-full animate-pulse rounded bg-line/60" />
-            <div className="h-3 w-5/6 animate-pulse rounded bg-line/60" />
+            {["w-3/4", "w-full", "w-5/6"].map((w) => <div key={w} className={`h-3 ${w} animate-pulse rounded-full bg-bg`} />)}
           </div>
-        </div>
-      </Shell>
+        </Panel>
+      </Kerangka>
     );
 
   const risks = [...data.risks].sort((a, b) => (ORDER[a.level] ?? 1) - (ORDER[b.level] ?? 1));
   const count = (lvl: RiskLevel) => risks.filter((r) => r.level === lvl).length;
   const tinggi = count("high");
+  const sedang = count("medium");
+  const tampil = filter === "all" ? risks : risks.filter((r) => r.level === filter);
+  const chips: { id: RiskLevel | "all"; label: string; n: number }[] = [
+    { id: "all", label: "Semua", n: risks.length },
+    ...LEVELS.map((l) => ({ id: l, label: RISK_STYLE[l].label, n: count(l) })),
+  ];
 
   return (
-    <Shell>
-      <h1 className="mt-4 font-serif text-3xl font-semibold text-ink">Hasil pengecekan dokumen</h1>
-
-      <section className="mt-6 rounded-2xl border border-line bg-card p-6">
-        <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-brass-deep">Ringkasan</h2>
-        <p className="mt-3 font-serif text-lg leading-relaxed text-ink">{data.summary}</p>
-
-        <dl className="mt-6 grid gap-2 sm:grid-cols-3 sm:gap-3">
-          {(["high", "medium", "low"] as const).map((lvl) => (
-            <div key={lvl} className="flex items-center justify-between rounded-xl border border-line bg-paper px-4 py-3 sm:block sm:p-3">
-              <dt><RiskBadge level={lvl} /></dt>
-              <dd className="font-serif text-2xl font-semibold text-ink sm:mt-2 sm:text-3xl">
-                {count(lvl)} <span className="font-sans text-sm font-normal text-ink-soft">pasal</span>
-              </dd>
+    <Kerangka aktif={2}>
+      <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[1fr_320px]">
+        <div className="min-w-0 space-y-6">
+          <section className="fade-up grid grid-cols-1 gap-6 rounded-3xl border border-line bg-surface p-6 shadow-soft md:grid-cols-[1fr_220px] md:p-8">
+            <div>
+              <p className="text-sm font-semibold text-secondary">Ringkasan</p>
+              <p className="mt-3 text-lg leading-relaxed text-ink">{data.summary}</p>
             </div>
-          ))}
-        </dl>
+            <div className="rounded-2xl bg-bg p-5">
+              <p className="text-sm text-ink-soft">Pasal ditandai</p>
+              <p className="text-5xl font-extrabold tracking-tight text-primary">{risks.length}</p>
+              {risks.length > 0 && (
+                <div className="mt-4 flex h-3 gap-1 overflow-hidden rounded-full" aria-hidden>
+                  {LEVELS.map((l, i) =>
+                    count(l) ? (
+                      <span
+                        key={l}
+                        className={`grow-x h-full rounded-full ${RISK_STYLE[l].bar}`}
+                        style={{ flexGrow: count(l), animationDelay: `${i * 150}ms` }}
+                      />
+                    ) : null,
+                  )}
+                </div>
+              )}
+              <ul className="mt-4 space-y-1.5 text-sm">
+                {LEVELS.map((l) => (
+                  <li key={l} className="flex items-center justify-between gap-2">
+                    <span className="flex items-center gap-2 text-ink-soft">
+                      <span className={`size-2.5 rounded-full ${RISK_STYLE[l].bar}`} /> {RISK_STYLE[l].label}
+                    </span>
+                    <span className="font-bold tabular-nums text-ink">{count(l)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="md:col-span-2">
+              {tinggi > 0 ? (
+                <Notice tone="danger" title={`Ditemukan ${tinggi} pasal berisiko tinggi`}>
+                  Sebaiknya bahas dengan penjual dan PPAT sebelum tanda tangan atau membayar.
+                </Notice>
+              ) : sedang > 0 ? (
+                <Notice tone="warning" title={`Ada ${sedang} pasal yang perlu dicek`}>
+                  Pastikan maksud pasal tersebut jelas sebelum tanda tangan.
+                </Notice>
+              ) : (
+                <Notice tone="success" title="Tidak ditemukan pasal berisiko tinggi">
+                  Tetap periksa keaslian sertifikat sebelum bertransaksi.
+                </Notice>
+              )}
+            </div>
+          </section>
 
-        {tinggi > 0 && (
-          <p className="mt-4 flex gap-2 rounded-xl bg-risk-high-bg p-3 text-sm text-risk-high-text">
-            <Icon name="alert" className="mt-0.5 size-4 shrink-0" />
-            Ada {tinggi} pasal berisiko tinggi. Sebaiknya bahas dulu dengan penjual dan PPAT sebelum tanda tangan atau membayar.
-          </p>
-        )}
-      </section>
+          <section>
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 className="text-xl font-extrabold tracking-tight text-ink">Rincian temuan</h2>
+              <div className="flex flex-wrap gap-2" role="group" aria-label="Saring temuan">
+                {chips.map((c) => (
+                  <button
+                    key={c.id}
+                    type="button"
+                    onClick={() => setFilter(c.id)}
+                    disabled={c.n === 0}
+                    aria-pressed={filter === c.id}
+                    className={`flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition-all disabled:opacity-40 ${
+                      filter === c.id ? "bg-primary text-white shadow-soft" : "border border-line bg-surface text-ink-soft hover:border-primary hover:text-primary"
+                    }`}
+                  >
+                    {c.label}
+                    <span className={`rounded-full px-1.5 text-xs tabular-nums ${filter === c.id ? "bg-white/20" : "bg-bg"}`}>{c.n}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div key={filter} className="mt-4 space-y-3">
+              {tampil.length === 0 && <p className="text-ink-soft">Tidak ada pasal yang ditandai.</p>}
+              {tampil.map((r, i) => (
+                <div key={`${r.pasal}-${i}`} className="fade-up" style={{ animationDelay: `${i * 60}ms` }}>
+                  <RiskCard risk={r} />
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
 
-      <section className="mt-8 space-y-3">
-        <h2 className="font-serif text-xl font-semibold text-ink">Detail per pasal</h2>
-        {risks.length === 0 && <p className="text-ink-soft">Tidak ditemukan pasal berisiko.</p>}
-        {risks.map((r, i) => <RiskCard key={`${r.pasal}-${i}`} risk={r} />)}
-      </section>
+        <aside className="space-y-4 lg:sticky lg:top-28">
+          <Panel title="Langkah selanjutnya" icon="arrow">
+            <KonsultasiDokumen documentId={data.document_id} />
+            <ul className="mt-4 space-y-1">
+              {[
+                { href: "/panduan/cek-keaslian", icon: "book" as const, label: "Cek keaslian sertifikat" },
+                { href: "/panduan/balik-nama", icon: "book" as const, label: "Prosedur balik nama" },
+                { href: "/upload", icon: "upload" as const, label: "Periksa dokumen lain" },
+              ].map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="group flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-primary-soft hover:text-primary">
+                    <span className="flex size-8 items-center justify-center rounded-xl bg-bg text-primary">
+                      <Icon name={l.icon} className="size-4" />
+                    </span>
+                    <span className="flex-1">{l.label}</span>
+                    <Icon name="arrow" className="size-4 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Panel>
 
-      <Link
-        href={`/chat?doc=${encodeURIComponent(data.document_id)}`}
-        className="group mt-8 flex items-center gap-4 rounded-2xl border border-brand/20 bg-brand-soft p-5 transition-colors hover:border-brand/40"
-      >
-        <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand text-white">
-          <Icon name="chat" />
-        </span>
-        <span className="flex-1">
-          <span className="block font-semibold text-ink">Masih bingung? Tanya soal dokumen ini</span>
-          <span className="block text-sm text-ink-soft">Misalnya: &ldquo;Pasal 6 maksudnya apa? Apa yang harus saya minta ke penjual?&rdquo;</span>
-        </span>
-        <Icon name="arrow" className="size-5 text-brand transition-transform group-hover:translate-x-0.5" />
-      </Link>
+          <div className="rounded-3xl border border-line bg-surface p-5 text-sm shadow-soft">
+            <div className="flex justify-between gap-4">
+              <span className="text-ink-soft">Nomor pemeriksaan</span>
+              <span className="font-mono font-bold uppercase text-ink">{data.document_id.slice(0, 8)}</span>
+            </div>
+            <div className="mt-2 flex items-center justify-between gap-4">
+              <span className="text-ink-soft">Tingkat risiko tertinggi</span>
+              <RiskBadge level={tinggi ? "high" : sedang ? "medium" : "low"} />
+            </div>
+          </div>
 
-      <p className="mt-6 text-xs text-ink-soft">
-        Hasil ini bantuan awal, bukan pengganti konsultasi dengan notaris/PPAT.
-      </p>
-    </Shell>
+          <Notice tone="warning" title="Bukan nasihat hukum">
+            Hasil ini bantuan awal. Konsultasikan keputusan transaksi dengan PPAT atau notaris.
+          </Notice>
+        </aside>
+      </div>
+    </Kerangka>
   );
 }

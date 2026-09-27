@@ -1,76 +1,120 @@
 @import "tailwindcss";
 
-/* Warna aplikasi. Dipakai lewat class: bg-brand, text-ink, border-line, dst. */
+/* JagaTanah — warna identitas kelompok: merah maroon #620000 + aksen emas, sudut membulat.
+   Dipakai lewat class: bg-primary, text-ink, border-line, shadow-soft, dst. */
 @theme {
-  --color-brand: #6B1E2E;        /* marun: logo, tombol utama, link */
-  --color-brand-hover: #561623;
-  --color-brand-soft: #F4E9EB;   /* latar tipis marun: sorotan, bubble */
-  --color-brass: #8A6D3B;        /* kuningan: aksen tipis & dekoratif saja */
-  --color-brass-deep: #6B5229;   /* kuningan untuk TEKS (kontras cukup di atas kertas) */
-  --color-paper: #F7F4F2;        /* background kertas */
-  --color-card: #FFFFFF;
-  --color-line: #D9CFCB;         /* border */
-  --color-ink: #221A1A;          /* teks utama */
-  --color-ink-soft: #5C4F4F;     /* teks pendukung */
+  --color-primary: #620000;        /* maroon: latar pembuka, tombol utama, link */
+  --color-primary-hover: #4D0000;
+  --color-primary-deep: #4A0000;   /* bayangan / ujung latar maroon */
+  --color-secondary: #8E1B1B;      /* maroon terang: gradasi kecil, penanda aktif */
+  --color-primary-soft: #F7ECEC;   /* latar tipis maroon: sorotan, hover */
+  --color-accent: #E8B23A;         /* emas: tombol ajakan di atas maroon, penanda */
+  --color-accent-hover: #D9A12A;
+  --color-accent-soft: #FBF1DA;
+  --color-accent-ink: #5E4300;
+
+  --color-bg: #F6F5F4;
+  --color-muted: #EEEBEA;          /* latar pemberitahuan netral */
+  --color-surface: #FFFFFF;
+  --color-line: #E6E1DF;
+  --color-line-strong: #C4BAB6;
+  --color-ink: #1E1716;
+  --color-ink-soft: #5C504D;
 
   /* Warna risiko: HANYA untuk label risiko, selalu + ikon + teks */
   --color-risk-high: #D92D20;
-  --color-risk-high-bg: #FEE4E2;
+  --color-risk-high-bg: #FEECEB;
   --color-risk-high-text: #912018;
-  --color-risk-mid: #F79009;
-  --color-risk-mid-bg: #FEF0C7;
-  --color-risk-mid-text: #93370D;
-  --color-risk-low: #079455;
-  --color-risk-low-bg: #DCFAE6;
-  --color-risk-low-text: #085D3A;
+  --color-risk-mid: #E08A00;
+  --color-risk-mid-bg: #FEF3DC;
+  --color-risk-mid-text: #7A3E00;
+  --color-risk-low: #12925A;
+  --color-risk-low-bg: #E3F7EC;
+  --color-risk-low-text: #0B5A33;
+
+  --shadow-soft: 0 1px 2px rgb(30 23 22 / 0.04), 0 8px 24px -10px rgb(30 23 22 / 0.12);
+  --shadow-lift: 0 2px 6px rgb(30 23 22 / 0.06), 0 22px 44px -16px rgb(98 0 0 / 0.28);
 }
 
 @theme inline {
-  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-source-serif), ui-serif, Georgia, serif;
+  --font-sans: var(--font-public-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
-html { color-scheme: light; }
+html { color-scheme: light; scroll-behavior: smooth; }
 
 body {
-  background: var(--color-paper);
+  background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-sans);
 }
 
+/* Fokus keyboard: emas + cincin gelap, terlihat di latar terang maupun maroon */
 :focus-visible {
-  outline: 2px solid var(--color-brand);
-  outline-offset: 2px;
+  outline: 3px solid var(--color-accent);
+  outline-offset: 0;
+  box-shadow: 0 0 0 6px var(--color-ink);
 }
 
-/* Kaca: hanya dipakai di atas konten (navbar, lensa), bukan di atas background polos */
+/* Kolom ketik yang bingkai luarnya sudah menyala saat fokus (focus-within), mis. kolom chat:
+   jangan tampilkan kotak fokus ganda di dalamnya. */
+.tanpa-cincin-fokus:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Latar maroon polos untuk pembuka, judul halaman, dan footer */
+.hero-bg { background: var(--color-primary); }
+
+/* Kaca: navbar melayang */
 .glass {
-  background: rgb(247 244 242 / 0.72);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  border-bottom: 1px solid rgb(217 207 203 / 0.7);
+  background: rgb(255 255 255 / 0.94);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .glass { background: var(--color-paper); }
+  .glass { background: var(--color-surface); }
 }
 
-/* Lensa kaca di landing page: kaca bening di atas "dokumen" */
-.lens {
-  background: rgb(255 255 255 / 0.55);
-  backdrop-filter: blur(10px) saturate(150%);
-  -webkit-backdrop-filter: blur(10px) saturate(150%);
-  border: 1px solid rgb(255 255 255 / 0.8);
-  box-shadow: 0 1px 0 rgb(255 255 255 / 0.9) inset, 0 18px 40px -12px rgb(34 26 26 / 0.28);
-}
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .lens { background: var(--color-card); }
-}
+/* Kartu yang terangkat saat disorot */
+.lift { transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+.lift:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+
+/* Muncul saat di-scroll (lihat components/Reveal.tsx). Default terlihat; disembunyikan hanya lewat data-shown="false" */
+.reveal { transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal[data-shown="false"] { opacity: 0; transform: translateY(18px); }
 
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: none; }
 }
 .fade-up { animation: fade-up 0.35s ease-out both; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.float { animation: float 5s ease-in-out infinite; }
+
+/* Garis pemindai yang turun-naik di atas dokumen (beranda) */
+@keyframes scan {
+  0% { top: 8%; }
+  50% { top: 86%; }
+  100% { top: 8%; }
+}
+.scan-line { animation: scan 4.5s ease-in-out infinite; }
+
+@keyframes pop-in {
+  0% { opacity: 0; transform: translateX(-8px) scale(0.97); }
+  100% { opacity: 1; transform: none; }
+}
+.pop-in { animation: pop-in 0.5s ease-out both; }
+
+/* Bar yang mengisi dari kiri (proporsi risiko di halaman hasil) */
+@keyframes grow-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.grow-x { transform-origin: left; animation: grow-x 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 
 @keyframes typing {
   0%, 80%, 100% { opacity: 0.25; }
@@ -80,10 +124,25 @@ body {
 .typing-dot:nth-child(2) { animation-delay: 0.15s; }
 .typing-dot:nth-child(3) { animation-delay: 0.3s; }
 
+@keyframes progress-indeterminate {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(250%); }
+}
+.progress-bar { animation: progress-indeterminate 1.4s ease-in-out infinite; }
+
+/* <details> tanpa segitiga bawaan + isi yang membuka halus */
+summary { list-style: none; cursor: pointer; }
+summary::-webkit-details-marker { display: none; }
+details[open] > summary .chevron { transform: rotate(180deg); }
+details[open] > summary .plus { transform: rotate(45deg); }
+details[open] > :not(summary) { animation: fade-up 0.25s ease-out both; }
+
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
+  .reveal[data-shown="false"] { opacity: 1; transform: none; }
 }

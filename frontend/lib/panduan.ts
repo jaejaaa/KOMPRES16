@@ -43,8 +43,12 @@ function olah(slug: string, raw: RawPanduan, ringkas: string): Panduan {
 }
 
 export const PANDUAN: Panduan[] = [
-  olah("cek-keaslian", cekKeaslian, "Pastikan sertifikat asli dan cocok dengan data BPN sebelum membayar apa pun."),
-  olah("balik-nama", balikNama, "Alur lengkap dari cek sertifikat, bayar pajak, AJB di PPAT, sampai sertifikat atas nama kamu."),
+  olah("cek-keaslian", cekKeaslian, "Pastikan sertifikat asli dan cocok dengan data Kantor Pertanahan sebelum membayar apa pun."),
+  olah("balik-nama", balikNama, "Alur lengkap dari cek sertifikat, pembayaran pajak, AJB di PPAT, sampai sertifikat atas nama Anda."),
 ];
 
 export const getPanduan = (slug: string) => PANDUAN.find((p) => p.slug === slug);
+
+// Jumlah rujukan "(... Pasal ...)" di seluruh panduan, untuk info di daftar panduan
+export const jumlahRujukan = (p: Panduan) =>
+  p.bagian.reduce((n, b) => n + (b.teks.match(/\([^()]*Pasal[^()]*\)/g)?.length ?? 0), 0);

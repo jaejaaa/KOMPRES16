@@ -9,10 +9,18 @@ const USE_MOCK = process.env.NEXT_PUBLIC_USE_MOCK !== "false" || !BASE_URL;
 const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 const ERROR_TEXT: Record<number, string> = {
-  401: "Sesi kamu habis. Muat ulang halaman lalu coba lagi.",
+  401: "Sesi Anda telah berakhir. Muat ulang halaman lalu coba lagi.",
+  403: "Masuk dengan Google terlebih dahulu untuk bertanya soal dokumen ini.",
   413: `Ukuran file terlalu besar. Maksimal ${MAX_PDF_MB} MB.`,
   415: "File harus berformat PDF.",
 };
+
+// Error dari backend, lengkap dengan kode status (mis. 403 = tamu belum masuk)
+export class ApiError extends Error {
+  constructor(public status: number, message: string) {
+    super(message);
+  }
+}
 
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   const token = await getToken();
@@ -23,7 +31,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   const data = await res.json().catch(() => null);
   if (!res.ok) {
     const detail = typeof data?.detail === "string" ? data.detail : null;
-    throw new Error(ERROR_TEXT[res.status] ?? detail ?? `Terjadi kesalahan (${res.status}). Coba lagi.`);
+    throw new ApiError(res.status, ERROR_TEXT[res.status] ?? detail ?? `Terjadi kesalahan (${res.status}). Coba lagi.`);
   }
   return data as T;
 }

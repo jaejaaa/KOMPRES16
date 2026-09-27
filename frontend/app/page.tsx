@@ -1,157 +1,188 @@
 import Link from "next/link";
-import Icon, { type IconName } from "@/components/Icon";
+import HeroBackdrop from "@/components/HeroBackdrop";
+import Icon from "@/components/Icon";
+import LayananTabs from "@/components/LayananTabs";
+import Reveal from "@/components/Reveal";
+import { btn, container, NAV_OFFSET } from "@/components/ui";
 import { MAX_PDF_MB } from "@/lib/site";
 
-const LANGKAH = [
-  { judul: "Unggah PDF", isi: `Perjanjian jual beli, AJB, atau surat tanah lain. Cukup PDF digital, maksimal ${MAX_PDF_MB} MB.` },
-  { judul: "Pasal berisiko ditandai", isi: "Tiap pasal diberi label tinggi, perlu dicek, atau aman, lengkap dengan alasannya." },
-  { judul: "Tanya kalau masih bingung", isi: "Asisten menjawab dengan bahasa sehari-hari dan menyebut pasal dasarnya." },
+const PINTASAN = [
+  { href: "/upload", judul: "Cek Dokumen", isi: "Periksa pasal perjanjian Anda" },
+  { href: "/chat", judul: "Konsultasi Hukum", isi: "Tanya seputar hukum pertanahan" },
+  { href: "/panduan", judul: "Panduan Prosedur", isi: "Cek sertifikat dan balik nama" },
 ];
 
-const FITUR: { href: string; icon: IconName; judul: string; isi: string }[] = [
-  { href: "/upload", icon: "doc", judul: "Cek dokumen tanah", isi: "Temukan pasal yang merugikan sebelum kamu tanda tangan atau bayar uang muka." },
-  { href: "/chat", icon: "chat", judul: "Tanya hukum tanah", isi: "SHM vs HGB, siapa bayar BPHTB, sah atau tidaknya jual beli tanpa PPAT." },
-  { href: "/panduan", icon: "book", judul: "Panduan prosedur", isi: "Langkah cek keaslian sertifikat dan balik nama, disertai pasal rujukannya." },
+const CARA = [
+  { judul: "Unggah dokumen", isi: `Pilih file PDF perjanjian jual beli, AJB, atau surat tanah lain. Ukuran maksimal ${MAX_PDF_MB} MB.` },
+  { judul: "Tunggu analisis", isi: "Setiap pasal dibaca dan dicocokkan dengan peraturan pertanahan. Prosesnya hanya beberapa detik." },
+  { judul: "Baca hasilnya", isi: "Pasal diberi tingkat risiko beserta alasannya. Bila masih ragu, tanyakan langsung di Konsultasi Hukum." },
 ];
 
-const REGULASI = [
-  "UU 5/1960 (UUPA)",
-  "PP 24/1997",
-  "PP 18/2021",
-  "Permen ATR/BPN 3/2023",
-  "UU 28/2009",
-  "UU 2/2012",
-  "UU 27/2022",
-  "KUHPerdata Buku II",
-  "UU 21/1997",
+const REGULASI: { nama: string; tentang: string; dicabut?: boolean }[] = [
+  { nama: "UU No. 5 Tahun 1960", tentang: "Peraturan Dasar Pokok-Pokok Agraria (UUPA)" },
+  { nama: "PP No. 24 Tahun 1997", tentang: "Pendaftaran Tanah" },
+  { nama: "PP No. 18 Tahun 2021", tentang: "Hak Pengelolaan, Hak atas Tanah, Satuan Rumah Susun, dan Pendaftaran Tanah" },
+  { nama: "Permen ATR/BPN No. 3 Tahun 2023", tentang: "Penerbitan Dokumen Elektronik dalam Kegiatan Pendaftaran Tanah" },
+  { nama: "UU No. 28 Tahun 2009", tentang: "Pajak Daerah dan Retribusi Daerah (ketentuan BPHTB)" },
+  { nama: "UU No. 2 Tahun 2012", tentang: "Pengadaan Tanah bagi Pembangunan untuk Kepentingan Umum" },
+  { nama: "UU No. 27 Tahun 2022", tentang: "Pelindungan Data Pribadi" },
+  { nama: "KUHPerdata Buku II", tentang: "Kebendaan" },
+  { nama: "UU No. 21 Tahun 1997", tentang: "Bea Perolehan Hak atas Tanah dan Bangunan", dicabut: true },
 ];
 
-function DokumenLensa() {
-  return (
-    <div className="relative mx-auto w-full max-w-md pb-20 md:pb-10" aria-hidden>
-      {/* Selembar perjanjian */}
-      <div className="rotate-[-1.5deg] rounded-sm border border-line bg-card px-6 py-7 font-serif text-[13px] leading-relaxed text-ink-soft shadow-[0_24px_48px_-24px_rgb(34_26_26/0.35)]">
-        <p className="text-center text-xs font-semibold tracking-[0.2em] text-ink">PERJANJIAN JUAL BELI TANAH</p>
-        <div className="mx-auto mt-2 h-px w-16 bg-brass" />
-        <p className="mt-4"><b className="text-ink">Pasal 1.</b> Pihak Pertama menjual sebidang tanah Hak Milik dengan Sertifikat No. 1234 seluas 120 m² kepada Pihak Kedua.</p>
-        <p className="mt-2"><b className="text-ink">Pasal 3.</b> Pihak Kedua wajib melunasi seluruh harga tanah paling lambat 7 hari sejak perjanjian ini ditandatangani.</p>
-        <p className="mt-2 rounded bg-risk-high-bg/70 px-1 -mx-1">
-          <b className="text-ink">Pasal 6.</b> Perjanjian ini cukup ditandatangani kedua belah pihak tanpa perlu dibuatkan akta oleh pejabat manapun.
-        </p>
-        <p className="mt-2"><b className="text-ink">Pasal 8.</b> Biaya balik nama ditanggung oleh Pihak Kedua.</p>
-        <div className="mt-4 space-y-2">
-          <div className="h-2 w-full rounded bg-line/60" />
-          <div className="h-2 w-5/6 rounded bg-line/60" />
-          <div className="h-2 w-2/3 rounded bg-line/60" />
-        </div>
-      </div>
-
-      {/* Lensa kaca yang menyorot pasal berisiko */}
-      <div className="lens absolute -bottom-2 left-4 right-4 rounded-3xl p-5 md:-left-10 md:right-10">
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-risk-high-bg px-2.5 py-1 text-xs font-semibold text-risk-high-text">
-          <Icon name="alert" className="size-3.5" /> Risiko tinggi · Pasal 6
-        </span>
-        <p className="mt-3 font-serif text-lg leading-snug text-ink">
-          &ldquo;&hellip;tanpa perlu dibuatkan <mark className="bg-transparent text-brand underline decoration-brass decoration-2 underline-offset-4">akta oleh pejabat manapun</mark>.&rdquo;
-        </p>
-        <p className="mt-2 text-sm text-ink-soft">
-          Tanpa akta PPAT, sertifikat tidak bisa dibalik nama ke nama pembeli.
-        </p>
-        <p className="mt-2 text-xs font-medium text-brass-deep">PP 24/1997 Pasal 37 ayat 1</p>
-      </div>
-    </div>
-  );
-}
+const FAQ = [
+  { q: "Apakah layanan ini dipungut biaya?", a: "Tidak. JagaTanah dapat digunakan tanpa biaya." },
+  {
+    q: "Apakah saya perlu masuk (login)?",
+    a: "Pemeriksaan dokumen dan tanya jawab umum bisa langsung dipakai tanpa akun. Masuk dengan Google diperlukan untuk bertanya soal dokumen yang sudah diperiksa dan agar riwayat Anda tersimpan permanen. Tanpa masuk, riwayat hanya tersimpan selama tab peramban masih terbuka.",
+  },
+  {
+    q: "Dokumen apa saja yang bisa diperiksa?",
+    a: `Perjanjian jual beli, Akta Jual Beli (AJB), perjanjian sewa, dan dokumen tanah lain dalam bentuk PDF digital, maksimal ${MAX_PDF_MB} MB. PDF hasil pindaian (scan) atau foto belum bisa dibaca.`,
+  },
+  {
+    q: "Apakah dokumen saya aman?",
+    a: "File PDF tidak disimpan. Sistem hanya menyimpan teks dokumen untuk keperluan analisis dan tanya jawab, dan data tersebut hanya bisa dibuka dari akun Anda. Untuk pengguna tamu, data tidak bisa dibuka lagi setelah tab ditutup.",
+  },
+  {
+    q: "Apakah hasil pemeriksaan bisa dijadikan dasar hukum?",
+    a: "Tidak. Hasil pemeriksaan adalah bantuan awal untuk memahami isi dokumen. Keputusan transaksi tetap perlu dikonsultasikan dengan PPAT, notaris, atau Kantor Pertanahan.",
+  },
+  {
+    q: "Dari mana jawaban konsultasi hukum berasal?",
+    a: "Dari kumpulan peraturan pertanahan dan panduan prosedur. Setiap jawaban menampilkan pasal yang dijadikan dasar sehingga dapat Anda periksa sendiri.",
+  },
+];
 
 export default function Home() {
   return (
     <main>
-      {/* Hero */}
-      <section className="mx-auto grid max-w-5xl items-center gap-12 px-4 pb-12 pt-10 md:grid-cols-[1.1fr_1fr] md:px-8 md:pt-16">
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brass-deep">Untuk calon pembeli tanah</p>
-          <h1 className="mt-3 font-serif text-4xl font-semibold leading-[1.1] text-ink md:text-5xl">
-            Baca dulu pasalnya, <span className="text-brand">baru tanda tangan.</span>
-          </h1>
-          <p className="mt-4 max-w-lg text-lg leading-relaxed text-ink-soft">
-            Unggah perjanjian jual beli atau AJB. Kami tandai pasal yang berisiko dan jelaskan dengan bahasa sehari-hari,
-            lengkap dengan dasar hukumnya.
-          </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Link href="/upload" className="inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-3 font-semibold text-white transition-colors hover:bg-brand-hover">
-              Cek dokumen sekarang <Icon name="arrow" className="size-4" />
-            </Link>
-            <Link href="/chat" className="inline-flex items-center gap-2 rounded-xl border border-line bg-card px-5 py-3 font-semibold text-ink transition-colors hover:border-brand/40">
-              Tanya hukum tanah
-            </Link>
-          </div>
-          <p className="mt-5 flex items-center gap-2 text-sm text-ink-soft">
-            <Icon name="scale" className="size-4 text-brass" />
-            Berdasarkan 9 peraturan pertanahan, dari UUPA sampai aturan sertifikat elektronik.
-          </p>
-        </div>
-        <DokumenLensa />
-      </section>
-
-      {/* Cara kerja */}
-      <section className="border-y border-line bg-card/60">
-        <div className="mx-auto max-w-5xl px-4 py-12 md:px-8">
-          <h2 className="font-serif text-2xl font-semibold text-ink">Cara kerjanya</h2>
-          <ol className="mt-6 grid gap-6 md:grid-cols-3">
-            {LANGKAH.map((l, i) => (
-              <li key={l.judul} className="flex gap-4">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-brass/50 font-serif text-lg font-semibold text-brass-deep">
-                  {i + 1}
-                </span>
-                <div>
-                  <h3 className="font-semibold text-ink">{l.judul}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-ink-soft">{l.isi}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Fitur */}
-      <section className="mx-auto max-w-5xl px-4 py-12 md:px-8">
-        <h2 className="font-serif text-2xl font-semibold text-ink">Yang bisa kamu lakukan</h2>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          {FITUR.map((f) => (
-            <Link
-              key={f.href}
-              href={f.href}
-              className="group rounded-2xl border border-line bg-card p-5 transition-colors hover:border-brand/40"
+      {/* Pembuka: satu layar penuh, maroon dengan foto patung keadilan di latar */}
+      <section className={`relative overflow-hidden bg-[#650000] ${NAV_OFFSET} flex min-h-svh flex-col text-white`}>
+        <HeroBackdrop />
+        <div className={`${container} relative flex flex-1 items-center py-16`}>
+          <div className="fade-up max-w-3xl">
+            <h1
+              className="text-[2.75rem] font-extrabold leading-[1.04] tracking-tight sm:text-6xl lg:text-7xl"
+              style={{ textShadow: "0 2px 24px rgba(60,0,0,.6)" }}
             >
-              <span className="flex size-10 items-center justify-center rounded-xl bg-brand-soft text-brand">
-                <Icon name={f.icon} />
-              </span>
-              <h3 className="mt-4 font-semibold text-ink">{f.judul}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-ink-soft">{f.isi}</p>
-              <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand">
-                Buka <Icon name="arrow" className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </span>
-            </Link>
-          ))}
+              Periksa dokumen tanah <span className="text-accent">sebelum tanda tangan.</span>
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80 md:text-xl">
+              Unggah perjanjian jual beli atau dokumen tanah lainnya. Pasal yang berisiko ditandai dan dijelaskan dengan
+              bahasa sederhana, lengkap dengan dasar hukumnya. Gratis, bisa langsung dipakai tanpa membuat akun.
+            </p>
+            <div className="mt-9 flex flex-wrap gap-3">
+              <Link href="/upload" className={`${btn.accent} px-7 py-3.5`}>
+                Mulai Pemeriksaan <Icon name="arrow" className="size-4" />
+              </Link>
+              <Link href="/chat" className={`${btn.onDark} px-7 py-3.5`}>
+                Konsultasi Hukum
+              </Link>
+            </div>
+          </div>
         </div>
-      </section>
 
-      {/* Dasar hukum */}
-      <section className="mx-auto max-w-5xl px-4 md:px-8">
-        <div className="rounded-2xl border border-line bg-card p-6 md:p-8">
-          <h2 className="font-serif text-2xl font-semibold text-ink">Dasar hukumnya bisa kamu cek sendiri</h2>
-          <p className="mt-2 max-w-2xl text-ink-soft">
-            Setiap jawaban menyebut pasal yang dipakai. Basis pengetahuannya disusun dari peraturan berikut, dan aturan
-            yang sudah dicabut tidak dipakai sebagai jawaban.
-          </p>
-          <ul className="mt-5 flex flex-wrap gap-2">
-            {REGULASI.map((r) => (
-              <li key={r} className="rounded-full border border-line bg-paper px-3 py-1 text-sm text-ink">
-                {r}
-                {r === "UU 21/1997" && <span className="text-ink-soft"> · dicabut</span>}
+        {/* Pintasan layanan di dasar layar pembuka */}
+        <nav aria-label="Pintasan layanan" className="relative border-t border-white/15">
+          <ul className={`${container} grid grid-cols-1 sm:grid-cols-3`}>
+            {PINTASAN.map((p, i) => (
+              <li key={p.href} className={i > 0 ? "border-t border-white/15 sm:border-l sm:border-t-0" : ""}>
+                <Link
+                  href={p.href}
+                  className={`group flex items-center justify-between gap-4 py-5 transition-colors hover:text-accent ${i === 0 ? "sm:pr-6" : "sm:px-6"}`}
+                >
+                  <span>
+                    <span className="block font-semibold">{p.judul}</span>
+                    <span className="block text-sm text-white/65">{p.isi}</span>
+                  </span>
+                  <Icon name="arrow" className="size-5 shrink-0 text-accent transition-transform group-hover:translate-x-1" />
+                </Link>
               </li>
             ))}
           </ul>
+        </nav>
+      </section>
+
+      {/* Layanan interaktif */}
+      <section id="layanan" className={`${container} scroll-mt-24 pt-20`}>
+        <Reveal className="max-w-2xl">
+          <h2 className="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Layanan JagaTanah</h2>
+          <p className="mt-3 text-lg text-ink-soft">Pilih layanan untuk melihat contoh tampilannya.</p>
+        </Reveal>
+        <Reveal delay={100} className="mt-8">
+          <LayananTabs />
+        </Reveal>
+      </section>
+
+      {/* Cara menggunakan */}
+      <section id="cara" className={`${container} scroll-mt-24 pt-20`}>
+        <Reveal className="max-w-2xl">
+          <h2 className="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Cara menggunakan layanan</h2>
+          <p className="mt-3 text-lg text-ink-soft">Pemeriksaan dokumen dilakukan dalam tiga tahap.</p>
+        </Reveal>
+        <ol className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+          {CARA.map((c, i) => (
+            <li key={c.judul}>
+              <Reveal delay={i * 100} className="border-t-2 border-primary pt-6">
+                <span className="text-sm font-bold tabular-nums text-primary">Tahap {i + 1}</span>
+                <h3 className="mt-2 text-xl font-bold text-ink">{c.judul}</h3>
+                <p className="mt-2 leading-relaxed text-ink-soft">{c.isi}</p>
+              </Reveal>
+            </li>
+          ))}
+        </ol>
+        <Link href="/upload" className={`${btn.primary} mt-10`}>
+          Mulai Pemeriksaan <Icon name="arrow" className="size-4" />
+        </Link>
+      </section>
+
+      {/* Dasar hukum */}
+      <section id="dasar-hukum" className={`${container} scroll-mt-24 pt-20`}>
+        <Reveal className="max-w-2xl">
+          <h2 className="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Dasar hukum yang digunakan</h2>
+          <p className="mt-3 text-lg text-ink-soft">Setiap hasil pemeriksaan dan jawaban menyebut pasal dari peraturan berikut.</p>
+        </Reveal>
+        <Reveal delay={100} className="mt-8 rounded-3xl border border-line bg-surface p-2 shadow-soft">
+          <ol className="grid grid-cols-1 md:grid-cols-2">
+            {REGULASI.map((r, i) => (
+              <li key={r.nama} className={`flex gap-4 rounded-2xl p-4 transition-colors hover:bg-primary-soft ${r.dicabut ? "text-ink-soft" : ""}`}>
+                <span className="w-6 shrink-0 pt-px text-sm font-bold tabular-nums text-primary">{i + 1}.</span>
+                <span className="min-w-0">
+                  <span className="flex flex-wrap items-center gap-2 font-bold text-ink">
+                    {r.nama}
+                    {r.dicabut && <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-semibold text-ink-soft">Dicabut</span>}
+                  </span>
+                  <span className="mt-0.5 block text-sm leading-snug text-ink-soft">{r.tentang}</span>
+                </span>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+        <p className="mt-4 text-sm text-ink-soft">Peraturan yang sudah dicabut disimpan sebagai pembanding dan tidak dipakai untuk menjawab.</p>
+      </section>
+
+      {/* Pertanyaan umum */}
+      <section id="faq" className={`${container} scroll-mt-24 grid grid-cols-1 gap-8 pt-20 lg:grid-cols-[1fr_1.6fr]`}>
+        <Reveal>
+          <h2 className="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Pertanyaan umum</h2>
+          <p className="mt-3 text-lg text-ink-soft">Belum menemukan jawaban yang Anda cari?</p>
+          <Link href="/chat" className={`${btn.secondary} mt-5`}>Tanyakan langsung</Link>
+        </Reveal>
+        <div className="space-y-3">
+          {FAQ.map((f, i) => (
+            <Reveal key={f.q} delay={i * 60}>
+              <details className="group rounded-2xl border border-line bg-surface shadow-soft transition-colors open:border-primary/30">
+                <summary className="flex items-center justify-between gap-4 px-5 py-4 font-semibold text-ink">
+                  {f.q}
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-bg text-primary transition-colors group-open:bg-primary group-open:text-white">
+                    <Icon name="plus" className="plus size-4 transition-transform duration-300" />
+                  </span>
+                </summary>
+                <p className="px-5 pb-5 leading-relaxed text-ink-soft">{f.a}</p>
+              </details>
+            </Reveal>
+          ))}
         </div>
       </section>
     </main>
