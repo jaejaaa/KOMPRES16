@@ -118,6 +118,7 @@ export default function UploadPage() {
   return (
     <main>
       <PageHeader
+        foto="lup"
         icon="doc"
         crumbs={[{ href: "/", label: "Beranda" }, { label: "Cek Dokumen" }]}
         title="Pemeriksaan Dokumen Tanah"

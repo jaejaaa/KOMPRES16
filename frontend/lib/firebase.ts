@@ -2,12 +2,17 @@ import { initializeApp, getApps, type FirebaseError } from "firebase/app";
 import {
   browserLocalPersistence,
   browserSessionPersistence,
+  createUserWithEmailAndPassword,
+  EmailAuthProvider,
   getAuth,
   GoogleAuthProvider,
+  linkWithCredential,
   linkWithPopup,
+  sendPasswordResetEmail,
   setPersistence,
   signInAnonymously,
   signInWithCredential,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
@@ -54,7 +59,30 @@ const PESAN_AUTH: Record<string, string | null> = {
   "auth/popup-blocked": "Jendela login diblokir browser. Izinkan pop-up untuk situs ini, lalu coba lagi.",
   "auth/unauthorized-domain": "Alamat situs ini belum diizinkan untuk login Google. Hubungi tim pengembang.",
   "auth/network-request-failed": "Koneksi internet bermasalah. Periksa koneksi Anda, lalu coba lagi.",
+  // Masuk / daftar dengan email
+  "auth/invalid-email": "Format email tidak valid.",
+  "auth/missing-password": "Kata sandi wajib diisi.",
+  "auth/weak-password": "Kata sandi minimal 6 karakter.",
+  "auth/email-already-in-use": "Email ini sudah terdaftar. Silakan pilih tab Masuk.",
+  "auth/credential-already-in-use": "Email ini sudah terdaftar. Silakan pilih tab Masuk.",
+  "auth/invalid-credential": "Email atau kata sandi salah.",
+  "auth/wrong-password": "Email atau kata sandi salah.",
+  "auth/user-not-found": "Email atau kata sandi salah.",
+  "auth/user-disabled": "Akun ini dinonaktifkan.",
+  "auth/too-many-requests": "Terlalu banyak percobaan. Tunggu beberapa saat, lalu coba lagi.",
+  "auth/operation-not-allowed": "Metode masuk ini belum diaktifkan. Hubungi tim pengembang.",
 };
+
+const pesanDari = (e: unknown) => {
+  const code = (e as FirebaseError).code ?? "";
+  return code in PESAN_AUTH ? PESAN_AUTH[code] : "Gagal masuk. Silakan coba lagi.";
+};
+
+// Setelah berhasil masuk: sesi dipindah ke penyimpanan permanen & komponen lain diberi tahu
+async function selesaiMasuk() {
+  await setPersistence(firebaseAuth(), browserLocalPersistence);
+  window.dispatchEvent(new Event(AUTH_EVENT));
+}
 
 export const AUTH_EVENT = "jagatanah-auth";
 
@@ -82,12 +110,47 @@ export async function masukDenganGoogle(): Promise<HasilMasuk> {
       await signInWithPopup(auth, provider);
     }
     // Pindahkan sesi ke penyimpanan permanen. Dilakukan SETELAH popup supaya popup tidak diblokir browser.
-    await setPersistence(auth, browserLocalPersistence);
-    window.dispatchEvent(new Event(AUTH_EVENT));
+    await selesaiMasuk();
     return { ok: true, dokumenTamuHilang };
   } catch (e) {
-    const code = (e as FirebaseError).code ?? "";
-    return { ok: false, pesan: code in PESAN_AUTH ? PESAN_AUTH[code] : "Gagal masuk. Silakan coba lagi." };
+    return { ok: false, pesan: pesanDari(e) };
+  }
+}
+
+// Daftar akun baru dengan email. Tamu "dinaikkan" (uid tetap) supaya dokumen yang baru diperiksa ikut tersimpan.
+export async function daftarDenganEmail(email: string, sandi: string): Promise<HasilMasuk> {
+  const auth = firebaseAuth();
+  const tamu = auth.currentUser?.isAnonymous ? auth.currentUser : null;
+  try {
+    if (tamu) await linkWithCredential(tamu, EmailAuthProvider.credential(email, sandi));
+    else await createUserWithEmailAndPassword(auth, email, sandi);
+    await selesaiMasuk();
+    return { ok: true, dokumenTamuHilang: false };
+  } catch (e) {
+    return { ok: false, pesan: pesanDari(e) };
+  }
+}
+
+// Masuk ke akun email yang sudah ada. Akun lama punya uid sendiri, jadi dokumen yang diperiksa sebagai tamu tidak ikut.
+export async function masukDenganEmail(email: string, sandi: string): Promise<HasilMasuk> {
+  const auth = firebaseAuth();
+  const adaTamu = !!auth.currentUser?.isAnonymous;
+  try {
+    await signInWithEmailAndPassword(auth, email, sandi);
+    await selesaiMasuk();
+    return { ok: true, dokumenTamuHilang: adaTamu };
+  } catch (e) {
+    return { ok: false, pesan: pesanDari(e) };
+  }
+}
+
+// Kirim email atur ulang kata sandi. Firebase tidak memberi tahu apakah email terdaftar (demi keamanan).
+export async function resetKataSandi(email: string): Promise<{ ok: boolean; pesan: string }> {
+  try {
+    await sendPasswordResetEmail(firebaseAuth(), email);
+    return { ok: true, pesan: `Jika ${email} terdaftar, tautan untuk mengatur ulang kata sandi sudah dikirim. Periksa kotak masuk atau folder spam.` };
+  } catch (e) {
+    return { ok: false, pesan: pesanDari(e) ?? "Gagal mengirim email. Silakan coba lagi." };
   }
 }
 

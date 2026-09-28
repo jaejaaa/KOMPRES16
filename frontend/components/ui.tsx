@@ -1,7 +1,7 @@
 // Komponen dasar tampilan layanan: judul halaman, panel, pemberitahuan, langkah, tombol
 import Link from "next/link";
 import type { ReactNode } from "react";
-import HeroBackdrop from "./HeroBackdrop";
+import HeroBackdrop, { type FotoLatar } from "./HeroBackdrop";
 import Icon, { type IconName } from "./Icon";
 
 const BTN =
@@ -25,17 +25,19 @@ export function PageHeader({
   desc,
   icon,
   latar = true,
+  foto,
 }: {
   crumbs: { href?: string; label: string }[];
   title: string;
   desc?: ReactNode;
   icon?: IconName;
-  latar?: boolean; // latar foto dewi keadilan (versi ringkas dari beranda); false = maroon polos
+  latar?: boolean; // latar foto (versi ringkas dari beranda); false = maroon polos
+  foto?: FotoLatar; // default patung dewi keadilan
 }) {
   return (
     // Penuh kiri-kanan dan mulai dari atas layar, di belakang navbar melayang (lihat NAV_OFFSET)
     <section className={`hero-bg relative overflow-hidden ${NAV_OFFSET} text-white`}>
-      {latar && <HeroBackdrop ringkas />}
+      {latar && <HeroBackdrop ringkas foto={foto} />}
       <div className={`${container} relative pb-16 pt-10 md:pb-20 md:pt-14`}>
         <nav aria-label="Breadcrumb">
           <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/70">

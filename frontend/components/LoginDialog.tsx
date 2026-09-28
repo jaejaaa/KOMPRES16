@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { masukDenganGoogle, type HasilMasuk } from "@/lib/firebase";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import { daftarDenganEmail, masukDenganEmail, masukDenganGoogle, resetKataSandi, type HasilMasuk } from "@/lib/firebase";
 import Icon from "./Icon";
 import LogoMark from "./LogoMark";
 import { Notice, Spinner } from "./ui";
@@ -16,13 +16,17 @@ export function GoogleIcon({ className = "size-5" }: { className?: string }) {
   );
 }
 
-const MANFAAT = ["Riwayat pemeriksaan dan percakapan tersimpan permanen", "Bisa bertanya soal dokumen yang sudah diperiksa"];
+type Tab = "masuk" | "daftar";
+const MIN_SANDI = 6;
+const INPUT =
+  "tanpa-cincin-fokus w-full rounded-xl border border-line bg-bg px-4 py-3 text-ink transition-all placeholder:text-ink-soft/60 focus:border-primary focus:bg-surface focus:ring-4 focus:ring-primary/10";
+const LABEL = "text-xs font-bold uppercase tracking-wide text-ink-soft";
 
 export default function LoginDialog({
   open,
   onClose,
   judul = "Masuk ke JagaTanah",
-  pesan = "Masuk dengan akun Google agar riwayat Anda tersimpan dan bisa dibuka kembali kapan saja.",
+  pesan = "Masuk atau buat akun baru agar riwayat pemeriksaan dan percakapan Anda tersimpan dan bisa dibuka kembali kapan saja.",
   onBerhasil,
 }: {
   open: boolean;
@@ -32,8 +36,13 @@ export default function LoginDialog({
   onBerhasil?: (hasil: Extract<HasilMasuk, { ok: true }>) => void;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
-  const [loading, setLoading] = useState(false);
+  const [tab, setTab] = useState<Tab>("masuk");
+  const [email, setEmail] = useState("");
+  const [sandi, setSandi] = useState("");
+  const [lihatSandi, setLihatSandi] = useState(false);
+  const [proses, setProses] = useState<"email" | "google" | "reset" | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
 
   useEffect(() => {
     const d = ref.current;
@@ -44,14 +53,20 @@ export default function LoginDialog({
 
   function tutup() {
     setError(null);
+    setInfo(null);
+    setSandi("");
+    setProses(null);
     onClose();
   }
 
-  async function masuk() {
-    setLoading(true);
+  function gantiTab(t: Tab) {
+    setTab(t);
     setError(null);
-    const hasil = await masukDenganGoogle();
-    setLoading(false);
+    setInfo(null);
+  }
+
+  function selesai(hasil: HasilMasuk) {
+    setProses(null);
     if (hasil.ok) {
       tutup();
       onBerhasil?.(hasil);
@@ -60,13 +75,45 @@ export default function LoginDialog({
     }
   }
 
+  async function kirim(e: FormEvent) {
+    e.preventDefault();
+    setError(null);
+    setInfo(null);
+    const alamat = email.trim();
+    if (!alamat) return setError("Email wajib diisi.");
+    if (sandi.length < MIN_SANDI) return setError(`Kata sandi minimal ${MIN_SANDI} karakter.`);
+    setProses("email");
+    selesai(tab === "masuk" ? await masukDenganEmail(alamat, sandi) : await daftarDenganEmail(alamat, sandi));
+  }
+
+  async function google() {
+    setError(null);
+    setInfo(null);
+    setProses("google");
+    selesai(await masukDenganGoogle());
+  }
+
+  async function lupaSandi() {
+    setError(null);
+    setInfo(null);
+    const alamat = email.trim();
+    if (!alamat) return setError("Isi email Anda terlebih dahulu, lalu klik “Lupa kata sandi?” lagi.");
+    setProses("reset");
+    const r = await resetKataSandi(alamat);
+    setProses(null);
+    if (r.ok) setInfo(r.pesan);
+    else setError(r.pesan);
+  }
+
+  const sibuk = proses !== null;
+
   return (
     <dialog
       ref={ref}
       onClose={tutup}
       onClick={(e) => e.target === ref.current && tutup()}
       aria-labelledby="judul-masuk"
-      className="m-auto w-[min(92vw,27rem)] rounded-3xl border-0 bg-surface p-0 text-ink shadow-lift backdrop:bg-ink/50 backdrop:backdrop-blur-sm"
+      className="m-auto max-h-[92dvh] w-[min(94vw,28rem)] overflow-y-auto rounded-[2rem] border-0 bg-surface p-0 text-ink shadow-lift backdrop:bg-ink/50 backdrop:backdrop-blur-sm"
     >
       <div className="relative p-6 md:p-8">
         <button
@@ -78,41 +125,108 @@ export default function LoginDialog({
           <Icon name="x" className="size-5" />
         </button>
 
-        <LogoMark size={44} />
-        <h2 id="judul-masuk" className="mt-5 text-2xl font-extrabold tracking-tight">{judul}</h2>
-        <p className="mt-2 leading-relaxed text-ink-soft">{pesan}</p>
+        <h2 id="judul-masuk" className="flex items-center gap-2.5 pr-8 text-xl font-extrabold tracking-tight">
+          <LogoMark size={26} /> {judul}
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-ink-soft">{pesan}</p>
 
-        <ul className="mt-5 space-y-2.5 text-sm">
-          {MANFAAT.map((m) => (
-            <li key={m} className="flex gap-2.5">
-              <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-risk-low-bg text-risk-low">
-                <Icon name="check" className="size-3" />
-              </span>
-              {m}
-            </li>
+        <div role="tablist" aria-label="Pilih masuk atau daftar" className="mt-6 grid grid-cols-2 gap-1 rounded-2xl bg-bg p-1">
+          {(["masuk", "daftar"] as const).map((t) => (
+            <button
+              key={t}
+              type="button"
+              role="tab"
+              aria-selected={tab === t}
+              onClick={() => gantiTab(t)}
+              className={`rounded-xl py-2.5 text-sm font-bold uppercase tracking-wide transition-all ${
+                tab === t ? "bg-surface text-ink shadow-soft" : "text-ink-soft hover:text-ink"
+              }`}
+            >
+              {t === "masuk" ? "Masuk" : "Daftar Baru"}
+            </button>
           ))}
-        </ul>
+        </div>
 
-        {error && (
-          <div className="fade-up mt-5">
-            <Notice tone="danger">{error}</Notice>
+        <form onSubmit={kirim} className="mt-6 space-y-4" noValidate>
+          <label className="block">
+            <span className={LABEL}>Email</span>
+            <input
+              type="email"
+              autoComplete="email"
+              autoFocus
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="nama@email.com"
+              className={`${INPUT} mt-2`}
+            />
+          </label>
+
+          <div>
+            <div className="flex items-center justify-between gap-3">
+              <label htmlFor="sandi" className={LABEL}>Kata Sandi</label>
+              {tab === "masuk" && (
+                <button type="button" onClick={lupaSandi} disabled={sibuk} className="text-xs font-semibold text-primary hover:underline disabled:opacity-50">
+                  {proses === "reset" ? "Mengirim…" : "Lupa kata sandi?"}
+                </button>
+              )}
+            </div>
+            <div className="relative mt-2">
+              <input
+                id="sandi"
+                type={lihatSandi ? "text" : "password"}
+                autoComplete={tab === "masuk" ? "current-password" : "new-password"}
+                value={sandi}
+                onChange={(e) => setSandi(e.target.value)}
+                placeholder={`Minimal ${MIN_SANDI} karakter`}
+                className={`${INPUT} pr-12`}
+              />
+              <button
+                type="button"
+                onClick={() => setLihatSandi(!lihatSandi)}
+                aria-label={lihatSandi ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"}
+                aria-pressed={lihatSandi}
+                className="absolute inset-y-0 right-1 flex w-10 items-center justify-center text-ink-soft hover:text-ink"
+              >
+                <Icon name={lihatSandi ? "eyeOff" : "eye"} className="size-5" />
+              </button>
+            </div>
           </div>
-        )}
+
+          {error && <div className="fade-up"><Notice tone="danger">{error}</Notice></div>}
+          {info && <div className="fade-up"><Notice tone="success">{info}</Notice></div>}
+
+          <div className="grid grid-cols-2 gap-3 pt-1">
+            <button
+              type="button"
+              onClick={tutup}
+              className="rounded-xl border border-line py-3 font-semibold text-ink-soft transition-colors hover:border-line-strong hover:text-ink"
+            >
+              Batal
+            </button>
+            <button
+              type="submit"
+              disabled={sibuk}
+              className="flex items-center justify-center gap-2 rounded-xl bg-primary py-3 font-semibold text-white transition-colors hover:bg-primary-hover disabled:opacity-60"
+            >
+              {proses === "email" && <Spinner className="size-4" />}
+              {tab === "masuk" ? "Masuk Akun" : "Buat Akun"}
+            </button>
+          </div>
+        </form>
+
+        <div className="my-6 flex items-center gap-4 text-xs font-bold uppercase tracking-wide text-ink-soft">
+          <span className="h-px flex-1 bg-line" /> atau masuk cepat <span className="h-px flex-1 bg-line" />
+        </div>
 
         <button
           type="button"
-          onClick={masuk}
-          disabled={loading}
-          autoFocus
-          className="mt-6 flex w-full items-center justify-center gap-3 rounded-full border border-line-strong bg-surface px-5 py-3.5 font-semibold text-ink shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift disabled:pointer-events-none disabled:opacity-60"
+          onClick={google}
+          disabled={sibuk}
+          className="flex w-full items-center justify-center gap-3 rounded-xl border border-line bg-surface py-3 font-semibold text-ink shadow-soft transition-colors hover:border-line-strong disabled:opacity-60"
         >
-          {loading ? <Spinner /> : <GoogleIcon />}
-          {loading ? "Menunggu login Google…" : "Masuk dengan Google"}
+          {proses === "google" ? <Spinner className="size-5" /> : <GoogleIcon />}
+          {proses === "google" ? "Menunggu login Google…" : "Masuk dengan Google"}
         </button>
-        <button type="button" onClick={tutup} className="mt-3 w-full rounded-full py-2 text-sm font-semibold text-ink-soft hover:text-ink">
-          Nanti saja
-        </button>
-        <p className="mt-3 text-center text-xs text-ink-soft">Login hanya dipakai untuk menyimpan riwayat Anda.</p>
       </div>
     </dialog>
   );

@@ -4,24 +4,30 @@ import Link from "next/link";
 import { cariKonsultan, getKategoriKasus } from "@/lib/api";
 import { PROVINSI } from "@/lib/provinsi";
 import type { HasilKonsultan, KategoriKasus, Konsultan, Profesi } from "@/types/api";
+import DetailKonsultan from "./DetailKonsultan";
 import Icon from "./Icon";
 import { btn, container, Notice, Panel } from "./ui";
 
 const PROFESI: Record<Profesi, string> = { notaris_ppat: "Notaris/PPAT", advokat: "Advokat" };
 
-function KartuKonsultan({ k, namaKategori }: { k: Konsultan; namaKategori: (id: string) => string }) {
+type Pilih = (k: Konsultan, profesi: Profesi) => void;
+
+// Seluruh kartu bisa diklik untuk membuka popup detail
+function KartuKonsultan({ k, namaKategori, onPilih }: { k: Konsultan; namaKategori: (id: string) => string; onPilih: () => void }) {
   const inisial = k.nama.replace(/^(Dr\.|H\.|Hj\.)\s*/i, "").charAt(0).toUpperCase();
   return (
-    <article className="lift flex h-full flex-col rounded-3xl border border-line bg-surface p-5 shadow-soft">
+    <button
+      type="button"
+      onClick={onPilih}
+      aria-haspopup="dialog"
+      className="lift group flex h-full w-full flex-col rounded-3xl border border-line bg-surface p-5 text-left shadow-soft hover:border-primary/40"
+    >
       <div className="flex items-start gap-4">
         <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-lg font-bold text-primary" aria-hidden>
           {inisial}
         </span>
         <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-2">
-            <h3 className="font-bold text-ink">{k.nama}</h3>
-            <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[11px] font-bold text-accent-ink">Contoh</span>
-          </div>
+          <h3 className="font-bold text-ink">{k.nama}</h3>
           <p className="mt-1 flex items-center gap-1.5 text-sm text-ink-soft">
             <Icon name="building" className="size-4 shrink-0" /> <span className="truncate">{k.kantor}</span>
           </p>
@@ -35,12 +41,26 @@ function KartuKonsultan({ k, namaKategori }: { k: Konsultan; namaKategori: (id: 
           <li key={id} className="rounded-full bg-bg px-2.5 py-1 text-xs text-ink">{namaKategori(id)}</li>
         ))}
       </ul>
-      <p className="mt-auto pt-4 text-xs italic text-ink-soft">Kontak: {k.kontak}</p>
-    </article>
+      <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-semibold text-primary">
+        Lihat detail <Icon name="arrow" className="size-4 transition-transform group-hover:translate-x-1" />
+      </span>
+    </button>
   );
 }
 
-function Bagian({ profesi, daftar, provinsi, namaKategori }: { profesi: Profesi; daftar: Konsultan[]; provinsi: string; namaKategori: (id: string) => string }) {
+function Bagian({
+  profesi,
+  daftar,
+  provinsi,
+  namaKategori,
+  onPilih,
+}: {
+  profesi: Profesi;
+  daftar: Konsultan[];
+  provinsi: string;
+  namaKategori: (id: string) => string;
+  onPilih: Pilih;
+}) {
   return (
     <section>
       <h3 className="flex items-center gap-2 text-lg font-bold text-ink">
@@ -50,13 +70,13 @@ function Bagian({ profesi, daftar, provinsi, namaKategori }: { profesi: Profesi;
         <ul className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-2">
           {daftar.map((k, i) => (
             <li key={k.id} className="fade-up" style={{ animationDelay: `${i * 60}ms` }}>
-              <KartuKonsultan k={k} namaKategori={namaKategori} />
+              <KartuKonsultan k={k} namaKategori={namaKategori} onPilih={() => onPilih(k, profesi)} />
             </li>
           ))}
         </ul>
       ) : (
         <p className="mt-3 rounded-2xl border border-dashed border-line-strong p-5 text-sm text-ink-soft">
-          Belum ada contoh {PROFESI[profesi]} {provinsi ? `di ${provinsi}` : ""} untuk kebutuhan ini.
+          Belum ada {PROFESI[profesi]} {provinsi ? `di ${provinsi}` : ""} untuk kebutuhan ini.
           {provinsi && " Coba pilih “Semua provinsi”."}
         </p>
       )}
@@ -70,6 +90,8 @@ export default function DirektoriKonsultan({ kategoriAwal }: { kategoriAwal?: st
   const [provinsi, setProvinsi] = useState("");
   const [ulang, setUlang] = useState(0);
   const [hasil, setHasil] = useState<{ kunci: string; data?: HasilKonsultan; error?: string } | null>(null);
+  const [dipilih, setDipilih] = useState<{ k: Konsultan; profesi: Profesi } | null>(null);
+  const pilih: Pilih = (k, profesi) => setDipilih({ k, profesi });
   const kunci = `${kategori}|${provinsi}|${ulang}`;
   const memuat = !!kategori && hasil?.kunci !== kunci;
 
@@ -162,10 +184,6 @@ export default function DirektoriKonsultan({ kategoriAwal }: { kategoriAwal?: st
       </aside>
 
       <div className="min-w-0 space-y-6">
-        <Notice tone="warning" title="Data contoh (demo)">
-          Nama, kantor, dan kontak di halaman ini fiktif untuk keperluan demo, bukan daftar Notaris/PPAT atau advokat
-          sungguhan. Jangan dipakai untuk menghubungi siapa pun.
-        </Notice>
 
         {kat && (
           <div>
@@ -186,10 +204,10 @@ export default function DirektoriKonsultan({ kategoriAwal }: { kategoriAwal?: st
         ) : (
           <div className="space-y-8">
             {kat?.profesi.includes("notaris_ppat") && (
-              <Bagian profesi="notaris_ppat" daftar={hasil.data.notaris_ppat} provinsi={provinsi} namaKategori={namaKategori} />
+              <Bagian profesi="notaris_ppat" daftar={hasil.data.notaris_ppat} provinsi={provinsi} namaKategori={namaKategori} onPilih={pilih} />
             )}
             {kat?.profesi.includes("advokat") && (
-              <Bagian profesi="advokat" daftar={hasil.data.advokat} provinsi={provinsi} namaKategori={namaKategori} />
+              <Bagian profesi="advokat" daftar={hasil.data.advokat} provinsi={provinsi} namaKategori={namaKategori} onPilih={pilih} />
             )}
           </div>
         )}
@@ -204,6 +222,13 @@ export default function DirektoriKonsultan({ kategoriAwal }: { kategoriAwal?: st
           </Link>
         </div>
       </div>
+
+      <DetailKonsultan
+        konsultan={dipilih?.k ?? null}
+        profesi={dipilih ? PROFESI[dipilih.profesi] : ""}
+        namaKategori={namaKategori}
+        onClose={() => setDipilih(null)}
+      />
     </div>
   );
 }

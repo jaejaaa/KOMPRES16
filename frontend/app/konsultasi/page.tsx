@@ -12,6 +12,7 @@ export default async function KonsultasiPage({ searchParams }: PageProps<"/konsu
   return (
     <main>
       <PageHeader
+        foto="pena"
         icon="scale"
         crumbs={[{ href: "/", label: "Beranda" }, { label: "Konsultasi Hukum" }]}
         title="Konsultasi Hukum"

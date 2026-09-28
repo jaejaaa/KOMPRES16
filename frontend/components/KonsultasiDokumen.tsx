@@ -18,7 +18,7 @@ export default function KonsultasiDokumen({ documentId }: { documentId: string }
   if (tamuHilang)
     return (
       <Notice tone="warning" title="Dokumen perlu diunggah ulang">
-        Anda masuk ke akun Google yang sudah pernah dipakai, sehingga dokumen yang diperiksa sebagai tamu tidak ikut
+        Anda masuk ke akun yang sudah pernah dibuat sebelumnya, sehingga dokumen yang diperiksa sebagai tamu tidak ikut
         tersimpan.{" "}
         <Link href="/upload" className="font-semibold underline underline-offset-2">Unggah ulang dokumen</Link>
       </Notice>
@@ -37,7 +37,7 @@ export default function KonsultasiDokumen({ documentId }: { documentId: string }
         <Icon name="chat" className="size-4" /> Konsultasikan dokumen ini
       </button>
       <p className="mt-2 flex items-center justify-center gap-1.5 text-xs text-ink-soft">
-        <Icon name="lock" className="size-3.5" /> Perlu masuk dengan Google
+        <Icon name="lock" className="size-3.5" /> Perlu masuk atau daftar akun
       </p>
       <LoginDialog
         open={login}

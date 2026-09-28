@@ -35,7 +35,7 @@ const FAQ = [
   { q: "Apakah layanan ini dipungut biaya?", a: "Tidak. JagaTanah dapat digunakan tanpa biaya." },
   {
     q: "Apakah saya perlu masuk (login)?",
-    a: "Pemeriksaan dokumen dan tanya jawab umum bisa langsung dipakai tanpa akun. Masuk dengan Google diperlukan untuk bertanya soal dokumen yang sudah diperiksa dan agar riwayat Anda tersimpan permanen. Tanpa masuk, riwayat hanya tersimpan selama tab peramban masih terbuka.",
+    a: "Pemeriksaan dokumen dan tanya jawab umum bisa langsung dipakai tanpa akun. Masuk dengan email atau akun Google diperlukan untuk bertanya soal dokumen yang sudah diperiksa dan agar riwayat Anda tersimpan permanen. Tanpa masuk, riwayat hanya tersimpan selama tab peramban masih terbuka.",
   },
   {
     q: "Dokumen apa saja yang bisa diperiksa?",

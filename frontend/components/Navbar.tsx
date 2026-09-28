@@ -209,7 +209,7 @@ export default function Navbar() {
                   onClick={() => { setOpen(false); setLogin(true); }}
                   className={`${btn.secondary} w-full`}
                 >
-                  Masuk dengan Google
+                  Masuk / Daftar
                 </button>
               )}
               <Link href={AI.href} onClick={() => setOpen(false)} className={`${btn.primary} mt-2 w-full`}>

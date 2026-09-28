@@ -20,6 +20,7 @@ export default async function PanduanDetail({ params }: PageProps<"/panduan/[slu
   return (
     <main>
       <PageHeader
+        foto="buku"
         icon="book"
         crumbs={[{ href: "/", label: "Beranda" }, { href: "/panduan", label: "Panduan" }, { label: p.judul }]}
         title={p.judul}

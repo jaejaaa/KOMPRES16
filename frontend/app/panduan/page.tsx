@@ -12,6 +12,7 @@ export default function PanduanPage() {
   return (
     <main>
       <PageHeader
+        foto="buku"
         icon="book"
         crumbs={[{ href: "/", label: "Beranda" }, { label: "Panduan" }]}
         title="Panduan Prosedur Pertanahan"

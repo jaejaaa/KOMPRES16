@@ -72,7 +72,11 @@ export interface Konsultan {
   kota: string;
   provinsi: string;
   kategori_kasus: string[];
-  kontak: string;
+  kontak?: string; // data lama (sebelum 4fb8cd2); diganti telepon/peta/jadwal/tarif
+  telepon?: string;
+  peta?: string; // tautan pencarian Google Maps
+  jadwal?: string;
+  tarif?: string; // kisaran indikatif per orang
   _dummy?: boolean;
 }
 

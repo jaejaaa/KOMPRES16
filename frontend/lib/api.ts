@@ -10,7 +10,7 @@ const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 const ERROR_TEXT: Record<number, string> = {
   401: "Sesi Anda telah berakhir. Muat ulang halaman lalu coba lagi.",
-  403: "Masuk dengan Google terlebih dahulu untuk bertanya soal dokumen ini.",
+  403: "Masuk atau daftar akun terlebih dahulu untuk bertanya soal dokumen ini.",
   413: `Ukuran file terlalu besar. Maksimal ${MAX_PDF_MB} MB.`,
   415: "File harus berformat PDF.",
 };

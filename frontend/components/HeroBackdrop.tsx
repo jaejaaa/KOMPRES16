@@ -14,7 +14,19 @@ const GARIS_DALAM: [number, number][][] = [
   [[100, 610], [680, 470]],
 ];
 
-export default function HeroBackdrop({ ringkas = false }: { ringkas?: boolean }) {
+// Foto latar yang tersedia. negatif = warna foto dibalik dulu (terang jadi gelap) sebelum diwarnai.
+// terang = foto berlatar terang yang TIDAK dibalik: kecerahannya diturunkan supaya banner tetap gelap-maroon.
+export const FOTO_LATAR = {
+  patung: { src: "/hero/patung-bg.jpg", posisi: "62% 38%", negatif: false, terang: false },
+  lup: { src: "/hero/lup-bg.jpg", posisi: "30% 60%", negatif: true, terang: false },
+  kamus: { src: "/hero/kamus-bg.jpg", posisi: "55% 35%", negatif: true, terang: false },
+  buku: { src: "/hero/buku-bg.jpg", posisi: "60% 40%", negatif: false, terang: false },
+  pena: { src: "/hero/pena-bg.jpg", posisi: "55% 50%", negatif: false, terang: true },
+} as const;
+export type FotoLatar = keyof typeof FOTO_LATAR;
+
+export default function HeroBackdrop({ ringkas = false, foto = "patung" }: { ringkas?: boolean; foto?: FotoLatar }) {
+  const f = FOTO_LATAR[foto];
   return (
     <div className="pointer-events-none absolute inset-0" aria-hidden>
       {/* Foto duotone: grayscale -> dikali oranye (sorotan) -> disaring maroon (bayangan) */}
@@ -26,13 +38,20 @@ export default function HeroBackdrop({ ringkas = false }: { ringkas?: boolean })
         }}
       >
         <Image
-          src="/hero/patung-bg.jpg"
+          src={f.src}
           alt=""
           fill
           preload
           sizes={ringkas ? "(min-width: 768px) 55vw, 100vw" : "(min-width: 768px) 68vw, 100vw"}
-          className={`object-cover ${ringkas ? "object-[62%_38%]" : "object-[62%_center]"}`}
-          style={{ filter: "grayscale(1) contrast(1.6) brightness(0.95)" }}
+          className="object-cover"
+          style={{
+            objectPosition: ringkas ? f.posisi : "62% center",
+            filter: f.negatif
+              ? "grayscale(1) invert(1) contrast(1.5) brightness(1.05)"
+              : f.terang
+                ? "grayscale(1) contrast(1.7) brightness(0.62)"
+                : "grayscale(1) contrast(1.6) brightness(0.95)",
+          }}
         />
         <div className="absolute inset-0 bg-linear-to-br from-[#FFB347] via-[#E0601A] to-[#7A1A05] mix-blend-multiply" />
         <div className="absolute inset-0 bg-[#4A0000] mix-blend-screen" />
@@ -59,21 +78,23 @@ export default function HeroBackdrop({ ringkas = false }: { ringkas?: boolean })
         }}
       />
 
-      {/* Garis poligon emas */}
-      <svg
-        viewBox="0 0 720 760"
-        preserveAspectRatio="xMaxYMid meet"
-        className={`absolute inset-y-0 right-0 hidden h-full md:block ${ringkas ? "w-[42%] py-4" : "w-1/2"}`}
-        fill="none"
-      >
-        <polygon points={TITIK.map((t) => t.join(",")).join(" ")} stroke="#E8B23A" strokeOpacity="0.55" strokeWidth="1.2" />
-        {GARIS_DALAM.map(([a, b]) => (
-          <line key={`${a}-${b}`} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke="#E8B23A" strokeOpacity="0.45" strokeWidth="1.2" />
-        ))}
-        {TITIK.map(([x, y]) => (
-          <circle key={`${x}-${y}`} cx={x} cy={y} r="4" fill="#E8B23A" fillOpacity="0.9" />
-        ))}
-      </svg>
+      {/* Garis poligon emas: hanya di pembuka beranda, tidak di banner halaman (ringkas) */}
+      {!ringkas && (
+        <svg
+          viewBox="0 0 720 760"
+          preserveAspectRatio="xMaxYMid meet"
+          className="absolute inset-y-0 right-0 hidden h-full w-1/2 md:block"
+          fill="none"
+        >
+          <polygon points={TITIK.map((t) => t.join(",")).join(" ")} stroke="#E8B23A" strokeOpacity="0.55" strokeWidth="1.2" />
+          {GARIS_DALAM.map(([a, b]) => (
+            <line key={`${a}-${b}`} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} stroke="#E8B23A" strokeOpacity="0.45" strokeWidth="1.2" />
+          ))}
+          {TITIK.map(([x, y]) => (
+            <circle key={`${x}-${y}`} cx={x} cy={y} r="4" fill="#E8B23A" fillOpacity="0.9" />
+          ))}
+        </svg>
+      )}
     </div>
   );
 }

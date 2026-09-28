@@ -74,11 +74,27 @@ function Asisten({ children }: { children: React.ReactNode }) {
 }
 
 function Jawaban({ data }: { data: ChatResponse }) {
-  if (data.di_luar_cakupan) return <Notice>{data.jawaban}</Notice>;
-
   return (
     <div className="rounded-3xl rounded-tl-md border border-line bg-surface p-5 shadow-soft">
       <p className="whitespace-pre-line leading-relaxed text-ink">{data.jawaban}</p>
+      {/* AI tidak bisa menjawab: arahkan ke Notaris/PPAT atau advokat di halaman Konsultasi Hukum */}
+      {data.di_luar_cakupan && (
+        <Link
+          href="/konsultasi"
+          className="group mt-4 flex items-center gap-3 rounded-2xl bg-bg px-4 py-3 text-sm transition-colors hover:bg-primary-soft"
+        >
+          <span className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-surface text-primary shadow-soft">
+            <Icon name="scale" className="size-4" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block font-semibold text-ink group-hover:text-primary group-hover:underline group-hover:underline-offset-2">
+              Cari Notaris/PPAT atau advokat
+            </span>
+            <span className="block text-xs text-ink-soft">Buka halaman Konsultasi Hukum</span>
+          </span>
+          <Icon name="arrow" className="size-4 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
+        </Link>
+      )}
       {data.sumber.length > 0 && (
         <div className="mt-4">
           <p className="flex items-center gap-2 text-xs font-semibold text-secondary">
@@ -184,12 +200,13 @@ export default function ChatRoom({ documentId }: { documentId?: string }) {
 
   const saran = documentId ? SARAN_DOKUMEN : SARAN_UMUM;
   const kosong = pesan.length === 0 && !loading;
-  // Tanya soal dokumen hanya untuk pengguna yang masuk dengan Google
+  // Tanya soal dokumen hanya untuk pengguna yang masuk (email atau Google)
   const terkunci = (!!documentId || perluMasuk) && akun.siap && !akun.masuk;
 
   return (
     <main>
       <PageHeader
+        foto="kamus"
         icon="chat"
         crumbs={[{ href: "/", label: "Beranda" }, { label: "JagaTanah AI" }]}
         title="JagaTanah AI"
@@ -232,7 +249,7 @@ export default function ChatRoom({ documentId }: { documentId?: string }) {
           <div role="log" aria-live="polite" className="flex-1 space-y-6 p-5 md:p-6">
             {tamuHilang ? (
               <Notice tone="warning" title="Dokumen perlu diunggah ulang">
-                Anda masuk ke akun Google yang sudah pernah dipakai, sehingga dokumen yang diperiksa sebagai tamu tidak ikut
+                Anda masuk ke akun yang sudah pernah dibuat sebelumnya, sehingga dokumen yang diperiksa sebagai tamu tidak ikut
                 tersimpan.{" "}
                 <Link href="/upload" className="font-semibold underline underline-offset-2">Unggah ulang dokumen</Link>
               </Notice>
@@ -248,7 +265,7 @@ export default function ChatRoom({ documentId }: { documentId?: string }) {
                 </p>
                 <div className="mt-6 flex flex-wrap justify-center gap-3">
                   <button type="button" onClick={() => setLogin(true)} className={btn.primary}>
-                    Masuk dengan Google
+                    Masuk atau Daftar
                   </button>
                   <Link href="/chat" className={btn.secondary}>Tanya umum saja</Link>
                 </div>
