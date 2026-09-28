@@ -1,0 +1,6 @@
+# Project Vercel frontend (Root Directory = frontend) memakai file ini, BUKAN .vercelignore di akar repo.
+# File di akar repo milik deploy backend dan membuang seluruh folder frontend; tanpa file ini build frontend gagal
+# ("Could not identify Next.js version"). Lihat https://vercel.com/docs/deployments/vercel-ignore#monorepos
+
+# Rahasia: isi lewat Environment Variables di Vercel
+.env*
