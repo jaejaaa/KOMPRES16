@@ -1,6 +1,14 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
-    "backend/main.py": { "maxDuration": 120 }
-  }
+    "backend/main.py": {
+      "maxDuration": 120
+    }
+  },
+  "crons": [
+    {
+      "path": "/cron/bersihkan-tamu",
+      "schedule": "0 18 * * *"
+    }
+  ]
 }

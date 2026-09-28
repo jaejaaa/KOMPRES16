@@ -1,8 +1,9 @@
 import json
 import logging
 import os
+import secrets
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from functools import cache
 from pathlib import Path
 from typing import Literal
@@ -10,7 +11,7 @@ from uuid import UUID, uuid4
 
 import firebase_admin
 import pymupdf
-from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException, UploadFile
+from fastapi import BackgroundTasks, Depends, FastAPI, Header, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
@@ -236,3 +237,33 @@ def konsultan_kategori():
 @app.get("/konsultan")
 def konsultan(kategori: str, provinsi: str | None = None, kota: str | None = None):
     return cari_konsultan(kategori, provinsi, kota)
+
+
+def uid_tamu(uids: list[str]) -> set[str]:
+    # Tamu = akun tanpa provider login (anonim) atau akunnya sudah tidak ada. Tamu yang login lewat
+    # linkWithPopup uid-nya tetap tapi punya provider, jadi datanya aman.
+    tamu = set()
+    for i in range(0, len(uids), 100):  # batas get_users
+        r = auth.get_users([auth.UidIdentifier(u) for u in uids[i:i + 100]])
+        tamu |= {u.uid for u in r.users if not u.provider_data} | {x.uid for x in r.not_found}
+    return tamu
+
+
+# Dipanggil Vercel Cron tiap hari (vercel.json). Server tidak tahu kapan tab ditutup, jadi data tamu
+# dihapus setelah umurnya > 24 jam. Vercel mengirim header "Authorization: Bearer <CRON_SECRET>".
+# ponytail: scan semua data > 24 jam tiap hari; pakai field expires_at + TTL Firestore kalau datanya ribuan.
+@app.get("/cron/bersihkan-tamu", include_in_schema=False)
+def bersihkan_tamu(authorization: str = Header("")):
+    secret = os.environ.get("CRON_SECRET")
+    if not secret or not secrets.compare_digest(authorization, f"Bearer {secret}"):
+        raise HTTPException(401)
+    batas = now() - timedelta(days=1)
+    dihapus = {}
+    for col in ("chat_history", "documents"):
+        snaps = list(fb().collection(col).where(filter=firestore.FieldFilter("created_at", "<", batas)).stream())
+        tamu = uid_tamu(list({s.get("user_id") for s in snaps}))
+        hapus = [s for s in snaps if s.get("user_id") in tamu]
+        for s in hapus:
+            s.reference.delete()
+        dihapus[col] = len(hapus)
+    return dihapus
