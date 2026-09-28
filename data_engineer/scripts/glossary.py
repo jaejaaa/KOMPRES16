@@ -31,6 +31,8 @@ PHRASES = {  # frasa awam
     "cek sertifikat": "pengecekan sertifikat keaslian sertifikat buku tanah",
     "tanah sengketa": "sengketa tanah pembatalan hak atas tanah",
     "tanah negara": "tanah negara hak atas tanah pemberian hak",
+    "tanah garapan": "girik petok d tanah bekas hak milik adat penguasaan fisik pembuktian hak konversi hak",
+    "tanah adat": "tanah bekas hak milik adat konversi hak penguasaan fisik pembuktian hak",
 }
 
 def expand_query(q: str) -> str:
