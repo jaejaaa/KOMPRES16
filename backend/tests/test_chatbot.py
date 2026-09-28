@@ -205,6 +205,16 @@ class TestTopik(unittest.TestCase):
         self.assertIn("riwayat", SYSTEM_PROMPT.lower())
         self.assertIn("terus gimana", SYSTEM_PROMPT)
 
+    def test_prompt_default_true_dan_istilah_awam_tanah(self):
+        # Bug nyata: "apakah bisa beli tanah SHM dari tanah garapan" (istilah "tanah garapan" tidak
+        # familiar buat model) sempat dinilai topik_sesuai=false walau jelas soal tanah. Ambang
+        # keputusan dibalik: default true, false hanya kalau JELAS tidak ada hubungannya sama sekali.
+        from chatbot.prompts import SYSTEM_PROMPT
+
+        self.assertIn("ASUMSIKAN topik_sesuai=true", SYSTEM_PROMPT)
+        self.assertIn("tanah garapan", SYSTEM_PROMPT.lower())
+        self.assertIn("girik", SYSTEM_PROMPT.lower())
+
 
 if __name__ == "__main__":
     unittest.main()
