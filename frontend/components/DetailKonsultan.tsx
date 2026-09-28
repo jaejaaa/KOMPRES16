@@ -1,5 +1,7 @@
 "use client";
+import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { fotoKonsultan } from "@/lib/foto-konsultan";
 import type { Konsultan } from "@/types/api";
 import Icon, { type IconName } from "./Icon";
 import { btn } from "./ui";
@@ -43,7 +45,15 @@ export default function DetailKonsultan({
     if (!k && d.open) d.close();
   }, [k]);
 
-  const inisial = k?.nama.replace(/^(Dr\.|H\.|Hj\.)\s*/i, "").charAt(0).toUpperCase();
+  // Inisial 2 huruf dari nama tanpa gelar, mis. "Dr. H. Ahmad Fauzi, S.H." -> "AF"
+  const inisial = k?.nama
+    .split(",")[0]
+    .replace(/^((Dr|H|Hj|Prof)\.\s*)+/i, "")
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((kata) => kata.charAt(0).toUpperCase())
+    .join("");
+  const foto = k ? fotoKonsultan(k) : undefined;
   const telepon = bersih(k?.telepon);
   const jadwal = bersih(k?.jadwal);
   const tarif = bersih(k?.tarif);
@@ -67,13 +77,37 @@ export default function DetailKonsultan({
             <Icon name="x" className="size-5" />
           </button>
 
-          <div className="hero-bg rounded-t-3xl px-6 pb-6 pt-7 text-white">
-            <span className="flex size-16 items-center justify-center rounded-2xl bg-white/15 text-2xl font-bold ring-1 ring-white/25" aria-hidden>
-              {inisial}
-            </span>
-            <p className="mt-4 text-sm font-semibold text-accent">{profesi}</p>
-            <h2 id="judul-konsultan" className="mt-1 text-2xl font-extrabold tracking-tight">{k.nama}</h2>
-            <p className="mt-1 text-white/75">{k.kantor}</p>
+          {/* Banner: teks di kiri, foto (atau inisial) di kanan dengan lingkaran emas yang separuhnya terpotong di bawah */}
+          <div className="relative h-[230px] overflow-hidden rounded-t-3xl bg-[#650000] text-white">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_90%_115%,rgb(230_180_58/0.22),transparent_55%)]" aria-hidden />
+            <div className="absolute bottom-0 right-4 h-[165px] w-[150px] min-[420px]:right-9 min-[420px]:h-[205px] min-[420px]:w-[200px]" aria-hidden>
+              {foto ? (
+                <>
+                  <span className="absolute left-1/2 top-full size-[140px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[1.5px] border-[rgb(230_180_58/0.55)] min-[420px]:size-[180px]" />
+                  <Image
+                    src={foto}
+                    alt=""
+                    fill
+                    sizes="200px"
+                    unoptimized={foto.startsWith("http")}
+                    className="object-contain object-bottom drop-shadow-[0_10px_18px_rgba(0,0,0,0.35)]"
+                  />
+                </>
+              ) : (
+                // Tanpa foto: lingkaran inisial di tengah tinggi banner
+                <span className="absolute bottom-[65px] left-1/2 flex size-[100px] -translate-x-1/2 items-center justify-center rounded-full bg-white/[0.08] text-4xl font-bold text-[#E6B43A] ring-[1.5px] ring-[rgb(230_180_58/0.55)] ring-offset-[5px] ring-offset-[#650000] min-[420px]:bottom-[54px] min-[420px]:size-[122px] min-[420px]:text-5xl">
+                  {inisial}
+                </span>
+              )}
+            </div>
+
+            <div className="relative z-10 flex h-full max-w-[calc(100%-170px)] flex-col justify-center pl-6 min-[420px]:max-w-[316px]">
+              <p className="text-xs font-bold uppercase tracking-[0.08em] text-[#E6B43A]">{profesi}</p>
+              <h2 id="judul-konsultan" className="mt-1.5 text-[22px] font-extrabold leading-tight tracking-tight min-[420px]:text-[26px]">
+                {k.nama}
+              </h2>
+              <p className="mt-1.5 text-sm text-white/75">{k.kantor}</p>
+            </div>
           </div>
 
           <div className="divide-y divide-line px-6">

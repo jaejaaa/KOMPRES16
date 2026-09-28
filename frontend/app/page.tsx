@@ -1,4 +1,6 @@
 import Link from "next/link";
+import AlurTahapan, { type Tahap } from "@/components/AlurTahapan";
+import DasarHukum from "@/components/DasarHukum";
 import HeroBackdrop from "@/components/HeroBackdrop";
 import Icon from "@/components/Icon";
 import LayananTabs from "@/components/LayananTabs";
@@ -6,22 +8,10 @@ import Reveal from "@/components/Reveal";
 import { btn, container, NAV_OFFSET } from "@/components/ui";
 import { MAX_PDF_MB } from "@/lib/site";
 
-const CARA = [
-  { judul: "Unggah dokumen", isi: `Pilih file PDF perjanjian jual beli, AJB, atau surat tanah lain. Ukuran maksimal ${MAX_PDF_MB} MB.` },
-  { judul: "Tunggu analisis", isi: "Setiap pasal dibaca dan dicocokkan dengan peraturan pertanahan. Prosesnya hanya beberapa detik." },
-  { judul: "Baca hasilnya", isi: "Pasal diberi tingkat risiko beserta alasannya. Bila masih ragu, tanyakan langsung ke JagaTanah AI." },
-];
-
-const REGULASI: { nama: string; tentang: string; dicabut?: boolean }[] = [
-  { nama: "UU No. 5 Tahun 1960", tentang: "Peraturan Dasar Pokok-Pokok Agraria (UUPA)" },
-  { nama: "PP No. 24 Tahun 1997", tentang: "Pendaftaran Tanah" },
-  { nama: "PP No. 18 Tahun 2021", tentang: "Hak Pengelolaan, Hak atas Tanah, Satuan Rumah Susun, dan Pendaftaran Tanah" },
-  { nama: "Permen ATR/BPN No. 3 Tahun 2023", tentang: "Penerbitan Dokumen Elektronik dalam Kegiatan Pendaftaran Tanah" },
-  { nama: "UU No. 28 Tahun 2009", tentang: "Pajak Daerah dan Retribusi Daerah (ketentuan BPHTB)" },
-  { nama: "UU No. 2 Tahun 2012", tentang: "Pengadaan Tanah bagi Pembangunan untuk Kepentingan Umum" },
-  { nama: "UU No. 27 Tahun 2022", tentang: "Pelindungan Data Pribadi" },
-  { nama: "KUHPerdata Buku II", tentang: "Kebendaan" },
-  { nama: "UU No. 21 Tahun 1997", tentang: "Bea Perolehan Hak atas Tanah dan Bangunan", dicabut: true },
+const CARA: Tahap[] = [
+  { icon: "upload", judul: "Unggah dokumen", isi: `Pilih file PDF perjanjian jual beli, AJB, atau surat tanah lain. Ukuran maksimal ${MAX_PDF_MB} MB.` },
+  { icon: "search", judul: "Tunggu analisis", isi: "Setiap pasal dibaca dan dicocokkan dengan peraturan pertanahan. Prosesnya hanya beberapa detik." },
+  { icon: "list", judul: "Baca hasilnya", isi: "Pasal diberi tingkat risiko beserta alasannya. Bila masih ragu, tanyakan langsung ke JagaTanah AI." },
 ];
 
 const FAQ = [
@@ -54,7 +44,8 @@ const FAQ = [
 
 export default function Home() {
   return (
-    <main>
+    // overflow-x-clip: kartu timeline yang menunggu meluncur masuk dari samping tidak boleh membuat halaman bisa digeser ke samping di HP
+    <main className="overflow-x-clip">
       {/* Pembuka: satu layar penuh, maroon dengan foto patung keadilan di latar */}
       <section className={`relative overflow-hidden bg-[#650000] ${NAV_OFFSET} flex min-h-svh flex-col text-white`}>
         <HeroBackdrop />
@@ -99,17 +90,7 @@ export default function Home() {
           <h2 className="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Cara menggunakan layanan</h2>
           <p className="mt-3 text-lg text-ink-soft">Pemeriksaan dokumen dilakukan dalam tiga tahap.</p>
         </Reveal>
-        <ol className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
-          {CARA.map((c, i) => (
-            <li key={c.judul}>
-              <Reveal delay={i * 100} className="border-t-2 border-primary pt-6">
-                <span className="text-sm font-bold tabular-nums text-primary">Tahap {i + 1}</span>
-                <h3 className="mt-2 text-xl font-bold text-ink">{c.judul}</h3>
-                <p className="mt-2 leading-relaxed text-ink-soft">{c.isi}</p>
-              </Reveal>
-            </li>
-          ))}
-        </ol>
+        <AlurTahapan tahap={CARA} />
         <Link href="/upload" className={`${btn.primary} mt-10`}>
           Mulai Pemeriksaan <Icon name="arrow" className="size-4" />
         </Link>
@@ -119,25 +100,14 @@ export default function Home() {
       <section id="dasar-hukum" className={`${container} scroll-mt-24 pt-20`}>
         <Reveal className="max-w-2xl">
           <h2 className="text-3xl font-extrabold tracking-tight text-ink md:text-4xl">Dasar hukum yang digunakan</h2>
-          <p className="mt-3 text-lg text-ink-soft">Setiap hasil pemeriksaan dan jawaban menyebut pasal dari peraturan berikut.</p>
+          <p className="mt-3 text-lg text-ink-soft">Setiap hasil pemeriksaan dan jawaban menyebut pasal dari peraturan berikut. Pilih salah satu untuk membaca ringkasannya.</p>
         </Reveal>
         <Reveal delay={100} className="mt-8 rounded-3xl border border-line bg-surface p-2 shadow-soft">
-          <ol className="grid grid-cols-1 md:grid-cols-2">
-            {REGULASI.map((r, i) => (
-              <li key={r.nama} className={`flex gap-4 rounded-2xl p-4 transition-colors hover:bg-primary-soft ${r.dicabut ? "text-ink-soft" : ""}`}>
-                <span className="w-6 shrink-0 pt-px text-sm font-bold tabular-nums text-primary">{i + 1}.</span>
-                <span className="min-w-0">
-                  <span className="flex flex-wrap items-center gap-2 font-bold text-ink">
-                    {r.nama}
-                    {r.dicabut && <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-semibold text-ink-soft">Dicabut</span>}
-                  </span>
-                  <span className="mt-0.5 block text-sm leading-snug text-ink-soft">{r.tentang}</span>
-                </span>
-              </li>
-            ))}
-          </ol>
+          <DasarHukum />
         </Reveal>
-        <p className="mt-4 text-sm text-ink-soft">Peraturan yang sudah dicabut disimpan sebagai pembanding dan tidak dipakai untuk menjawab.</p>
+        <p className="mt-4 text-sm text-ink-soft">
+          Ringkasan disederhanakan agar mudah dipahami; yang mengikat tetap bunyi pasal pada dokumen asli. Peraturan yang sudah dicabut disimpan sebagai pembanding dan tidak dipakai untuk menjawab.
+        </p>
       </section>
 
       {/* Pertanyaan umum */}

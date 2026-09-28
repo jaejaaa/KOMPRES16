@@ -140,7 +140,7 @@ export default function DirektoriKonsultan({ kategoriAwal }: { kategoriAwal?: st
             <select
               value={kategori}
               onChange={(e) => setKategori(e.target.value)}
-              className="w-full rounded-2xl border border-line-strong bg-surface px-4 py-3 text-ink"
+              className="fokus-marun w-full rounded-2xl border border-line-strong bg-surface px-4 py-3 text-ink transition-all focus:border-secondary focus:ring-4 focus:ring-secondary/15"
             >
               {daftarKategori?.map((k) => <option key={k.id} value={k.id}>{k.nama}</option>)}
             </select>
@@ -184,7 +184,7 @@ export default function DirektoriKonsultan({ kategoriAwal }: { kategoriAwal?: st
               <select
                 value={provinsi}
                 onChange={(e) => { setProvinsi(e.target.value); setKota(""); }}
-                className="w-full rounded-2xl border border-line-strong bg-surface px-4 py-3 text-ink"
+                className="fokus-marun w-full rounded-2xl border border-line-strong bg-surface px-4 py-3 text-ink transition-all focus:border-secondary focus:ring-4 focus:ring-secondary/15"
               >
                 <option value="">Semua provinsi</option>
                 {PROVINSI.map((p) => <option key={p} value={p}>{p}</option>)}
@@ -196,7 +196,7 @@ export default function DirektoriKonsultan({ kategoriAwal }: { kategoriAwal?: st
                 <select
                   value={kota}
                   onChange={(e) => setKota(e.target.value)}
-                  className="w-full rounded-2xl border border-line-strong bg-surface px-4 py-3 text-ink"
+                  className="fokus-marun w-full rounded-2xl border border-line-strong bg-surface px-4 py-3 text-ink transition-all focus:border-secondary focus:ring-4 focus:ring-secondary/15"
                 >
                   <option value="">Semua kota/kabupaten di {provinsi}</option>
                   {kotaTersedia.map((k) => <option key={k} value={k}>{k}</option>)}
@@ -236,7 +236,7 @@ export default function DirektoriKonsultan({ kategoriAwal }: { kategoriAwal?: st
           </div>
         )}
 
-        <div className="flex flex-col items-start justify-between gap-5 rounded-3xl border border-line border-l-4 border-l-accent bg-surface p-6 shadow-soft md:flex-row md:items-center">
+        <div className="flex flex-col items-start justify-between gap-5 rounded-3xl border border-line border-l-4 border-l-[#E8A5A5] bg-surface p-6 shadow-soft md:flex-row md:items-center">
           <div>
             <h2 className="text-lg font-bold text-ink">Belum yakin butuh siapa?</h2>
             <p className="mt-1 text-sm text-ink-soft">Ceritakan masalah Anda ke JagaTanah AI, jawabannya disertai dasar hukum.</p>

@@ -77,6 +77,7 @@ export interface Konsultan {
   peta?: string; // tautan pencarian Google Maps
   jadwal?: string;
   tarif?: string; // kisaran indikatif per orang
+  foto?: string; // foto profesional berlatar transparan (PNG/WebP); kosong = lingkaran inisial
   _dummy?: boolean;
 }
 

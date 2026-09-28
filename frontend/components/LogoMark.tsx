@@ -1,16 +1,11 @@
+import Image from "next/image";
 import { APP_NAME, APP_TAGLINE } from "@/lib/site";
 
-// Perisai (jaga) berisi sebidang tanah + tanda centang = "tanah yang terjaga"
-export default function LogoMark({ size = 32, inverse = false }: { size?: number; inverse?: boolean }) {
-  const perisai = inverse ? "#FFFFFF" : "var(--color-primary)";
-  const centang = inverse ? "var(--color-primary)" : "#FFFFFF";
-  return (
-    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden>
-      <path d="M16 2 27.5 6v8.6c0 7.1-4.7 12.6-11.5 15.4C9.2 27.2 4.5 21.7 4.5 14.6V6z" fill={perisai} />
-      <path d="M9.5 19.6 16 16.2l6.5 3.4L16 23z" fill="var(--color-accent)" />
-      <path d="M11.5 10.6l3.2 3.2 6-6.2" fill="none" stroke={centang} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
+// Emblem JagaTanah (timbangan di atas buku) marun, dipakai di seluruh halaman; versi putih hanya untuk ikon tab
+// browser (app/icon.png, app/favicon.ico). File 1024px + unoptimized supaya tulisan pada emblem tidak pecah
+// saat halaman di-zoom (tanpa itu Next memperkecil gambar sesuai ukuran tampil).
+export default function LogoMark({ size = 32 }: { size?: number; inverse?: boolean }) {
+  return <Image src="/logo/jagatanah-marun.webp" alt="" width={size} height={size} unoptimized className="shrink-0" aria-hidden />;
 }
 
 // "Jaga" + "Tanah" dua warna; nama diambil dari lib/site.ts
@@ -18,7 +13,7 @@ export function Wordmark({ inverse = false, withTagline = true }: { inverse?: bo
   const pisah = APP_NAME.match(/^(Jaga)(.*)$/);
   return (
     <span className="flex items-center gap-2.5">
-      <LogoMark inverse={inverse} size={withTagline ? 36 : 28} />
+      <LogoMark size={withTagline ? 40 : 32} />
       <span className="leading-tight">
         <span className={`block text-lg font-extrabold tracking-tight ${inverse ? "text-white" : "text-ink"}`}>
           {pisah ? (

@@ -8,6 +8,7 @@ import {
   GoogleAuthProvider,
   linkWithCredential,
   linkWithPopup,
+  sendEmailVerification,
   sendPasswordResetEmail,
   setPersistence,
   signInAnonymously,
@@ -15,6 +16,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  type User,
 } from "firebase/auth";
 
 const config = {
@@ -51,7 +53,12 @@ export async function getToken(): Promise<string> {
 
 export type HasilMasuk =
   | { ok: true; dokumenTamuHilang: boolean } // true: masuk ke akun Google lama, dokumen tamu tidak ikut
-  | { ok: false; pesan: string | null }; // pesan null = dibatalkan user
+  // pesan null = dibatalkan user. verifikasi: akun email belum diverifikasi, isinya alamat email tersebut
+  | { ok: false; pesan: string | null; verifikasi?: { email: string; terkirim: boolean; dokumenTamuHilang: boolean } };
+
+// Akun email yang belum mengeklik tautan verifikasi diperlakukan seperti tamu (mencegah pendaftaran asal-asalan).
+// Akun Google selalu terverifikasi.
+export const perluVerifikasi = (u: User | null): u is User => !!u && !u.isAnonymous && !u.emailVerified;
 
 const PESAN_AUTH: Record<string, string | null> = {
   "auth/popup-closed-by-user": null,
@@ -117,17 +124,33 @@ export async function masukDenganGoogle(): Promise<HasilMasuk> {
   }
 }
 
+// Kirim tautan verifikasi ke email akun yang sedang aktif (email berbahasa Indonesia)
+async function kirimVerifikasi(u: User) {
+  const auth = firebaseAuth();
+  auth.languageCode = "id";
+  await sendEmailVerification(u);
+}
+
 // Daftar akun baru dengan email. Tamu "dinaikkan" (uid tetap) supaya dokumen yang baru diperiksa ikut tersimpan.
+// Akun belum dianggap masuk sampai emailnya diverifikasi (lihat cekVerifikasi).
 export async function daftarDenganEmail(email: string, sandi: string): Promise<HasilMasuk> {
   const auth = firebaseAuth();
   const tamu = auth.currentUser?.isAnonymous ? auth.currentUser : null;
+  let user: User;
   try {
-    if (tamu) await linkWithCredential(tamu, EmailAuthProvider.credential(email, sandi));
-    else await createUserWithEmailAndPassword(auth, email, sandi);
-    await selesaiMasuk();
-    return { ok: true, dokumenTamuHilang: false };
+    user = tamu
+      ? (await linkWithCredential(tamu, EmailAuthProvider.credential(email, sandi))).user
+      : (await createUserWithEmailAndPassword(auth, email, sandi)).user;
   } catch (e) {
     return { ok: false, pesan: pesanDari(e) };
+  }
+  window.dispatchEvent(new Event(AUTH_EVENT));
+  try {
+    await kirimVerifikasi(user);
+    return { ok: false, pesan: null, verifikasi: { email, terkirim: true, dokumenTamuHilang: false } };
+  } catch (e) {
+    // Akun sudah dibuat; email bisa dikirim ulang dari layar verifikasi
+    return { ok: false, pesan: pesanDari(e), verifikasi: { email, terkirim: false, dokumenTamuHilang: false } };
   }
 }
 
@@ -136,12 +159,39 @@ export async function masukDenganEmail(email: string, sandi: string): Promise<Ha
   const auth = firebaseAuth();
   const adaTamu = !!auth.currentUser?.isAnonymous;
   try {
-    await signInWithEmailAndPassword(auth, email, sandi);
+    const { user } = await signInWithEmailAndPassword(auth, email, sandi);
+    if (perluVerifikasi(user)) {
+      window.dispatchEvent(new Event(AUTH_EVENT));
+      return { ok: false, pesan: null, verifikasi: { email, terkirim: false, dokumenTamuHilang: adaTamu } };
+    }
     await selesaiMasuk();
     return { ok: true, dokumenTamuHilang: adaTamu };
   } catch (e) {
     return { ok: false, pesan: pesanDari(e) };
   }
+}
+
+// Kirim ulang tautan verifikasi ke akun email yang sedang aktif
+export async function kirimUlangVerifikasi(): Promise<{ ok: boolean; pesan: string | null }> {
+  const u = firebaseAuth().currentUser;
+  if (!perluVerifikasi(u)) return { ok: false, pesan: "Sesi pendaftaran berakhir. Silakan masuk kembali." };
+  try {
+    await kirimVerifikasi(u);
+    return { ok: true, pesan: null };
+  } catch (e) {
+    return { ok: false, pesan: pesanDari(e) };
+  }
+}
+
+// Cek apakah tautan verifikasi sudah diklik. Jika sudah: token diperbarui (klaim email_verified) dan akun resmi masuk.
+export async function cekVerifikasi(): Promise<boolean> {
+  const u = firebaseAuth().currentUser;
+  if (!u || u.isAnonymous) return false;
+  await u.reload();
+  if (!u.emailVerified) return false;
+  await u.getIdToken(true);
+  await selesaiMasuk();
+  return true;
 }
 
 // Kirim email atur ulang kata sandi. Firebase tidak memberi tahu apakah email terdaftar (demi keamanan).

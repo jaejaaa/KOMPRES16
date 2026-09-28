@@ -62,6 +62,14 @@ body {
   box-shadow: none;
 }
 
+/* Kolom pilihan (select) yang fokusnya meniru kolom chat: bingkai marun + cincin marun tipis,
+   menggantikan kotak fokus emas-hitam bawaan di atas */
+.fokus-marun:focus-visible {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 4px rgb(142 27 27 / 0.15);
+}
+
 /* Latar maroon polos untuk pembuka, judul halaman, dan footer */
 .hero-bg { background: var(--color-primary); }
 
@@ -82,6 +90,15 @@ body {
 /* Muncul saat di-scroll (lihat components/Reveal.tsx). Default terlihat; disembunyikan hanya lewat data-shown="false" */
 .reveal { transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal[data-shown="false"] { opacity: 0; transform: translateY(18px); }
+/* Meluncur dari samping (alur tahapan di beranda) */
+.reveal[data-dari="kiri"],
+.reveal[data-dari="kanan"] { transition: opacity 1s ease-out, transform 1.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal[data-dari="kiri"][data-shown="false"] { transform: translateX(-72px); }
+.reveal[data-dari="kanan"][data-shown="false"] { transform: translateX(72px); }
+/* Garis penghubung yang tergambar dari atas ke bawah (lapisan dalam, lihat Reveal.tsx) */
+.reveal[data-dari="garis"][data-shown="false"] { opacity: 1; transform: none; }
+.reveal-garis { transition: clip-path 1.2s cubic-bezier(0.65, 0, 0.35, 1); clip-path: inset(0 0 0 0); }
+.reveal[data-dari="garis"][data-shown="false"] > .reveal-garis { clip-path: inset(0 0 100% 0); }
 
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(8px); }
@@ -129,6 +146,28 @@ body {
   100% { transform: translateX(250%); }
 }
 .progress-bar { animation: progress-indeterminate 1.4s ease-in-out infinite; }
+
+/* Sembunyikan tombol lihat sandi bawaan Edge; formulir punya tombol mata sendiri */
+input::-ms-reveal,
+input::-ms-clear { display: none; }
+
+/* Stabilo merah untuk kalimat inti di ringkasan dasar hukum; tersapu dari kiri saat ringkasan dibuka */
+.stabilo {
+  color: var(--color-ink);
+  font-weight: 600;
+  padding: 0.05em 0.2em;
+  margin: 0 -0.1em;
+  border-radius: 0.35em 0.2em;
+  background-color: transparent; /* <mark> bawaan browser berwarna kuning */
+  background-image: linear-gradient(100deg, rgb(229 57 53 / 0.14), rgb(229 57 53 / 0.34) 8%, rgb(229 57 53 / 0.28) 92%, rgb(229 57 53 / 0.1));
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition: background-size 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.3s;
+}
+[data-terbuka="true"] .stabilo { background-size: 100% 100%; }
+@media (prefers-reduced-motion: reduce) { .stabilo { transition: none; } }
 
 /* <details> tanpa segitiga bawaan + isi yang membuka halus */
 summary { list-style: none; cursor: pointer; }
@@ -183,7 +222,8 @@ details[open] > :not(summary) { animation: fade-up 0.25s ease-out both; }
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .reveal[data-shown="false"] { opacity: 1; transform: none; }
+  .reveal[data-shown="false"][data-dari] { opacity: 1; transform: none; }
+  .reveal[data-shown="false"] > .reveal-garis { clip-path: none; }
   ::view-transition-group(*),
   ::view-transition-old(*),
   ::view-transition-new(*) {

@@ -21,6 +21,7 @@ const PATHS = {
   clock: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2",
   list: "M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01",
   lock: "M6 11h12v10H6zM8.5 11V7.5a3.5 3.5 0 0 1 7 0V11",
+  mail: "M3 6h18v12H3zM3 7l9 6.5L21 7",
   plus: "M12 5v14M5 12h14",
   x: "M7 7l10 10M17 7 7 17",
   filter: "M4 5h16l-6 8v5l-4 2v-7z",

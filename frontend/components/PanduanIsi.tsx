@@ -73,7 +73,7 @@ export default function PanduanIsi({ p }: { p: Panduan }) {
               </p>
             </div>
             <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-bg" role="progressbar" aria-valuenow={persen} aria-valuemin={0} aria-valuemax={100} aria-label="Langkah selesai">
-              <div className="h-full rounded-full bg-linear-to-r from-risk-low to-secondary transition-all duration-500" style={{ width: `${persen}%` }} />
+              <div className="h-full rounded-full bg-risk-low transition-all duration-500" style={{ width: `${persen}%` }} />
             </div>
             {jumlahSelesai > 0 && (
               <button type="button" onClick={() => simpan([])} className="mt-3 text-xs font-semibold text-ink-soft hover:text-primary">
