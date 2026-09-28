@@ -96,19 +96,24 @@ class Gemini:
                 print(f"  [gemini] kuota/beban ({s[:60].strip()}...) -> tunggu {wait}s, percobaan {attempt + 1}/7", flush=True)
                 time.sleep(wait)
 
-    def _partial_path(self):
-        return CHUNKS_DIR / f"embeddings_gemini.partial.{self.tag.replace('/', '_')}.npz"
+    def _cache_path(self):
+        return CHUNKS_DIR / f"embeddings_gemini.cache.{self.tag.replace('/', '_')}.npz"
 
     def encode_docs(self, texts):
-        """Progres disimpan tiap batch (embeddings_gemini.partial.*.npz) sehingga bisa dilanjutkan bila kuota habis / proses berhenti."""
+        """Cache PERMANEN per-teks (hash isi -> vektor), disimpan tiap batch di embeddings_gemini.cache.*.npz.
+        Dua manfaat: (1) bisa dilanjutkan kalau kuota habis / proses berhenti di tengah jalan; (2) kalau korpus
+        cuma bertambah sedikit (mis. 1 panduan baru), chunk LAMA yang isinya sama persis TIDAK di-embed ulang
+        -- cuma teks yang benar-benar baru/berubah yang kena panggilan API. Jangan hapus file ini setelah selesai;
+        biarkan tumbuh jadi cache jangka panjang. Entri utk teks yg sudah tidak dipakai lagi cuma jadi baris
+        menganggur (aman, tidak dipakai/dicari lagi), bukan masalah korektnes."""
         import numpy as np
         keys = [hashlib.sha1(t.encode()).hexdigest() for t in texts]
-        done, pf = {}, self._partial_path()
+        done, pf = {}, self._cache_path()
         if pf.exists():
             z = np.load(pf, allow_pickle=False)
             done = dict(zip(z["keys"].tolist(), z["vecs"]))
         todo = [i for i, k in enumerate(keys) if k not in done]
-        print(f"  [gemini] {len(texts) - len(todo)}/{len(texts)} sudah ada di cache progres; sisa {len(todo)}", flush=True)
+        print(f"  [gemini] {len(texts) - len(todo)}/{len(texts)} sudah ada di cache; sisa {len(todo)} teks baru/berubah yang perlu di-embed", flush=True)
         def simpan():
             if done: np.savez(pf, keys=np.array(list(done.keys())), vecs=np.vstack(list(done.values())))
         try:
@@ -120,11 +125,9 @@ class Gemini:
                 print(f"  [gemini] {len(texts) - len(todo) + s + len(idx)}/{len(texts)}", flush=True)
         except KuotaHarianHabis as e:
             simpan()
-            raise KuotaHarianHabis(f"{e} Progres tersimpan: {len(done)}/{len(texts)} chunk. Jalankan lagi setelah kuota harian "
+            raise KuotaHarianHabis(f"{e} Progres tersimpan (cache permanen): {len(done)}/{len(texts)} chunk unik. Jalankan lagi setelah kuota harian "
                                    f"di-reset (umumnya tengah malam waktu Pasifik) untuk melanjutkan; yang sudah selesai tidak diulang.") from e
-        out = np.vstack([done[k] for k in keys])
-        pf.unlink(missing_ok=True)
-        return out
+        return np.vstack([done[k] for k in keys])
 
     def encode_query(self, text):
         return self._embed([text], "RETRIEVAL_QUERY")[0]

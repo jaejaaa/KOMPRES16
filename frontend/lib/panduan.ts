@@ -2,6 +2,7 @@
 // Kalau Data Engineer mengubah panduan, salin ulang file JSON-nya ke frontend/data/panduan/.
 import balikNama from "@/data/panduan/balik-nama.json";
 import cekKeaslian from "@/data/panduan/cek-keaslian.json";
+import tanahGarapan from "@/data/panduan/tanah-garapan.json";
 
 interface RawPanduan {
   doc: string;
@@ -45,6 +46,7 @@ function olah(slug: string, raw: RawPanduan, ringkas: string): Panduan {
 export const PANDUAN: Panduan[] = [
   olah("cek-keaslian", cekKeaslian, "Pastikan sertifikat asli dan cocok dengan data Kantor Pertanahan sebelum membayar apa pun."),
   olah("balik-nama", balikNama, "Alur lengkap dari cek sertifikat, pembayaran pajak, AJB di PPAT, sampai sertifikat atas nama Anda."),
+  olah("tanah-garapan", tanahGarapan, "Tanah garapan/girik yang belum bersertifikat masih bisa didaftarkan jadi SHM — begini caranya, dan yang perlu dicek dulu kalau mau membelinya."),
 ];
 
 export const getPanduan = (slug: string) => PANDUAN.find((p) => p.slug === slug);
