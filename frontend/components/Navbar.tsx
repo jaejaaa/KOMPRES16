@@ -97,7 +97,8 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div className="sticky top-0 z-40 px-3 pt-3 md:px-6">
+    // viewTransitionName: navbar tetap diam & di lapisan teratas saat animasi pindah halaman (lihat globals.css)
+    <div className="sticky top-0 z-40 px-3 pt-3 md:px-6" style={{ viewTransitionName: "navbar" }}>
       <header
         className={`glass mx-auto max-w-6xl rounded-[1.75rem] border border-white/60 transition-shadow duration-300 ${
           scrolled ? "shadow-lift" : "shadow-soft"

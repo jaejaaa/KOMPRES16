@@ -1,6 +1,6 @@
 // Komponen dasar tampilan layanan: judul halaman, panel, pemberitahuan, langkah, tombol
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { ViewTransition, type ReactNode } from "react";
 import HeroBackdrop, { type FotoLatar } from "./HeroBackdrop";
 import Icon, { type IconName } from "./Icon";
 
@@ -35,42 +35,45 @@ export function PageHeader({
   foto?: FotoLatar; // default patung dewi keadilan
 }) {
   return (
-    // Penuh kiri-kanan dan mulai dari atas layar, di belakang navbar melayang (lihat NAV_OFFSET)
-    <section className={`hero-bg relative overflow-hidden ${NAV_OFFSET} text-white`}>
-      {latar && <HeroBackdrop ringkas foto={foto} />}
-      <div className={`${container} relative pb-16 pt-10 md:pb-20 md:pt-14`}>
-        <nav aria-label="Breadcrumb">
-          <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/70">
-            {crumbs.map((c, i) => (
-              <li key={c.label} className="flex items-center gap-1.5">
-                {i > 0 && <Icon name="chevron" className="size-3.5 -rotate-90 text-white/40" />}
-                {c.href ? (
-                  <Link href={c.href} className="rounded-full px-1 transition-colors hover:text-white">{c.label}</Link>
-                ) : (
-                  <span aria-current="page" className="rounded-full bg-white/10 px-2.5 py-0.5 font-medium text-white">{c.label}</span>
-                )}
-              </li>
-            ))}
-          </ol>
-        </nav>
-        <div className="mt-5 flex items-start gap-4">
-          {icon && (
-            <span className="hidden size-14 shrink-0 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20 backdrop-blur sm:flex">
-              <Icon name={icon} className="size-7 text-accent" />
-            </span>
-          )}
-          <div>
-            <h1
-              className="text-3xl font-extrabold tracking-tight md:text-[2.5rem] md:leading-tight"
-              style={latar ? { textShadow: "0 2px 24px rgba(60,0,0,.6)" } : undefined}
-            >
-              {title}
-            </h1>
-            {desc && <p className="mt-2 max-w-2xl leading-relaxed text-white/75">{desc}</p>}
+    // Penuh kiri-kanan dan mulai dari atas layar, di belakang navbar melayang (lihat NAV_OFFSET).
+    // Nama "banner" sama di semua halaman: saat pindah halaman banner tetap di tempat, isinya berganti pelan.
+    <ViewTransition name="banner">
+      <section className={`hero-bg relative overflow-hidden ${NAV_OFFSET} text-white`}>
+        {latar && <HeroBackdrop ringkas foto={foto} />}
+        <div className={`${container} relative pb-16 pt-10 md:pb-20 md:pt-14`}>
+          <nav aria-label="Breadcrumb">
+            <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/70">
+              {crumbs.map((c, i) => (
+                <li key={c.label} className="flex items-center gap-1.5">
+                  {i > 0 && <Icon name="chevron" className="size-3.5 -rotate-90 text-white/40" />}
+                  {c.href ? (
+                    <Link href={c.href} className="rounded-full px-1 transition-colors hover:text-white">{c.label}</Link>
+                  ) : (
+                    <span aria-current="page" className="rounded-full bg-white/10 px-2.5 py-0.5 font-medium text-white">{c.label}</span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </nav>
+          <div className="mt-5 flex items-start gap-4">
+            {icon && (
+              <span className="hidden size-14 shrink-0 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20 backdrop-blur sm:flex">
+                <Icon name={icon} className="size-7 text-accent" />
+              </span>
+            )}
+            <div>
+              <h1
+                className="text-3xl font-extrabold tracking-tight md:text-[2.5rem] md:leading-tight"
+                style={latar ? { textShadow: "0 2px 24px rgba(60,0,0,.6)" } : undefined}
+              >
+                {title}
+              </h1>
+              {desc && <p className="mt-2 max-w-2xl leading-relaxed text-white/75">{desc}</p>}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </ViewTransition>
   );
 }
 
