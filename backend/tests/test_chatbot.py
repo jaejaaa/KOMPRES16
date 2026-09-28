@@ -197,6 +197,14 @@ class TestTopik(unittest.TestCase):
         self.assertIn("topik_sesuai", SYSTEM_PROMPT)
         self.assertIn("ijazah", SYSTEM_PROMPT)
 
+    def test_prompt_menyuruh_pertimbangkan_riwayat_utk_lanjutan_pendek(self):
+        # Bug nyata: "terus gimana"/"syaratnya apa aja" setelah cerita panjang soal tanah sempat
+        # ditolak "di luar cakupan" karena dinilai sendirian tanpa lihat <riwayat> percakapan.
+        from chatbot.prompts import SYSTEM_PROMPT
+
+        self.assertIn("riwayat", SYSTEM_PROMPT.lower())
+        self.assertIn("terus gimana", SYSTEM_PROMPT)
+
 
 if __name__ == "__main__":
     unittest.main()
