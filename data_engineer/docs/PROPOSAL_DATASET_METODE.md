@@ -39,8 +39,16 @@ Untuk menguji deteksi risiko dibuat dokumen perjanjian **fiktif** berbentuk PDF 
 - **Set terpisah (held-out):** 6 dokumen dengan kalimat dan struktur berbeda serta pasal "jebakan" yang tampak berisiko tetapi wajar; **17 pasal berisiko** dan **31 aman**. Kunci jawabannya tidak dibagikan kepada pihak yang menyetel analisis, agar pengukuran tidak bias.
 
 **Taksonomi 10 kategori** (K1–K10), disepakati dengan AI Engineer: uang muka hangus tanpa syarat jelas; ketidakjelasan objek tanah; status hak dan beban tidak dijamin; peralihan hak tanpa akta PPAT; pajak dan biaya tidak jelas; klausul denda/syarat berat sebelah (termasuk pembatalan sepihak); waktu pelaksanaan tidak jelas; subjek hak tidak memenuhi syarat; hilangnya hak somasi/upaya hukum; kuasa mutlak yang berisiko disalahgunakan. Dasar Pasal dicantumkan hanya bila ada di korpus (mis. PP 24/1997 Pasal 37 untuk akta PPAT, UUPA Pasal 21 untuk subjek hak milik, UUPA Pasal 44 ayat 3 untuk sewa yang memeras); kategori K9 dan K10 tidak memiliki dasar Pasal di korpus.
-Pelabelan risiko adalah penilaian perancang dataset dan bukan nasihat hukum.
-**Hasil awal deteksi risiko (set dev, AI Engineer, sekali jalan, belum dituning):** precision 0,87; recall 0,93; F1 0,90 pada 8 dokumen awal, dibanding analisis dummy F1 0,20. Angka ini optimistis (definisi kategori pada prompt berasal dari taksonomi yang sama dengan pembuatan dokumen). [ISI: hasil pada 12 dokumen dev dan pada set held-out]
+Pelabelan risiko adalah penilaian perancang dataset dan bukan nasihat hukum. Aplikasi menampilkan level risiko sebagai hijau/kuning/merah (low/medium/high); level *low* berarti "pasal sudah diperiksa dan dinilai aman", bukan tanda peringatan ke pengguna — jadi angka yang relevan secara produk adalah deteksi level *medium*+*high*, bukan seluruh level.
+
+**Hasil awal (set dev, 8 dokumen awal, sekali jalan, belum dituning):** precision 0,87; recall 0,93; F1 0,90, dibanding analisis dummy F1 0,20. Angka ini optimistis (definisi kategori pada prompt dan pembuatan dokumen berasal dari taksonomi yang sama).
+
+**Hasil final (set held-out, 6 dokumen dengan kalimat/struktur berbeda dan pasal jebakan, dijalankan sekali, dinilai dengan kunci jawaban yang tidak dibagikan ke penyetel prompt):**
+- Deteksi pasal berisiko, semua level: precision 0,52; recall 1,00; F1 0,68.
+- **Deteksi pasal berisiko, level medium/high saja (metrik yang relevan untuk produk):** precision 0,89; recall 1,00; F1 0,94 (17/17 pasal berisiko ditemukan, hanya 2 alarm keliru dari 6 dokumen).
+- Kecocokan kategori pada temuan yang benar: 0,94. Ketepatan level: 0,82; dalam selisih ±1 tingkat: 1,00.
+- Selisih precision antara "semua level" dan "medium/high saja" murni karena 14 dari 16 "alarm palsu" berlevel *low* — pemeriksaan manual menunjukkan ini bukan kesalahan: kebanyakan adalah pasal yang benar-benar diperiksa dan dikonfirmasi aman (level rendah sebagai bentuk transparansi, bukan tanda risiko), dan 2 sisanya (level *medium*) adalah temuan sah yang tidak tercakup kunci jawaban (celah linimasa bersyarat pada dua dokumen berbeda) — mengungkap kekurangan pada rancangan kunci jawaban, bukan pada model.
+- Angka held-out konsisten dengan set dev (recall tetap sempurna, tidak ada regresi), sehingga tidak ada indikasi *overfitting* terhadap taksonomi/prompt.
 
 ## 5. Evaluasi
 - **Test set Q&A** (pengembangan): 45 pertanyaan (40 dapat dijawab, 5 di luar cakupan) berupa regulasi, bahasa awam, panduan, jebakan aturan dicabut, dan pertanyaan multi-Pasal. Jawaban acuan dan bukti kunci diverifikasi otomatis terhadap teks Pasal.

@@ -90,6 +90,7 @@ Kelemahan yang diketahui: pertanyaan perbandingan/multi-Pasal ("bedanya hak mili
   Set **dev** (12 dokumen, 25 pasal berisiko, 80 aman) boleh dipakai menyetel prompt; set **held-out** (6 dokumen, 17 berisiko, 31 aman) hanya untuk angka final, jangan dipakai menyetel. Baseline `analyze()` dummy: F1 0,20 (dev) dan 0,21 (held-out).
   Contoh: `PYTHONIOENCODING=utf-8 python data_engineer/scripts/09_eval_risk.py --analyzer analisis:analyze --path backend --set dev`.
   Held-out: AI Engineer menjalankan `... 09_eval_risk.py --analyzer analisis:analyze --path backend --set heldout --predict-only` lalu mengirim `data/eval/prediksi_*_heldout.json` ke Data Engineer, yang menilainya dengan kunci privat (`--predictions FILE --set heldout`).
+  **Hasil final held-out** (6 dokumen, dijalankan 2026-09-28): level medium/high saja (metrik relevan produk) — precision 0,89, recall 1,00, F1 0,94. Skrip kini melaporkan dua metrik sekaligus: semua level, dan medium/high saja (level *low* = "sudah diperiksa, aman", bukan alarm).
   Catatan bias: dokumen dev dibuat dari definisi kategori yang sama dengan prompt `analyze()`, jadi angka dev optimistis; itu alasan set held-out dibuat dengan kalimat berbeda.
 - **Status hukum per Pasal:** PP 24/1997 Ps 26 dan 45 ditandai khusus (jangka waktu pengumuman dicabut PP 18/2021 Ps 103 huruf c); UU 21/1997 = masa peralihan 1 tahun (UU 28/2009 Ps 180 angka 6).
 

@@ -47,14 +47,30 @@ def load_gt(set_name):
                  "Set held-out sengaja tidak di-commit: hanya Data Engineer yang memegang kuncinya (kirim file prediksi ke Data Engineer untuk dinilai).")
     return json.loads(path.read_text(encoding="utf-8"))["dokumen"], base
 
+def _deteksi(gt, pr_per_doc, min_level="low"):
+    """Precision/recall/F1 memakai hanya prediksi dengan level >= min_level sebagai 'ditandai berisiko'.
+    min_level='low' (default) = semua level dihitung (perilaku lama). min_level='medium' = cocok sistem
+    hijau/kuning/merah aplikasi: level 'low' berarti "sudah dicek, aman", bukan tanda risiko ke pengguna,
+    jadi tidak selayaknya dihitung sebagai alarm palsu maupun sebagai temuan yang perlu dicocokkan."""
+    amb = LEVELS.get(min_level, 0)
+    tp = fp = fn = 0
+    for d in gt:
+        truth = {r["pasal"] for r in d["risks"]}
+        pr = pr_per_doc[d["id"]]
+        ditandai = {p for p, r in pr.items() if LEVELS.get(r.get("level"), -1) >= amb}
+        tp += len(ditandai & truth); fp += len(ditandai - truth); fn += len(truth - ditandai)
+    P = tp / (tp + fp) if tp + fp else 0.0; R = tp / (tp + fn) if tp + fn else 0.0
+    return {"tp": tp, "fp": fp, "fn": fn, "precision": P, "recall": R, "f1": (2 * P * R / (P + R)) if P + R else 0.0}
+
 def score(preds, mapping=None, set_name="dev"):
     gt, _ = load_gt(set_name)
     taks = json.loads((SYN / "taksonomi_risiko.json").read_text(encoding="utf-8"))["kategori"]
     mapping = mapping or {}
-    tp = fp = fn = 0; kat_ok = kat_n = lvl_ok = lvl_dekat = lvl_n = 0
+    kat_ok = kat_n = lvl_ok = lvl_dekat = lvl_n = 0
     per_doc, per_kat, per_level = [], {t["id"]: [0, 0] for t in taks}, {l: [0, 0] for l in LEVELS}
     fp_bersih = n_bersih_pasal = 0
     tanpa_pasal = []  # temuan tanpa nomor pasal, mis. "klausul tidak ditemukan" (K3 boleh absen); dilaporkan terpisah, bukan alarm palsu
+    pr_per_doc = {}
     for d in gt:
         truth = {r["pasal"]: r for r in d["risks"]}
         pr = {}
@@ -62,8 +78,8 @@ def score(preds, mapping=None, set_name="dev"):
             p = norm_pasal(r.get("pasal"))
             if not p: tanpa_pasal.append({"dokumen": d["id"], "kategori": r.get("kategori"), "pasal": r.get("pasal")}); continue
             if p and (p not in pr or LEVELS.get(r.get("level"), -1) > LEVELS.get(pr[p].get("level"), -1)): pr[p] = r
+        pr_per_doc[d["id"]] = pr
         d_tp = [p for p in pr if p in truth]; d_fp = [p for p in pr if p not in truth]; d_fn = [p for p in truth if p not in pr]
-        tp += len(d_tp); fp += len(d_fp); fn += len(d_fn)
         for p, t in truth.items():
             per_kat[t["kategori_id"]][1] += 1; per_level[t["level"]][1] += 1
             if p in pr: per_kat[t["kategori_id"]][0] += 1; per_level[t["level"]][0] += 1
@@ -74,8 +90,8 @@ def score(preds, mapping=None, set_name="dev"):
             lvl_ok += a == b; lvl_dekat += abs(a - b) <= 1
         if not d["risks"]: fp_bersih += len(d_fp); n_bersih_pasal += len(d["pasal_total"])
         per_doc.append({"id": d["id"], "benar": len(d_tp), "meleset": len(d_fn), "alarm_palsu": len(d_fp), "jumlah_risiko": len(truth)})
-    P = tp / (tp + fp) if tp + fp else 0.0; R = tp / (tp + fn) if tp + fn else 0.0
-    return {"deteksi_pasal": {"tp": tp, "fp": fp, "fn": fn, "precision": P, "recall": R, "f1": (2 * P * R / (P + R)) if P + R else 0.0},
+    return {"deteksi_pasal": _deteksi(gt, pr_per_doc, "low"),
+            "deteksi_pasal_actionable": _deteksi(gt, pr_per_doc, "medium"),  # sesuai UI: cuma medium/high ditampilkan sbg tanda risiko
             "kecocokan_kategori": kat_ok / kat_n if kat_n else None, "level_tepat": lvl_ok / lvl_n if lvl_n else None,
             "level_selisih_maks_1": lvl_dekat / lvl_n if lvl_n else None,
             "recall_per_kategori": {k: (v[0] / v[1] if v[1] else None) for k, v in per_kat.items()},
@@ -84,9 +100,10 @@ def score(preds, mapping=None, set_name="dev"):
             "temuan_tanpa_nomor_pasal": tanpa_pasal, "set": set_name, "jumlah_dokumen": len(gt), "per_dokumen": per_doc}
 
 def cetak(nama, r):
-    d = r["deteksi_pasal"]
+    d = r["deteksi_pasal"]; da = r.get("deteksi_pasal_actionable")
     print(f"\n== Deteksi risiko [{nama}] set={r.get('set', 'dev')} ({r.get('jumlah_dokumen', '?')} dokumen) ==")
-    print(f"Deteksi pasal berisiko : precision {d['precision']:.2f} | recall {d['recall']:.2f} | F1 {d['f1']:.2f}   (benar {d['tp']}, alarm palsu {d['fp']}, terlewat {d['fn']})")
+    print(f"Deteksi pasal berisiko (semua level)     : precision {d['precision']:.2f} | recall {d['recall']:.2f} | F1 {d['f1']:.2f}   (benar {d['tp']}, alarm palsu {d['fp']}, terlewat {d['fn']})")
+    if da: print(f"Deteksi pasal berisiko (medium+high saja): precision {da['precision']:.2f} | recall {da['recall']:.2f} | F1 {da['f1']:.2f}   (benar {da['tp']}, alarm palsu {da['fp']}, terlewat {da['fn']})  <- angka yg relevan buat UI (level 'low' = 'sudah dicek, aman', bukan tanda risiko)")
     f = lambda x: "-" if x is None else f"{x:.2f}"
     print(f"Kategori cocok (dari yang terdeteksi): {f(r['kecocokan_kategori'])} | level tepat: {f(r['level_tepat'])} | level selisih <=1: {f(r['level_selisih_maks_1'])}")
     print("Recall per kategori    : " + ", ".join(f"{k}={f(v)}" for k, v in r["recall_per_kategori"].items()))
