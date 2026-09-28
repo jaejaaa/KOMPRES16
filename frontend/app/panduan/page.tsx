@@ -23,6 +23,8 @@ export default function PanduanPage() {
         <ul className="grid grid-cols-1 gap-5 md:grid-cols-2">
           {PANDUAN.map((p, i) => {
             const langkah = p.bagian.filter((b) => b.nomor !== null).length;
+            // Panduan berupa penjelasan (tanpa "Langkah 1/2/3") ditampilkan sebagai jumlah bagian, bukan "0 langkah"
+            const jumlah = langkah > 0 ? `${langkah} langkah` : `${p.bagian.length} bagian`;
             return (
               <li key={p.slug}>
                 <Reveal delay={i * 100} className="h-full">
@@ -37,7 +39,7 @@ export default function PanduanPage() {
                     <p className="mt-2 leading-relaxed text-ink-soft">{p.ringkas}</p>
                     <div className="mt-5 flex flex-wrap gap-2 text-sm">
                       <span className="flex items-center gap-1.5 rounded-full bg-bg px-3 py-1.5 font-medium text-ink">
-                        <Icon name="list" className="size-4 text-secondary" /> {langkah} langkah
+                        <Icon name="list" className="size-4 text-secondary" /> {jumlah}
                       </span>
                       <span className="flex items-center gap-1.5 rounded-full bg-bg px-3 py-1.5 font-medium text-ink">
                         <Icon name="scale" className="size-4 text-secondary" /> {jumlahRujukan(p)} rujukan pasal

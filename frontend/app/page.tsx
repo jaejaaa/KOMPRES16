@@ -6,13 +6,6 @@ import Reveal from "@/components/Reveal";
 import { btn, container, NAV_OFFSET } from "@/components/ui";
 import { MAX_PDF_MB } from "@/lib/site";
 
-const PINTASAN = [
-  { href: "/upload", judul: "Cek Dokumen", isi: "Periksa pasal perjanjian Anda" },
-  { href: "/chat", judul: "JagaTanah AI", isi: "Tanya seputar hukum pertanahan" },
-  { href: "/konsultasi", judul: "Konsultasi Hukum", isi: "Temukan Notaris/PPAT dan advokat" },
-  { href: "/panduan", judul: "Panduan Prosedur", isi: "Cek sertifikat dan balik nama" },
-];
-
 const CARA = [
   { judul: "Unggah dokumen", isi: `Pilih file PDF perjanjian jual beli, AJB, atau surat tanah lain. Ukuran maksimal ${MAX_PDF_MB} MB.` },
   { judul: "Tunggu analisis", isi: "Setiap pasal dibaca dan dicocokkan dengan peraturan pertanahan. Prosesnya hanya beberapa detik." },
@@ -75,7 +68,7 @@ export default function Home() {
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80 md:text-xl">
               Unggah perjanjian jual beli atau dokumen tanah lainnya. Pasal yang berisiko ditandai dan dijelaskan dengan
-              bahasa sederhana, lengkap dengan dasar hukumnya. Gratis, bisa langsung dipakai tanpa membuat akun.
+              bahasa sederhana, lengkap dengan dasar hukumnya. Gratis, bisa langsung dipakai.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Link href="/upload" className={`${btn.accent} px-7 py-3.5`}>
@@ -87,26 +80,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        {/* Pintasan layanan di dasar layar pembuka */}
-        <nav aria-label="Pintasan layanan" className="relative border-t border-white/15">
-          <ul className={`${container} grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`}>
-            {PINTASAN.map((p, i) => (
-              <li key={p.href} className={i > 0 ? "border-t border-white/15 lg:border-l lg:border-t-0" : ""}>
-                <Link
-                  href={p.href}
-                  className={`group flex items-center justify-between gap-4 py-5 transition-colors hover:text-accent ${i === 0 ? "lg:pr-6" : "lg:px-6"}`}
-                >
-                  <span>
-                    <span className="block font-semibold">{p.judul}</span>
-                    <span className="block text-sm text-white/65">{p.isi}</span>
-                  </span>
-                  <Icon name="arrow" className="size-5 shrink-0 text-accent transition-transform group-hover:translate-x-1" />
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
       </section>
 
       {/* Layanan interaktif */}

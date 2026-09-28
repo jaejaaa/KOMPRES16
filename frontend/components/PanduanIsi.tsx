@@ -63,22 +63,25 @@ export default function PanduanIsi({ p }: { p: Panduan }) {
   return (
     <div className={`${container} grid grid-cols-1 items-start gap-6 pt-8 lg:grid-cols-[280px_1fr]`}>
       <aside className="space-y-4 lg:sticky lg:top-28">
-        <div className="rounded-3xl border border-line bg-surface p-5 shadow-soft">
-          <div className="flex items-baseline justify-between gap-2">
-            <p className="text-sm font-semibold text-ink">Progres Anda</p>
-            <p className="text-sm tabular-nums text-ink-soft">
-              {jumlahSelesai}/{langkah.length} langkah
-            </p>
+        {/* Progres & checklist hanya untuk panduan yang punya langkah bernomor ("Langkah 1", "Cara 1", ...) */}
+        {langkah.length > 0 && (
+          <div className="rounded-3xl border border-line bg-surface p-5 shadow-soft">
+            <div className="flex items-baseline justify-between gap-2">
+              <p className="text-sm font-semibold text-ink">Progres Anda</p>
+              <p className="text-sm tabular-nums text-ink-soft">
+                {jumlahSelesai}/{langkah.length} langkah
+              </p>
+            </div>
+            <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-bg" role="progressbar" aria-valuenow={persen} aria-valuemin={0} aria-valuemax={100} aria-label="Langkah selesai">
+              <div className="h-full rounded-full bg-linear-to-r from-risk-low to-secondary transition-all duration-500" style={{ width: `${persen}%` }} />
+            </div>
+            {jumlahSelesai > 0 && (
+              <button type="button" onClick={() => simpan([])} className="mt-3 text-xs font-semibold text-ink-soft hover:text-primary">
+                Ulangi dari awal
+              </button>
+            )}
           </div>
-          <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-bg" role="progressbar" aria-valuenow={persen} aria-valuemin={0} aria-valuemax={100} aria-label="Langkah selesai">
-            <div className="h-full rounded-full bg-linear-to-r from-risk-low to-secondary transition-all duration-500" style={{ width: `${persen}%` }} />
-          </div>
-          {jumlahSelesai > 0 && (
-            <button type="button" onClick={() => simpan([])} className="mt-3 text-xs font-semibold text-ink-soft hover:text-primary">
-              Ulangi dari awal
-            </button>
-          )}
-        </div>
+        )}
 
         {/* Di HP daftar isi disembunyikan supaya isi panduan langsung terlihat */}
         <Panel title="Daftar isi" icon="list" flush className="hidden lg:block">
