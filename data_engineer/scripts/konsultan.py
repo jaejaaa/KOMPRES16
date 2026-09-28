@@ -27,6 +27,17 @@ def kategori_kasus() -> list[dict]:
     return _load("kategori_kasus")["kategori_kasus"]
 
 
+def provinsi_kota() -> dict[str, list[str]]:
+    """Peta provinsi -> kota/kabupaten yang PUNYA konsultan (dummy), untuk dropdown lokasi bertingkat di FE.
+    Bukan daftar administratif lengkap: kalau suatu kota belum ada di sini, filter kota di FE tidak akan
+    menampilkannya -- dengan sengaja, supaya orang tidak memilih kota yang pasti hasilnya kosong."""
+    hasil: dict[str, set] = {}
+    for nama in ("notaris_ppat_dummy", "advokat_dummy"):
+        for k in _load(nama)["konsultan"]:
+            hasil.setdefault(k["provinsi"], set()).add(k["kota"])
+    return {p: sorted(kota) for p, kota in sorted(hasil.items())}
+
+
 def _filter(konsultan: list[dict], kategori_id: str, provinsi: str | None, kota: str | None, top_n: int) -> list[dict]:
     hasil = [k for k in konsultan if kategori_id in k["kategori_kasus"]]
     if provinsi: hasil = [k for k in hasil if k["provinsi"].lower() == provinsi.lower()]

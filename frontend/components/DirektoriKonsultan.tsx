@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { cariKonsultan, getKategoriKasus } from "@/lib/api";
+import { cariKonsultan, getKategoriKasus, getLokasi } from "@/lib/api";
 import { PROVINSI } from "@/lib/provinsi";
 import type { HasilKonsultan, KategoriKasus, Konsultan, Profesi } from "@/types/api";
 import DetailKonsultan from "./DetailKonsultan";
@@ -52,15 +52,18 @@ function Bagian({
   profesi,
   daftar,
   provinsi,
+  kota,
   namaKategori,
   onPilih,
 }: {
   profesi: Profesi;
   daftar: Konsultan[];
   provinsi: string;
+  kota: string;
   namaKategori: (id: string) => string;
   onPilih: Pilih;
 }) {
+  const lokasi = kota ? `${kota}, ${provinsi}` : provinsi;
   return (
     <section>
       <h3 className="flex items-center gap-2 text-lg font-bold text-ink">
@@ -76,8 +79,8 @@ function Bagian({
         </ul>
       ) : (
         <p className="mt-3 rounded-2xl border border-dashed border-line-strong p-5 text-sm text-ink-soft">
-          Belum ada {PROFESI[profesi]} {provinsi ? `di ${provinsi}` : ""} untuk kebutuhan ini.
-          {provinsi && " Coba pilih “Semua provinsi”."}
+          Belum ada {PROFESI[profesi]} {lokasi ? `di ${lokasi}` : ""} untuk kebutuhan ini.
+          {kota ? " Coba pilih “Semua kota/kabupaten”." : provinsi && " Coba pilih “Semua provinsi”."}
         </p>
       )}
     </section>
@@ -88,12 +91,15 @@ export default function DirektoriKonsultan({ kategoriAwal }: { kategoriAwal?: st
   const [daftarKategori, setDaftarKategori] = useState<KategoriKasus[] | null>(null);
   const [kategori, setKategori] = useState(kategoriAwal ?? "");
   const [provinsi, setProvinsi] = useState("");
+  const [kota, setKota] = useState("");
+  const [lokasi, setLokasi] = useState<Record<string, string[]>>({});
   const [ulang, setUlang] = useState(0);
   const [hasil, setHasil] = useState<{ kunci: string; data?: HasilKonsultan; error?: string } | null>(null);
   const [dipilih, setDipilih] = useState<{ k: Konsultan; profesi: Profesi } | null>(null);
   const pilih: Pilih = (k, profesi) => setDipilih({ k, profesi });
-  const kunci = `${kategori}|${provinsi}|${ulang}`;
+  const kunci = `${kategori}|${provinsi}|${kota}|${ulang}`;
   const memuat = !!kategori && hasil?.kunci !== kunci;
+  const kotaTersedia = provinsi ? lokasi[provinsi] ?? [] : [];
 
   useEffect(() => {
     let aktif = true;
@@ -105,6 +111,9 @@ export default function DirektoriKonsultan({ kategoriAwal }: { kategoriAwal?: st
         setKategori((k) => k || (kategoriAwal && list.some((x) => x.id === kategoriAwal) ? kategoriAwal : list[0]?.id) || "");
       })
       .catch(() => aktif && setDaftarKategori([]));
+    getLokasi()
+      .then((data) => aktif && setLokasi(data))
+      .catch(() => {});
     return () => { aktif = false; };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- kategoriAwal cuma dipakai sekali saat mount
   }, []);
@@ -112,11 +121,11 @@ export default function DirektoriKonsultan({ kategoriAwal }: { kategoriAwal?: st
   useEffect(() => {
     if (!kategori) return;
     let aktif = true;
-    cariKonsultan(kategori, provinsi || undefined)
+    cariKonsultan(kategori, provinsi || undefined, kota || undefined)
       .then((data) => aktif && setHasil({ kunci, data }))
       .catch((e) => aktif && setHasil({ kunci, error: (e as Error).message }));
     return () => { aktif = false; };
-  }, [kategori, provinsi, kunci]);
+  }, [kategori, provinsi, kota, kunci]);
 
   const kat = daftarKategori?.find((k) => k.id === kategori);
   const namaKategori = (id: string) => daftarKategori?.find((k) => k.id === id)?.nama.split(" (")[0] ?? id;
@@ -169,17 +178,32 @@ export default function DirektoriKonsultan({ kategoriAwal }: { kategoriAwal?: st
         </Panel>
 
         <Panel title="Lokasi" icon="pin">
-          <label className="block">
-            <span className="sr-only">Provinsi</span>
-            <select
-              value={provinsi}
-              onChange={(e) => setProvinsi(e.target.value)}
-              className="w-full rounded-2xl border border-line-strong bg-surface px-4 py-3 text-ink"
-            >
-              <option value="">Semua provinsi</option>
-              {PROVINSI.map((p) => <option key={p} value={p}>{p}</option>)}
-            </select>
-          </label>
+          <div className="space-y-2">
+            <label className="block">
+              <span className="sr-only">Provinsi</span>
+              <select
+                value={provinsi}
+                onChange={(e) => { setProvinsi(e.target.value); setKota(""); }}
+                className="w-full rounded-2xl border border-line-strong bg-surface px-4 py-3 text-ink"
+              >
+                <option value="">Semua provinsi</option>
+                {PROVINSI.map((p) => <option key={p} value={p}>{p}</option>)}
+              </select>
+            </label>
+            {provinsi && kotaTersedia.length > 0 && (
+              <label className="block">
+                <span className="sr-only">Kota/Kabupaten</span>
+                <select
+                  value={kota}
+                  onChange={(e) => setKota(e.target.value)}
+                  className="w-full rounded-2xl border border-line-strong bg-surface px-4 py-3 text-ink"
+                >
+                  <option value="">Semua kota/kabupaten di {provinsi}</option>
+                  {kotaTersedia.map((k) => <option key={k} value={k}>{k}</option>)}
+                </select>
+              </label>
+            )}
+          </div>
         </Panel>
       </aside>
 
@@ -204,10 +228,10 @@ export default function DirektoriKonsultan({ kategoriAwal }: { kategoriAwal?: st
         ) : (
           <div className="space-y-8">
             {kat?.profesi.includes("notaris_ppat") && (
-              <Bagian profesi="notaris_ppat" daftar={hasil.data.notaris_ppat} provinsi={provinsi} namaKategori={namaKategori} onPilih={pilih} />
+              <Bagian profesi="notaris_ppat" daftar={hasil.data.notaris_ppat} provinsi={provinsi} kota={kota} namaKategori={namaKategori} onPilih={pilih} />
             )}
             {kat?.profesi.includes("advokat") && (
-              <Bagian profesi="advokat" daftar={hasil.data.advokat} provinsi={provinsi} namaKategori={namaKategori} onPilih={pilih} />
+              <Bagian profesi="advokat" daftar={hasil.data.advokat} provinsi={provinsi} kota={kota} namaKategori={namaKategori} onPilih={pilih} />
             )}
           </div>
         )}

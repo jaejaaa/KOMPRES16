@@ -146,9 +146,10 @@ export const mockSaranKonsultasi: SaranKonsultasi[] = [
   },
 ];
 
-export function mockCariKonsultan(kategori: string, provinsi?: string): HasilKonsultan {
+export function mockCariKonsultan(kategori: string, provinsi?: string, kota?: string): HasilKonsultan {
   const kat = mockKategoriKasus.find((k) => k.id === kategori);
-  const cocok = (k: Konsultan) => k.kategori_kasus.includes(kategori) && (!provinsi || k.provinsi === provinsi);
+  const cocok = (k: Konsultan) =>
+    k.kategori_kasus.includes(kategori) && (!provinsi || k.provinsi === provinsi) && (!kota || k.kota === kota);
   return {
     kategori: kat?.nama ?? null,
     catatan: kat?.catatan ?? null,
@@ -157,3 +158,9 @@ export function mockCariKonsultan(kategori: string, provinsi?: string): HasilKon
     peringatan: "SELURUH DATA DI HALAMAN INI FIKTIF untuk demo, bukan daftar Notaris/PPAT/Advokat sungguhan.",
   };
 }
+
+// Peta provinsi -> kota (tiruan GET /konsultan/lokasi), diturunkan dari mockKonsultan di atas.
+export const mockLokasi: Record<string, string[]> = mockKonsultan.reduce<Record<string, string[]>>((acc, k) => {
+  (acc[k.provinsi] ??= []).push(k.kota);
+  return acc;
+}, {});

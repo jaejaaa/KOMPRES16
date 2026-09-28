@@ -1,5 +1,5 @@
 import type { AnalysisResult, ChatHistoryItem, ChatResponse, HasilKonsultan, KategoriKasus, SaranKonsultasi, UploadResponse } from "@/types/api";
-import { mockAnalysis, mockCariKonsultan, mockDocuments, mockFailed, mockJawab, mockKategoriKasus, mockSaranKonsultasi } from "./mock-data";
+import { mockAnalysis, mockCariKonsultan, mockDocuments, mockFailed, mockJawab, mockKategoriKasus, mockLokasi, mockSaranKonsultasi } from "./mock-data";
 import { getToken } from "./firebase";
 import { MAX_PDF_MB } from "./site";
 
@@ -106,12 +106,19 @@ export async function getKategoriKasus(): Promise<KategoriKasus[]> {
   return publik("/konsultan/kategori");
 }
 
-export async function cariKonsultan(kategori: string, provinsi?: string): Promise<HasilKonsultan> {
+export async function cariKonsultan(kategori: string, provinsi?: string, kota?: string): Promise<HasilKonsultan> {
   if (USE_MOCK) {
     await delay(400);
-    return mockCariKonsultan(kategori, provinsi);
+    return mockCariKonsultan(kategori, provinsi, kota);
   }
   const q = new URLSearchParams({ kategori });
   if (provinsi) q.set("provinsi", provinsi);
+  if (kota) q.set("kota", kota);
   return publik(`/konsultan?${q}`);
+}
+
+// Peta provinsi -> kota/kabupaten yang punya konsultan (dummy), untuk dropdown lokasi bertingkat.
+export async function getLokasi(): Promise<Record<string, string[]>> {
+  if (USE_MOCK) return mockLokasi;
+  return publik("/konsultan/lokasi");
 }

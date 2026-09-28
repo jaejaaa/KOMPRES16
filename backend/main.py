@@ -27,7 +27,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "data_engineer" 
 from retriever import Retriever
 from analisis import DokumenTidakRelevan, analyze, saran_kategori_kasus
 from chatbot import jawab_chat
-from konsultan import cari_konsultan, kategori_kasus
+from konsultan import cari_konsultan, kategori_kasus, provinsi_kota
 
 # Struktur Firestore:
 #   documents/{id}     user_id, filename, text, status, summary, risks[], error, created_at
@@ -237,6 +237,11 @@ def konsultan_kategori():
 @app.get("/konsultan")
 def konsultan(kategori: str, provinsi: str | None = None, kota: str | None = None):
     return cari_konsultan(kategori, provinsi, kota)
+
+
+@app.get("/konsultan/lokasi")
+def konsultan_lokasi():
+    return provinsi_kota()
 
 
 def uid_tamu(uids: list[str]) -> set[str]:
