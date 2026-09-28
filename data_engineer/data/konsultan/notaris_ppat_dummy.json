@@ -1,12 +1,12 @@
 {
- "_PERINGATAN": "SELURUH DATA DI FILE INI FIKTIF (nama, kantor, kota, telepon, lokasi, tarif per orang, dan jadwal dipasangkan/dikarang untuk demo). BUKAN daftar Notaris/PPAT/Advokat sungguhan. Nomor telepon TIDAK AKTIF (pola berurutan, bukan nomor asli). Tautan peta hanya PENCARIAN nama kantor di Google Maps (bukan lokasi terverifikasi). Tarif (field \"tarif\") bersifat INDIKATIF per orang, diputar dari 3 tingkatan, BUKAN tarif resmi maupun cerminan kualitas layanan sungguhan. Jangan ditampilkan ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk menghubungi atau mendatangi siapa pun.",
+ "_PERINGATAN": "SELURUH NAMA, KANTOR, TELEPON, TARIF, DAN JADWAL DI FILE INI FIKTIF (dipasangkan/dikarang untuk demo), BUKAN daftar Notaris/PPAT/Advokat sungguhan -- HANYA nama kabupaten/kota dan provinsi yang asli (data wilayah Kemendagri/BPS, dipakai supaya dropdown lokasi realistis), bukan klaim ada konsultan sungguhan di kota tersebut. Nomor telepon TIDAK AKTIF (pola berurutan, bukan nomor asli). Tautan peta hanya PENCARIAN nama kantor di Google Maps (bukan lokasi terverifikasi). Tarif (field \"tarif\") bersifat INDIKATIF per orang, diputar dari 3 tingkatan, BUKAN tarif resmi maupun cerminan kualitas layanan sungguhan. Jangan ditampilkan ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk menghubungi atau mendatangi siapa pun.",
  "konsultan": [
   {
    "id": "N01",
    "nama": "Ahmad Fauzi, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Ahmad Fauzi",
-   "kota": "Banda Aceh",
+   "kota": "Kota Banda Aceh",
    "provinsi": "Aceh",
    "kategori_kasus": [
     "balik-nama",
@@ -14,7 +14,7 @@
     "cek-sertifikat"
    ],
    "telepon": "0812-0000-0001 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Ahmad%20Fauzi%2C%20Banda%20Aceh%2C%20Aceh",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Ahmad%20Fauzi%2C%20Kota%20Banda%20Aceh%2C%20Aceh",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -24,7 +24,7 @@
    "nama": "Rina Simatupang, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Rina Simatupang",
-   "kota": "Medan",
+   "kota": "Kota Medan",
    "provinsi": "Sumatera Utara",
    "kategori_kasus": [
     "balik-nama",
@@ -32,7 +32,7 @@
     "cek-sertifikat"
    ],
    "telepon": "0812-0000-0002 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Rina%20Simatupang%2C%20Medan%2C%20Sumatera%20Utara",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Rina%20Simatupang%2C%20Kota%20Medan%2C%20Sumatera%20Utara",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -42,14 +42,14 @@
    "nama": "Yusuf Hakim, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Yusuf Hakim",
-   "kota": "Padang",
+   "kota": "Kota Padang",
    "provinsi": "Sumatera Barat",
    "kategori_kasus": [
     "balik-nama",
     "waris"
    ],
    "telepon": "0812-0000-0003 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Yusuf%20Hakim%2C%20Padang%2C%20Sumatera%20Barat",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Yusuf%20Hakim%2C%20Kota%20Padang%2C%20Sumatera%20Barat",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -59,14 +59,14 @@
    "nama": "Siti Rahmadhani, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Siti Rahmadhani",
-   "kota": "Pekanbaru",
+   "kota": "Kota Pekanbaru",
    "provinsi": "Riau",
    "kategori_kasus": [
     "balik-nama",
     "hak-tanggungan"
    ],
    "telepon": "0812-0000-0004 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Siti%20Rahmadhani%2C%20Pekanbaru%2C%20Riau",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Siti%20Rahmadhani%2C%20Kota%20Pekanbaru%2C%20Riau",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -76,14 +76,14 @@
    "nama": "Deni Saputra, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Deni Saputra",
-   "kota": "Batam",
+   "kota": "Kota Batam",
    "provinsi": "Kepulauan Riau",
    "kategori_kasus": [
     "balik-nama",
     "cek-sertifikat"
    ],
    "telepon": "0812-0000-0005 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Deni%20Saputra%2C%20Batam%2C%20Kepulauan%20Riau",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Deni%20Saputra%2C%20Kota%20Batam%2C%20Kepulauan%20Riau",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -93,14 +93,14 @@
    "nama": "Muhammad Ridwan, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT M. Ridwan",
-   "kota": "Jambi",
+   "kota": "Kota Jambi",
    "provinsi": "Jambi",
    "kategori_kasus": [
     "balik-nama",
     "waris"
    ],
    "telepon": "0812-0000-0006 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20M.%20Ridwan%2C%20Jambi%2C%20Jambi",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20M.%20Ridwan%2C%20Kota%20Jambi%2C%20Jambi",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -110,14 +110,14 @@
    "nama": "Elisa Wijaya, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Elisa Wijaya",
-   "kota": "Palembang",
+   "kota": "Kota Palembang",
    "provinsi": "Sumatera Selatan",
    "kategori_kasus": [
     "balik-nama",
     "sertifikat-ganda"
    ],
    "telepon": "0812-0000-0007 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Elisa%20Wijaya%2C%20Palembang%2C%20Sumatera%20Selatan",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Elisa%20Wijaya%2C%20Kota%20Palembang%2C%20Sumatera%20Selatan",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -127,14 +127,14 @@
    "nama": "Bambang Prasetyo, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Bambang Prasetyo",
-   "kota": "Bengkulu",
+   "kota": "Kota Bengkulu",
    "provinsi": "Bengkulu",
    "kategori_kasus": [
     "balik-nama",
     "waris"
    ],
    "telepon": "0812-0000-0008 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Bambang%20Prasetyo%2C%20Bengkulu%2C%20Bengkulu",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Bambang%20Prasetyo%2C%20Kota%20Bengkulu%2C%20Bengkulu",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -144,7 +144,7 @@
    "nama": "Meilani Putri, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Meilani Putri",
-   "kota": "Bandar Lampung",
+   "kota": "Kota Bandar Lampung",
    "provinsi": "Lampung",
    "kategori_kasus": [
     "balik-nama",
@@ -152,7 +152,7 @@
     "waris"
    ],
    "telepon": "0812-0000-0009 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Meilani%20Putri%2C%20Bandar%20Lampung%2C%20Lampung",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Meilani%20Putri%2C%20Kota%20Bandar%20Lampung%2C%20Lampung",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -162,13 +162,13 @@
    "nama": "Hasan Basri, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Hasan Basri",
-   "kota": "Pangkalpinang",
+   "kota": "Kota Pangkal Pinang",
    "provinsi": "Kepulauan Bangka Belitung",
    "kategori_kasus": [
     "balik-nama"
    ],
    "telepon": "0812-0000-0010 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Hasan%20Basri%2C%20Pangkalpinang%2C%20Kepulauan%20Bangka%20Belitung",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Hasan%20Basri%2C%20Kota%20Pangkal%20Pinang%2C%20Kepulauan%20Bangka%20Belitung",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -178,7 +178,7 @@
    "nama": "Anisa Rahmawati, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Anisa Rahmawati",
-   "kota": "Jakarta Selatan",
+   "kota": "Kota Jakarta Selatan",
    "provinsi": "DKI Jakarta",
    "kategori_kasus": [
     "balik-nama",
@@ -187,7 +187,7 @@
     "hak-tanggungan"
    ],
    "telepon": "0812-0000-0011 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Anisa%20Rahmawati%2C%20Jakarta%20Selatan%2C%20DKI%20Jakarta",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Anisa%20Rahmawati%2C%20Kota%20Jakarta%20Selatan%2C%20DKI%20Jakarta",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -197,14 +197,14 @@
    "nama": "Dedi Kurniawan, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Dedi Kurniawan",
-   "kota": "Jakarta Pusat",
+   "kota": "Kota Jakarta Pusat",
    "provinsi": "DKI Jakarta",
    "kategori_kasus": [
     "balik-nama",
     "waris"
    ],
    "telepon": "0812-0000-0012 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Dedi%20Kurniawan%2C%20Jakarta%20Pusat%2C%20DKI%20Jakarta",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Dedi%20Kurniawan%2C%20Kota%20Jakarta%20Pusat%2C%20DKI%20Jakarta",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -214,7 +214,7 @@
    "nama": "Fitriani Handayani, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Fitriani Handayani",
-   "kota": "Bandung",
+   "kota": "Kota Bandung",
    "provinsi": "Jawa Barat",
    "kategori_kasus": [
     "balik-nama",
@@ -222,7 +222,7 @@
     "cek-sertifikat"
    ],
    "telepon": "0812-0000-0013 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Fitriani%20Handayani%2C%20Bandung%2C%20Jawa%20Barat",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Fitriani%20Handayani%2C%20Kota%20Bandung%2C%20Jawa%20Barat",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -232,14 +232,14 @@
    "nama": "Agus Salim, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Agus Salim",
-   "kota": "Bekasi",
+   "kota": "Kota Bekasi",
    "provinsi": "Jawa Barat",
    "kategori_kasus": [
     "balik-nama",
     "hak-tanggungan"
    ],
    "telepon": "0812-0000-0014 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Agus%20Salim%2C%20Bekasi%2C%20Jawa%20Barat",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Agus%20Salim%2C%20Kota%20Bekasi%2C%20Jawa%20Barat",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -249,14 +249,14 @@
    "nama": "Christine Marpaung, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Christine Marpaung",
-   "kota": "Bogor",
+   "kota": "Kota Bogor",
    "provinsi": "Jawa Barat",
    "kategori_kasus": [
     "balik-nama",
     "sertifikat-ganda"
    ],
    "telepon": "0812-0000-0015 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Christine%20Marpaung%2C%20Bogor%2C%20Jawa%20Barat",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Christine%20Marpaung%2C%20Kota%20Bogor%2C%20Jawa%20Barat",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -266,14 +266,14 @@
    "nama": "Sutrisno Wijaya, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Sutrisno Wijaya",
-   "kota": "Serang",
+   "kota": "Kota Serang",
    "provinsi": "Banten",
    "kategori_kasus": [
     "balik-nama",
     "waris"
    ],
    "telepon": "0812-0000-0016 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Sutrisno%20Wijaya%2C%20Serang%2C%20Banten",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Sutrisno%20Wijaya%2C%20Kota%20Serang%2C%20Banten",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -283,14 +283,14 @@
    "nama": "Kartika Sari, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Kartika Sari",
-   "kota": "Tangerang",
+   "kota": "Kota Tangerang",
    "provinsi": "Banten",
    "kategori_kasus": [
     "balik-nama",
     "cek-sertifikat"
    ],
    "telepon": "0812-0000-0017 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Kartika%20Sari%2C%20Tangerang%2C%20Banten",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Kartika%20Sari%2C%20Kota%20Tangerang%2C%20Banten",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -300,7 +300,7 @@
    "nama": "Wahyu Setiawan, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Wahyu Setiawan",
-   "kota": "Semarang",
+   "kota": "Kota Semarang",
    "provinsi": "Jawa Tengah",
    "kategori_kasus": [
     "balik-nama",
@@ -308,7 +308,7 @@
     "sertifikat-ganda"
    ],
    "telepon": "0812-0000-0018 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Wahyu%20Setiawan%2C%20Semarang%2C%20Jawa%20Tengah",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Wahyu%20Setiawan%2C%20Kota%20Semarang%2C%20Jawa%20Tengah",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -318,14 +318,14 @@
    "nama": "Retno Wulandari, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Retno Wulandari",
-   "kota": "Surakarta",
+   "kota": "Kota Surakarta",
    "provinsi": "Jawa Tengah",
    "kategori_kasus": [
     "balik-nama",
     "cek-sertifikat"
    ],
    "telepon": "0812-0000-0019 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Retno%20Wulandari%2C%20Surakarta%2C%20Jawa%20Tengah",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Retno%20Wulandari%2C%20Kota%20Surakarta%2C%20Jawa%20Tengah",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -335,14 +335,14 @@
    "nama": "Bagus Nugroho, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Bagus Nugroho",
-   "kota": "Yogyakarta",
+   "kota": "Kota Yogyakarta",
    "provinsi": "D.I. Yogyakarta",
    "kategori_kasus": [
     "balik-nama",
     "waris"
    ],
    "telepon": "0812-0000-0020 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Bagus%20Nugroho%2C%20Yogyakarta%2C%20D.I.%20Yogyakarta",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Bagus%20Nugroho%2C%20Kota%20Yogyakarta%2C%20D.I.%20Yogyakarta",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -352,7 +352,7 @@
    "nama": "Indra Gunawan, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Indra Gunawan",
-   "kota": "Surabaya",
+   "kota": "Kota Surabaya",
    "provinsi": "Jawa Timur",
    "kategori_kasus": [
     "balik-nama",
@@ -360,7 +360,7 @@
     "hak-tanggungan"
    ],
    "telepon": "0812-0000-0021 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Indra%20Gunawan%2C%20Surabaya%2C%20Jawa%20Timur",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Indra%20Gunawan%2C%20Kota%20Surabaya%2C%20Jawa%20Timur",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -370,7 +370,7 @@
    "nama": "Puspita Ayu, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Puspita Ayu",
-   "kota": "Malang",
+   "kota": "Kota Malang",
    "provinsi": "Jawa Timur",
    "kategori_kasus": [
     "balik-nama",
@@ -378,7 +378,7 @@
     "cek-sertifikat"
    ],
    "telepon": "0812-0000-0022 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Puspita%20Ayu%2C%20Malang%2C%20Jawa%20Timur",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Puspita%20Ayu%2C%20Kota%20Malang%2C%20Jawa%20Timur",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -388,7 +388,7 @@
    "nama": "Made Sudiartha, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Made Sudiartha",
-   "kota": "Denpasar",
+   "kota": "Kota Denpasar",
    "provinsi": "Bali",
    "kategori_kasus": [
     "balik-nama",
@@ -396,7 +396,7 @@
     "sertifikat-ganda"
    ],
    "telepon": "0812-0000-0023 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Made%20Sudiartha%2C%20Denpasar%2C%20Bali",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Made%20Sudiartha%2C%20Kota%20Denpasar%2C%20Bali",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -423,14 +423,14 @@
    "nama": "Lalu Ahmad Zaini, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT L. Ahmad Zaini",
-   "kota": "Mataram",
+   "kota": "Kota Mataram",
    "provinsi": "Nusa Tenggara Barat",
    "kategori_kasus": [
     "balik-nama",
     "waris"
    ],
    "telepon": "0812-0000-0025 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20L.%20Ahmad%20Zaini%2C%20Mataram%2C%20Nusa%20Tenggara%20Barat",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20L.%20Ahmad%20Zaini%2C%20Kota%20Mataram%2C%20Nusa%20Tenggara%20Barat",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -440,14 +440,14 @@
    "nama": "Maria Goreti, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Maria Goreti",
-   "kota": "Kupang",
+   "kota": "Kota Kupang",
    "provinsi": "Nusa Tenggara Timur",
    "kategori_kasus": [
     "balik-nama",
     "cek-sertifikat"
    ],
    "telepon": "0812-0000-0026 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Maria%20Goreti%2C%20Kupang%2C%20Nusa%20Tenggara%20Timur",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Maria%20Goreti%2C%20Kota%20Kupang%2C%20Nusa%20Tenggara%20Timur",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -457,14 +457,14 @@
    "nama": "Yohanes Situmorang, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Yohanes Situmorang",
-   "kota": "Pontianak",
+   "kota": "Kota Pontianak",
    "provinsi": "Kalimantan Barat",
    "kategori_kasus": [
     "balik-nama",
     "sertifikat-ganda"
    ],
    "telepon": "0812-0000-0027 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Yohanes%20Situmorang%2C%20Pontianak%2C%20Kalimantan%20Barat",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Yohanes%20Situmorang%2C%20Kota%20Pontianak%2C%20Kalimantan%20Barat",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -474,14 +474,14 @@
    "nama": "Herlina Wati, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Herlina Wati",
-   "kota": "Palangkaraya",
+   "kota": "Kota Palangka Raya",
    "provinsi": "Kalimantan Tengah",
    "kategori_kasus": [
     "balik-nama",
     "waris"
    ],
    "telepon": "0812-0000-0028 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Herlina%20Wati%2C%20Palangkaraya%2C%20Kalimantan%20Tengah",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Herlina%20Wati%2C%20Kota%20Palangka%20Raya%2C%20Kalimantan%20Tengah",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -491,7 +491,7 @@
    "nama": "Rudi Hartono, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Rudi Hartono",
-   "kota": "Banjarmasin",
+   "kota": "Kota Banjarmasin",
    "provinsi": "Kalimantan Selatan",
    "kategori_kasus": [
     "balik-nama",
@@ -499,7 +499,7 @@
     "hak-tanggungan"
    ],
    "telepon": "0812-0000-0029 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Rudi%20Hartono%2C%20Banjarmasin%2C%20Kalimantan%20Selatan",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Rudi%20Hartono%2C%20Kota%20Banjarmasin%2C%20Kalimantan%20Selatan",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -509,14 +509,14 @@
    "nama": "Nurul Aini, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Nurul Aini",
-   "kota": "Samarinda",
+   "kota": "Kota Samarinda",
    "provinsi": "Kalimantan Timur",
    "kategori_kasus": [
     "balik-nama",
     "sertifikat-ganda"
    ],
    "telepon": "0812-0000-0030 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Nurul%20Aini%2C%20Samarinda%2C%20Kalimantan%20Timur",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Nurul%20Aini%2C%20Kota%20Samarinda%2C%20Kalimantan%20Timur",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -542,14 +542,14 @@
    "nama": "Grace Tumbelaka, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Grace Tumbelaka",
-   "kota": "Manado",
+   "kota": "Kota Manado",
    "provinsi": "Sulawesi Utara",
    "kategori_kasus": [
     "balik-nama",
     "waris"
    ],
    "telepon": "0812-0000-0032 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Grace%20Tumbelaka%2C%20Manado%2C%20Sulawesi%20Utara",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Grace%20Tumbelaka%2C%20Kota%20Manado%2C%20Sulawesi%20Utara",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -559,14 +559,14 @@
    "nama": "Moh. Iqbal, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Moh. Iqbal",
-   "kota": "Palu",
+   "kota": "Kota Palu",
    "provinsi": "Sulawesi Tengah",
    "kategori_kasus": [
     "balik-nama",
     "cek-sertifikat"
    ],
    "telepon": "0812-0000-0033 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Moh.%20Iqbal%2C%20Palu%2C%20Sulawesi%20Tengah",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Moh.%20Iqbal%2C%20Kota%20Palu%2C%20Sulawesi%20Tengah",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -576,7 +576,7 @@
    "nama": "Andi Nurul Fadillah, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Andi Nurul Fadillah",
-   "kota": "Makassar",
+   "kota": "Kota Makassar",
    "provinsi": "Sulawesi Selatan",
    "kategori_kasus": [
     "balik-nama",
@@ -584,7 +584,7 @@
     "sertifikat-ganda"
    ],
    "telepon": "0812-0000-0034 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Andi%20Nurul%20Fadillah%2C%20Makassar%2C%20Sulawesi%20Selatan",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Andi%20Nurul%20Fadillah%2C%20Kota%20Makassar%2C%20Sulawesi%20Selatan",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -594,14 +594,14 @@
    "nama": "La Ode Amir, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT La Ode Amir",
-   "kota": "Kendari",
+   "kota": "Kota Kendari",
    "provinsi": "Sulawesi Tenggara",
    "kategori_kasus": [
     "balik-nama",
     "cek-sertifikat"
    ],
    "telepon": "0812-0000-0035 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20La%20Ode%20Amir%2C%20Kendari%2C%20Sulawesi%20Tenggara",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20La%20Ode%20Amir%2C%20Kota%20Kendari%2C%20Sulawesi%20Tenggara",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -611,13 +611,13 @@
    "nama": "Frangky Mokodompit, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Frangky Mokodompit",
-   "kota": "Gorontalo",
+   "kota": "Kota Gorontalo",
    "provinsi": "Gorontalo",
    "kategori_kasus": [
     "balik-nama"
    ],
    "telepon": "0812-0000-0036 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Frangky%20Mokodompit%2C%20Gorontalo%2C%20Gorontalo",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Frangky%20Mokodompit%2C%20Kota%20Gorontalo%2C%20Gorontalo",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -644,14 +644,14 @@
    "nama": "Sarah Sahetapy, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Sarah Sahetapy",
-   "kota": "Ambon",
+   "kota": "Kota Ambon",
    "provinsi": "Maluku",
    "kategori_kasus": [
     "balik-nama",
     "cek-sertifikat"
    ],
    "telepon": "0812-0000-0038 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Sarah%20Sahetapy%2C%20Ambon%2C%20Maluku",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Sarah%20Sahetapy%2C%20Kota%20Ambon%2C%20Maluku",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -661,14 +661,14 @@
    "nama": "Yusrin Kabalmay, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Yusrin Kabalmay",
-   "kota": "Ternate",
+   "kota": "Kota Ternate",
    "provinsi": "Maluku Utara",
    "kategori_kasus": [
     "balik-nama",
     "waris"
    ],
    "telepon": "0812-0000-0039 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Yusrin%20Kabalmay%2C%20Ternate%2C%20Maluku%20Utara",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Yusrin%20Kabalmay%2C%20Kota%20Ternate%2C%20Maluku%20Utara",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -678,14 +678,14 @@
    "nama": "Yance Wamafma, S.H., M.Kn.",
    "jenis": "Notaris/PPAT (dummy)",
    "kantor": "Kantor Notaris & PPAT Yance Wamafma",
-   "kota": "Jayapura",
+   "kota": "Kota Jayapura",
    "provinsi": "Papua",
    "kategori_kasus": [
     "balik-nama",
     "sertifikat-ganda"
    ],
    "telepon": "0812-0000-0040 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Yance%20Wamafma%2C%20Jayapura%2C%20Papua",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Yance%20Wamafma%2C%20Kota%20Jayapura%2C%20Papua",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
    "_dummy": true
@@ -705,6 +705,1023 @@
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Dorince%20Mansim%2C%20Manokwari%2C%20Papua%20Barat",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N42",
+   "nama": "Hadi Halim, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Hadi Halim",
+   "kota": "Kota Langsa",
+   "provinsi": "Aceh",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "telepon": "0812-0000-0042 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Hadi%20Halim%2C%20Kota%20Langsa%2C%20Aceh",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N43",
+   "nama": "Oscar Tampubolon, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Oscar Tampubolon",
+   "kota": "Kota Lhokseumawe",
+   "provinsi": "Aceh",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0812-0000-0043 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Oscar%20Tampubolon%2C%20Kota%20Lhokseumawe%2C%20Aceh",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N44",
+   "nama": "Zainal Sudrajat, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Zainal Sudrajat",
+   "kota": "Kota Sabang",
+   "provinsi": "Aceh",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0044 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Zainal%20Sudrajat%2C%20Kota%20Sabang%2C%20Aceh",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N45",
+   "nama": "Kevin Rukmana, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Kevin Rukmana",
+   "kota": "Kota Subulussalam",
+   "provinsi": "Aceh",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "telepon": "0812-0000-0045 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Kevin%20Rukmana%2C%20Kota%20Subulussalam%2C%20Aceh",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N46",
+   "nama": "Yudha Katili, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Yudha Katili",
+   "kota": "Kota Binjai",
+   "provinsi": "Sumatera Utara",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "telepon": "0812-0000-0046 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Yudha%20Katili%2C%20Kota%20Binjai%2C%20Sumatera%20Utara",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N47",
+   "nama": "Hasan Nurjannah, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Hasan Nurjannah",
+   "kota": "Kota Gunungsitoli",
+   "provinsi": "Sumatera Utara",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0047 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Hasan%20Nurjannah%2C%20Kota%20Gunungsitoli%2C%20Sumatera%20Utara",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N48",
+   "nama": "Bella Hidayat, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Bella Hidayat",
+   "kota": "Kota Padangsidimpuan",
+   "provinsi": "Sumatera Utara",
+   "kategori_kasus": [
+    "balik-nama",
+    "hak-tanggungan"
+   ],
+   "telepon": "0812-0000-0048 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Bella%20Hidayat%2C%20Kota%20Padangsidimpuan%2C%20Sumatera%20Utara",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N49",
+   "nama": "Indah Panggabean, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Indah Panggabean",
+   "kota": "Kota Pematang Siantar",
+   "provinsi": "Sumatera Utara",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "telepon": "0812-0000-0049 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Indah%20Panggabean%2C%20Kota%20Pematang%20Siantar%2C%20Sumatera%20Utara",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N50",
+   "nama": "Ratna Bangun, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Ratna Bangun",
+   "kota": "Kota Sibolga",
+   "provinsi": "Sumatera Utara",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0050 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Ratna%20Bangun%2C%20Kota%20Sibolga%2C%20Sumatera%20Utara",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N51",
+   "nama": "Zahra Kurniawan, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Zahra Kurniawan",
+   "kota": "Kota Tanjung Balai",
+   "provinsi": "Sumatera Utara",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0812-0000-0051 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Zahra%20Kurniawan%2C%20Kota%20Tanjung%20Balai%2C%20Sumatera%20Utara",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N52",
+   "nama": "Gina Mansim, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Gina Mansim",
+   "kota": "Kota Tebing Tinggi",
+   "provinsi": "Sumatera Utara",
+   "kategori_kasus": [
+    "balik-nama",
+    "hak-tanggungan"
+   ],
+   "telepon": "0812-0000-0052 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Gina%20Mansim%2C%20Kota%20Tebing%20Tinggi%2C%20Sumatera%20Utara",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N53",
+   "nama": "Nia Marlina, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Nia Marlina",
+   "kota": "Kota Bukittinggi",
+   "provinsi": "Sumatera Barat",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0053 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Nia%20Marlina%2C%20Kota%20Bukittinggi%2C%20Sumatera%20Barat",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N54",
+   "nama": "Yanti Saputra, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Yanti Saputra",
+   "kota": "Kota Padang Panjang",
+   "provinsi": "Sumatera Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "telepon": "0812-0000-0054 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Yanti%20Saputra%2C%20Kota%20Padang%20Panjang%2C%20Sumatera%20Barat",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N55",
+   "nama": "Gilang Harahap, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Gilang Harahap",
+   "kota": "Kota Pariaman",
+   "provinsi": "Sumatera Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0812-0000-0055 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Gilang%20Harahap%2C%20Kota%20Pariaman%2C%20Sumatera%20Barat",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N56",
+   "nama": "Nugroho Sembiring, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Nugroho Sembiring",
+   "kota": "Kota Payakumbuh",
+   "provinsi": "Sumatera Barat",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0056 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Nugroho%20Sembiring%2C%20Kota%20Payakumbuh%2C%20Sumatera%20Barat",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N57",
+   "nama": "Wayan Susanto, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Wayan Susanto",
+   "kota": "Kota Sawah Lunto",
+   "provinsi": "Sumatera Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "telepon": "0812-0000-0057 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Wayan%20Susanto%2C%20Kota%20Sawah%20Lunto%2C%20Sumatera%20Barat",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N58",
+   "nama": "Indra Pattiasina, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Indra Pattiasina",
+   "kota": "Kota Solok",
+   "provinsi": "Sumatera Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "telepon": "0812-0000-0058 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Indra%20Pattiasina%2C%20Kota%20Solok%2C%20Sumatera%20Barat",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N59",
+   "nama": "Wahyu Firmansyah, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Wahyu Firmansyah",
+   "kota": "Kota Dumai",
+   "provinsi": "Riau",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0059 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Wahyu%20Firmansyah%2C%20Kota%20Dumai%2C%20Riau",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N60",
+   "nama": "Guntur Kusuma, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Guntur Kusuma",
+   "kota": "Kota Sungai Penuh",
+   "provinsi": "Jambi",
+   "kategori_kasus": [
+    "balik-nama",
+    "hak-tanggungan"
+   ],
+   "telepon": "0812-0000-0060 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Guntur%20Kusuma%2C%20Kota%20Sungai%20Penuh%2C%20Jambi",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N61",
+   "nama": "Ayu Lubis, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Ayu Lubis",
+   "kota": "Kota Lubuklinggau",
+   "provinsi": "Sumatera Selatan",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "telepon": "0812-0000-0061 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Ayu%20Lubis%2C%20Kota%20Lubuklinggau%2C%20Sumatera%20Selatan",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N62",
+   "nama": "Hana Sinaga, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Hana Sinaga",
+   "kota": "Kota Pagar Alam",
+   "provinsi": "Sumatera Selatan",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0062 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Hana%20Sinaga%2C%20Kota%20Pagar%20Alam%2C%20Sumatera%20Selatan",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N63",
+   "nama": "Putri Wirawan, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Putri Wirawan",
+   "kota": "Kota Prabumulih",
+   "provinsi": "Sumatera Selatan",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0812-0000-0063 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Putri%20Wirawan%2C%20Kota%20Prabumulih%2C%20Sumatera%20Selatan",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N64",
+   "nama": "Yuni Puja, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Yuni Puja",
+   "kota": "Kota Metro",
+   "provinsi": "Lampung",
+   "kategori_kasus": [
+    "balik-nama",
+    "hak-tanggungan"
+   ],
+   "telepon": "0812-0000-0064 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Yuni%20Puja%2C%20Kota%20Metro%2C%20Lampung",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N65",
+   "nama": "Farah Pallawagau, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Farah Pallawagau",
+   "kota": "Kota Tanjung Pinang",
+   "provinsi": "Kepulauan Riau",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0065 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Farah%20Pallawagau%2C%20Kota%20Tanjung%20Pinang%2C%20Kepulauan%20Riau",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N66",
+   "nama": "Mira Zulkarnain, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Mira Zulkarnain",
+   "kota": "Kota Jakarta Barat",
+   "provinsi": "DKI Jakarta",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "telepon": "0812-0000-0066 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Mira%20Zulkarnain%2C%20Kota%20Jakarta%20Barat%2C%20DKI%20Jakarta",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N67",
+   "nama": "Widya Suryanto, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Widya Suryanto",
+   "kota": "Kota Jakarta Timur",
+   "provinsi": "DKI Jakarta",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0812-0000-0067 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Widya%20Suryanto%2C%20Kota%20Jakarta%20Timur%2C%20DKI%20Jakarta",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N68",
+   "nama": "Fajar Situmorang, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Fajar Situmorang",
+   "kota": "Kota Jakarta Utara",
+   "provinsi": "DKI Jakarta",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0068 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Fajar%20Situmorang%2C%20Kota%20Jakarta%20Utara%2C%20DKI%20Jakarta",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N69",
+   "nama": "Made Simamora, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Made Simamora",
+   "kota": "Kota Banjar",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "telepon": "0812-0000-0069 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Made%20Simamora%2C%20Kota%20Banjar%2C%20Jawa%20Barat",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N70",
+   "nama": "Umar Suryana, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Umar Suryana",
+   "kota": "Kota Cimahi",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "telepon": "0812-0000-0070 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Umar%20Suryana%2C%20Kota%20Cimahi%2C%20Jawa%20Barat",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N71",
+   "nama": "Hendra Soamole, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Hendra Soamole",
+   "kota": "Kota Cirebon",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0071 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Hendra%20Soamole%2C%20Kota%20Cirebon%2C%20Jawa%20Barat",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N72",
+   "nama": "Teguh Permatasari, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Teguh Permatasari",
+   "kota": "Kota Depok",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "hak-tanggungan"
+   ],
+   "telepon": "0812-0000-0072 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Teguh%20Permatasari%2C%20Kota%20Depok%2C%20Jawa%20Barat",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N73",
+   "nama": "Firman Gunawan, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Firman Gunawan",
+   "kota": "Kota Sukabumi",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "telepon": "0812-0000-0073 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Firman%20Gunawan%2C%20Kota%20Sukabumi%2C%20Jawa%20Barat",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N74",
+   "nama": "Naufal Sitorus, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Naufal Sitorus",
+   "kota": "Kota Tasikmalaya",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0074 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Naufal%20Sitorus%2C%20Kota%20Tasikmalaya%2C%20Jawa%20Barat",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N75",
+   "nama": "Gita Tarigan, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Gita Tarigan",
+   "kota": "Kota Magelang",
+   "provinsi": "Jawa Tengah",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0812-0000-0075 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Gita%20Tarigan%2C%20Kota%20Magelang%2C%20Jawa%20Tengah",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N76",
+   "nama": "Oktavia Wibisono, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Oktavia Wibisono",
+   "kota": "Kota Pekalongan",
+   "provinsi": "Jawa Tengah",
+   "kategori_kasus": [
+    "balik-nama",
+    "hak-tanggungan"
+   ],
+   "telepon": "0812-0000-0076 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Oktavia%20Wibisono%2C%20Kota%20Pekalongan%2C%20Jawa%20Tengah",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N77",
+   "nama": "Wulan Rumbewas, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Wulan Rumbewas",
+   "kota": "Kota Salatiga",
+   "provinsi": "Jawa Tengah",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0077 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Wulan%20Rumbewas%2C%20Kota%20Salatiga%2C%20Jawa%20Tengah",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N78",
+   "nama": "Elsa Anggraini, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Elsa Anggraini",
+   "kota": "Kota Tegal",
+   "provinsi": "Jawa Tengah",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "telepon": "0812-0000-0078 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Elsa%20Anggraini%2C%20Kota%20Tegal%2C%20Jawa%20Tengah",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N79",
+   "nama": "Lestari Nugraha, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Lestari Nugraha",
+   "kota": "Kota Batu",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0812-0000-0079 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Lestari%20Nugraha%2C%20Kota%20Batu%2C%20Jawa%20Timur",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N80",
+   "nama": "Vera Nasution, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Vera Nasution",
+   "kota": "Kota Blitar",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0080 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Vera%20Nasution%2C%20Kota%20Blitar%2C%20Jawa%20Timur",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N81",
+   "nama": "Eko Purba, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Eko Purba",
+   "kota": "Kota Kediri",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "telepon": "0812-0000-0081 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Eko%20Purba%2C%20Kota%20Kediri%2C%20Jawa%20Timur",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N82",
+   "nama": "Lukman Rahardjo, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Lukman Rahardjo",
+   "kota": "Kota Madiun",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "telepon": "0812-0000-0082 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Lukman%20Rahardjo%2C%20Kota%20Madiun%2C%20Jawa%20Timur",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N83",
+   "nama": "Taufik Latumahina, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Taufik Latumahina",
+   "kota": "Kota Mojokerto",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0083 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Taufik%20Latumahina%2C%20Kota%20Mojokerto%2C%20Jawa%20Timur",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N84",
+   "nama": "Galih Malik, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Galih Malik",
+   "kota": "Kota Pasuruan",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "balik-nama",
+    "hak-tanggungan"
+   ],
+   "telepon": "0812-0000-0084 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Galih%20Malik%2C%20Kota%20Pasuruan%2C%20Jawa%20Timur",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N85",
+   "nama": "Sandi Santoso, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Sandi Santoso",
+   "kota": "Kota Probolinggo",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "telepon": "0812-0000-0085 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Sandi%20Santoso%2C%20Kota%20Probolinggo%2C%20Jawa%20Timur",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N86",
+   "nama": "Erlangga Wibowo, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Erlangga Wibowo",
+   "kota": "Kota Cilegon",
+   "provinsi": "Banten",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0086 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Erlangga%20Wibowo%2C%20Kota%20Cilegon%2C%20Banten",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N87",
+   "nama": "Mardi Hutagalung, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Mardi Hutagalung",
+   "kota": "Kota Tangerang Selatan",
+   "provinsi": "Banten",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0812-0000-0087 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Mardi%20Hutagalung%2C%20Kota%20Tangerang%20Selatan%2C%20Banten",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N88",
+   "nama": "Fitri Prasetyo, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Fitri Prasetyo",
+   "kota": "Kota Bima",
+   "provinsi": "Nusa Tenggara Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "hak-tanggungan"
+   ],
+   "telepon": "0812-0000-0088 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Fitri%20Prasetyo%2C%20Kota%20Bima%2C%20Nusa%20Tenggara%20Barat",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N89",
+   "nama": "Nadia Wardana, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Nadia Wardana",
+   "kota": "Kota Singkawang",
+   "provinsi": "Kalimantan Barat",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0089 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Nadia%20Wardana%2C%20Kota%20Singkawang%2C%20Kalimantan%20Barat",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N90",
+   "nama": "Vina Massepe, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Vina Massepe",
+   "kota": "Kota Banjar Baru",
+   "provinsi": "Kalimantan Selatan",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "telepon": "0812-0000-0090 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Vina%20Massepe%2C%20Kota%20Banjar%20Baru%2C%20Kalimantan%20Selatan",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N91",
+   "nama": "Diah Ratnasari, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Diah Ratnasari",
+   "kota": "Kota Balikpapan",
+   "provinsi": "Kalimantan Timur",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0812-0000-0091 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Diah%20Ratnasari%2C%20Kota%20Balikpapan%2C%20Kalimantan%20Timur",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N92",
+   "nama": "Kirana Permana, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Kirana Permana",
+   "kota": "Kota Bontang",
+   "provinsi": "Kalimantan Timur",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0092 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Kirana%20Permana%2C%20Kota%20Bontang%2C%20Kalimantan%20Timur",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N93",
+   "nama": "Tari Marbun, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Tari Marbun",
+   "kota": "Kota Tarakan",
+   "provinsi": "Kalimantan Utara",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "telepon": "0812-0000-0093 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Tari%20Marbun%2C%20Kota%20Tarakan%2C%20Kalimantan%20Utara",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N94",
+   "nama": "Dedi Siagian, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Dedi Siagian",
+   "kota": "Kota Bitung",
+   "provinsi": "Sulawesi Utara",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "telepon": "0812-0000-0094 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Dedi%20Siagian%2C%20Kota%20Bitung%2C%20Sulawesi%20Utara",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N95",
+   "nama": "Krisna Kusnadi, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Krisna Kusnadi",
+   "kota": "Kota Kotamobagu",
+   "provinsi": "Sulawesi Utara",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0095 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Krisna%20Kusnadi%2C%20Kota%20Kotamobagu%2C%20Sulawesi%20Utara",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N96",
+   "nama": "Surya Kapisa, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Surya Kapisa",
+   "kota": "Kota Tomohon",
+   "provinsi": "Sulawesi Utara",
+   "kategori_kasus": [
+    "balik-nama",
+    "hak-tanggungan"
+   ],
+   "telepon": "0812-0000-0096 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Surya%20Kapisa%2C%20Kota%20Tomohon%2C%20Sulawesi%20Utara",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N97",
+   "nama": "Farhan Kristanto, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Farhan Kristanto",
+   "kota": "Kota Palopo",
+   "provinsi": "Sulawesi Selatan",
+   "kategori_kasus": [
+    "balik-nama",
+    "waris"
+   ],
+   "telepon": "0812-0000-0097 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Farhan%20Kristanto%2C%20Kota%20Palopo%2C%20Sulawesi%20Selatan",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N98",
+   "nama": "Rizki Setiawan, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Rizki Setiawan",
+   "kota": "Kota Parepare",
+   "provinsi": "Sulawesi Selatan",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0098 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Rizki%20Setiawan%2C%20Kota%20Parepare%2C%20Sulawesi%20Selatan",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N99",
+   "nama": "Doni Simatupang, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Doni Simatupang",
+   "kota": "Kota Baubau",
+   "provinsi": "Sulawesi Tenggara",
+   "kategori_kasus": [
+    "balik-nama",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0812-0000-0099 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Doni%20Simatupang%2C%20Kota%20Baubau%2C%20Sulawesi%20Tenggara",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N100",
+   "nama": "Lutfi Ginting, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Lutfi Ginting",
+   "kota": "Kota Tual",
+   "provinsi": "Maluku",
+   "kategori_kasus": [
+    "balik-nama",
+    "hak-tanggungan"
+   ],
+   "telepon": "0812-0000-0100 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Lutfi%20Ginting%2C%20Kota%20Tual%2C%20Maluku",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Rp 750.000 – Rp 1.500.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N101",
+   "nama": "Eka Handoko, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Eka Handoko",
+   "kota": "Kota Tidore Kepulauan",
+   "provinsi": "Maluku Utara",
+   "kategori_kasus": [
+    "balik-nama"
+   ],
+   "telepon": "0812-0000-0101 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Eka%20Handoko%2C%20Kota%20Tidore%20Kepulauan%2C%20Maluku%20Utara",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.000.000 – Rp 2.000.000 per akta (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "N102",
+   "nama": "Maya Hehanussa, S.H., M.Kn.",
+   "jenis": "Notaris/PPAT (dummy)",
+   "kantor": "Kantor Notaris & PPAT Maya Hehanussa",
+   "kota": "Kota Sorong",
+   "provinsi": "Papua Barat",
+   "kategori_kasus": [
+    "balik-nama",
+    "cek-sertifikat"
+   ],
+   "telepon": "0812-0000-0102 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Notaris%20%26%20PPAT%20Maya%20Hehanussa%2C%20Kota%20Sorong%2C%20Papua%20Barat",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Rp 1.500.000 – Rp 3.000.000 per akta (indikatif/dummy)",
    "_dummy": true
   }
  ]

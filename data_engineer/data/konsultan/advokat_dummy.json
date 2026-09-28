@@ -1,19 +1,19 @@
 {
- "_PERINGATAN": "SELURUH DATA DI FILE INI FIKTIF (nama, kantor, kota, telepon, lokasi, tarif per orang, dan jadwal dipasangkan/dikarang untuk demo). BUKAN daftar Notaris/PPAT/Advokat sungguhan. Nomor telepon TIDAK AKTIF (pola berurutan, bukan nomor asli). Tautan peta hanya PENCARIAN nama kantor di Google Maps (bukan lokasi terverifikasi). Tarif (field \"tarif\") bersifat INDIKATIF per orang, diputar dari 3 tingkatan, BUKAN tarif resmi maupun cerminan kualitas layanan sungguhan. Jangan ditampilkan ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk menghubungi atau mendatangi siapa pun.",
+ "_PERINGATAN": "SELURUH NAMA, KANTOR, TELEPON, TARIF, DAN JADWAL DI FILE INI FIKTIF (dipasangkan/dikarang untuk demo), BUKAN daftar Notaris/PPAT/Advokat sungguhan -- HANYA nama kabupaten/kota dan provinsi yang asli (data wilayah Kemendagri/BPS, dipakai supaya dropdown lokasi realistis), bukan klaim ada konsultan sungguhan di kota tersebut. Nomor telepon TIDAK AKTIF (pola berurutan, bukan nomor asli). Tautan peta hanya PENCARIAN nama kantor di Google Maps (bukan lokasi terverifikasi). Tarif (field \"tarif\") bersifat INDIKATIF per orang, diputar dari 3 tingkatan, BUKAN tarif resmi maupun cerminan kualitas layanan sungguhan. Jangan ditampilkan ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk menghubungi atau mendatangi siapa pun.",
  "konsultan": [
   {
    "id": "A01",
    "nama": "Teuku Rizal, S.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Teuku Rizal & Rekan",
-   "kota": "Banda Aceh",
+   "kota": "Kota Banda Aceh",
    "provinsi": "Aceh",
    "kategori_kasus": [
     "sengketa-tanah",
     "waris"
    ],
    "telepon": "0813-0000-0001 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Teuku%20Rizal%20%26%20Rekan%2C%20Banda%20Aceh%2C%20Aceh",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Teuku%20Rizal%20%26%20Rekan%2C%20Kota%20Banda%20Aceh%2C%20Aceh",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -23,14 +23,14 @@
    "nama": "Boru Panggabean, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Panggabean & Partners",
-   "kota": "Medan",
+   "kota": "Kota Medan",
    "provinsi": "Sumatera Utara",
    "kategori_kasus": [
     "sengketa-tanah",
     "mafia-tanah"
    ],
    "telepon": "0813-0000-0002 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Panggabean%20%26%20Partners%2C%20Medan%2C%20Sumatera%20Utara",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Panggabean%20%26%20Partners%2C%20Kota%20Medan%2C%20Sumatera%20Utara",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -40,13 +40,13 @@
    "nama": "Rico Alfino, S.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Rico Alfino & Rekan",
-   "kota": "Padang",
+   "kota": "Kota Padang",
    "provinsi": "Sumatera Barat",
    "kategori_kasus": [
     "sengketa-tanah"
    ],
    "telepon": "0813-0000-0003 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Rico%20Alfino%20%26%20Rekan%2C%20Padang%2C%20Sumatera%20Barat",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Rico%20Alfino%20%26%20Rekan%2C%20Kota%20Padang%2C%20Sumatera%20Barat",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -56,14 +56,14 @@
    "nama": "Melly Anggraini, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Melly Anggraini & Associates",
-   "kota": "Pekanbaru",
+   "kota": "Kota Pekanbaru",
    "provinsi": "Riau",
    "kategori_kasus": [
     "sengketa-tanah",
     "sertifikat-ganda"
    ],
    "telepon": "0813-0000-0004 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Melly%20Anggraini%20%26%20Associates%2C%20Pekanbaru%2C%20Riau",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Melly%20Anggraini%20%26%20Associates%2C%20Kota%20Pekanbaru%2C%20Riau",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -73,14 +73,14 @@
    "nama": "Johan Tanoto, S.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Johan Tanoto & Partners",
-   "kota": "Batam",
+   "kota": "Kota Batam",
    "provinsi": "Kepulauan Riau",
    "kategori_kasus": [
     "sengketa-tanah",
     "mafia-tanah"
    ],
    "telepon": "0813-0000-0005 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Johan%20Tanoto%20%26%20Partners%2C%20Batam%2C%20Kepulauan%20Riau",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Johan%20Tanoto%20%26%20Partners%2C%20Kota%20Batam%2C%20Kepulauan%20Riau",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -90,13 +90,13 @@
    "nama": "Fajar Ramadhan, S.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Fajar Ramadhan & Rekan",
-   "kota": "Jambi",
+   "kota": "Kota Jambi",
    "provinsi": "Jambi",
    "kategori_kasus": [
     "sengketa-tanah"
    ],
    "telepon": "0813-0000-0006 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Fajar%20Ramadhan%20%26%20Rekan%2C%20Jambi%2C%20Jambi",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Fajar%20Ramadhan%20%26%20Rekan%2C%20Kota%20Jambi%2C%20Jambi",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -106,14 +106,14 @@
    "nama": "Sinta Marbun, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Marbun & Partners",
-   "kota": "Palembang",
+   "kota": "Kota Palembang",
    "provinsi": "Sumatera Selatan",
    "kategori_kasus": [
     "sengketa-tanah",
     "sertifikat-ganda"
    ],
    "telepon": "0813-0000-0007 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Marbun%20%26%20Partners%2C%20Palembang%2C%20Sumatera%20Selatan",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Marbun%20%26%20Partners%2C%20Kota%20Palembang%2C%20Sumatera%20Selatan",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -123,13 +123,13 @@
    "nama": "Dian Kusuma, S.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Dian Kusuma & Rekan",
-   "kota": "Bengkulu",
+   "kota": "Kota Bengkulu",
    "provinsi": "Bengkulu",
    "kategori_kasus": [
     "sengketa-tanah"
    ],
    "telepon": "0813-0000-0008 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Dian%20Kusuma%20%26%20Rekan%2C%20Bengkulu%2C%20Bengkulu",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Dian%20Kusuma%20%26%20Rekan%2C%20Kota%20Bengkulu%2C%20Bengkulu",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -139,14 +139,14 @@
    "nama": "Reza Pratama, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Pratama & Associates",
-   "kota": "Bandar Lampung",
+   "kota": "Kota Bandar Lampung",
    "provinsi": "Lampung",
    "kategori_kasus": [
     "sengketa-tanah",
     "waris"
    ],
    "telepon": "0813-0000-0009 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Pratama%20%26%20Associates%2C%20Bandar%20Lampung%2C%20Lampung",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Pratama%20%26%20Associates%2C%20Kota%20Bandar%20Lampung%2C%20Lampung",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -156,13 +156,13 @@
    "nama": "Wina Aditya, S.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Wina Aditya & Rekan",
-   "kota": "Pangkalpinang",
+   "kota": "Kota Pangkal Pinang",
    "provinsi": "Kepulauan Bangka Belitung",
    "kategori_kasus": [
     "sengketa-tanah"
    ],
    "telepon": "0813-0000-0010 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Wina%20Aditya%20%26%20Rekan%2C%20Pangkalpinang%2C%20Kepulauan%20Bangka%20Belitung",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Wina%20Aditya%20%26%20Rekan%2C%20Kota%20Pangkal%20Pinang%2C%20Kepulauan%20Bangka%20Belitung",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -172,7 +172,7 @@
    "nama": "Gunawan Santoso, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Santoso & Partners",
-   "kota": "Jakarta Selatan",
+   "kota": "Kota Jakarta Selatan",
    "provinsi": "DKI Jakarta",
    "kategori_kasus": [
     "sengketa-tanah",
@@ -180,7 +180,7 @@
     "sertifikat-ganda"
    ],
    "telepon": "0813-0000-0011 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Santoso%20%26%20Partners%2C%20Jakarta%20Selatan%2C%20DKI%20Jakarta",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Santoso%20%26%20Partners%2C%20Kota%20Jakarta%20Selatan%2C%20DKI%20Jakarta",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -190,14 +190,14 @@
    "nama": "Angelina Kusnadi, S.H., LL.M.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Kusnadi & Associates",
-   "kota": "Jakarta Pusat",
+   "kota": "Kota Jakarta Pusat",
    "provinsi": "DKI Jakarta",
    "kategori_kasus": [
     "sengketa-tanah",
     "mafia-tanah"
    ],
    "telepon": "0813-0000-0012 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Kusnadi%20%26%20Associates%2C%20Jakarta%20Pusat%2C%20DKI%20Jakarta",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Kusnadi%20%26%20Associates%2C%20Kota%20Jakarta%20Pusat%2C%20DKI%20Jakarta",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -207,14 +207,14 @@
    "nama": "Fadli Ramadhan, S.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Fadli Ramadhan & Rekan",
-   "kota": "Bandung",
+   "kota": "Kota Bandung",
    "provinsi": "Jawa Barat",
    "kategori_kasus": [
     "sengketa-tanah",
     "waris"
    ],
    "telepon": "0813-0000-0013 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Fadli%20Ramadhan%20%26%20Rekan%2C%20Bandung%2C%20Jawa%20Barat",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Fadli%20Ramadhan%20%26%20Rekan%2C%20Kota%20Bandung%2C%20Jawa%20Barat",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -224,14 +224,14 @@
    "nama": "Yenny Kristanto, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Kristanto & Partners",
-   "kota": "Bekasi",
+   "kota": "Kota Bekasi",
    "provinsi": "Jawa Barat",
    "kategori_kasus": [
     "sengketa-tanah",
     "sertifikat-ganda"
    ],
    "telepon": "0813-0000-0014 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Kristanto%20%26%20Partners%2C%20Bekasi%2C%20Jawa%20Barat",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Kristanto%20%26%20Partners%2C%20Kota%20Bekasi%2C%20Jawa%20Barat",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -241,13 +241,13 @@
    "nama": "Hendra Wijaya, S.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Hendra Wijaya & Rekan",
-   "kota": "Bogor",
+   "kota": "Kota Bogor",
    "provinsi": "Jawa Barat",
    "kategori_kasus": [
     "sengketa-tanah"
    ],
    "telepon": "0813-0000-0015 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Hendra%20Wijaya%20%26%20Rekan%2C%20Bogor%2C%20Jawa%20Barat",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Hendra%20Wijaya%20%26%20Rekan%2C%20Kota%20Bogor%2C%20Jawa%20Barat",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -257,14 +257,14 @@
    "nama": "Nina Marlina, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Marlina & Associates",
-   "kota": "Serang",
+   "kota": "Kota Serang",
    "provinsi": "Banten",
    "kategori_kasus": [
     "sengketa-tanah",
     "waris"
    ],
    "telepon": "0813-0000-0016 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Marlina%20%26%20Associates%2C%20Serang%2C%20Banten",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Marlina%20%26%20Associates%2C%20Kota%20Serang%2C%20Banten",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -274,14 +274,14 @@
    "nama": "Yudi Prasetya, S.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Yudi Prasetya & Rekan",
-   "kota": "Tangerang",
+   "kota": "Kota Tangerang",
    "provinsi": "Banten",
    "kategori_kasus": [
     "sengketa-tanah",
     "mafia-tanah"
    ],
    "telepon": "0813-0000-0017 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Yudi%20Prasetya%20%26%20Rekan%2C%20Tangerang%2C%20Banten",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Yudi%20Prasetya%20%26%20Rekan%2C%20Kota%20Tangerang%2C%20Banten",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -291,14 +291,14 @@
    "nama": "Diah Permatasari, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Permatasari & Partners",
-   "kota": "Semarang",
+   "kota": "Kota Semarang",
    "provinsi": "Jawa Tengah",
    "kategori_kasus": [
     "sengketa-tanah",
     "sertifikat-ganda"
    ],
    "telepon": "0813-0000-0018 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Permatasari%20%26%20Partners%2C%20Semarang%2C%20Jawa%20Tengah",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Permatasari%20%26%20Partners%2C%20Kota%20Semarang%2C%20Jawa%20Tengah",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -308,13 +308,13 @@
    "nama": "Bayu Firmansyah, S.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Bayu Firmansyah & Rekan",
-   "kota": "Surakarta",
+   "kota": "Kota Surakarta",
    "provinsi": "Jawa Tengah",
    "kategori_kasus": [
     "sengketa-tanah"
    ],
    "telepon": "0813-0000-0019 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Bayu%20Firmansyah%20%26%20Rekan%2C%20Surakarta%2C%20Jawa%20Tengah",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Bayu%20Firmansyah%20%26%20Rekan%2C%20Kota%20Surakarta%2C%20Jawa%20Tengah",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -324,14 +324,14 @@
    "nama": "Rahmat Hidayat, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Hidayat & Associates",
-   "kota": "Yogyakarta",
+   "kota": "Kota Yogyakarta",
    "provinsi": "D.I. Yogyakarta",
    "kategori_kasus": [
     "sengketa-tanah",
     "waris"
    ],
    "telepon": "0813-0000-0020 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Hidayat%20%26%20Associates%2C%20Yogyakarta%2C%20D.I.%20Yogyakarta",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Hidayat%20%26%20Associates%2C%20Kota%20Yogyakarta%2C%20D.I.%20Yogyakarta",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -341,7 +341,7 @@
    "nama": "Sri Wahyuni, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Wahyuni & Partners",
-   "kota": "Surabaya",
+   "kota": "Kota Surabaya",
    "provinsi": "Jawa Timur",
    "kategori_kasus": [
     "sengketa-tanah",
@@ -349,7 +349,7 @@
     "sertifikat-ganda"
    ],
    "telepon": "0813-0000-0021 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Wahyuni%20%26%20Partners%2C%20Surabaya%2C%20Jawa%20Timur",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Wahyuni%20%26%20Partners%2C%20Kota%20Surabaya%2C%20Jawa%20Timur",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -359,14 +359,14 @@
    "nama": "Arief Budiman, S.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Arief Budiman & Rekan",
-   "kota": "Malang",
+   "kota": "Kota Malang",
    "provinsi": "Jawa Timur",
    "kategori_kasus": [
     "sengketa-tanah",
     "waris"
    ],
    "telepon": "0813-0000-0022 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Arief%20Budiman%20%26%20Rekan%2C%20Malang%2C%20Jawa%20Timur",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Arief%20Budiman%20%26%20Rekan%2C%20Kota%20Malang%2C%20Jawa%20Timur",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -376,14 +376,14 @@
    "nama": "I Wayan Sudiana, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Sudiana & Partners",
-   "kota": "Denpasar",
+   "kota": "Kota Denpasar",
    "provinsi": "Bali",
    "kategori_kasus": [
     "sengketa-tanah",
     "mafia-tanah"
    ],
    "telepon": "0813-0000-0023 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Sudiana%20%26%20Partners%2C%20Denpasar%2C%20Bali",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Sudiana%20%26%20Partners%2C%20Kota%20Denpasar%2C%20Bali",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -409,14 +409,14 @@
    "nama": "Baiq Nurjannah, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Nurjannah & Associates",
-   "kota": "Mataram",
+   "kota": "Kota Mataram",
    "provinsi": "Nusa Tenggara Barat",
    "kategori_kasus": [
     "sengketa-tanah",
     "waris"
    ],
    "telepon": "0813-0000-0025 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Nurjannah%20%26%20Associates%2C%20Mataram%2C%20Nusa%20Tenggara%20Barat",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Nurjannah%20%26%20Associates%2C%20Kota%20Mataram%2C%20Nusa%20Tenggara%20Barat",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -426,13 +426,13 @@
    "nama": "Yosef Nahak, S.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Yosef Nahak & Rekan",
-   "kota": "Kupang",
+   "kota": "Kota Kupang",
    "provinsi": "Nusa Tenggara Timur",
    "kategori_kasus": [
     "sengketa-tanah"
    ],
    "telepon": "0813-0000-0026 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Yosef%20Nahak%20%26%20Rekan%2C%20Kupang%2C%20Nusa%20Tenggara%20Timur",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Yosef%20Nahak%20%26%20Rekan%2C%20Kota%20Kupang%2C%20Nusa%20Tenggara%20Timur",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -442,14 +442,14 @@
    "nama": "Erwin Halim, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Halim & Partners",
-   "kota": "Pontianak",
+   "kota": "Kota Pontianak",
    "provinsi": "Kalimantan Barat",
    "kategori_kasus": [
     "sengketa-tanah",
     "sertifikat-ganda"
    ],
    "telepon": "0813-0000-0027 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Halim%20%26%20Partners%2C%20Pontianak%2C%20Kalimantan%20Barat",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Halim%20%26%20Partners%2C%20Kota%20Pontianak%2C%20Kalimantan%20Barat",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -459,13 +459,13 @@
    "nama": "Novi Ratnasari, S.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Novi Ratnasari & Rekan",
-   "kota": "Palangkaraya",
+   "kota": "Kota Palangka Raya",
    "provinsi": "Kalimantan Tengah",
    "kategori_kasus": [
     "sengketa-tanah"
    ],
    "telepon": "0813-0000-0028 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Novi%20Ratnasari%20%26%20Rekan%2C%20Palangkaraya%2C%20Kalimantan%20Tengah",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Novi%20Ratnasari%20%26%20Rekan%2C%20Kota%20Palangka%20Raya%2C%20Kalimantan%20Tengah",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -475,14 +475,14 @@
    "nama": "Ahmad Zulkarnain, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Zulkarnain & Associates",
-   "kota": "Banjarmasin",
+   "kota": "Kota Banjarmasin",
    "provinsi": "Kalimantan Selatan",
    "kategori_kasus": [
     "sengketa-tanah",
     "mafia-tanah"
    ],
    "telepon": "0813-0000-0029 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Zulkarnain%20%26%20Associates%2C%20Banjarmasin%2C%20Kalimantan%20Selatan",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Zulkarnain%20%26%20Associates%2C%20Kota%20Banjarmasin%2C%20Kalimantan%20Selatan",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -492,14 +492,14 @@
    "nama": "Dewi Anjani, S.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Dewi Anjani & Rekan",
-   "kota": "Samarinda",
+   "kota": "Kota Samarinda",
    "provinsi": "Kalimantan Timur",
    "kategori_kasus": [
     "sengketa-tanah",
     "sertifikat-ganda"
    ],
    "telepon": "0813-0000-0030 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Dewi%20Anjani%20%26%20Rekan%2C%20Samarinda%2C%20Kalimantan%20Timur",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Dewi%20Anjani%20%26%20Rekan%2C%20Kota%20Samarinda%2C%20Kalimantan%20Timur",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -525,14 +525,14 @@
    "nama": "Meike Rumondor, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Rumondor & Partners",
-   "kota": "Manado",
+   "kota": "Kota Manado",
    "provinsi": "Sulawesi Utara",
    "kategori_kasus": [
     "sengketa-tanah",
     "waris"
    ],
    "telepon": "0813-0000-0032 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Rumondor%20%26%20Partners%2C%20Manado%2C%20Sulawesi%20Utara",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Rumondor%20%26%20Partners%2C%20Kota%20Manado%2C%20Sulawesi%20Utara",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -542,13 +542,13 @@
    "nama": "Moh. Taufik, S.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Moh. Taufik & Rekan",
-   "kota": "Palu",
+   "kota": "Kota Palu",
    "provinsi": "Sulawesi Tengah",
    "kategori_kasus": [
     "sengketa-tanah"
    ],
    "telepon": "0813-0000-0033 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Moh.%20Taufik%20%26%20Rekan%2C%20Palu%2C%20Sulawesi%20Tengah",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Moh.%20Taufik%20%26%20Rekan%2C%20Kota%20Palu%2C%20Sulawesi%20Tengah",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -558,7 +558,7 @@
    "nama": "Andi Pallawagau, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Pallawagau & Associates",
-   "kota": "Makassar",
+   "kota": "Kota Makassar",
    "provinsi": "Sulawesi Selatan",
    "kategori_kasus": [
     "sengketa-tanah",
@@ -566,7 +566,7 @@
     "sertifikat-ganda"
    ],
    "telepon": "0813-0000-0034 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Pallawagau%20%26%20Associates%2C%20Makassar%2C%20Sulawesi%20Selatan",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Pallawagau%20%26%20Associates%2C%20Kota%20Makassar%2C%20Sulawesi%20Selatan",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -576,13 +576,13 @@
    "nama": "Wa Ode Sitti, S.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Wa Ode Sitti & Rekan",
-   "kota": "Kendari",
+   "kota": "Kota Kendari",
    "provinsi": "Sulawesi Tenggara",
    "kategori_kasus": [
     "sengketa-tanah"
    ],
    "telepon": "0813-0000-0035 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Wa%20Ode%20Sitti%20%26%20Rekan%2C%20Kendari%2C%20Sulawesi%20Tenggara",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Wa%20Ode%20Sitti%20%26%20Rekan%2C%20Kota%20Kendari%2C%20Sulawesi%20Tenggara",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -592,14 +592,14 @@
    "nama": "Rian Katili, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Katili & Partners",
-   "kota": "Gorontalo",
+   "kota": "Kota Gorontalo",
    "provinsi": "Gorontalo",
    "kategori_kasus": [
     "sengketa-tanah",
     "waris"
    ],
    "telepon": "0813-0000-0036 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Katili%20%26%20Partners%2C%20Gorontalo%2C%20Gorontalo",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Katili%20%26%20Partners%2C%20Kota%20Gorontalo%2C%20Gorontalo",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -625,14 +625,14 @@
    "nama": "Ruth Latumahina, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Latumahina & Associates",
-   "kota": "Ambon",
+   "kota": "Kota Ambon",
    "provinsi": "Maluku",
    "kategori_kasus": [
     "sengketa-tanah",
     "mafia-tanah"
    ],
    "telepon": "0813-0000-0038 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Latumahina%20%26%20Associates%2C%20Ambon%2C%20Maluku",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Latumahina%20%26%20Associates%2C%20Kota%20Ambon%2C%20Maluku",
    "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -642,13 +642,13 @@
    "nama": "Ridwan Soamole, S.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Ridwan Soamole & Rekan",
-   "kota": "Ternate",
+   "kota": "Kota Ternate",
    "provinsi": "Maluku Utara",
    "kategori_kasus": [
     "sengketa-tanah"
    ],
    "telepon": "0813-0000-0039 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Ridwan%20Soamole%20%26%20Rekan%2C%20Ternate%2C%20Maluku%20Utara",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Ridwan%20Soamole%20%26%20Rekan%2C%20Kota%20Ternate%2C%20Maluku%20Utara",
    "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -658,7 +658,7 @@
    "nama": "Yance Kapisa, S.H., M.H.",
    "jenis": "Advokat (dummy)",
    "kantor": "Kantor Hukum Kapisa & Partners",
-   "kota": "Jayapura",
+   "kota": "Kota Jayapura",
    "provinsi": "Papua",
    "kategori_kasus": [
     "sengketa-tanah",
@@ -666,7 +666,7 @@
     "sertifikat-ganda"
    ],
    "telepon": "0813-0000-0040 (dummy - nomor tidak aktif, jangan dihubungi)",
-   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Kapisa%20%26%20Partners%2C%20Jayapura%2C%20Papua",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Kapisa%20%26%20Partners%2C%20Kota%20Jayapura%2C%20Papua",
    "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
    "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
    "_dummy": true
@@ -686,6 +686,1023 @@
    "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Beatrix%20Rumbewas%20%26%20Rekan%2C%20Manokwari%2C%20Papua%20Barat",
    "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
    "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A42",
+   "nama": "Taufik Marbun, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Taufik Marbun & Partners",
+   "kota": "Kota Langsa",
+   "provinsi": "Aceh",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0042 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Taufik%20Marbun%20%26%20Partners%2C%20Kota%20Langsa%2C%20Aceh",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A43",
+   "nama": "Rizki Rahardjo, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Rizki Rahardjo & Associates",
+   "kota": "Kota Lhokseumawe",
+   "provinsi": "Aceh",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0043 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Rizki%20Rahardjo%20%26%20Associates%2C%20Kota%20Lhokseumawe%2C%20Aceh",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A44",
+   "nama": "Kurnia Soamole, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Kurnia Soamole & Rekan",
+   "kota": "Kota Sabang",
+   "provinsi": "Aceh",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0044 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Kurnia%20Soamole%20%26%20Rekan%2C%20Kota%20Sabang%2C%20Aceh",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A45",
+   "nama": "Kartika Kusuma, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Kartika Kusuma & Partners",
+   "kota": "Kota Subulussalam",
+   "provinsi": "Aceh",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0045 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Kartika%20Kusuma%20%26%20Partners%2C%20Kota%20Subulussalam%2C%20Aceh",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A46",
+   "nama": "Zahra Panggabean, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Zahra Panggabean & Associates",
+   "kota": "Kota Binjai",
+   "provinsi": "Sumatera Utara",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0046 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Zahra%20Panggabean%20%26%20Associates%2C%20Kota%20Binjai%2C%20Sumatera%20Utara",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A47",
+   "nama": "Mira Mulyono, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Mira Mulyono & Rekan",
+   "kota": "Kota Gunungsitoli",
+   "provinsi": "Sumatera Utara",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0047 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Mira%20Mulyono%20%26%20Rekan%2C%20Kota%20Gunungsitoli%2C%20Sumatera%20Utara",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A48",
+   "nama": "Eko Kapisa, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Eko Kapisa & Partners",
+   "kota": "Kota Padangsidimpuan",
+   "provinsi": "Sumatera Utara",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0048 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Eko%20Kapisa%20%26%20Partners%2C%20Kota%20Padangsidimpuan%2C%20Sumatera%20Utara",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A49",
+   "nama": "Surya Santoso, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Surya Santoso & Associates",
+   "kota": "Kota Pematang Siantar",
+   "provinsi": "Sumatera Utara",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0049 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Surya%20Santoso%20%26%20Associates%2C%20Kota%20Pematang%20Siantar%2C%20Sumatera%20Utara",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A50",
+   "nama": "Pandu Sitorus, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Pandu Sitorus & Rekan",
+   "kota": "Kota Sibolga",
+   "provinsi": "Sumatera Utara",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0050 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Pandu%20Sitorus%20%26%20Rekan%2C%20Kota%20Sibolga%2C%20Sumatera%20Utara",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A51",
+   "nama": "Ivan Wirawan, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Ivan Wirawan & Partners",
+   "kota": "Kota Tanjung Balai",
+   "provinsi": "Sumatera Utara",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0051 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Ivan%20Wirawan%20%26%20Partners%2C%20Kota%20Tanjung%20Balai%2C%20Sumatera%20Utara",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A52",
+   "nama": "Indah Mansim, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Indah Mansim & Associates",
+   "kota": "Kota Tebing Tinggi",
+   "provinsi": "Sumatera Utara",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0052 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Indah%20Mansim%20%26%20Associates%2C%20Kota%20Tebing%20Tinggi%2C%20Sumatera%20Utara",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A53",
+   "nama": "Yuni Wijaya, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Yuni Wijaya & Rekan",
+   "kota": "Kota Bukittinggi",
+   "provinsi": "Sumatera Barat",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0053 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Yuni%20Wijaya%20%26%20Rekan%2C%20Kota%20Bukittinggi%2C%20Sumatera%20Barat",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A54",
+   "nama": "Lestari Simatupang, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Lestari Simatupang & Partners",
+   "kota": "Kota Padang Panjang",
+   "provinsi": "Sumatera Barat",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0054 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Lestari%20Simatupang%20%26%20Partners%2C%20Kota%20Padang%20Panjang%2C%20Sumatera%20Barat",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A55",
+   "nama": "Dedi Prasetyo, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Dedi Prasetyo & Associates",
+   "kota": "Kota Pariaman",
+   "provinsi": "Sumatera Barat",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0055 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Dedi%20Prasetyo%20%26%20Associates%2C%20Kota%20Pariaman%2C%20Sumatera%20Barat",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A56",
+   "nama": "Rian Rumbewas, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Rian Rumbewas & Rekan",
+   "kota": "Kota Payakumbuh",
+   "provinsi": "Sumatera Barat",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0056 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Rian%20Rumbewas%20%26%20Rekan%2C%20Kota%20Payakumbuh%2C%20Sumatera%20Barat",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A57",
+   "nama": "Nyoman Zulkarnain, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Nyoman Zulkarnain & Partners",
+   "kota": "Kota Sawah Lunto",
+   "provinsi": "Sumatera Barat",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0057 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Nyoman%20Zulkarnain%20%26%20Partners%2C%20Kota%20Sawah%20Lunto%2C%20Sumatera%20Barat",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A58",
+   "nama": "Hasan Harahap, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Hasan Harahap & Associates",
+   "kota": "Kota Solok",
+   "provinsi": "Sumatera Barat",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0058 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Hasan%20Harahap%20%26%20Associates%2C%20Kota%20Solok%2C%20Sumatera%20Barat",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A59",
+   "nama": "Hana Sudrajat, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Hana Sudrajat & Rekan",
+   "kota": "Kota Dumai",
+   "provinsi": "Riau",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0059 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Hana%20Sudrajat%20%26%20Rekan%2C%20Kota%20Dumai%2C%20Riau",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A60",
+   "nama": "Wulan Hehanussa, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Wulan Hehanussa & Partners",
+   "kota": "Kota Sungai Penuh",
+   "provinsi": "Jambi",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0060 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Wulan%20Hehanussa%20%26%20Partners%2C%20Kota%20Sungai%20Penuh%2C%20Jambi",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A61",
+   "nama": "Kirana Ratnasari, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Kirana Ratnasari & Associates",
+   "kota": "Kota Lubuklinggau",
+   "provinsi": "Sumatera Selatan",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0061 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Kirana%20Ratnasari%20%26%20Associates%2C%20Kota%20Lubuklinggau%2C%20Sumatera%20Selatan",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A62",
+   "nama": "Chandra Nasution, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Chandra Nasution & Rekan",
+   "kota": "Kota Pagar Alam",
+   "provinsi": "Sumatera Selatan",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0062 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Chandra%20Nasution%20%26%20Rekan%2C%20Kota%20Pagar%20Alam%2C%20Sumatera%20Selatan",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A63",
+   "nama": "Putu Simamora, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Putu Simamora & Partners",
+   "kota": "Kota Prabumulih",
+   "provinsi": "Sumatera Selatan",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0063 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Putu%20Simamora%20%26%20Partners%2C%20Kota%20Prabumulih%2C%20Sumatera%20Selatan",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A64",
+   "nama": "Kevin Pattiasina, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Kevin Pattiasina & Associates",
+   "kota": "Kota Metro",
+   "provinsi": "Lampung",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0064 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Kevin%20Pattiasina%20%26%20Associates%2C%20Kota%20Metro%2C%20Lampung",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A65",
+   "nama": "Guntur Nurjannah, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Guntur Nurjannah & Rekan",
+   "kota": "Kota Tanjung Pinang",
+   "provinsi": "Kepulauan Riau",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0065 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Guntur%20Nurjannah%20%26%20Rekan%2C%20Kota%20Tanjung%20Pinang%2C%20Kepulauan%20Riau",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A66",
+   "nama": "Gita Siregar, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Gita Siregar & Partners",
+   "kota": "Kota Jakarta Barat",
+   "provinsi": "DKI Jakarta",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0066 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Gita%20Siregar%20%26%20Partners%2C%20Kota%20Jakarta%20Barat%2C%20DKI%20Jakarta",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A67",
+   "nama": "Vina Siagian, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Vina Siagian & Associates",
+   "kota": "Kota Jakarta Timur",
+   "provinsi": "DKI Jakarta",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0067 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Vina%20Siagian%20%26%20Associates%2C%20Kota%20Jakarta%20Timur%2C%20DKI%20Jakarta",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A68",
+   "nama": "Julia Latumahina, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Julia Latumahina & Rekan",
+   "kota": "Kota Jakarta Utara",
+   "provinsi": "DKI Jakarta",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0068 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Julia%20Latumahina%20%26%20Rekan%2C%20Kota%20Jakarta%20Utara%2C%20DKI%20Jakarta",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A69",
+   "nama": "Budi Permatasari, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Budi Permatasari & Partners",
+   "kota": "Kota Banjar",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0069 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Budi%20Permatasari%20%26%20Partners%2C%20Kota%20Banjar%2C%20Jawa%20Barat",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A70",
+   "nama": "Oscar Lubis, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Oscar Lubis & Associates",
+   "kota": "Kota Cimahi",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0070 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Oscar%20Lubis%20%26%20Associates%2C%20Kota%20Cimahi%2C%20Jawa%20Barat",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A71",
+   "nama": "Indra Bangun, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Indra Bangun & Rekan",
+   "kota": "Kota Cirebon",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0071 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Indra%20Bangun%20%26%20Rekan%2C%20Kota%20Cirebon%2C%20Jawa%20Barat",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A72",
+   "nama": "Firman Sahetapy, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Firman Sahetapy & Partners",
+   "kota": "Kota Depok",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0072 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Firman%20Sahetapy%20%26%20Partners%2C%20Kota%20Depok%2C%20Jawa%20Barat",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A73",
+   "nama": "Fitri Kristanto, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Fitri Kristanto & Associates",
+   "kota": "Kota Sukabumi",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0073 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Fitri%20Kristanto%20%26%20Associates%2C%20Kota%20Sukabumi%2C%20Jawa%20Barat",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A74",
+   "nama": "Utami Wibowo, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Utami Wibowo & Rekan",
+   "kota": "Kota Tasikmalaya",
+   "provinsi": "Jawa Barat",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0074 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Utami%20Wibowo%20%26%20Rekan%2C%20Kota%20Tasikmalaya%2C%20Jawa%20Barat",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A75",
+   "nama": "Ika Tarigan, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Ika Tarigan & Partners",
+   "kota": "Kota Magelang",
+   "provinsi": "Jawa Tengah",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0075 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Ika%20Tarigan%20%26%20Partners%2C%20Kota%20Magelang%2C%20Jawa%20Tengah",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A76",
+   "nama": "Ahmad Puja, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Ahmad Puja & Associates",
+   "kota": "Kota Pekalongan",
+   "provinsi": "Jawa Tengah",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0076 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Ahmad%20Puja%20%26%20Associates%2C%20Kota%20Pekalongan%2C%20Jawa%20Tengah",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A77",
+   "nama": "Nugroho Marlina, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Nugroho Marlina & Rekan",
+   "kota": "Kota Salatiga",
+   "provinsi": "Jawa Tengah",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0077 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Nugroho%20Marlina%20%26%20Rekan%2C%20Kota%20Salatiga%2C%20Jawa%20Tengah",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A78",
+   "nama": "Hendra Halim, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Hendra Halim & Partners",
+   "kota": "Kota Tegal",
+   "provinsi": "Jawa Tengah",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0078 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Hendra%20Halim%20%26%20Partners%2C%20Kota%20Tegal%2C%20Jawa%20Tengah",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A79",
+   "nama": "Erlangga Ginting, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Erlangga Ginting & Associates",
+   "kota": "Kota Batu",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0079 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Erlangga%20Ginting%20%26%20Associates%2C%20Kota%20Batu%2C%20Jawa%20Timur",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A80",
+   "nama": "Eka Wardana, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Eka Wardana & Rekan",
+   "kota": "Kota Blitar",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0080 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Eka%20Wardana%20%26%20Rekan%2C%20Kota%20Blitar%2C%20Jawa%20Timur",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A81",
+   "nama": "Tia Anggraini, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Tia Anggraini & Partners",
+   "kota": "Kota Kediri",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0081 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Tia%20Anggraini%20%26%20Partners%2C%20Kota%20Kediri%2C%20Jawa%20Timur",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A82",
+   "nama": "Hesti Suryanto, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Hesti Suryanto & Associates",
+   "kota": "Kota Madiun",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0082 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Hesti%20Suryanto%20%26%20Associates%2C%20Kota%20Madiun%2C%20Jawa%20Timur",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A83",
+   "nama": "Yanti Sembiring, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Yanti Sembiring & Rekan",
+   "kota": "Kota Mojokerto",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0083 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Yanti%20Sembiring%20%26%20Rekan%2C%20Kota%20Mojokerto%2C%20Jawa%20Timur",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A84",
+   "nama": "Made Rukmana, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Made Rukmana & Partners",
+   "kota": "Kota Pasuruan",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0084 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Made%20Rukmana%20%26%20Partners%2C%20Kota%20Pasuruan%2C%20Jawa%20Timur",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A85",
+   "nama": "Galih Ramadhan, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Galih Ramadhan & Associates",
+   "kota": "Kota Probolinggo",
+   "provinsi": "Jawa Timur",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0085 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Galih%20Ramadhan%20%26%20Associates%2C%20Kota%20Probolinggo%2C%20Jawa%20Timur",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A86",
+   "nama": "Doni Permana, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Doni Permana & Rekan",
+   "kota": "Kota Cilegon",
+   "provinsi": "Banten",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0086 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Doni%20Permana%20%26%20Rekan%2C%20Kota%20Cilegon%2C%20Banten",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A87",
+   "nama": "Dewi Purba, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Dewi Purba & Partners",
+   "kota": "Kota Tangerang Selatan",
+   "provinsi": "Banten",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0087 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Dewi%20Purba%20%26%20Partners%2C%20Kota%20Tangerang%20Selatan%2C%20Banten",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A88",
+   "nama": "Sari Suryana, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Sari Suryana & Associates",
+   "kota": "Kota Bima",
+   "provinsi": "Nusa Tenggara Barat",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0088 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Sari%20Suryana%20%26%20Associates%2C%20Kota%20Bima%2C%20Nusa%20Tenggara%20Barat",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A89",
+   "nama": "Gina Firmansyah, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Gina Firmansyah & Rekan",
+   "kota": "Kota Singkawang",
+   "provinsi": "Kalimantan Barat",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0089 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Gina%20Firmansyah%20%26%20Rekan%2C%20Kota%20Singkawang%2C%20Kalimantan%20Barat",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A90",
+   "nama": "Widya Hidayat, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Widya Hidayat & Partners",
+   "kota": "Kota Banjar Baru",
+   "provinsi": "Kalimantan Selatan",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0090 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Widya%20Hidayat%20%26%20Partners%2C%20Kota%20Banjar%20Baru%2C%20Kalimantan%20Selatan",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A91",
+   "nama": "Lukman Manurung, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Lukman Manurung & Associates",
+   "kota": "Kota Balikpapan",
+   "provinsi": "Kalimantan Timur",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0091 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Lukman%20Manurung%20%26%20Associates%2C%20Kota%20Balikpapan%2C%20Kalimantan%20Timur",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A92",
+   "nama": "Farhan Kusnadi, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Farhan Kusnadi & Rekan",
+   "kota": "Kota Bontang",
+   "provinsi": "Kalimantan Timur",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0092 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Farhan%20Kusnadi%20%26%20Rekan%2C%20Kota%20Bontang%2C%20Kalimantan%20Timur",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A93",
+   "nama": "Bagas Malik, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Bagas Malik & Partners",
+   "kota": "Kota Tarakan",
+   "provinsi": "Kalimantan Utara",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0093 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Bagas%20Malik%20%26%20Partners%2C%20Kota%20Tarakan%2C%20Kalimantan%20Utara",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A94",
+   "nama": "Citra Gunawan, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Citra Gunawan & Associates",
+   "kota": "Kota Bitung",
+   "provinsi": "Sulawesi Utara",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0094 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Citra%20Gunawan%20%26%20Associates%2C%20Kota%20Bitung%2C%20Sulawesi%20Utara",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A95",
+   "nama": "Ratna Sinaga, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Ratna Sinaga & Rekan",
+   "kota": "Kota Kotamobagu",
+   "provinsi": "Sulawesi Utara",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0095 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Ratna%20Sinaga%20%26%20Rekan%2C%20Kota%20Kotamobagu%2C%20Sulawesi%20Utara",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A96",
+   "nama": "Farah Kurniawan, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Farah Kurniawan & Partners",
+   "kota": "Kota Tomohon",
+   "provinsi": "Sulawesi Utara",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0096 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Farah%20Kurniawan%20%26%20Partners%2C%20Kota%20Tomohon%2C%20Sulawesi%20Utara",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A97",
+   "nama": "Vera Daeng, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Vera Daeng & Associates",
+   "kota": "Kota Palopo",
+   "provinsi": "Sulawesi Selatan",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0097 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Vera%20Daeng%20%26%20Associates%2C%20Kota%20Palopo%2C%20Sulawesi%20Selatan",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A98",
+   "nama": "Krisna Setiawan, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Krisna Setiawan & Rekan",
+   "kota": "Kota Parepare",
+   "provinsi": "Sulawesi Selatan",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0098 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Krisna%20Setiawan%20%26%20Rekan%2C%20Kota%20Parepare%2C%20Sulawesi%20Selatan",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A99",
+   "nama": "Dimas Hutagalung, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Dimas Hutagalung & Partners",
+   "kota": "Kota Baubau",
+   "provinsi": "Sulawesi Tenggara",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0099 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Dimas%20Hutagalung%20%26%20Partners%2C%20Kota%20Baubau%2C%20Sulawesi%20Tenggara",
+   "jadwal": "Senin–Sabtu 09.00–17.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A100",
+   "nama": "Arif Wibisono, S.H., LL.M.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Arif Wibisono & Associates",
+   "kota": "Kota Tual",
+   "provinsi": "Maluku",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "sertifikat-ganda"
+   ],
+   "telepon": "0813-0000-0100 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Arif%20Wibisono%20%26%20Associates%2C%20Kota%20Tual%2C%20Maluku",
+   "jadwal": "Senin–Jumat 10.00–18.00, janji temu di luar jam tersebut bisa diatur (dummy)",
+   "tarif": "Konsultasi awal Rp 250.000 – Rp 500.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A101",
+   "nama": "Bella Pallawagau, S.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Bella Pallawagau & Rekan",
+   "kota": "Kota Tidore Kepulauan",
+   "provinsi": "Maluku Utara",
+   "kategori_kasus": [
+    "sengketa-tanah"
+   ],
+   "telepon": "0813-0000-0101 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Bella%20Pallawagau%20%26%20Rekan%2C%20Kota%20Tidore%20Kepulauan%2C%20Maluku%20Utara",
+   "jadwal": "Senin–Jumat 09.00–16.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 400.000 – Rp 750.000/sesi (indikatif/dummy)",
+   "_dummy": true
+  },
+  {
+   "id": "A102",
+   "nama": "Putri Saputra, S.H., M.H.",
+   "jenis": "Advokat (dummy)",
+   "kantor": "Kantor Hukum Putri Saputra & Partners",
+   "kota": "Kota Sorong",
+   "provinsi": "Papua Barat",
+   "kategori_kasus": [
+    "sengketa-tanah",
+    "mafia-tanah"
+   ],
+   "telepon": "0813-0000-0102 (dummy - nomor tidak aktif, jangan dihubungi)",
+   "peta": "https://www.google.com/maps/search/?api=1&query=Kantor%20Hukum%20Putri%20Saputra%20%26%20Partners%2C%20Kota%20Sorong%2C%20Papua%20Barat",
+   "jadwal": "Senin–Jumat 08.30–15.30, Sabtu 09.00–12.00 (waktu setempat, dummy)",
+   "tarif": "Konsultasi awal Rp 600.000 – Rp 1.200.000/sesi (indikatif/dummy)",
    "_dummy": true
   }
  ]

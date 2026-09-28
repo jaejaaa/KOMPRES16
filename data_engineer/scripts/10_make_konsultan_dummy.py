@@ -1,7 +1,11 @@
 """Buat data DUMMY direktori konsultan profesional (Notaris/PPAT + Advokat) untuk fitur "Konsultasi Profesional".
 
-PENTING: seluruh nama, kantor, kontak, lokasi, harga, dan jadwal di sini FIKTIF (bukan orang/kantor sungguhan).
-Tujuannya demo/prototipe, BUKAN pengganti scraping data asli. Scraping data asli tidak dilakukan karena:
+PENTING: seluruh nama, kantor, kontak, harga, dan jadwal di sini FIKTIF (bukan orang/kantor sungguhan). Nama
+kota & provinsi SAJA yang asli (dari data/wilayah/kabupaten_kota.json, sumber Kemendagri/BPS via
+emsifa/api-wilayah-indonesia; file itu berisi 514 kabupaten/kota, tapi cakupan skrip ini SENGAJA dibatasi ke
+98 Kota saja, Kabupaten tidak diikutkan) -- itu supaya dropdown lokasi bertingkat di FE realistis, BUKAN klaim
+ada konsultan sungguhan di kota itu. Tujuannya demo/prototipe, BUKAN pengganti scraping data asli. Scraping
+data asli tidak dilakukan karena:
   - Sumber resmi Notaris (ini.id, Mitra ATR/BPN) berbasis cari-per-nama, bukan daftar yang bisa diambil sekaligus.
   - Organisasi advokat terpecah (PERADI/PERADIN/KAI dll), tidak ada satu sumber otoritatif.
   - Data profesi + kontak orang sungguhan yang dipublikasikan ulang tanpa izin berisiko kena UU 27/2022 PDP
@@ -164,19 +168,109 @@ def _entri(i, prefix, jenis, kode_telepon, tarif_templates, row):
             "kota": kota, "provinsi": provinsi, "kategori_kasus": kategori,
             "telepon": telepon, "peta": peta, "jadwal": jadwal, "tarif": tarif, "_dummy": True}
 
+
+# --- Perluasan ke SEMUA 514 kabupaten/kota resmi (Kemendagri/BPS, via data/wilayah/kabupaten_kota.json) ---
+# NOTARIS/ADVOKAT di atas cuma isi 1 kota per provinsi (ibu kota). Supaya tiap kabupaten/kota PUNYA
+# setidaknya 1 notaris + 1 advokat (untuk dropdown lokasi bertingkat), sisanya di-generate dari pool nama
+# di bawah -- jelas dummy (lihat _PERINGATAN), bukan usaha menyamar jadi data asli.
+NAMA_DEPAN = [
+    "Ahmad", "Budi", "Chandra", "Dedi", "Eko", "Fajar", "Gilang", "Hadi", "Iwan", "Joko",
+    "Krisna", "Lukman", "Made", "Nugroho", "Oscar", "Putu", "Rian", "Surya", "Taufik", "Umar",
+    "Wayan", "Zainal", "Bayu", "Dimas", "Farhan", "Galih", "Hendra", "Indra", "Kevin", "Nyoman",
+    "Pandu", "Rizki", "Sandi", "Teguh", "Wahyu", "Yudha", "Arif", "Bagas", "Doni", "Erlangga",
+    "Firman", "Guntur", "Hasan", "Ivan", "Kurnia", "Lutfi", "Mardi", "Naufal",
+    "Ayu", "Bella", "Citra", "Dewi", "Eka", "Fitri", "Gita", "Hana", "Indah", "Kartika",
+    "Laila", "Maya", "Nadia", "Oktavia", "Putri", "Ratna", "Sari", "Tia", "Utami", "Vina",
+    "Wulan", "Yuni", "Zahra", "Anisa", "Bunga", "Clara", "Diah", "Elsa", "Farah", "Gina",
+    "Hesti", "Ika", "Julia", "Kirana", "Lestari", "Mira", "Nia", "Puspa", "Rina", "Sinta",
+    "Tari", "Vera", "Widya", "Yanti",
+]
+NAMA_BELAKANG = [
+    "Wijaya", "Santoso", "Kusuma", "Pratama", "Nugraha", "Saputra", "Setiawan", "Gunawan", "Hidayat",
+    "Permana", "Suryanto", "Halim", "Wibowo", "Lubis", "Siregar", "Nasution", "Harahap", "Simatupang",
+    "Sitorus", "Panggabean", "Marbun", "Situmorang", "Tampubolon", "Hutagalung", "Sinaga", "Manurung",
+    "Purba", "Sembiring", "Ginting", "Tarigan", "Bangun", "Siagian", "Simamora", "Sudrajat", "Prasetyo",
+    "Wirawan", "Mulyono", "Rahardjo", "Susanto", "Handoko", "Wibisono", "Kurniawan", "Kusnadi", "Suryana",
+    "Rukmana", "Wardana", "Puja", "Sahetapy", "Latumahina", "Pattiasina", "Hehanussa", "Rumbewas",
+    "Mansim", "Kapisa", "Soamole", "Katili", "Massepe", "Pallawagau", "Daeng", "Malik", "Firmansyah",
+    "Ramadhan", "Anggraini", "Marlina", "Kristanto", "Permatasari", "Nurjannah", "Ratnasari", "Zulkarnain",
+]
+SUFIKS_KANTOR_ADVOKAT = ["Rekan", "Partners", "Associates"]
+
+
+def _generate_untuk_kota(kota, provinsi, indeks_global):
+    """1 baris notaris + 1 baris advokat untuk 1 kabupaten/kota, dari pool nama (deterministik, bukan acak)."""
+    dpn = NAMA_DEPAN[(indeks_global * 7) % len(NAMA_DEPAN)]
+    blk = NAMA_BELAKANG[(indeks_global * 11) % len(NAMA_BELAKANG)]
+    nama = f"{dpn} {blk}"
+    kat_notaris = ["balik-nama"]
+    extra_n = ["waris", "cek-sertifikat", "sertifikat-ganda", "hak-tanggungan"][indeks_global % 4]
+    if indeks_global % 3 != 0: kat_notaris.append(extra_n)  # sebagian kecil cuma balik-nama, mayoritas 2 kategori
+    baris_notaris = (nama, "S.H., M.Kn.", f"Kantor Notaris & PPAT {nama}", kota, provinsi, kat_notaris)
+
+    dpn2 = NAMA_DEPAN[(indeks_global * 13 + 5) % len(NAMA_DEPAN)]
+    blk2 = NAMA_BELAKANG[(indeks_global * 17 + 3) % len(NAMA_BELAKANG)]
+    nama2 = f"{dpn2} {blk2}"
+    sufiks = SUFIKS_KANTOR_ADVOKAT[indeks_global % len(SUFIKS_KANTOR_ADVOKAT)]
+    kat_advokat = ["sengketa-tanah"]
+    extra_a = ["waris", "mafia-tanah", "sertifikat-ganda"][indeks_global % 3]
+    if indeks_global % 3 != 0: kat_advokat.append(extra_a)
+    gelar_advokat = ["S.H.", "S.H., M.H.", "S.H., LL.M."][indeks_global % 3]
+    baris_advokat = (nama2, gelar_advokat, f"Kantor Hukum {nama2} & {sufiks}", kota, provinsi, kat_advokat)
+    return baris_notaris, baris_advokat
+
+
+def _normalisasi_kota_curated(row, wilayah):
+    """Cocokkan kota hasil tulisan tangan (mis. 'Bandung', 'Palangkaraya') ke nama Kota resmi ('Kota Bandung',
+    'Kota Palangka Raya'). Cakupan sengaja dibatasi ke level Kota saja (bukan Kabupaten) -- pencocokan tanpa
+    spasi supaya ejaan gabung ('Palangkaraya') tetap ketemu nama resmi berspasi ('Palangka Raya'). Kalau tidak
+    ketemu (mis. 'Singaraja', 'Tanjung Selor' -- ibu kota kabupaten, bukan Kota tersendiri), biarkan apa adanya."""
+    nama, gelar, kantor, kota, provinsi, kategori = row
+    resmi = wilayah.get(provinsi, [])
+    tanpa_spasi = {r.replace(" ", "").lower(): r for r in resmi}
+    cocok = tanpa_spasi.get(f"kota{kota}".replace(" ", "").lower())
+    if cocok:
+        return (nama, gelar, kantor, cocok, provinsi, kategori)
+    return row
+
+
+def _muat_wilayah():
+    p = Path(__file__).resolve().parent.parent / "data/wilayah/kabupaten_kota.json"
+    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    peringatan = ("SELURUH DATA DI FILE INI FIKTIF (nama, kantor, kota, telepon, lokasi, tarif per orang, dan "
-                  "jadwal dipasangkan/dikarang untuk demo). BUKAN daftar Notaris/PPAT/Advokat sungguhan. Nomor "
-                  "telepon TIDAK AKTIF (pola berurutan, bukan nomor asli). Tautan peta hanya PENCARIAN nama kantor "
-                  "di Google Maps (bukan lokasi terverifikasi). Tarif (field \"tarif\") bersifat INDIKATIF per "
-                  "orang, diputar dari 3 tingkatan, BUKAN tarif resmi maupun cerminan kualitas layanan sungguhan. "
-                  "Jangan ditampilkan ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk "
-                  "menghubungi atau mendatangi siapa pun.")
+    wilayah = _muat_wilayah()
+
+    notaris_rows = [_normalisasi_kota_curated(r, wilayah) for r in NOTARIS]
+    advokat_rows = [_normalisasi_kota_curated(r, wilayah) for r in ADVOKAT]
+    kota_tercakup = {(r[3], r[4]) for r in notaris_rows} | {(r[3], r[4]) for r in advokat_rows}
+
+    idx = 0
+    for provinsi, daftar_kota in wilayah.items():
+        for kota in daftar_kota:
+            if not kota.startswith("Kota "):
+                continue  # cakupan sengaja dibatasi ke level Kota, Kabupaten tidak diikutkan
+            if (kota, provinsi) in kota_tercakup:
+                continue
+            idx += 1
+            n, a = _generate_untuk_kota(kota, provinsi, idx)
+            notaris_rows.append(n)
+            advokat_rows.append(a)
+    peringatan = ("SELURUH NAMA, KANTOR, TELEPON, TARIF, DAN JADWAL DI FILE INI FIKTIF (dipasangkan/dikarang "
+                  "untuk demo), BUKAN daftar Notaris/PPAT/Advokat sungguhan -- HANYA nama kabupaten/kota dan "
+                  "provinsi yang asli (data wilayah Kemendagri/BPS, dipakai supaya dropdown lokasi realistis), "
+                  "bukan klaim ada konsultan sungguhan di kota tersebut. Nomor telepon TIDAK AKTIF (pola "
+                  "berurutan, bukan nomor asli). Tautan peta hanya PENCARIAN nama kantor di Google Maps (bukan "
+                  "lokasi terverifikasi). Tarif (field \"tarif\") bersifat INDIKATIF per orang, diputar dari 3 "
+                  "tingkatan, BUKAN tarif resmi maupun cerminan kualitas layanan sungguhan. Jangan ditampilkan "
+                  "ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk menghubungi atau "
+                  "mendatangi siapa pun.")
     (OUT / "kategori_kasus.json").write_text(json.dumps(
         {"_PERINGATAN": peringatan, "kategori_kasus": KATEGORI_KASUS}, ensure_ascii=False, indent=1), encoding="utf-8")
-    notaris = [_entri(i, "N", "Notaris/PPAT (dummy)", "0812", TARIF_NOTARIS, r) for i, r in enumerate(NOTARIS, 1)]
-    advokat = [_entri(i, "A", "Advokat (dummy)", "0813", TARIF_ADVOKAT, r) for i, r in enumerate(ADVOKAT, 1)]
+    notaris = [_entri(i, "N", "Notaris/PPAT (dummy)", "0812", TARIF_NOTARIS, r) for i, r in enumerate(notaris_rows, 1)]
+    advokat = [_entri(i, "A", "Advokat (dummy)", "0813", TARIF_ADVOKAT, r) for i, r in enumerate(advokat_rows, 1)]
     (OUT / "notaris_ppat_dummy.json").write_text(json.dumps({"_PERINGATAN": peringatan, "konsultan": notaris}, ensure_ascii=False, indent=1), encoding="utf-8")
     (OUT / "advokat_dummy.json").write_text(json.dumps({"_PERINGATAN": peringatan, "konsultan": advokat}, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"Notaris/PPAT: {len(notaris)} entri, {len(set(k['provinsi'] for k in notaris))} provinsi")
