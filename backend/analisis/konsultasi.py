@@ -2,8 +2,11 @@
 
 Pemetaan ini KEPUTUSAN PRODUK sederhana yang kami buat sendiri (bukan aturan hukum baku) — silakan
 disesuaikan bersama tim/Data Engineer kalau ada kategori kasus yang lebih pas. Kategori yang tidak
-disebut di sini (mis. "Pajak dan biaya tidak jelas", "Waktu pelaksanaan tidak jelas") sengaja tidak
-disarankan konsultan: risikonya perlu dinegosiasikan ke pihak lawan, bukan kasus untuk notaris/advokat.
+disebut di sini -- "Uang muka (DP) hangus", "Pajak dan biaya tidak jelas", "Waktu pelaksanaan tidak
+jelas" -- sengaja tidak disarankan konsultan: ketiganya soal klausul kontrak yang belum ditandatangani,
+perlu DINEGOSIASIKAN ke pihak lawan sebelum tanda tangan, bukan kasus konsultasi notaris/advokat.
+Tidak ada kategori_kasus yang pas untuk "review draf kontrak sebelum tanda tangan" saat ini; kalau
+Data Engineer menambah kategori itu nanti, ketiganya bisa dipetakan ke situ.
 
 Hanya risiko level "high" yang disarankan konsultasi (paling butuh pendapat profesional); level medium/low
 biasanya cukup diperhatikan/dinegosiasikan sendiri sebelum tanda tangan.
@@ -13,7 +16,9 @@ from .taksonomi import NAMA_KATEGORI
 # nama kategori -> id kategori_kasus (lihat data_engineer/scripts/konsultan.py -> kategori_kasus())
 PEMETAAN_KATEGORI = {
     "Ketidakjelasan objek tanah": "cek-sertifikat",
-    "Status hak dan beban atas tanah tidak dijamin": "hak-tanggungan",
+    # sengaja BUKAN "hak-tanggungan" (cuma Notaris): deskripsi K3 mencakup sengketa/sitaan yang
+    # bisa butuh Advokat, bukan cuma cek administratif. "sertifikat-ganda" punya jalur keduanya. (usul Yudis)
+    "Status hak dan beban atas tanah tidak dijamin": "sertifikat-ganda",
     "Peralihan hak tanpa akta PPAT": "balik-nama",
     "Klausul denda/syarat berat sebelah": "sengketa-tanah",
     "Subjek hak tidak memenuhi syarat": "sengketa-tanah",
