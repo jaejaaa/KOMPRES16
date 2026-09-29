@@ -1,7 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { cariKonsultan, getKategoriKasus, getLokasi } from "@/lib/api";
+import { petaFotoKonsultan } from "@/lib/foto-konsultan";
 import { PROVINSI } from "@/lib/provinsi";
 import type { HasilKonsultan, KategoriKasus, Konsultan, Profesi } from "@/types/api";
 import DetailKonsultan from "./DetailKonsultan";
@@ -10,10 +12,20 @@ import { btn, container, Notice, Panel } from "./ui";
 
 const PROFESI: Record<Profesi, string> = { notaris_ppat: "Notaris/PPAT", advokat: "Advokat" };
 
-type Pilih = (k: Konsultan, profesi: Profesi) => void;
+type Pilih = (k: Konsultan, profesi: Profesi, foto?: string) => void;
 
 // Seluruh kartu bisa diklik untuk membuka popup detail
-function KartuKonsultan({ k, namaKategori, onPilih }: { k: Konsultan; namaKategori: (id: string) => string; onPilih: () => void }) {
+function KartuKonsultan({
+  k,
+  foto,
+  namaKategori,
+  onPilih,
+}: {
+  k: Konsultan;
+  foto?: string;
+  namaKategori: (id: string) => string;
+  onPilih: () => void;
+}) {
   const inisial = k.nama.replace(/^(Dr\.|H\.|Hj\.)\s*/i, "").charAt(0).toUpperCase();
   return (
     <button
@@ -23,9 +35,23 @@ function KartuKonsultan({ k, namaKategori, onPilih }: { k: Konsultan; namaKatego
       className="lift group flex h-full w-full flex-col rounded-3xl border border-line bg-surface p-5 text-left shadow-soft hover:border-primary/40"
     >
       <div className="flex items-start gap-4">
-        <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-lg font-bold text-primary" aria-hidden>
-          {inisial}
-        </span>
+        {foto ? (
+          // Foto yang sama dengan banner popup detail, di bingkai marun kecil (diperbesar ke kepala-bahu)
+          <span className="relative size-14 shrink-0 overflow-hidden rounded-2xl bg-[#650000]" aria-hidden>
+            <Image
+              src={foto}
+              alt=""
+              fill
+              sizes="56px"
+              unoptimized={foto.startsWith("http")}
+              className="origin-top scale-[1.35] object-cover object-top"
+            />
+          </span>
+        ) : (
+          <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-primary-soft text-lg font-bold text-primary" aria-hidden>
+            {inisial}
+          </span>
+        )}
         <div className="min-w-0 flex-1">
           <h3 className="font-bold text-ink">{k.nama}</h3>
           <p className="mt-1 flex items-center gap-1.5 text-sm text-ink-soft">
@@ -126,6 +152,7 @@ function Bagian({
   const [posisi, setPosisi] = useState({ kunci: resetKey, page: 1 });
   const page = posisi.kunci === resetKey ? posisi.page : 1;
   const setPage = (p: number) => setPosisi({ kunci: resetKey, page: p });
+  const peta = petaFotoKonsultan(daftar);
   const totalPages = Math.max(1, Math.ceil(daftar.length / PER_PAGE));
   const halaman = daftar.slice((page - 1) * PER_PAGE, page * PER_PAGE);
   const lokasi = kota ? `${kota}, ${provinsi}` : provinsi;
@@ -139,7 +166,7 @@ function Bagian({
           <ul className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-2">
             {halaman.map((k, i) => (
               <li key={k.id} className="fade-up" style={{ animationDelay: `${i * 60}ms` }}>
-                <KartuKonsultan k={k} namaKategori={namaKategori} onPilih={() => onPilih(k, profesi)} />
+                <KartuKonsultan k={k} foto={peta.get(k.id)} namaKategori={namaKategori} onPilih={() => onPilih(k, profesi, peta.get(k.id))} />
               </li>
             ))}
           </ul>
@@ -163,8 +190,8 @@ export default function DirektoriKonsultan({ kategoriAwal }: { kategoriAwal?: st
   const [lokasi, setLokasi] = useState<Record<string, string[]>>({});
   const [ulang, setUlang] = useState(0);
   const [hasil, setHasil] = useState<{ kunci: string; data?: HasilKonsultan; error?: string } | null>(null);
-  const [dipilih, setDipilih] = useState<{ k: Konsultan; profesi: Profesi } | null>(null);
-  const pilih: Pilih = (k, profesi) => setDipilih({ k, profesi });
+  const [dipilih, setDipilih] = useState<{ k: Konsultan; profesi: Profesi; foto?: string } | null>(null);
+  const pilih: Pilih = (k, profesi, foto) => setDipilih({ k, profesi, foto });
   const kunci = `${kategori}|${provinsi}|${kota}|${ulang}`;
   const memuat = !!kategori && hasil?.kunci !== kunci;
   const kotaTersedia = provinsi ? lokasi[provinsi] ?? [] : [];
@@ -317,6 +344,7 @@ export default function DirektoriKonsultan({ kategoriAwal }: { kategoriAwal?: st
 
       <DetailKonsultan
         konsultan={dipilih?.k ?? null}
+        foto={dipilih?.foto}
         profesi={dipilih ? PROFESI[dipilih.profesi] : ""}
         namaKategori={namaKategori}
         onClose={() => setDipilih(null)}

@@ -47,7 +47,7 @@ export default function Home() {
     // overflow-x-clip: kartu timeline yang menunggu meluncur masuk dari samping tidak boleh membuat halaman bisa digeser ke samping di HP
     <main className="overflow-x-clip">
       {/* Pembuka: satu layar penuh, maroon dengan foto patung keadilan di latar */}
-      <section className={`relative overflow-hidden bg-[#650000] ${NAV_OFFSET} flex min-h-svh flex-col text-white`}>
+      <section className={`latar-gelap relative overflow-hidden bg-[#650000] ${NAV_OFFSET} flex min-h-svh flex-col text-white`}>
         <HeroBackdrop />
         <div className={`${container} relative flex flex-1 items-center py-16`}>
           <div className="fade-up max-w-3xl">

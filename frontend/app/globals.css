@@ -48,11 +48,15 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Fokus keyboard: emas + cincin gelap, terlihat di latar terang maupun maroon */
+/* Fokus keyboard: garis marun tipis (tanpa emas/hitam, permintaan user). Di atas latar marun
+   (pembuka beranda, banner halaman, footer) garisnya putih supaya tetap terlihat. */
 :focus-visible {
-  outline: 3px solid var(--color-accent);
-  outline-offset: 0;
-  box-shadow: 0 0 0 6px var(--color-ink);
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+.hero-bg :focus-visible,
+.latar-gelap :focus-visible {
+  outline-color: #fff;
 }
 
 /* Kolom ketik yang bingkai luarnya sudah menyala saat fokus (focus-within), mis. kolom chat:

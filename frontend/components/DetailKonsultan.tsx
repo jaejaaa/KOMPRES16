@@ -27,11 +27,13 @@ function Baris({ icon, label, children }: { icon: IconName; label: string; child
 // Popup detail satu Notaris/PPAT atau advokat. Kompatibel dengan data lama (kontak) dan baru (telepon, peta, jadwal, tarif).
 export default function DetailKonsultan({
   konsultan: k,
+  foto: fotoKartu,
   profesi,
   namaKategori,
   onClose,
 }: {
   konsultan: Konsultan | null;
+  foto?: string; // foto yang sama dengan kartu yang diklik
   profesi: string;
   namaKategori: (id: string) => string;
   onClose: () => void;
@@ -53,7 +55,7 @@ export default function DetailKonsultan({
     .slice(0, 2)
     .map((kata) => kata.charAt(0).toUpperCase())
     .join("");
-  const foto = k ? fotoKonsultan(k) : undefined;
+  const foto = fotoKartu ?? (k ? fotoKonsultan(k) : undefined);
   const telepon = bersih(k?.telepon);
   const jadwal = bersih(k?.jadwal);
   const tarif = bersih(k?.tarif);

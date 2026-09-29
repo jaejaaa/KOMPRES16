@@ -3,9 +3,10 @@ import type { Konsultan } from "@/types/api";
 // Foto banner detail konsultan. Data dummy belum punya field `foto`, jadi foto dipilih dari public/konsultan
 // sesuai nama depan, bergiliran berdasarkan nomor id. Kalau data sudah membawa `foto`, itu yang dipakai.
 // Nama yang tidak ada di daftar di bawah tetap memakai lingkaran inisial.
+// 6 foto per kelompok: dengan giliran berdasarkan nomor id, satu halaman direktori (8 kartu) jarang berisi wajah kembar
 const FOTO = {
-  pria: ["/konsultan/notaris1.png", "/konsultan/notaris2.png", "/konsultan/notaris5.png"],
-  wanita: ["/konsultan/notaris3.png", "/konsultan/notaris4.png", "/konsultan/notaris6.png"],
+  pria: [1, 2, 5, 10, 11, 12].map((n) => `/konsultan/notaris${n}.png`),
+  wanita: [3, 4, 6, 7, 8, 9].map((n) => `/konsultan/notaris${n}.png`),
 };
 
 // Kelompok nama depan mengikuti NAMA_DEPAN di data_engineer/scripts/10_make_konsultan_dummy.py,
@@ -35,12 +36,36 @@ const NAMA_LENGKAP: Record<string, keyof typeof FOTO> = {
   "Andi Nurul Fadillah": "wanita",
 };
 
-export function fotoKonsultan(k: Konsultan): string | undefined {
-  if (k.foto) return k.foto;
+function kelompokFoto(k: Konsultan): keyof typeof FOTO | undefined {
   const nama = k.nama.split(",")[0].replace(/^((Dr|H|Hj|Prof)\.\s*)+/i, "").trim();
   const depan = nama.split(/\s+/)[0];
-  const kelompok = NAMA_LENGKAP[nama] ?? (depan === "Andi" ? undefined : PRIA.has(depan) ? "pria" : WANITA.has(depan) ? "wanita" : undefined);
+  return NAMA_LENGKAP[nama] ?? (depan === "Andi" ? undefined : PRIA.has(depan) ? "pria" : WANITA.has(depan) ? "wanita" : undefined);
+}
+
+// Foto satu konsultan tanpa konteks daftar (bergiliran menurut nomor id)
+export function fotoKonsultan(k: Konsultan): string | undefined {
+  if (k.foto) return k.foto;
+  const kelompok = kelompokFoto(k);
   if (!kelompok) return undefined;
   const daftar = FOTO[kelompok];
   return daftar[(parseInt(k.id.replace(/\D/g, ""), 10) || 0) % daftar.length];
+}
+
+// Foto untuk satu daftar yang sedang ditampilkan: dibagi berurutan per kelompok (pria/wanita) mengikuti urutan
+// daftar, jadi kartu yang berdekatan (satu halaman berisi 8) hampir tidak pernah berwajah sama.
+// Giliran menurut nomor id saja masih menghasilkan wajah kembar karena id berselisih 6 bisa sekelompok.
+export function petaFotoKonsultan(daftar: Konsultan[]): Map<string, string> {
+  const hitung = { pria: 0, wanita: 0 };
+  const peta = new Map<string, string>();
+  for (const k of daftar) {
+    if (k.foto) {
+      peta.set(k.id, k.foto);
+      continue;
+    }
+    const kelompok = kelompokFoto(k);
+    if (!kelompok) continue;
+    const foto = FOTO[kelompok];
+    peta.set(k.id, foto[hitung[kelompok]++ % foto.length]);
+  }
+  return peta;
 }
