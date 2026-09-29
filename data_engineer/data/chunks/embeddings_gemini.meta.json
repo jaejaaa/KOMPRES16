@@ -1,8 +1,8 @@
 {
- "provider": "gemini:gemini-embedding-2",
+ "provider": "gemini",
  "model": "gemini-embedding-2@768",
- "n": 1452,
+ "n": 1471,
  "dim": 768,
- "fingerprint": "742db7b9ae8ba7bf8d72e30f31e1352c8acf6919",
- "dibuat": "2026-09-26 14:10"
+ "fingerprint": "7af6a73ff9086b2cac25c23e6807721377e18745",
+ "dibuat": "2026-09-29 18:33"
 }
