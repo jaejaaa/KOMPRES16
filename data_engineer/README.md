@@ -20,8 +20,8 @@ Bagian dari [KOMPRES 16](../README.md). Tugas: menyiapkan "otak referensi" chatb
 | `docs/` | `PROPOSAL_DATASET_METODE.md` (draf proposal + daftar pustaka), `DATASET_PELENGKAP.md`, `FIRESTORE_SETUP.md` (opsional) |
 
 ## Sumber regulasi
-UUPA (UU 5/1960), PP 24/1997, PP 18/2021, UU 21/1997 (BPHTB), Permen ATR/BPN 3/2023, KUHPerdata Buku II (hal. 90–189 dari PDF 4 Buku), UU 2/2012, UU 27/2022, UU 28/2009 (hanya BPHTB, Pasal 85–93).
-- Kolom `status` per chunk: UU 21/1997 = `dicabut` (digantikan UU 28/2009; disembunyikan default), PP 24/1997 = `diubah sebagian` (PP 18/2021), sisanya `berlaku`. Status ini per dokumen, bukan per Pasal.
+UUPA (UU 5/1960), PP 24/1997, PP 18/2021, UU 21/1997 (BPHTB), Permen ATR/BPN 3/2023, KUHPerdata Buku II (hal. 90–189 dari PDF 4 Buku), UU 2/2012, UU 27/2022, UU 28/2009 (hanya BPHTB, Pasal 85–93; dicabut, lihat status), UU 1/2022 (hanya BPHTB, Pasal 44–49 -- pengganti UU 28/2009 Ps 85–93).
+- Kolom `status` per chunk: UU 21/1997 = `dicabut` (digantikan UU 28/2009; disembunyikan default), UU 28/2009 = `dicabut` (digantikan UU 1/2022 tentang HKPD Ps 44–49, dicek ke JDIH BPK), PP 24/1997 = `diubah sebagian` (PP 18/2021), sisanya `berlaku`. Status ini per dokumen, bukan per Pasal.
 - Tidak ada Pasal yang hilang. Yang gagal terbaca OCR ditambal manual di `data/manual/`: PP 18/2021 Ps 66 & 85 · UU 21/1997 Ps 4, 9, 13, 24 · KUHPerdata Ps 1162 (sumber tertulis tanpa kata "Pasal").
 
 ## Menjalankan
