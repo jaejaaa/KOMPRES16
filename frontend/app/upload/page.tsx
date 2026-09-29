@@ -18,7 +18,7 @@ const STATUS: Record<DocStatus, { label: string; className: string }> = {
 };
 
 // Pesan yang bergantian selama dokumen diproses (hanya penanda, bukan progres sebenarnya)
-const TAHAP = ["Mengunggah dokumen", "Membaca teks dokumen", "Mencocokkan pasal dengan peraturan", "Menyusun hasil pemeriksaan"];
+const TAHAP = ["Mengunggah dokumen", "Membaca teks dokumen", "Membandingkan pasal dengan peraturan", "Menyusun catatan pasal"];
 
 const SYARAT = [
   "PDF digital, bukan hasil scan atau foto",
@@ -46,7 +46,7 @@ function RiwayatPemeriksaan({ uid }: { uid: string | null }) {
   if (!docs?.length) return null;
 
   return (
-    <Panel title="Riwayat pemeriksaan" icon="clock" className="mt-6">
+    <Panel title="Riwayat telaah" icon="clock" className="mt-6">
       <ul className="space-y-2">
         {docs.map((d) => {
           const s = STATUS[d.status] ?? STATUS.pending;
@@ -120,9 +120,9 @@ export default function UploadPage() {
       <PageHeader
         foto="lup"
         icon="doc"
-        crumbs={[{ href: "/", label: "Beranda" }, { label: "Cek Dokumen" }]}
-        title="Pemeriksaan Dokumen/Peraturan"
-        desc="Unggah perjanjian jual beli, AJB, atau dokumen tanah lainnya. Pasal yang perlu diwaspadai akan ditandai beserta alasannya."
+        crumbs={[{ href: "/", label: "Beranda" }, { label: "Telaah Dokumen" }]}
+        title="Telaah Dokumen/Peraturan"
+        desc="Unggah perjanjian jual beli, AJB, atau dokumen tanah lainnya. Pasal yang rancu atau perlu dicek ulang akan ditandai beserta alasannya."
       />
       <StepBar aktif={loading ? 1 : 0} />
 
@@ -162,7 +162,7 @@ export default function UploadPage() {
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-bold text-ink">{file.name}</p>
                   <p className="mt-0.5 flex items-center gap-1.5 text-sm text-risk-low-text">
-                    <Icon name="check" className="size-4" /> Siap diperiksa · {(file.size / 1024 / 1024).toFixed(2)} MB
+                    <Icon name="check" className="size-4" /> Siap ditelaah · {(file.size / 1024 / 1024).toFixed(2)} MB
                   </p>
                 </div>
                 <button
@@ -217,7 +217,7 @@ export default function UploadPage() {
             {akun.siap && !akun.masuk && (
               <div className="mt-5">
                 <TamuBanner
-                  pesan="Riwayat pemeriksaan hanya tersimpan selama tab ini terbuka."
+                  pesan="Riwayat telaah hanya tersimpan selama tab ini terbuka."
                   onMasuk={() => setLogin(true)}
                 />
               </div>
@@ -226,11 +226,11 @@ export default function UploadPage() {
             <button type="button" onClick={submit} disabled={!file || loading} className={`${btn.primary} mt-3 w-full py-4 text-base`}>
               {loading ? (
                 <>
-                  <Spinner /> Menganalisis dokumen, tunggu sebentar...
+                  <Spinner /> Menelaah dokumen, tunggu sebentar...
                 </>
               ) : (
                 <>
-                  Periksa Dokumen <Icon name="arrow" className="size-5" />
+                  Telaah Dokumen <Icon name="arrow" className="size-5" />
                 </>
               )}
             </button>
@@ -250,10 +250,12 @@ export default function UploadPage() {
               </ul>
             </Panel>
             <Notice title="Privasi dokumen">
-              File PDF tidak disimpan. Teks dokumen hanya dipakai untuk analisis dan tanya jawab di sesi Anda.
+              File PDF tidak disimpan. Teks dokumen hanya dipakai untuk telaah dan tanya jawab di sesi Anda. Anda boleh
+              menyamarkan nama, NIK, atau nomor sertifikat sebelum mengunggah.
             </Notice>
             <Notice tone="warning" title="Bukan nasihat hukum">
-              Hasil pemeriksaan adalah bantuan awal. Konsultasikan keputusan transaksi dengan PPAT atau notaris.
+              Hasil telaah adalah bantuan awal, bukan penilaian keaslian atau keabsahan dokumen. Konsultasikan keputusan
+              transaksi dengan PPAT atau notaris.
             </Notice>
           </aside>
         </div>

@@ -1,7 +1,7 @@
 import Icon from "./Icon";
 
 // Kartu kecil "mode tamu" di atas kolom ketik / tombol utama.
-// onTutup diisi = bisa ditutup dengan tanda silang (chat); dikosongkan = peringatan tetap (cek dokumen).
+// onTutup diisi = bisa ditutup dengan tanda silang (chat); dikosongkan = peringatan tetap (telaah dokumen).
 export default function TamuBanner({ pesan, onMasuk, onTutup }: { pesan: string; onMasuk: () => void; onTutup?: () => void }) {
   return (
     <div className={`fade-up relative flex items-center gap-3 rounded-2xl border border-line bg-bg py-3 pl-4 text-sm ${onTutup ? "pr-10" : "pr-4"}`} role="note">

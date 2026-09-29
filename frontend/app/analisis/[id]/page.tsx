@@ -19,9 +19,9 @@ function Kerangka({ aktif, children }: { aktif: 1 | 2; children: React.ReactNode
     <main>
       <PageHeader
         icon="list"
-        crumbs={[{ href: "/", label: "Beranda" }, { href: "/upload", label: "Cek Dokumen" }, { label: "Hasil Pemeriksaan" }]}
-        title="Hasil Pemeriksaan Dokumen"
-        desc="Pasal diurutkan dari risiko tertinggi. Buka kutipan untuk membaca teks asli pasalnya."
+        crumbs={[{ href: "/", label: "Beranda" }, { href: "/upload", label: "Telaah Dokumen" }, { label: "Hasil Telaah" }]}
+        title="Hasil Telaah Dokumen"
+        desc="Pasal diurutkan dari yang paling perlu dicek ulang. Buka kutipan untuk membaca teks asli pasalnya."
       />
       <StepBar aktif={aktif} />
       <div className={`${container} pt-6`}>{children}</div>
@@ -75,7 +75,7 @@ export default function AnalisisPage() {
   if (error) return <Masalah judul="Hasil tidak dapat dimuat" pesan={error} />;
 
   if (data?.status === "failed")
-    return <Masalah judul="Analisis gagal" pesan={data.error ?? "Dokumen tidak dapat dianalisis."} />;
+    return <Masalah judul="Telaah gagal" pesan={data.error ?? "Dokumen tidak dapat ditelaah."} />;
 
   if (!data || data.status !== "done")
     return (
@@ -86,7 +86,7 @@ export default function AnalisisPage() {
               <Spinner className="size-7" />
             </span>
             <div>
-              <p className="text-lg font-bold text-ink">Dokumen sedang dianalisis</p>
+              <p className="text-lg font-bold text-ink">Dokumen sedang ditelaah</p>
               <p className="text-sm text-ink-soft">Biasanya kurang dari 30 detik. Halaman ini akan terisi otomatis.</p>
             </div>
           </div>
@@ -148,16 +148,16 @@ export default function AnalisisPage() {
             </div>
             <div className="md:col-span-2">
               {tinggi > 0 ? (
-                <Notice tone="danger" title={`Ditemukan ${tinggi} pasal berisiko tinggi`}>
-                  Sebaiknya bahas dengan penjual dan PPAT sebelum tanda tangan atau membayar.
+                <Notice tone="danger" title={`Ada ${tinggi} pasal yang perlu dicek ulang`}>
+                  Tanyakan maksud pasal tersebut ke penjual dan PPAT/notaris sebelum tanda tangan atau membayar.
                 </Notice>
               ) : sedang > 0 ? (
-                <Notice tone="warning" title={`Ada ${sedang} pasal yang perlu dicek`}>
+                <Notice tone="warning" title={`Ada ${sedang} pasal yang perlu diperhatikan`}>
                   Pastikan maksud pasal tersebut jelas sebelum tanda tangan.
                 </Notice>
               ) : (
-                <Notice tone="success" title="Tidak ditemukan pasal berisiko tinggi">
-                  Tetap periksa keaslian sertifikat sebelum bertransaksi.
+                <Notice tone="success" title="Tidak ada pasal yang perlu dicek ulang">
+                  Catatan ini tidak menjamin dokumen asli atau sah. Tetap cocokkan sertifikat ke Kantor Pertanahan sebelum bertransaksi.
                 </Notice>
               )}
             </div>
@@ -200,9 +200,9 @@ export default function AnalisisPage() {
             <KonsultasiDokumen documentId={data.document_id} />
             <ul className="mt-4 space-y-1">
               {[
-                { href: "/panduan/cek-keaslian", icon: "book" as const, label: "Cek keaslian sertifikat" },
+                { href: "/panduan/cek-keaslian", icon: "book" as const, label: "Cek sertifikat ke Kantor Pertanahan" },
                 { href: "/panduan/balik-nama", icon: "book" as const, label: "Prosedur balik nama" },
-                { href: "/upload", icon: "upload" as const, label: "Periksa dokumen lain" },
+                { href: "/upload", icon: "upload" as const, label: "Telaah dokumen lain" },
               ].map((l) => (
                 <li key={l.href}>
                   <Link href={l.href} className="group flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-primary-soft hover:text-primary">
@@ -221,17 +221,17 @@ export default function AnalisisPage() {
 
           <div className="rounded-3xl border border-line bg-surface p-5 text-sm shadow-soft">
             <div className="flex justify-between gap-4">
-              <span className="text-ink-soft">Nomor pemeriksaan</span>
+              <span className="text-ink-soft">Nomor telaah</span>
               <span className="font-mono font-bold uppercase text-ink">{data.document_id.slice(0, 8)}</span>
             </div>
             <div className="mt-2 flex items-center justify-between gap-4">
-              <span className="text-ink-soft">Tingkat risiko tertinggi</span>
+              <span className="text-ink-soft">Catatan paling penting</span>
               <RiskBadge level={tinggi ? "high" : sedang ? "medium" : "low"} />
             </div>
           </div>
 
           <Notice tone="warning" title="Bukan nasihat hukum">
-            Hasil ini bantuan awal. Konsultasikan keputusan transaksi dengan PPAT atau notaris.
+            Hasil ini bantuan awal untuk memahami isi dokumen, bukan penilaian keaslian atau keabsahan. Konsultasikan keputusan transaksi dengan PPAT atau notaris.
           </Notice>
         </aside>
       </div>

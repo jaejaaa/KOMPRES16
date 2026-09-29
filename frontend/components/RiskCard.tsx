@@ -3,9 +3,9 @@ import Icon, { type IconName } from "./Icon";
 
 // Warna risiko selalu ditemani ikon + teks, jangan warna saja
 export const RISK_STYLE: Record<RiskLevel, { label: string; icon: IconName; bulat: string; badge: string; bar: string }> = {
-  high: { label: "Risiko tinggi", icon: "alert", bulat: "bg-risk-high text-white", badge: "bg-risk-high-bg text-risk-high-text", bar: "bg-risk-high" },
-  medium: { label: "Perlu dicek", icon: "question", bulat: "bg-risk-mid text-white", badge: "bg-risk-mid-bg text-risk-mid-text", bar: "bg-risk-mid" },
-  low: { label: "Aman", icon: "check", bulat: "bg-risk-low text-white", badge: "bg-risk-low-bg text-risk-low-text", bar: "bg-risk-low" },
+  high: { label: "Perlu dicek ulang", icon: "alert", bulat: "bg-risk-high text-white", badge: "bg-risk-high-bg text-risk-high-text", bar: "bg-risk-high" },
+  medium: { label: "Perlu diperhatikan", icon: "question", bulat: "bg-risk-mid text-white", badge: "bg-risk-mid-bg text-risk-mid-text", bar: "bg-risk-mid" },
+  low: { label: "Tidak ada catatan", icon: "check", bulat: "bg-risk-low text-white", badge: "bg-risk-low-bg text-risk-low-text", bar: "bg-risk-low" },
 };
 
 export function RiskBadge({ level }: { level: RiskLevel }) {
@@ -31,9 +31,9 @@ export default function RiskCard({ risk }: { risk: Risk }) {
             <h3 className="text-lg font-bold text-ink">{risk.pasal}</h3>
             <RiskBadge level={risk.level} />
           </div>
-          {/* "Aspek yang diperiksa" supaya kategori tidak terbaca sebagai masalah saat level-nya Aman */}
+          {/* "Aspek yang ditelaah" supaya kategori tidak terbaca sebagai masalah saat pasal tidak punya catatan */}
           <p className="mt-0.5 text-sm text-ink-soft">
-            Aspek yang diperiksa: <span className="font-semibold text-ink">{risk.kategori}</span>
+            Aspek yang ditelaah: <span className="font-semibold text-ink">{risk.kategori}</span>
           </p>
           <p className="mt-3 leading-relaxed text-ink">{risk.alasan}</p>
 

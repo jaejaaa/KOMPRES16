@@ -23,7 +23,7 @@ const SARAN_UMUM = [
   "Bagaimana cara balik nama sertifikat?",
 ];
 const SARAN_DOKUMEN = [
-  "Pasal mana yang paling berbahaya di dokumen saya?",
+  "Pasal mana di dokumen saya yang perlu dicek ulang?",
   "Apa maksud Pasal 6 di perjanjian saya?",
   "Apa yang harus saya minta ke penjual sebelum tanda tangan?",
 ];
@@ -238,7 +238,7 @@ export default function ChatRoom({ documentId }: { documentId?: string }) {
               <Notice title="Anda sedang membahas dokumen yang diunggah">
                 Jawaban akan merujuk isi dokumen Anda.{" "}
                 <Link href={`/analisis/${encodeURIComponent(documentId)}`} className="font-semibold text-primary underline underline-offset-2">
-                  Lihat hasil pemeriksaan
+                  Lihat hasil telaah
                 </Link>{" "}
                 ·{" "}
                 <Link href="/chat" className="font-semibold text-primary underline underline-offset-2">Tanya umum saja</Link>
@@ -249,7 +249,7 @@ export default function ChatRoom({ documentId }: { documentId?: string }) {
           <div role="log" aria-live="polite" className="flex-1 space-y-6 p-5 md:p-6">
             {tamuHilang ? (
               <Notice tone="warning" title="Dokumen perlu diunggah ulang">
-                Anda masuk ke akun yang sudah pernah dibuat sebelumnya, sehingga dokumen yang diperiksa sebagai tamu tidak ikut
+                Anda masuk ke akun yang sudah pernah dibuat sebelumnya, sehingga dokumen yang ditelaah sebagai tamu tidak ikut
                 tersimpan.{" "}
                 <Link href="/upload" className="font-semibold underline underline-offset-2">Unggah ulang dokumen</Link>
               </Notice>
@@ -260,7 +260,7 @@ export default function ChatRoom({ documentId }: { documentId?: string }) {
                 </span>
                 <p className="mt-4 text-xl font-extrabold tracking-tight text-ink">Masuk untuk bertanya soal dokumen ini</p>
                 <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-ink-soft">
-                  Tanya jawab tentang isi dokumen hanya tersedia untuk pengguna yang masuk. Hasil pemeriksaan Anda tetap
+                  Tanya jawab tentang isi dokumen hanya tersedia untuk pengguna yang masuk. Hasil telaah Anda tetap
                   tersimpan setelah masuk.
                 </p>
                 <div className="mt-6 flex flex-wrap justify-center gap-3">

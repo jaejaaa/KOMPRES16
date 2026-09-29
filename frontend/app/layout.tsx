@@ -11,7 +11,7 @@ const publicSans = Public_Sans({ subsets: ["latin"], variable: "--font-public-sa
 export const metadata: Metadata = {
   title: `${APP_NAME} — ${APP_TAGLINE}`,
   description:
-    "Periksa perjanjian jual beli dan dokumen tanah sebelum tanda tangan. Pasal berisiko dijelaskan dengan bahasa sederhana, lengkap dengan dasar hukumnya.",
+    "Pahami isi perjanjian jual beli dan dokumen tanah sebelum tanda tangan. Pasal yang rancu atau perlu dicek ulang ditandai dengan bahasa sederhana, lengkap dengan dasar hukumnya.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

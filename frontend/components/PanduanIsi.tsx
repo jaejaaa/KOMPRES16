@@ -2,6 +2,7 @@
 import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import type { Bagian, Panduan } from "@/lib/panduan";
+import { STABILO_PANDUAN } from "@/lib/stabilo-panduan";
 import Icon from "./Icon";
 import LegalText from "./LegalText";
 import { btn, container, Notice, Panel } from "./ui";
@@ -54,6 +55,7 @@ function PraktikUmum() {
 
 export default function PanduanIsi({ p }: { p: Panduan }) {
   const [selesai, simpan] = useLangkahSelesai(p.slug);
+  const stabilo = STABILO_PANDUAN[p.slug] ?? [];
   const butir: Butir[] = p.bagian.map((b, i) => ({ ...b, anchor: `bagian-${i + 1}` }));
   const langkah = butir.filter((b) => b.nomor !== null);
   const jumlahSelesai = langkah.filter((b) => selesai.includes(b.anchor)).length;
@@ -114,7 +116,7 @@ export default function PanduanIsi({ p }: { p: Panduan }) {
               <div key={b.anchor} id={b.anchor} className="scroll-mt-28">
                 <Panel title={b.judul} icon={b.praktikUmum ? "info" : "book"}>
                   {b.praktikUmum && <div className="mb-4"><PraktikUmum /></div>}
-                  <p className="leading-relaxed text-ink-soft"><LegalText>{b.teks}</LegalText></p>
+                  <p className="leading-relaxed text-ink-soft"><LegalText stabilo={stabilo}>{b.teks}</LegalText></p>
                 </Panel>
               </div>
             );
@@ -140,7 +142,7 @@ export default function PanduanIsi({ p }: { p: Panduan }) {
                   <p className="text-xs font-semibold text-secondary">Langkah {b.nomor}</p>
                   <h2 className="mt-0.5 text-lg font-bold text-ink">{b.judul}</h2>
                   {b.praktikUmum && <div className="mt-3"><PraktikUmum /></div>}
-                  <p className="mt-2 leading-relaxed text-ink-soft"><LegalText>{b.teks}</LegalText></p>
+                  <p className="mt-2 leading-relaxed text-ink-soft"><LegalText stabilo={stabilo}>{b.teks}</LegalText></p>
                   <button
                     type="button"
                     onClick={() => toggle(b.anchor)}

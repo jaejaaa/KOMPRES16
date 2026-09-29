@@ -151,16 +151,16 @@ export function Spinner({ className = "size-5" }: { className?: string }) {
   );
 }
 
-const LANGKAH = ["Unggah dokumen", "Analisis otomatis", "Hasil pemeriksaan"];
+const LANGKAH = ["Unggah dokumen", "Telaah otomatis", "Catatan pasal"];
 
-// Diagram alur layanan cek dokumen (bukan tombol): 0 = unggah, 1 = analisis, 2 = hasil.
+// Diagram alur layanan telaah dokumen (bukan tombol): 0 = unggah, 1 = telaah, 2 = catatan.
 // Tahap berpindah sendiri saat dokumen diproses, jadi sengaja dibuat seperti bagan, bukan tab.
 export function StepBar({ aktif }: { aktif: 0 | 1 | 2 }) {
   return (
     <div className={`${container} pt-8`}>
       <div className="flex flex-col gap-4 rounded-3xl border border-line bg-surface px-5 py-4 shadow-soft md:flex-row md:items-center md:gap-8 md:px-6">
-        <p className="shrink-0 text-sm font-semibold text-ink-soft">Alur pemeriksaan</p>
-        <ol className="flex flex-1 items-start md:items-center" aria-label="Alur pemeriksaan">
+        <p className="shrink-0 text-sm font-semibold text-ink-soft">Alur telaah</p>
+        <ol className="flex flex-1 items-start md:items-center" aria-label="Alur telaah">
           {LANGKAH.map((l, i) => {
             const selesai = i < aktif;
             const kini = i === aktif;

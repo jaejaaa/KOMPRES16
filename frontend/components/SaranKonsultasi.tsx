@@ -24,7 +24,7 @@ export default function SaranKonsultasi({ documentId }: { documentId: string }) 
   return (
     <Panel title="Rekomendasi konsultasi" icon="scale">
       <p className="text-sm leading-relaxed text-ink-soft">
-        Ditemukan risiko tinggi yang biasanya perlu pendapat profesional.
+        Ada pasal yang perlu dicek ulang, dan biasanya perlu pendapat profesional.
       </p>
       <ul className="mt-3 space-y-3">
         {saran.map((s) => {

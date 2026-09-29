@@ -38,7 +38,7 @@ export default function LoginDialog({
   open,
   onClose,
   judul = "Masuk ke JagaTanah",
-  pesan = "Masuk atau buat akun baru agar riwayat pemeriksaan dan percakapan Anda tersimpan dan bisa dibuka kembali kapan saja.",
+  pesan = "Masuk atau buat akun baru agar riwayat telaah dan percakapan Anda tersimpan dan bisa dibuka kembali kapan saja.",
   onBerhasil,
 }: {
   open: boolean;

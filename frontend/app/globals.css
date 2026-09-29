@@ -171,7 +171,14 @@ input::-ms-clear { display: none; }
   transition: background-size 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.3s;
 }
 [data-terbuka="true"] .stabilo { background-size: 100% 100%; }
-@media (prefers-reduced-motion: reduce) { .stabilo { transition: none; } }
+/* Stabilo di teks panduan: langsung penuh; di browser yang mendukung scroll-driven animation,
+   tersapu dari kiri saat kalimatnya digulir masuk layar */
+.stabilo-gulir { background-size: 100% 100%; transition: none; }
+@supports (animation-timeline: view()) {
+  .stabilo-gulir { animation: sapu-stabilo linear both; animation-timeline: view(); animation-range: entry 10% cover 30%; }
+}
+@keyframes sapu-stabilo { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
+@media (prefers-reduced-motion: reduce) { .stabilo { transition: none; } .stabilo-gulir { animation: none; } }
 
 /* <details> tanpa segitiga bawaan + isi yang membuka halus */
 summary { list-style: none; cursor: pointer; }

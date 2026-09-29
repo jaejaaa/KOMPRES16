@@ -63,7 +63,7 @@ function MenuProfil({ akun }: { akun: Akun }) {
               onClick={() => setBuka(false)}
               className="flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-semibold text-ink hover:bg-bg"
             >
-              <Icon name="clock" className="size-4 text-primary" /> Riwayat pemeriksaan
+              <Icon name="clock" className="size-4 text-primary" /> Riwayat telaah
             </Link>
             <button
               type="button"
@@ -85,7 +85,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [login, setLogin] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  // Halaman hasil analisis masih bagian dari layanan "Cek Dokumen"
+  // Halaman hasil telaah masih bagian dari layanan "Telaah Dokumen"
   const isActive = (href: string) =>
     href === "/" ? path === "/" : path.startsWith(href) || (href === "/upload" && path.startsWith("/analisis"));
 
