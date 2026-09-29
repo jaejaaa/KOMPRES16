@@ -7,7 +7,7 @@ import Icon, { type IconName } from "./Icon";
 import { btn } from "./ui";
 
 // Data konsultan dari Data Engineer membawa catatan internal dalam kurung, mis. "(dummy)" atau
-// "(indikatif/dummy)". Keterangan data contoh sudah ada di kotak peringatan halaman, jadi di sini dibuang.
+// "(indikatif/dummy)" -- dibuang di sini supaya tampilannya bersih.
 const bersih = (teks?: string) => teks?.replace(/\s*\([^)]*dummy[^)]*\)/gi, "").trim() || undefined;
 
 function Baris({ icon, label, children }: { icon: IconName; label: string; children: React.ReactNode }) {

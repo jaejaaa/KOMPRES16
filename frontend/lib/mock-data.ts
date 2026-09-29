@@ -142,7 +142,6 @@ export const mockSaranKonsultasi: SaranKonsultasi[] = [
     catatan: null,
     notaris_ppat: [mockKonsultan[0]],
     advokat: [],
-    peringatan: "SELURUH DATA DI HALAMAN INI FIKTIF untuk demo, bukan daftar Notaris/PPAT/Advokat sungguhan.",
   },
 ];
 
@@ -155,7 +154,6 @@ export function mockCariKonsultan(kategori: string, provinsi?: string, kota?: st
     catatan: kat?.catatan ?? null,
     notaris_ppat: kat?.profesi.includes("notaris_ppat") ? mockKonsultan.filter((k) => k.id.startsWith("N") && cocok(k)) : [],
     advokat: kat?.profesi.includes("advokat") ? mockKonsultan.filter((k) => k.id.startsWith("A") && cocok(k)) : [],
-    peringatan: "SELURUH DATA DI HALAMAN INI FIKTIF untuk demo, bukan daftar Notaris/PPAT/Advokat sungguhan.",
   };
 }
 

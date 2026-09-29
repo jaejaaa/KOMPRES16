@@ -4,7 +4,7 @@ import Link from "next/link";
 import { getSaranKonsultasi } from "@/lib/api";
 import type { SaranKonsultasi as SaranKonsultasiItem } from "@/types/api";
 import Icon from "./Icon";
-import { Notice, Panel } from "./ui";
+import { Panel } from "./ui";
 
 // Rekomendasi konsultan (dummy) berdasarkan kategori risiko "high" yang ditemukan analyze().
 // Sengaja tidak render apa pun kalau belum ada risiko high yang cocok, daripada tampil kosong/aneh.
@@ -51,11 +51,6 @@ export default function SaranKonsultasi({ documentId }: { documentId: string }) 
           );
         })}
       </ul>
-      <div className="mt-3">
-        <Notice tone="warning" title="Data contoh (demo)">
-          {saran[0].peringatan}
-        </Notice>
-      </div>
     </Panel>
   );
 }

@@ -91,7 +91,7 @@ snap.to_dict.return_value = {"user_id": "user-a", "risks": [
 ]}
 r = c.get(f"/analysis/{main.uuid4()}/konsultan").json()
 assert [x["kategori_kasus"] for x in r] == ["balik-nama"]  # cuma risiko "high" & yang terpetakan
-assert "peringatan" in r[0] and "notaris_ppat" in r[0]  # apa adanya dari cari_konsultan()
+assert "notaris_ppat" in r[0] and "advokat" in r[0]  # apa adanya dari cari_konsultan()
 
 main.app.dependency_overrides.clear()
 assert c.get("/chat/history").status_code == 401  # tanpa token ditolak

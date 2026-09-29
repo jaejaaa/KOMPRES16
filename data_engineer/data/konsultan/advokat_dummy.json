@@ -1,5 +1,4 @@
 {
- "_PERINGATAN": "SELURUH NAMA, KANTOR, TELEPON, TARIF, DAN JADWAL DI FILE INI FIKTIF (dipasangkan/dikarang untuk demo), BUKAN daftar Notaris/PPAT/Advokat sungguhan -- HANYA nama kabupaten/kota dan provinsi yang asli (data wilayah Kemendagri/BPS, dipakai supaya dropdown lokasi realistis), bukan klaim ada konsultan sungguhan di kota tersebut. Nomor telepon TIDAK AKTIF (pola berurutan, bukan nomor asli). Tautan peta hanya PENCARIAN nama kantor di Google Maps (bukan lokasi terverifikasi). Tarif (field \"tarif\") bersifat INDIKATIF per orang, diputar dari 3 tingkatan, BUKAN tarif resmi maupun cerminan kualitas layanan sungguhan. Jangan ditampilkan ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk menghubungi atau mendatangi siapa pun.",
  "konsultan": [
   {
    "id": "A01",

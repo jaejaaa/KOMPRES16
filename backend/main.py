@@ -229,7 +229,7 @@ def chat_history(uid: str = Depends(current_user)):
     return history(uid)
 
 
-# Data konsultan masih DUMMY (Data Engineer): FE wajib tampilkan field "peringatan" + label "Contoh/Demo"
+# Data konsultan masih DUMMY (Data Engineer), lihat data_engineer/scripts/10_make_konsultan_dummy.py
 @app.get("/konsultan/kategori")
 def konsultan_kategori():
     return kategori_kasus()

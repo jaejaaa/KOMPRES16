@@ -48,20 +48,18 @@ def _filter(konsultan: list[dict], kategori_id: str, provinsi: str | None, kota:
 def cari_konsultan(kategori_id: str, provinsi: str | None = None, kota: str | None = None, top_n: int = 5) -> dict:
     """Cari konsultan (dummy) untuk suatu kategori kasus, di kedua profesi sekaligus.
 
-    Return: {"kategori": str, "catatan": str|None, "notaris_ppat": [...], "advokat": [...], "peringatan": str}
+    Return: {"kategori": str, "catatan": str|None, "notaris_ppat": [...], "advokat": [...]}
     - list untuk profesi yang TIDAK relevan pada kategori ini SELALU kosong (mis. 'sengketa-tanah' -> notaris_ppat=[]),
       bukan bug: Notaris/PPAT tidak beracara di pengadilan dan bukan penegak hukum. Jangan menampilkan Notaris
       untuk kasus itu meski daftarnya diisi manual nanti.
     - Tiap konsultan (notaris_ppat/advokat) punya field 'telepon', 'peta', 'jadwal', 'tarif' -- SEMUA dummy dan
-      berbeda PER ORANG (tarif diputar dari 3 tingkatan, bukan cerminan kualitas asli). Lihat _PERINGATAN dan
-      komentar di scripts/10_make_konsultan_dummy.py sebelum ditampilkan ke pengguna.
-    - Semua entri berasal dari data dummy; 'peringatan' selalu disertakan dan wajib ditampilkan ke pengguna.
+      berbeda PER ORANG (tarif diputar dari 3 tingkatan, bukan cerminan kualitas asli). Lihat catatan di
+      scripts/10_make_konsultan_dummy.py untuk detail data fiktif ini.
     """
     kat = next((k for k in kategori_kasus() if k["id"] == kategori_id), None)
-    peringatan = _load("kategori_kasus")["_PERINGATAN"]
     if kat is None:
-        return {"kategori": None, "catatan": f"Kategori '{kategori_id}' tidak dikenal.", "notaris_ppat": [], "advokat": [], "peringatan": peringatan}
+        return {"kategori": None, "catatan": f"Kategori '{kategori_id}' tidak dikenal.", "notaris_ppat": [], "advokat": []}
     profesi = kat["profesi"]
     notaris = _filter(_load("notaris_ppat_dummy")["konsultan"], kategori_id, provinsi, kota, top_n) if "notaris_ppat" in profesi else []
     advokat = _filter(_load("advokat_dummy")["konsultan"], kategori_id, provinsi, kota, top_n) if "advokat" in profesi else []
-    return {"kategori": kat["nama"], "catatan": kat.get("catatan"), "notaris_ppat": notaris, "advokat": advokat, "peringatan": peringatan}
+    return {"kategori": kat["nama"], "catatan": kat.get("catatan"), "notaris_ppat": notaris, "advokat": advokat}

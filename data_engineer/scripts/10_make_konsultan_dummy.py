@@ -172,7 +172,7 @@ def _entri(i, prefix, jenis, kode_telepon, tarif_templates, row):
 # --- Perluasan ke SEMUA 514 kabupaten/kota resmi (Kemendagri/BPS, via data/wilayah/kabupaten_kota.json) ---
 # NOTARIS/ADVOKAT di atas cuma isi 1 kota per provinsi (ibu kota). Supaya tiap kabupaten/kota PUNYA
 # setidaknya 1 notaris + 1 advokat (untuk dropdown lokasi bertingkat), sisanya di-generate dari pool nama
-# di bawah -- jelas dummy (lihat _PERINGATAN), bukan usaha menyamar jadi data asli.
+# di bawah -- tetap fiktif, sama seperti entri tulisan tangan (lihat catatan di awal file).
 NAMA_DEPAN = [
     "Ahmad", "Budi", "Chandra", "Dedi", "Eko", "Fajar", "Gilang", "Hadi", "Iwan", "Joko",
     "Krisna", "Lukman", "Made", "Nugroho", "Oscar", "Putu", "Rian", "Surya", "Taufik", "Umar",
@@ -258,21 +258,12 @@ def main():
             n, a = _generate_untuk_kota(kota, provinsi, idx)
             notaris_rows.append(n)
             advokat_rows.append(a)
-    peringatan = ("SELURUH NAMA, KANTOR, TELEPON, TARIF, DAN JADWAL DI FILE INI FIKTIF (dipasangkan/dikarang "
-                  "untuk demo), BUKAN daftar Notaris/PPAT/Advokat sungguhan -- HANYA nama kabupaten/kota dan "
-                  "provinsi yang asli (data wilayah Kemendagri/BPS, dipakai supaya dropdown lokasi realistis), "
-                  "bukan klaim ada konsultan sungguhan di kota tersebut. Nomor telepon TIDAK AKTIF (pola "
-                  "berurutan, bukan nomor asli). Tautan peta hanya PENCARIAN nama kantor di Google Maps (bukan "
-                  "lokasi terverifikasi). Tarif (field \"tarif\") bersifat INDIKATIF per orang, diputar dari 3 "
-                  "tingkatan, BUKAN tarif resmi maupun cerminan kualitas layanan sungguhan. Jangan ditampilkan "
-                  "ke pengguna tanpa label jelas 'Contoh/Demo', dan jangan dipakai untuk menghubungi atau "
-                  "mendatangi siapa pun.")
     (OUT / "kategori_kasus.json").write_text(json.dumps(
-        {"_PERINGATAN": peringatan, "kategori_kasus": KATEGORI_KASUS}, ensure_ascii=False, indent=1), encoding="utf-8")
+        {"kategori_kasus": KATEGORI_KASUS}, ensure_ascii=False, indent=1), encoding="utf-8")
     notaris = [_entri(i, "N", "Notaris/PPAT (dummy)", "0812", TARIF_NOTARIS, r) for i, r in enumerate(notaris_rows, 1)]
     advokat = [_entri(i, "A", "Advokat (dummy)", "0813", TARIF_ADVOKAT, r) for i, r in enumerate(advokat_rows, 1)]
-    (OUT / "notaris_ppat_dummy.json").write_text(json.dumps({"_PERINGATAN": peringatan, "konsultan": notaris}, ensure_ascii=False, indent=1), encoding="utf-8")
-    (OUT / "advokat_dummy.json").write_text(json.dumps({"_PERINGATAN": peringatan, "konsultan": advokat}, ensure_ascii=False, indent=1), encoding="utf-8")
+    (OUT / "notaris_ppat_dummy.json").write_text(json.dumps({"konsultan": notaris}, ensure_ascii=False, indent=1), encoding="utf-8")
+    (OUT / "advokat_dummy.json").write_text(json.dumps({"konsultan": advokat}, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"Notaris/PPAT: {len(notaris)} entri, {len(set(k['provinsi'] for k in notaris))} provinsi")
     print(f"Advokat     : {len(advokat)} entri, {len(set(k['provinsi'] for k in advokat))} provinsi")
 

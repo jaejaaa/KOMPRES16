@@ -86,7 +86,6 @@ export interface HasilKonsultan {
   catatan: string | null;
   notaris_ppat: Konsultan[];
   advokat: Konsultan[];
-  peringatan: string; // wajib ditampilkan ke pengguna
 }
 
 // GET /analysis/{id}/konsultan: rekomendasi berdasarkan kategori risiko "high" yang ditemukan
