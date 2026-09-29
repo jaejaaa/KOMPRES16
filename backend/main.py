@@ -208,7 +208,8 @@ def history(uid: str) -> list[dict]:
 def chat(body: ChatIn, token: dict = Depends(current_token)):
     uid = token["uid"]
     doc_id = str(body.document_id) if body.document_id else None
-    if doc_id and token["firebase"]["sign_in_provider"] == "anonymous":
+    # Tamu (anonim) dan akun email yang belum verifikasi tidak punya klaim email_verified=true
+    if doc_id and not token.get("email_verified"):
         raise HTTPException(403, "Login dulu untuk lanjut tanya soal dokumen ini")
     konteks = own_document(body.document_id, uid).get("text") if doc_id else None
     riwayat = []
