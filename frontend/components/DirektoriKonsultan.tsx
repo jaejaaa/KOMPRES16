@@ -48,6 +48,63 @@ function KartuKonsultan({ k, namaKategori, onPilih }: { k: Konsultan; namaKatego
   );
 }
 
+const PER_PAGE = 8;
+
+// Deret nomor halaman, dipendekkan dgn "…" kalau totalnya banyak (mis. 1 2 3 … 12 saat di halaman 1-3)
+function deretHalaman(page: number, total: number): (number | "…")[] {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  const set = new Set([1, 2, total - 1, total, page - 1, page, page + 1]);
+  const nomor = [...set].filter((n) => n >= 1 && n <= total).sort((a, b) => a - b);
+  const hasil: (number | "…")[] = [];
+  nomor.forEach((n, i) => {
+    if (i > 0 && n - (nomor[i - 1] as number) > 1) hasil.push("…");
+    hasil.push(n);
+  });
+  return hasil;
+}
+
+function Paginasi({ page, total, onPilihHalaman }: { page: number; total: number; onPilihHalaman: (p: number) => void }) {
+  if (total <= 1) return null;
+  return (
+    <nav aria-label="Halaman" className="mt-4 flex items-center justify-center gap-1.5">
+      <button
+        type="button"
+        disabled={page <= 1}
+        onClick={() => onPilihHalaman(page - 1)}
+        aria-label="Halaman sebelumnya"
+        className="flex size-9 items-center justify-center rounded-full border border-line-strong text-ink-soft hover:bg-bg disabled:pointer-events-none disabled:opacity-40"
+      >
+        <Icon name="back" className="size-4" />
+      </button>
+      {deretHalaman(page, total).map((n, i) =>
+        n === "…" ? (
+          <span key={`e${i}`} className="px-1 text-sm text-ink-soft">…</span>
+        ) : (
+          <button
+            key={n}
+            type="button"
+            onClick={() => onPilihHalaman(n)}
+            aria-current={n === page ? "page" : undefined}
+            className={`flex size-9 items-center justify-center rounded-full text-sm font-semibold ${n === page ? "bg-primary text-white" : "text-ink hover:bg-bg"
+              }`}
+          >
+            {n}
+          </button>
+        )
+      )}
+      <button
+        type="button"
+        disabled={page >= total}
+        onClick={() => onPilihHalaman(page + 1)}
+        aria-label="Halaman berikutnya"
+        className="flex size-9 items-center justify-center rounded-full border border-line-strong text-ink-soft hover:bg-bg disabled:pointer-events-none disabled:opacity-40"
+      >
+        <Icon name="arrow" className="size-4" />
+      </button>
+    </nav>
+  );
+}
+
 function Bagian({
   profesi,
   daftar,
@@ -55,6 +112,7 @@ function Bagian({
   kota,
   namaKategori,
   onPilih,
+  resetKey,
 }: {
   profesi: Profesi;
   daftar: Konsultan[];
@@ -62,7 +120,12 @@ function Bagian({
   kota: string;
   namaKategori: (id: string) => string;
   onPilih: Pilih;
+  resetKey: string;
 }) {
+  const [page, setPage] = useState(1);
+  useEffect(() => setPage(1), [resetKey]);
+  const totalPages = Math.max(1, Math.ceil(daftar.length / PER_PAGE));
+  const halaman = daftar.slice((page - 1) * PER_PAGE, page * PER_PAGE);
   const lokasi = kota ? `${kota}, ${provinsi}` : provinsi;
   return (
     <section>
@@ -70,13 +133,16 @@ function Bagian({
         {PROFESI[profesi]} <span className="rounded-full bg-bg px-2 text-sm font-semibold text-ink-soft">{daftar.length}</span>
       </h3>
       {daftar.length ? (
-        <ul className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-2">
-          {daftar.map((k, i) => (
-            <li key={k.id} className="fade-up" style={{ animationDelay: `${i * 60}ms` }}>
-              <KartuKonsultan k={k} namaKategori={namaKategori} onPilih={() => onPilih(k, profesi)} />
-            </li>
-          ))}
-        </ul>
+        <>
+          <ul className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-2">
+            {halaman.map((k, i) => (
+              <li key={k.id} className="fade-up" style={{ animationDelay: `${i * 60}ms` }}>
+                <KartuKonsultan k={k} namaKategori={namaKategori} onPilih={() => onPilih(k, profesi)} />
+              </li>
+            ))}
+          </ul>
+          <Paginasi page={page} total={totalPages} onPilihHalaman={setPage} />
+        </>
       ) : (
         <p className="mt-3 rounded-2xl border border-dashed border-line-strong p-5 text-sm text-ink-soft">
           Belum ada {PROFESI[profesi]} {lokasi ? `di ${lokasi}` : ""} untuk kebutuhan ini.
@@ -228,10 +294,10 @@ export default function DirektoriKonsultan({ kategoriAwal }: { kategoriAwal?: st
         ) : (
           <div className="space-y-8">
             {kat?.profesi.includes("notaris_ppat") && (
-              <Bagian profesi="notaris_ppat" daftar={hasil.data.notaris_ppat} provinsi={provinsi} kota={kota} namaKategori={namaKategori} onPilih={pilih} />
+              <Bagian profesi="notaris_ppat" daftar={hasil.data.notaris_ppat} provinsi={provinsi} kota={kota} namaKategori={namaKategori} onPilih={pilih} resetKey={kunci} />
             )}
             {kat?.profesi.includes("advokat") && (
-              <Bagian profesi="advokat" daftar={hasil.data.advokat} provinsi={provinsi} kota={kota} namaKategori={namaKategori} onPilih={pilih} />
+              <Bagian profesi="advokat" daftar={hasil.data.advokat} provinsi={provinsi} kota={kota} namaKategori={namaKategori} onPilih={pilih} resetKey={kunci} />
             )}
           </div>
         )}
