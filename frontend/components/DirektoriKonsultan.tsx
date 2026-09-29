@@ -122,8 +122,10 @@ function Bagian({
   onPilih: Pilih;
   resetKey: string;
 }) {
-  const [page, setPage] = useState(1);
-  useEffect(() => setPage(1), [resetKey]);
+  // Halaman disimpan bersama kunci filter: begitu filter berubah, halaman otomatis kembali ke 1 (tanpa useEffect)
+  const [posisi, setPosisi] = useState({ kunci: resetKey, page: 1 });
+  const page = posisi.kunci === resetKey ? posisi.page : 1;
+  const setPage = (p: number) => setPosisi({ kunci: resetKey, page: p });
   const totalPages = Math.max(1, Math.ceil(daftar.length / PER_PAGE));
   const halaman = daftar.slice((page - 1) * PER_PAGE, page * PER_PAGE);
   const lokasi = kota ? `${kota}, ${provinsi}` : provinsi;

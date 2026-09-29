@@ -223,7 +223,7 @@ export default function ChatRoom({ documentId }: { documentId?: string }) {
               </span>
               <span className="leading-tight">
                 <span className="block font-bold text-ink">JagaTanah AI</span>
-                <span className="block text-xs text-ink-soft">Menjawab berdasarkan peraturan pertanahan</span>
+                <span className="block text-xs text-ink-soft">Menjawab berdasarkan peraturan di Indonesia</span>
               </span>
             </span>
             {documentId && (

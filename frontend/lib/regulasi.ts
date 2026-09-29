@@ -54,14 +54,14 @@ export const REGULASI: Regulasi[] = [
     tautan: { url: "https://peraturan.bpk.go.id/Details/269663/permen-atrkepala-bpn-no-3-tahun-2023", sumber: BPK },
   },
   {
-    nama: "UU No. 28 Tahun 2009",
-    tentang: "Pajak Daerah dan Retribusi Daerah (ketentuan BPHTB)",
+    nama: "UU No. 1 Tahun 2022",
+    tentang: "Hubungan Keuangan antara Pemerintah Pusat dan Pemerintahan Daerah (ketentuan BPHTB)",
     ringkasan: [
-      "Mengatur pajak dan retribusi daerah, termasuk Bea Perolehan Hak atas Tanah dan Bangunan (BPHTB) yang sejak 2011 dipungut oleh pemerintah kabupaten/kota. Dasar pengenaannya adalah nilai perolehan, misalnya harga transaksi untuk jual beli (Pasal 87), dengan ==tarif BPHTB paling tinggi 5%== (Pasal 88).",
-      "==PPAT/notaris hanya boleh menandatangani akta pemindahan hak atas tanah setelah wajib pajak menyerahkan bukti pembayaran BPHTB== (Pasal 91).",
+      "Undang-undang yang kini mengatur pajak daerah, termasuk Bea Perolehan Hak atas Tanah dan Bangunan (BPHTB), menggantikan UU No. 28 Tahun 2009. BPHTB dikenakan atas perolehan hak atas tanah dan/atau bangunan, misalnya karena jual beli, hibah, atau waris, dan ==dibayar oleh pihak yang memperoleh hak== (Pasal 44–45).",
+      "Dasar pengenaannya adalah nilai perolehan: harga transaksi untuk jual beli, atau nilai pasar untuk hibah dan waris; jika lebih rendah dari NJOP, yang dipakai adalah NJOP (Pasal 46). ==Tarif BPHTB paling tinggi 5%== (Pasal 47), dihitung setelah dikurangi nilai tidak kena pajak paling sedikit Rp80 juta, atau Rp300 juta untuk waris dan hibah wasiat kepada orang tua, anak, atau suami/istri (Pasal 46). Untuk jual beli, ==BPHTB sudah terutang sejak perjanjian pengikatan jual beli ditandatangani== (Pasal 49).",
     ],
-    catatan: "Menurut JDIH BPK, UU ini telah dicabut dengan UU No. 1 Tahun 2022 tentang Hubungan Keuangan antara Pemerintah Pusat dan Pemerintahan Daerah.",
-    tautan: { url: "https://peraturan.bpk.go.id/Details/38763/uu-no-28-tahun-2009", sumber: BPK },
+    catatan: "Di JagaTanah, yang dipakai dari undang-undang ini hanya ketentuan BPHTB (Pasal 44–49).",
+    tautan: { url: "https://peraturan.bpk.go.id/Details/195696/uu-no-1-tahun-2022", sumber: BPK },
   },
   {
     nama: "UU No. 2 Tahun 2012",
@@ -90,6 +90,17 @@ export const REGULASI: Regulasi[] = [
       "==Sejak UUPA berlaku, ketentuan Buku II mengenai bumi, air, dan kekayaan alam sudah dicabut==, kecuali soal hipotek yang saat itu masih berlaku. Untuk urusan tanah, yang dipakai adalah UUPA; Buku II menjadi rujukan pelengkap untuk asas-asas kebendaan.",
     ],
     tautan: { url: "https://jdih.mahkamahagung.go.id/legal-product/kitab-undang-undang-hukum-perdata/detail", sumber: "JDIH Mahkamah Agung" },
+  },
+  {
+    nama: "UU No. 28 Tahun 2009",
+    tentang: "Pajak Daerah dan Retribusi Daerah (ketentuan BPHTB)",
+    dicabut: true,
+    ringkasan: [
+      "Mengatur pajak dan retribusi daerah, termasuk Bea Perolehan Hak atas Tanah dan Bangunan (BPHTB) yang sejak 2011 dipungut oleh pemerintah kabupaten/kota. Dasar pengenaannya adalah nilai perolehan, misalnya harga transaksi untuk jual beli (Pasal 87), dengan ==tarif BPHTB paling tinggi 5%== (Pasal 88).",
+      "==PPAT/notaris hanya boleh menandatangani akta pemindahan hak atas tanah setelah wajib pajak menyerahkan bukti pembayaran BPHTB== (Pasal 91).",
+    ],
+    catatan: "Dicabut dengan UU No. 1 Tahun 2022 (HKPD); ketentuan BPHTB kini diatur di Pasal 44–49 undang-undang tersebut.",
+    tautan: { url: "https://peraturan.bpk.go.id/Details/38763/uu-no-28-tahun-2009", sumber: BPK },
   },
   {
     nama: "UU No. 21 Tahun 1997",

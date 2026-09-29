@@ -121,7 +121,7 @@ export default function UploadPage() {
         foto="lup"
         icon="doc"
         crumbs={[{ href: "/", label: "Beranda" }, { label: "Cek Dokumen" }]}
-        title="Pemeriksaan Dokumen Tanah"
+        title="Pemeriksaan Dokumen/Peraturan"
         desc="Unggah perjanjian jual beli, AJB, atau dokumen tanah lainnya. Pasal yang perlu diwaspadai akan ditandai beserta alasannya."
       />
       <StepBar aktif={loading ? 1 : 0} />
@@ -190,8 +190,8 @@ export default function UploadPage() {
                 onDragLeave={() => setDragging(false)}
                 onDrop={(e) => { e.preventDefault(); setDragging(false); pick(e.dataTransfer.files[0]); }}
                 className={`group flex cursor-pointer flex-col items-center justify-center rounded-3xl border-2 border-dashed px-6 py-12 text-center transition-all duration-300 ${dragging
-                    ? "scale-[1.01] border-secondary bg-primary-soft"
-                    : "border-line-strong bg-linear-to-b from-bg to-surface hover:border-secondary hover:bg-primary-soft/50"
+                  ? "scale-[1.01] border-secondary bg-primary-soft"
+                  : "border-line-strong bg-linear-to-b from-bg to-surface hover:border-secondary hover:bg-primary-soft/50"
                   }`}
               >
                 <span
