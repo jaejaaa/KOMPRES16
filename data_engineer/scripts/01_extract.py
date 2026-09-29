@@ -15,6 +15,7 @@ DOCS = {  # file -> (slug, nama_pendek, judul)
     "UU Nomor 2 Tahun 2012.pdf": ("uu-2-2012", "UU 2/2012", "Pengadaan Tanah bagi Pembangunan untuk Kepentingan Umum"),
     "UU Nomor 28 Tahun 2009.pdf": ("uu-28-2009", "UU 28/2009", "Pajak Daerah dan Retribusi Daerah (PDRD)"),
     "UU Nomor 27 Tahun 2022.pdf": ("uu-27-2022", "UU 27/2022", "Pelindungan Data Pribadi"),
+    "UU Nomor 1 Tahun 2022.pdf": ("uu-1-2022", "UU 1/2022", "Hubungan Keuangan antara Pemerintah Pusat dan Pemerintahan Daerah (HKPD)"),
 }
 
 def clean(t: str) -> str:

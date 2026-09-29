@@ -16,14 +16,15 @@ MAX_CHARS = 1800
 # Status berlaku; UU 21/1997 (BPHTB) digantikan UU 28/2009 Pasal 85-93, yang kemudian dicabut UU 1/2022;
 # PP 24/1997 diubah PP 18/2021. Dicek langsung ke JDIH BPK (peraturan.bpk.go.id), bukan cuma dari laporan pihak lain.
 STATUS = {"uu-21-1997": "dicabut (digantikan UU 28/2009; menurut Pasal 180 angka 6 UU 28/2009 hanya berlaku 1 tahun masa peralihan)",
-          "uu-28-2009": "dicabut (digantikan UU 1/2022 tentang HKPD; ketentuan BPHTB yang dulu di Pasal 85-93 UU 28/2009 sekarang di Pasal 44-49 UU 1/2022 -- UU 1/2022 belum ada di korpus ini)",
+          "uu-28-2009": "dicabut (digantikan UU 1/2022 tentang HKPD Pasal 44-49, sudah ada di korpus ini)",
           "pp-24-1997": "diubah sebagian (PP 18/2021)"}
 # Status per Pasal: PP 18/2021 Pasal 103 huruf c mencabut jangka waktu pengumuman di PP 24/1997 Pasal 26 ayat (1) dan Pasal 45 ayat (1) huruf e;
 # Pasal lain PP 24/1997 tetap berlaku (PP 18/2021 Pasal 102).
 _UMUM = "diubah sebagian (PP 18/2021 Pasal 103 huruf c: ketentuan jangka waktu pengumuman dalam pasal ini tidak berlaku lagi; lihat PP 18/2021 Pasal 88)"
 STATUS_PASAL = {("pp-24-1997", "26"): _UMUM, ("pp-24-1997", "45"): _UMUM}
 BOUNDS = {"kuhperdata-buku2": ("BUKU KEDUA", "BUKU KETIGA")}  # PDF memuat 4 Buku; ambil teks di antara dua penanda
-SCOPE = {"uu-28-2009": (85, 93)}  # BPHTB dalam UU PDRD
+SCOPE = {"uu-28-2009": (85, 93),  # BPHTB dalam UU PDRD (dicabut, lihat STATUS)
+         "uu-1-2022": (44, 49)}  # BPHTB dalam UU HKPD (pengganti UU 28/2009 Pasal 85-93)
 
 NOISE_LINE = re.compile(r"^\s*(-?\s*\d{1,3}\s*-?|PRESIDEN|REPUBLIK\s+INDONESIA|PRESIDEN\s+REPUBLIK\s+INDONESIA|SK\s+No\s.*|www\.hukumonline\.com|Diunduh dari .*jdih\.atrbpn\.go\.id.*)\s*$", re.I)
 CONTINUED = re.compile(r"^\s*(Pasal\s+\d+|BAB\s+[IVXL]+|\(\d+\)\s*\w*|\w+)?\s*(\.\s?){2,}\s*(-\s*\d+\s*-)?\s*$")  # footer 'Pasal 89 . . .'
