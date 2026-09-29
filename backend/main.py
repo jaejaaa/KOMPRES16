@@ -236,7 +236,9 @@ def konsultan_kategori():
 
 @app.get("/konsultan")
 def konsultan(kategori: str, provinsi: str | None = None, kota: str | None = None):
-    return cari_konsultan(kategori, provinsi, kota)
+    # top_n tinggi (bukan default 5) -- ini direktori untuk di-browse, bukan rekomendasi terbatas;
+    # /analysis/{id}/konsultan di bawah SENGAJA tetap pakai default 5 (itu rekomendasi, bukan direktori).
+    return cari_konsultan(kategori, provinsi, kota, top_n=200)
 
 
 @app.get("/konsultan/lokasi")
