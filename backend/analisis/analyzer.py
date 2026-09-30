@@ -21,8 +21,10 @@ MAKS_KARAKTER_SAMPEL_RELEVANSI = 3000  # cukup buat judul + para pihak; hemat to
 KUTIPAN_ABSEN = "(klausul ini tidak ditemukan dalam dokumen)"
 PASAL_ABSEN = "Tidak ada klausul"
 PESAN_TIDAK_RELEVAN = (
-    "Dokumen ini tidak terlihat seperti dokumen hukum pertanahan (PPJB, AJB, akta hibah, "
-    "sewa tanah, sertifikat, dsb). Silakan unggah dokumen yang sesuai."
+    "Fitur ini memeriksa perjanjian/akta pertanahan pribadi (PPJB, AJB, akta hibah, sewa tanah, "
+    "sertifikat, dsb), bukan teks undang-undang/peraturan itu sendiri. Kalau dokumen Anda adalah "
+    "salinan UU/PP (mis. UUPA, KUHPerdata) atau dokumen lain di luar itu, silakan tanyakan isinya "
+    "lewat JagaTanah AI (chatbot), atau unggah dokumen perjanjian yang sesuai."
 )
 
 

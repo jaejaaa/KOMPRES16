@@ -157,9 +157,28 @@ class TestRelevansi(unittest.TestCase):
         try:
             analyze(CONTOH, llm=FakeLLM(relevan=False))
         except DokumenTidakRelevan as e:
-            self.assertIn("hukum pertanahan", str(e))
+            self.assertIn("perjanjian", str(e).lower())
         else:
             self.fail("harus menolak")
+
+    def test_pesan_penolakan_mengarahkan_ke_chatbot(self):
+        # Bug nyata: upload teks UU mentah (UUPA/KUHPerdata) -- pesan penolakan harus jelas
+        # ini bukan jenis dokumen yang dianalisis fitur ini, dan arahkan ke JagaTanah AI.
+        try:
+            analyze(CONTOH, llm=FakeLLM(relevan=False))
+        except DokumenTidakRelevan as e:
+            self.assertIn("JagaTanah AI", str(e))
+        else:
+            self.fail("harus menolak")
+
+    def test_prompt_relevansi_menyebut_uu_mentah_sbg_contoh_ditolak(self):
+        # Bug nyata: UUPA (UU 5/1960) kadang lolos, KUHPerdata kadang ditolak -- tidak konsisten
+        # utk kelas dokumen yang sama (teks UU mentah, bukan perjanjian). Prompt sekarang eksplisit.
+        from analisis.prompts import SYSTEM_PROMPT_RELEVANSI
+
+        self.assertIn("UUPA", SYSTEM_PROMPT_RELEVANSI)
+        self.assertIn("KUHPerdata", SYSTEM_PROMPT_RELEVANSI)
+        self.assertIn("ANTARA PIHAK", SYSTEM_PROMPT_RELEVANSI)
 
 
 if __name__ == "__main__":

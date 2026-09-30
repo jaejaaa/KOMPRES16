@@ -19,7 +19,7 @@ db = MagicMock()
 main.fb = lambda: db
 main.app.dependency_overrides[main.current_user] = lambda: "user-a"
 # /chat pakai current_token langsung (butuh sign_in_provider utk blokir tamu), bukan current_user
-main.app.dependency_overrides[main.current_token] = lambda: {"uid": "user-a", "firebase": {"sign_in_provider": "password"}}
+main.app.dependency_overrides[main.current_token] = lambda: {"uid": "user-a", "email_verified": True, "firebase": {"sign_in_provider": "password"}}
 c = TestClient(main.app)
 up = lambda b: c.post("/upload", files={"file": ("x.pdf", b, "application/pdf")})
 doc_ref = db.collection.return_value.document.return_value
@@ -64,7 +64,7 @@ assert db.collection.return_value.add.call_args.args[0]["document_id"] is None
 main.app.dependency_overrides[main.current_token] = lambda: {"uid": "user-a", "firebase": {"sign_in_provider": "anonymous"}}
 assert c.post("/chat", json={"pertanyaan": "Pasal 1?", "document_id": str(main.uuid4())}).status_code == 403  # tamu ditolak
 assert c.post("/chat", json={"pertanyaan": "Apa itu HGB?"}).status_code == 200  # chat umum tetap boleh sbg tamu
-main.app.dependency_overrides[main.current_token] = lambda: {"uid": "user-a", "firebase": {"sign_in_provider": "password"}}
+main.app.dependency_overrides[main.current_token] = lambda: {"uid": "user-a", "email_verified": True, "firebase": {"sign_in_provider": "password"}}
 
 assert c.post("/chat", json={"pertanyaan": "Pasal 1?", "document_id": str(main.uuid4())}).status_code == 404  # dokumen orang lain
 snap.get.return_value = "user-a"
